@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1f4e78" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="毛利率試算" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-192.svg" />
+  <title>中科毛利率試算器</title>
+  <style>
+    :root{
+      --navy:#1f4e78; --blue:#eaf3fa; --yellow:#fff4c7;
+      --green:#e4f4e1; --red:#ffe1e1; --text:#17212b; --muted:#6a7785;
+      --card:#ffffff; --bg:#f3f6f9; --border:#d9e1e8;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;
+      background:var(--bg); color:var(--text);
+    }
+    .app{max-width:620px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 16px calc(30px + env(safe-area-inset-bottom))}
+    header{
+      background:linear-gradient(135deg,#1f4e78,#2d6b9e); color:#fff;
+      padding:22px 20px; border-radius:22px; box-shadow:0 12px 30px rgba(31,78,120,.22);
+      margin-bottom:16px;
+    }
+    header h1{font-size:23px;margin:0 0 6px}
+    header p{margin:0;opacity:.88;font-size:14px}
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:20px;
+      padding:18px; margin-bottom:14px; box-shadow:0 6px 18px rgba(23,33,43,.06);
+    }
+    .card h2{font-size:17px;margin:0 0 14px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input{
+      width:100%; font-size:20px; padding:13px 12px; border-radius:13px;
+      border:1px solid #d7c46d; background:var(--yellow); outline:none;
+    }
+    input:focus{border-color:#b08a00;box-shadow:0 0 0 3px rgba(176,138,0,.12)}
+    .full{grid-column:1/-1}
+    .quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    button{
+      border:0;border-radius:999px;padding:10px 14px;background:#e8eef4;color:#23445f;
+      font-weight:700;font-size:14px;
+    }
+    button.primary{background:var(--navy);color:#fff}
+    .hero-result{
+      text-align:center;padding:18px;border-radius:17px;background:var(--green);margin-bottom:12px;
+    }
+    .hero-result small{display:block;color:#45614a;margin-bottom:5px}
+    .hero-result strong{font-size:34px}
+    .rows{display:grid;gap:8px}
+    .row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #edf1f4}
+    .row:last-child{border-bottom:0}
+    .value{font-weight:800}
+    .hint{font-size:12px;color:var(--muted);line-height:1.5}
+    .danger{background:var(--red)!important}
+    .warn{background:#fff0c9!important}
+    footer{text-align:center;color:#8793a0;font-size:12px;padding:8px}
+    @media (max-width:440px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>中科毛利率試算器</h1>
+    <p>輸入售價正算，或輸入目標毛利率回推售價。</p>
+  </header>
+
+  <section class="card">
+    <h2>試算資料</h2>
+    <div class="grid">
+      <div>
+        <label for="price">手動售價（含稅）</label>
+        <input id="price" type="number" inputmode="decimal" step="0.01" value="94.5">
+      </div>
+      <div>
+        <label for="cost">商品成本</label>
+        <input id="cost" type="number" inputmode="decimal" step="0.01" value="40.7">
+      </div>
+      <div>
+        <label for="pxMargin">全聯毛利率（%）</label>
+        <input id="pxMargin" type="number" inputmode="decimal" step="0.01" value="24.68">
+      </div>
+      <div>
+        <label for="companyFee">公司費用率（%）</label>
+        <input id="companyFee" type="number" inputmode="decimal" step="0.01" value="10.95">
+      </div>
+      <div class="full">
+        <label for="targetMargin">目標中科毛利率（%）— 留白即用手動售價正算</label>
+        <input id="targetMargin" type="number" inputmode="decimal" step="0.01" placeholder="例如 35">
+        <div class="quick">
+          <button data-target="26">26%</button>
+          <button data-target="28">28%</button>
+          <button data-target="30">30%</button>
+          <button data-target="35" class="primary">35%</button>
+          <button data-target="40">40%</button>
+          <button id="clearTarget">清除回推</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>試算結果</h2>
+    <div id="hero" class="hero-result">
+      <small id="heroLabel">中科毛利率</small>
+      <strong id="heroValue">—</strong>
+    </div>
+    <div class="rows">
+      <div class="row"><span>實際採用售價（含稅）</span><span class="value" id="activePrice">—</span></div>
+      <div class="row"><span>未稅售價</span><span class="value" id="untaxedPrice">—</span></div>
+      <div class="row"><span>公司出貨價（未稅）</span><span class="value" id="shipPrice">—</span></div>
+      <div class="row"><span>公司費用</span><span class="value" id="feeAmount">—</span></div>
+      <div class="row"><span>中科毛利額</span><span class="value" id="profitAmount">—</span></div>
+    </div>
+    <p class="hint">毛利率低於 26% 顯示紅色，26%～29.99% 顯示黃色，30%以上顯示綠色。</p>
+  </section>
+  <footer>所有資料只在你的裝置上計算，不會上傳。</footer>
+</div>
+
+<script>
+const ids = ["price","cost","pxMargin","companyFee","targetMargin"];
+const $ = id => document.getElementById(id);
+const num = id => parseFloat($(id).value);
+const money = v => Number.isFinite(v) ? v.toLocaleString("zh-TW",{minimumFractionDigits:2,maximumFractionDigits:2}) : "—";
+
+function calc(){
+  const price = num("price"), cost = num("cost"), px = num("pxMargin")/100, fee = num("companyFee")/100;
+  const targetRaw = $("targetMargin").value.trim();
+  const target = targetRaw === "" ? null : parseFloat(targetRaw)/100;
+
+  let active = price;
+  if(target !== null){
+    const denominator = (1-fee-target)*(1-px);
+    active = denominator > 0 ? cost/denominator*1.05 : NaN;
+  }
+
+  const untaxed = active/1.05;
+  const ship = untaxed*(1-px);
+  const feeAmount = ship*fee;
+  const profit = ship-feeAmount-cost;
+  const margin = ship ? profit/ship : NaN;
+
+  $("activePrice").textContent = money(active);
+  $("untaxedPrice").textContent = money(untaxed);
+  $("shipPrice").textContent = money(ship);
+  $("feeAmount").textContent = money(feeAmount);
+  $("profitAmount").textContent = money(profit);
+  $("heroValue").textContent = Number.isFinite(margin) ? (margin*100).toFixed(2)+"%" : "條件無法計算";
+  $("heroLabel").textContent = target === null ? "中科毛利率" : "回推後中科毛利率";
+
+  const hero = $("hero");
+  hero.className = "hero-result";
+  if(!Number.isFinite(margin) || margin < .26) hero.classList.add("danger");
+  else if(margin < .30) hero.classList.add("warn");
+
+  localStorage.setItem("marginCalc", JSON.stringify(Object.fromEntries(ids.map(id=>[id,$(id).value]))));
+}
+ids.forEach(id => $(id).addEventListener("input",calc));
+document.querySelectorAll("[data-target]").forEach(b=>b.addEventListener("click",()=>{$("targetMargin").value=b.dataset.target;calc();}));
+$("clearTarget").addEventListener("click",()=>{$("targetMargin").value="";calc();});
+
+try{
+  const saved = JSON.parse(localStorage.getItem("marginCalc")||"null");
+  if(saved) ids.forEach(id=>{if(saved[id]!==undefined) $(id).value=saved[id]});
+}catch(e){}
+calc();
+
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js"));}
+</script>
+</body>
+</html>
