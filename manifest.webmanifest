@@ -1,10 +1,10 @@
 {
-  "name": "中科毛利率試算器",
-  "short_name": "毛利率試算",
+  "name": "OP 中科毛利率試算器",
+  "short_name": "OP毛利試算",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f3f6f9",
-  "theme_color": "#1f4e78",
+  "background_color": "#eef5f0",
+  "theme_color": "#16894f",
   "icons": [
     {
       "src": "icon-192.svg",
