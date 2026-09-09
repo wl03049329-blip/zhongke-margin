@@ -48,7 +48,7 @@ input:focus,select:focus{border-color:var(--op2);box-shadow:0 0 0 4px rgba(22,14
 .product-option{display:block;width:100%;min-height:42px;padding:9px 10px;border-radius:10px;background:#fff;color:var(--ink);font-size:13px;font-weight:700;text-align:left}
 .product-option:hover,.product-option.active{background:var(--op3);color:var(--op)}
 .product-empty{padding:12px 10px;color:var(--muted);font-size:12px;text-align:center}
-.product-cost-note{display:none;margin:7px 2px 0;color:var(--op);font-size:11px;line-height:1.5;font-weight:700}
+.product-cost-note{display:none;margin:7px 2px 0;color:var(--op);font-size:11px;line-height:1.65;font-weight:700;white-space:pre-line}
 .product-cost-note.visible{display:block}
 .unit{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:800;color:#8b928d;pointer-events:none}
 .quick{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:9px}
@@ -72,7 +72,7 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
 <main class="app">
 <header class="hero">
  <div class="brand"><img class="brand-logo" src="op-logo.png" alt="OP Logo"><div><h1>OP 中科毛利率試算器</h1><p>環保品牌風格・業務即時決策工具</p></div></div>
- <div class="meta"><span class="pill">VERSION 3.1</span><span class="pill">Developed by 弘昇</span><span class="pill">固定稅率 5%</span></div>
+ <div class="meta"><span class="pill">VERSION 3.2</span><span class="pill">Developed by 弘昇</span><span class="pill">固定稅率 5%</span></div>
 </header>
 
 <nav class="tabs">
@@ -156,67 +156,67 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
  </div>
 </section>
 
-<footer><strong>OP 中科毛利率試算器</strong>Version 3.1・Developed by 弘昇<br>愛地球・減少紙張試算・資料僅儲存在本機</footer>
+<footer><strong>OP 中科毛利率試算器</strong>Version 3.2・Developed by 弘昇<br>愛地球・減少紙張試算・資料僅儲存在本機</footer>
 </main>
 <script>
 // PX Q3 product cost master
 // Source: 2026Q3 全產品成本表 / PX Q3
 // Costs are tax-exclusive
 const PX_Q3_PRODUCTS = [
- {name:"OP專科防臭袋S",cost:38.61},
- {name:"OP專科防臭袋M",cost:36.78},
- {name:"OP安全無毒耐熱袋(小)PX(二)",cost:22.58},
- {name:"OP安全無毒耐熱袋(中)PX(二)",cost:23.60},
- {name:"OP生物抗菌密封袋M(PX)",cost:22.63},
- {name:"OP生物抗菌密封袋L(PX)",cost:24.30},
- {name:"OP生物分解抗菌密封袋XL",cost:24.62},
- {name:"OP抗菌立體密封袋M+L",cost:24.62},
- {name:"OP長效抗菌立體密封袋M",cost:22.09},
- {name:"OP生物分解抗菌立體密封袋S",cost:19.56},
- {name:"OP生物分解保鮮膜360尺(20入)",cost:43.52},
- {name:"OP植材抗菌保鮮膜300尺",cost:31.23},
- {name:"OP無雙酚A鋁箔800公分-12入",cost:25.22},
- {name:"OP無雙酚A鋁箔1500公分-12入",cost:40.02},
- {name:"OP無雙酚A料理紙32M(12入)",cost:56.37},
- {name:"OP無漂白料理紙7M(加量)",cost:25.50},
- {name:"OP加長保護手套耐用強化 M",cost:33.92},
- {name:"OP環保舒適手套-綠茶香氛M(橘)",cost:18.57},
- {name:"OP環保舒適手套-綠茶香氛L(橘)",cost:18.57},
- {name:"OP環保舒適手套-綠茶香氛S",cost:18.77},
- {name:"OP超音波馬卡龍瞬吸布PX",cost:21.32},
- {name:"OP檸檬清新抗菌瞬吸布",cost:25.54},
- {name:"OP天然棉紗布(3片入)",cost:22.66},
- {name:"德適淨濕拖巾-薰衣草",cost:16.80},
- {name:"德適淨濕拖巾-雪松清香",cost:16.89},
- {name:"德適淨濕拖巾-海洋清新",cost:17.69},
- {name:"OP柑橘抗菌EX菜瓜布(三)",cost:24.52},
- {name:"OP細柔無砂海綿菜瓜布",cost:24.86},
- {name:"OP抗菌木漿棉",cost:14.76},
- {name:"檸檬馬鞭草菜瓜布-萬用速淨4入",cost:25.49},
- {name:"OP生物分解濾水網80入",cost:21.78},
- {name:"OP咖啡渣淨味濾水網80入(PX)",cost:20.64},
- {name:"Amaze大地擴香-甜橘玫瑰果",cost:87.10},
- {name:"AMAZE經典擴香-雪松中性淡香水",cost:89.44},
- {name:"AMAZE經典擴香-白麝香琥珀淡香水",cost:88.25},
- {name:"AMAZE 礦石香氛包-雪松中性淡香水",cost:27.61},
- {name:"AMAZE 礦石香氛包-白麝香琥珀淡香水",cost:27.22},
- {name:"Amaze礦石香氛-玫瑰淡香水",cost:27.30},
- {name:"礦石香氛-沁藍海洋淡香水",cost:28.11},
- {name:"礦石香氛-月光舒眠薰衣草",cost:28.04},
- {name:"香氛豆補充包-玫瑰淡香水(二)",cost:38.51},
- {name:"香氛豆補充包-海洋中性白麝香(二)",cost:37.20},
- {name:"香氛豆-粉紅甜蜜果香淡香水",cost:31.80},
- {name:"香氛豆-鳶尾粉邂逅淡香水",cost:33.49},
- {name:"OP日本愛宕柿小蘇打(二)",cost:30.32},
- {name:"OP愛岩柿消臭噴霧-抗病毒EX(黃)",cost:60.06},
- {name:"OP抗菌消臭噴霧-清新海洋",cost:54.99},
- {name:"茶酚淨洗潔精-清雅茶香(黃)",cost:49.66},
- {name:"茶酚淨洗潔精-檸檬茶萃(黃)",cost:51.23},
- {name:"茶酚淨洗潔精補充包-茶香(黃)",cost:29.50},
- {name:"德適淨十抗菌酒精擦(PX)",cost:23.70},
- {name:"凝膠型除濕袋-雪松清香",cost:29.84},
- {name:"OP指尖強化手套-薰衣紫M",cost:13.79},
- {name:"OP指尖強化手套-薰衣紫L",cost:13.79}
+ {name:"OP專科防臭袋S",code:"59060175",barcode:"4710660886819",cost:38.61},
+ {name:"OP專科防臭袋M",code:"59060174",barcode:"4710660886802",cost:36.78},
+ {name:"OP安全無毒耐熱袋(小)PX(二)",code:"65010241",barcode:"4710660885409",cost:22.58},
+ {name:"OP安全無毒耐熱袋(中)PX(二)",code:"65010240",barcode:"4710660885515",cost:23.60},
+ {name:"OP生物抗菌密封袋M(PX)",code:"65013459",barcode:"4710660883436",cost:22.63},
+ {name:"OP生物抗菌密封袋L(PX)",code:"65013458",barcode:"4710660883443",cost:24.30},
+ {name:"OP生物分解抗菌密封袋XL",code:"65013454",barcode:"4710660887113",cost:24.62},
+ {name:"OP抗菌立體密封袋M+L",code:"86020136",barcode:"4710660883764",cost:24.62},
+ {name:"OP長效抗菌立體密封袋M",code:"65010181",barcode:"4710660884426",cost:22.09},
+ {name:"OP生物分解抗菌立體密封袋S",code:"65014102",barcode:"4710660888288",cost:19.56},
+ {name:"OP生物分解保鮮膜360尺(20入)",code:"86210115",barcode:"4710660882088",cost:43.52},
+ {name:"OP植材抗菌保鮮膜300尺",code:"63012168",barcode:"4710660888264",cost:31.23},
+ {name:"OP無雙酚A鋁箔800公分-12入",code:"65010209",barcode:"4710660884433",cost:25.22},
+ {name:"OP無雙酚A鋁箔1500公分-12入",code:"65010647",barcode:"4710660886567",cost:40.02},
+ {name:"OP無雙酚A料理紙32M(12入)",code:"65011135",barcode:"4710660886628",cost:56.37},
+ {name:"OP無漂白料理紙7M(加量)",code:"65013511",barcode:"4710660887632",cost:25.50},
+ {name:"OP加長保護手套耐用強化 M",code:"86080018",barcode:"4710660882378",cost:33.92},
+ {name:"OP環保舒適手套-綠茶香氛M(橘)",code:"65050023",barcode:"4710660885539",cost:18.57},
+ {name:"OP環保舒適手套-綠茶香氛L(橘)",code:"65050024",barcode:"4710660885546",cost:18.57},
+ {name:"OP環保舒適手套-綠茶香氛S",code:"65051312",barcode:"4710660888066",cost:18.77},
+ {name:"OP超音波馬卡龍瞬吸布PX",code:"65020228",barcode:"4710660887007",cost:21.32},
+ {name:"OP檸檬清新抗菌瞬吸布",code:"63020126",barcode:"4710660888462",cost:25.54},
+ {name:"OP天然棉紗布(3片入)",code:"",barcode:"",cost:22.66},
+ {name:"德適淨濕拖巾-薰衣草",code:"63040316",barcode:"4710660888554",cost:16.80},
+ {name:"德適淨濕拖巾-雪松清香",code:"63040315",barcode:"4710660888578",cost:16.89},
+ {name:"德適淨濕拖巾-海洋清新",code:"63040317",barcode:"4710660888561",cost:17.69},
+ {name:"OP柑橘抗菌EX菜瓜布(三)",code:"65020089",barcode:"4710660884358",cost:24.52},
+ {name:"OP細柔無砂海綿菜瓜布",code:"65020125",barcode:"4710660887076",cost:24.86},
+ {name:"OP抗菌木漿棉",code:"65020116",barcode:"4710660886499",cost:14.76},
+ {name:"檸檬馬鞭草菜瓜布-萬用速淨4入",code:"65020135",barcode:"4710660887069",cost:25.49},
+ {name:"OP生物分解濾水網80入",code:"65020101",barcode:"4710660886048",cost:21.78},
+ {name:"OP咖啡渣淨味濾水網80入(PX)",code:"63020121",barcode:"4710660886512",cost:20.64},
+ {name:"Amaze大地擴香-甜橘玫瑰果",code:"61030152",barcode:"4710660884624",cost:87.10},
+ {name:"AMAZE經典擴香-雪松中性淡香水",code:"61030162",barcode:"4710660886925",cost:89.44},
+ {name:"AMAZE經典擴香-白麝香琥珀淡香水",code:"61030315",barcode:"4710660886932",cost:88.25},
+ {name:"AMAZE 礦石香氛包-雪松中性淡香水",code:"61030143",barcode:"4710660886598",cost:27.61},
+ {name:"AMAZE 礦石香氛包-白麝香琥珀淡香水",code:"61030142",barcode:"4710660886604",cost:27.22},
+ {name:"Amaze礦石香氛-玫瑰淡香水",code:"61030158",barcode:"4710660886895",cost:27.30},
+ {name:"礦石香氛-沁藍海洋淡香水",code:"61030316",barcode:"4710660887977",cost:28.11},
+ {name:"礦石香氛-月光舒眠薰衣草",code:"61030321",barcode:"4710660886987",cost:28.04},
+ {name:"香氛豆補充包-玫瑰淡香水(二)",code:"61020440",barcode:"4710660887618",cost:38.51},
+ {name:"香氛豆補充包-海洋中性白麝香(二)",code:"61020441",barcode:"4710660887625",cost:37.20},
+ {name:"香氛豆-粉紅甜蜜果香淡香水",code:"59020344",barcode:"4710660888127",cost:31.80},
+ {name:"香氛豆-鳶尾粉邂逅淡香水",code:"59020345",barcode:"4710660888134",cost:33.49},
+ {name:"OP日本愛宕柿小蘇打(二)",code:"61050035",barcode:"4710660884501",cost:30.32},
+ {name:"OP愛岩柿消臭噴霧-抗病毒EX(黃)",code:"61030090",barcode:"4710660885560",cost:60.06},
+ {name:"OP抗菌消臭噴霧-清新海洋",code:"61030274",barcode:"4710660887595",cost:54.99},
+ {name:"茶酚淨洗潔精-清雅茶香(黃)",code:"61050067",barcode:"4710660886574",cost:49.66},
+ {name:"茶酚淨洗潔精-檸檬茶萃(黃)",code:"61050079",barcode:"4710660886970",cost:51.23},
+ {name:"茶酚淨洗潔精補充包-茶香(黃)",code:"61050069",barcode:"4710660886659",cost:29.50},
+ {name:"德適淨十抗菌酒精擦(PX)",code:"61040174",barcode:"4710660887823",cost:23.70},
+ {name:"凝膠型除濕袋-雪松清香",code:"61030278",barcode:"4710660887601",cost:29.84},
+ {name:"OP指尖強化手套-薰衣紫M",code:"63020159",barcode:"4710660888745",cost:13.79},
+ {name:"OP指尖強化手套-薰衣紫L",code:"63020160",barcode:"4710660888752",cost:13.79}
 ];
 const $=id=>document.getElementById(id), n=id=>parseFloat($(id).value), pct=x=>x/100;
 const m2=v=>Number.isFinite(v)?v.toLocaleString("zh-TW",{minimumFractionDigits:2,maximumFractionDigits:2}):"—";
@@ -241,9 +241,10 @@ function updateProductCostNote(binding){
  const note=$(binding.noteId),product=binding.selected;
  if(!product){note.textContent="";note.classList.remove("visible");return}
  const current=Number($(binding.costId).value),standard=product.cost.toFixed(2);
- note.textContent=Number.isFinite(current)&&current.toFixed(2)!==standard
+ const costText=Number.isFinite(current)&&current.toFixed(2)!==standard
   ?`PX Q3 公告成本：$${standard}｜目前試算成本：$${current.toFixed(2)}`
   :`PX Q3 公告成本：$${standard}（未稅）`;
+ note.textContent=`商品代號：${product.code||"尚未建檔"}\n條碼：${product.barcode||"尚未建檔"}\n${costText}`;
  note.classList.add("visible");
 }
 function selectProduct(binding,product){
