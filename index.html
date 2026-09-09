@@ -58,21 +58,31 @@ button.wide{grid-column:span 3}
 .result{position:relative;overflow:hidden;text-align:center;color:#fff;background:linear-gradient(145deg,#087244,#18a15f);border-radius:21px;padding:20px 15px;margin-bottom:11px;box-shadow:0 13px 28px rgba(8,114,68,.22)}
 .result.warn{background:linear-gradient(145deg,#d58d00,#efb02a);color:#342300}.result.danger{background:linear-gradient(145deg,#b83636,#e35454)}
 .result small{display:block;font-size:11px;opacity:.84;margin-bottom:5px}.result strong{display:block;font-size:42px;line-height:1;font-weight:950;letter-spacing:-1.3px;font-variant-numeric:tabular-nums}.result em{display:block;font-style:normal;font-size:11px;opacity:.86;margin-top:8px}
+.result-label{display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:5px}.result-label small{margin:0}
+.margin-status{display:inline-flex;align-items:center;min-height:22px;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.2px;background:#e5f6eb;color:#075c37;border:1px solid rgba(255,255,255,.6)}
+.margin-status.warning{background:#fff0ba;color:#6f4b00}.margin-status.danger{background:#ffe0df;color:#9d2929}
 .result.pulse strong{animation:pop .28s cubic-bezier(.2,.9,.2,1.25)}@keyframes pop{from{transform:scale(.88);opacity:.4}to{transform:scale(1);opacity:1}}
 .rows{display:grid}.row{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:47px;border-bottom:1px solid var(--line);padding:8px 2px}.row:last-child{border-bottom:0}.row span:first-child{font-size:12px;color:var(--muted)}.value{font-weight:900;font-variant-numeric:tabular-nums}
+.copy-actions{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px}.copy-result{padding:9px 14px;color:var(--op);background:var(--op3);border:1px solid #c9e8d7}.copy-feedback{min-height:18px;color:var(--op);font-size:11px;font-weight:800}
+.scenario-inputs,.scenario-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:13px}
+.scenario-plan{padding:11px;border:1px solid var(--line);border-radius:17px;background:#f7faf8}.scenario-plan h3,.scenario-card h3{margin:0 0 10px;font-size:14px;color:var(--op)}.scenario-plan .field+ .field{margin-top:9px}.scenario-plan input{font-size:16px;padding-top:11px;padding-bottom:11px}
+.scenario-card{padding:13px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 6px 16px rgba(19,70,45,.06)}
+.scenario-title{display:flex;align-items:flex-start;justify-content:space-between;gap:7px}.scenario-badges{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px}.best-badge{padding:3px 6px;border-radius:999px;background:var(--op3);color:var(--op);font-size:9px;font-weight:900;white-space:nowrap}
+.scenario-metrics{display:grid;gap:7px}.scenario-metric{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;font-size:11px;color:var(--muted)}.scenario-metric b{color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}.scenario-final{margin-top:3px;padding-top:8px;border-top:1px solid var(--line)}.scenario-final b{color:var(--op)}
 .table{width:100%;border-collapse:collapse;font-size:12px}.table th{color:var(--muted);font-weight:800;text-align:right;padding:9px 6px;border-bottom:1px solid var(--line)}.table th:first-child,.table td:first-child{text-align:left}.table td{text-align:right;padding:11px 6px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}.table tr.current{background:var(--op3);font-weight:900;color:var(--op)}
 .note{font-size:11px;line-height:1.6;color:#68766f;background:#f4f8f5;border-radius:14px;padding:10px 11px;margin-top:10px}
 .formula{border-left:4px solid var(--op2);padding:11px 12px;background:#f4faf6;border-radius:0 14px 14px 0;margin-bottom:9px}.formula b{display:block;font-size:12px;margin-bottom:4px}.formula code{font-size:11px;white-space:normal;color:#335544}
 .promo-box{padding:12px;border-radius:16px;background:#f6faf7;border:1px solid var(--line);margin-top:10px}
-footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8px 4px}footer strong{color:var(--op);display:block}
-@media(max-width:480px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.quick{grid-template-columns:repeat(3,1fr)}.tabs{grid-template-columns:repeat(5,1fr)}.tab{font-size:10px}.brand-logo{width:68px}}
+.hs-footer{display:flex;align-items:center;justify-content:center;gap:10px;margin:27px 5px 4px;padding:18px 12px;border-top:1px solid rgba(8,107,66,.15);color:#62736a;text-align:left;font-size:10px;line-height:1.6}.hs-mark{display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--op);color:#fff;font-size:12px;font-weight:950;letter-spacing:.5px;box-shadow:0 5px 12px rgba(8,107,66,.18)}.hs-copy strong{display:block;color:var(--ink);font-size:12px}.hs-copy span{display:block}.hs-copy b{color:var(--op);font-size:11px}
+@media(max-width:620px){.scenario-inputs,.scenario-results{grid-template-columns:1fr}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.quick{grid-template-columns:repeat(3,1fr)}.tabs{grid-template-columns:repeat(5,1fr)}.tab{font-size:10px}.brand-logo{width:68px}.copy-actions{flex-direction:column;gap:4px}.hs-footer{text-align:center;flex-direction:column;gap:7px}}
 </style>
 </head>
 <body>
 <main class="app">
 <header class="hero">
  <div class="brand"><img class="brand-logo" src="op-logo.png" alt="OP Logo"><div><h1>OP 中科毛利率試算器</h1><p>環保品牌風格・業務即時決策工具</p></div></div>
- <div class="meta"><span class="pill">VERSION 3.2</span><span class="pill">Developed by 弘昇</span><span class="pill">固定稅率 5%</span></div>
+ <div class="meta"><span class="pill">VERSION 3.3</span><span class="pill">Developed by 弘昇</span><span class="pill">固定稅率 5%</span></div>
 </header>
 
 <nav class="tabs">
@@ -94,7 +104,7 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
    <div><label>公司費用率（可調整）</label><div class="wrap"><input id="cFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
   </div>
  </div>
- <div class="card"><div id="cResult" class="result"><small>中科毛利率</small><strong id="cMargin">—</strong><em>依輸入售價正算</em></div><div id="cRows" class="rows"></div></div>
+ <div class="card"><div id="cResult" class="result"><div class="result-label"><small>中科毛利率</small><span id="cStatus" class="margin-status" aria-live="polite">—</span></div><strong id="cMargin">—</strong><em>依輸入售價正算</em></div><div id="cRows" class="rows"></div><div class="copy-actions"><button id="copyResult" class="copy-result" type="button">複製試算結果</button><span id="copyFeedback" class="copy-feedback" role="status" aria-live="polite"></span></div></div>
 </section>
 
 <section id="reverse" class="panel">
@@ -114,16 +124,20 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
 
 <section id="scenario" class="panel">
  <div class="card">
-  <div class="head"><h2>售價情境比較</h2><span class="tag">±5 元</span></div>
+  <div class="head"><h2>方案比較</h2><span class="tag">A / B / C</span></div>
   <div class="grid">
    <div class="full"><label for="sProduct">PX 商品</label><div class="product-picker"><input id="sProduct" class="product-search" type="search" placeholder="請選擇商品" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sProductOptions"><div id="sProductOptions" class="product-options" role="listbox"></div></div><small id="sProductCostNote" class="product-cost-note"></small></div>
-   <div><label>基準售價（含稅）</label><div class="wrap"><input id="sPrice" type="number" inputmode="decimal" value="99"><span class="unit">元</span></div></div>
    <div><label>商品成本</label><div class="wrap"><input id="sCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div></div>
    <div><label>全聯毛利率</label><div class="wrap"><input id="sPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
    <div><label>公司費用率</label><div class="wrap"><input id="sFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
   </div>
+  <div class="scenario-inputs">
+   <div class="scenario-plan"><h3>方案 A</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPriceA" type="number" inputmode="decimal" value="94"><span class="unit">元</span></div></div><div class="field"><label>促銷條件／額外費用</label><div class="wrap"><input id="sPromoA" type="number" inputmode="decimal" value="0"><span class="unit">元</span></div></div></div>
+   <div class="scenario-plan"><h3>方案 B</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPrice" type="number" inputmode="decimal" value="99"><span class="unit">元</span></div></div><div class="field"><label>促銷條件／額外費用</label><div class="wrap"><input id="sPromoB" type="number" inputmode="decimal" value="0"><span class="unit">元</span></div></div></div>
+   <div class="scenario-plan"><h3>方案 C</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPriceC" type="number" inputmode="decimal" value="104"><span class="unit">元</span></div></div><div class="field"><label>促銷條件／額外費用</label><div class="wrap"><input id="sPromoC" type="number" inputmode="decimal" value="0"><span class="unit">元</span></div></div></div>
+  </div>
  </div>
- <div class="card"><table class="table"><thead><tr><th>售價</th><th>出貨價</th><th>毛利額</th><th>毛利率</th></tr></thead><tbody id="scenarioBody"></tbody></table></div>
+ <div class="card"><div id="scenarioResults" class="scenario-results"></div><div class="note">費用後結果＝既有中科毛利額再扣除各方案額外促銷費用；未輸入額外費用時，結果與既有公式一致。</div></div>
 </section>
 
 <section id="promo" class="panel">
@@ -156,7 +170,7 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
  </div>
 </section>
 
-<footer><strong>OP 中科毛利率試算器</strong>Version 3.2・Developed by 弘昇<br>愛地球・減少紙張試算・資料僅儲存在本機</footer>
+<footer class="hs-footer"><div class="hs-mark" aria-label="HS Logo placeholder">HS</div><div class="hs-copy"><strong>HS Business Tools</strong><span>Designed &amp; Built by <b>弘昇</b></span><span>OP PX Margin Tool · Version 3.3</span></div></footer>
 </main>
 <script>
 // PX Q3 product cost master
@@ -218,15 +232,24 @@ const PX_Q3_PRODUCTS = [
  {name:"OP指尖強化手套-薰衣紫M",code:"63020159",barcode:"4710660888745",cost:13.79},
  {name:"OP指尖強化手套-薰衣紫L",code:"63020160",barcode:"4710660888752",cost:13.79}
 ];
+// Margin status thresholds (percentage points). Update here for future policy changes.
+const MARGIN_THRESHOLDS={targetMargin:30,warningMargin:25};
 const $=id=>document.getElementById(id), n=id=>parseFloat($(id).value), pct=x=>x/100;
 const m2=v=>Number.isFinite(v)?v.toLocaleString("zh-TW",{minimumFractionDigits:2,maximumFractionDigits:2}):"—";
 const pc=v=>Number.isFinite(v)?(v*100).toFixed(2)+"%":"—";
 function model(price,cost,px,fee){const untaxed=price/1.05,ship=untaxed*(1-px),feeAmt=ship*fee,profit=ship-feeAmt-cost,margin=ship?profit/ship:NaN;return{price,untaxed,ship,feeAmt,profit,margin}}
 function rows(o){return `<div class="row"><span>實際售價（含稅）</span><span class="value">${m2(o.price)} 元</span></div><div class="row"><span>未稅售價</span><span class="value">${m2(o.untaxed)} 元</span></div><div class="row"><span>公司出貨價（未稅）</span><span class="value">${m2(o.ship)} 元</span></div><div class="row"><span>公司費用</span><span class="value">${m2(o.feeAmt)} 元</span></div><div class="row"><span>中科毛利額</span><span class="value">${m2(o.profit)} 元</span></div>`}
-function styleResult(el,margin){el.className="result";if(!Number.isFinite(margin)||margin<.26)el.classList.add("danger");else if(margin<.30)el.classList.add("warn");void el.offsetWidth;el.classList.add("pulse")}
-function calcC(){const o=model(n("cPrice"),n("cCost"),pct(n("cPx")),pct(n("cFee")));$("cMargin").textContent=pc(o.margin);$("cRows").innerHTML=rows(o);styleResult($("cResult"),o.margin);save()}
+function marginState(margin){const value=margin*100;if(Number.isFinite(value)&&value>=MARGIN_THRESHOLDS.targetMargin)return{label:"達標",key:"target"};if(Number.isFinite(value)&&value>=MARGIN_THRESHOLDS.warningMargin)return{label:"接近門檻",key:"warning"};return{label:"低於門檻",key:"danger"}}
+function styleResult(el,margin,statusId){const state=marginState(margin);el.className="result";if(state.key==="danger")el.classList.add("danger");else if(state.key==="warning")el.classList.add("warn");if(statusId){const status=$(statusId);status.textContent=state.label;status.className=`margin-status ${state.key==="target"?"":state.key}`.trim()}void el.offsetWidth;el.classList.add("pulse")}
+function calcC(){const o=model(n("cPrice"),n("cCost"),pct(n("cPx")),pct(n("cFee")));$("cMargin").textContent=pc(o.margin);$("cRows").innerHTML=rows(o);styleResult($("cResult"),o.margin,"cStatus");save()}
 function calcR(){const cost=n("rCost"),target=pct(n("rTarget")),px=pct(n("rPx")),fee=pct(n("rFee")),den=(1-fee-target)*(1-px),price=den>0?cost/den*1.05:NaN,o=model(price,cost,px,fee);$("rPrice").textContent=Number.isFinite(price)?m2(price)+" 元":"無法計算";$("rSub").textContent=Number.isFinite(o.margin)?"代回驗證："+pc(o.margin):"請檢查輸入條件";$("rRows").innerHTML=rows(o);styleResult($("rResult"),o.margin);save()}
-function calcS(){const base=n("sPrice"),cost=n("sCost"),px=pct(n("sPx")),fee=pct(n("sFee")),d=[-5,-3,-1,0,1,3,5];$("scenarioBody").innerHTML=d.map(x=>{const o=model(base+x,cost,px,fee);return `<tr class="${x===0?"current":""}"><td>${m2(o.price)}</td><td>${m2(o.ship)}</td><td>${m2(o.profit)}</td><td>${pc(o.margin)}</td></tr>`}).join("");save()}
+const SCENARIO_CONFIG=[{name:"A",priceId:"sPriceA",promoId:"sPromoA"},{name:"B",priceId:"sPrice",promoId:"sPromoB"},{name:"C",priceId:"sPriceC",promoId:"sPromoC"}];
+function calcS(){
+ const cost=n("sCost"),px=pct(n("sPx")),fee=pct(n("sFee"));
+ const results=SCENARIO_CONFIG.map(config=>{const price=n(config.priceId),promo=n(config.promoId),promoCost=Number.isFinite(promo)?promo:0,o=model(price,cost,px,fee),finalProfit=o.profit-promoCost,finalMargin=o.ship?finalProfit/o.ship:NaN;return{...config,promoCost,o,finalProfit,finalMargin}});
+ const maxMargin=Math.max(...results.map(result=>Number.isFinite(result.finalMargin)?result.finalMargin:-Infinity)),maxProfit=Math.max(...results.map(result=>Number.isFinite(result.finalProfit)?result.finalProfit:-Infinity));
+ $("scenarioResults").innerHTML=results.map(result=>{const marginBest=Number.isFinite(result.finalMargin)&&Math.abs(result.finalMargin-maxMargin)<1e-10,profitBest=Number.isFinite(result.finalProfit)&&Math.abs(result.finalProfit-maxProfit)<1e-10;return `<article class="scenario-card"><div class="scenario-title"><h3>方案 ${result.name}</h3><div class="scenario-badges">${marginBest?'<span class="best-badge">毛利率最高</span>':""}${profitBest?'<span class="best-badge">毛利額最高</span>':""}</div></div><div class="scenario-metrics"><div class="scenario-metric"><span>售價</span><b>${m2(result.o.price)} 元</b></div><div class="scenario-metric"><span>商品成本</span><b>${m2(cost)} 元</b></div><div class="scenario-metric"><span>促銷費用</span><b>${m2(result.promoCost)} 元</b></div><div class="scenario-metric"><span>毛利額</span><b>${m2(result.o.profit)} 元</b></div><div class="scenario-metric"><span>毛利率</span><b>${pc(result.o.margin)}</b></div><div class="scenario-metric scenario-final"><span>費用後結果</span><b>${m2(result.finalProfit)} 元<br>${pc(result.finalMargin)}</b></div></div></article>`}).join("");save()
+}
 function promoAverage(type,a){if(type==="bogo")return a/2;if(type==="half")return a*.75;return a}
 function updatePromoUI(){const t=$("promoType").value;$("promoInputB").style.display=t==="special"?"block":"none";if(t==="bogo"){$("pLabelA").textContent="活動總價（2件）";$("promoHint").textContent="買一送一：輸入兩件合計實付金額，系統以總價 ÷ 2 計算平均單價。"}else if(t==="half"){$("pLabelA").textContent="第一件售價";$("promoHint").textContent="第二件五折：平均單價＝第一件售價 × 75%。"}else{$("pLabelA").textContent="單特售價（1件）";$("pLabelB").textContent="二特總價（2件）";$("promoHint").textContent="單特／二特：系統同時計算單特毛利，以及二特總價 ÷ 2 後的平均單價毛利。"}calcP()}
 function calcP(){const t=$("promoType").value,cost=n("pCost"),px=pct(n("pPx")),fee=pct(n("pFee")),a=n("pA"),avg=promoAverage(t,a),o=model(avg,cost,px,fee);$("pMargin").textContent=pc(o.margin);$("pSub").textContent=`平均單價 ${m2(avg)} 元`;$("pRows").innerHTML=rows(o);styleResult($("pResult"),o.margin);const ex=$("specialExtra");if(t==="special"){const b=n("pB")/2,o2=model(b,cost,px,fee);ex.style.display="block";ex.innerHTML=`<b>二特平均單價：${m2(b)} 元</b><br>二特中科毛利率：<b>${pc(o2.margin)}</b><br>二特中科毛利額：<b>${m2(o2.profit)} 元</b>`}else ex.style.display="none";save()}
@@ -236,7 +259,8 @@ const productBindings=[
  {productId:"sProduct",optionsId:"sProductOptions",noteId:"sProductCostNote",costId:"sCost",calculate:calcS},
  {productId:"pProduct",optionsId:"pProductOptions",noteId:"pProductCostNote",costId:"pCost",calculate:calcP}
 ];
-function findProduct(name){const key=name.trim().toLocaleLowerCase("zh-TW");return PX_Q3_PRODUCTS.find(product=>product.name.toLocaleLowerCase("zh-TW")===key)}
+function productSearchText(product){return [product.name,product.code,product.barcode].join(" ").toLocaleLowerCase("zh-TW")}
+function findProduct(query){const key=query.trim().toLocaleLowerCase("zh-TW");return PX_Q3_PRODUCTS.find(product=>[product.name,product.code,product.barcode].some(value=>value&&value.toLocaleLowerCase("zh-TW")===key))}
 function updateProductCostNote(binding){
  const note=$(binding.noteId),product=binding.selected;
  if(!product){note.textContent="";note.classList.remove("visible");return}
@@ -261,7 +285,7 @@ function closeProductOptions(binding){
 }
 function renderProductOptions(binding){
  const input=$(binding.productId),options=$(binding.optionsId),query=input.value.trim().toLocaleLowerCase("zh-TW");
- const matches=PX_Q3_PRODUCTS.filter(product=>product.name.toLocaleLowerCase("zh-TW").includes(query));
+ const matches=PX_Q3_PRODUCTS.filter(product=>productSearchText(product).includes(query));
  options.replaceChildren();
  if(!matches.length){const empty=document.createElement("div");empty.className="product-empty";empty.textContent="找不到符合的 PX Q3 商品";options.appendChild(empty)}
  else matches.forEach(product=>{const button=document.createElement("button");button.type="button";button.className="product-option";button.setAttribute("role","option");button.textContent=`${product.name}｜$${product.cost.toFixed(2)}`;button.addEventListener("mousedown",event=>{event.preventDefault();selectProduct(binding,product)});options.appendChild(button)});
@@ -291,13 +315,20 @@ function setupProductSelectors(){
   cost.addEventListener("input",()=>updateProductCostNote(binding));
  });
 }
+function buildCalcResultText(){
+ const product=productBindings[0].selected||findProduct($("cProduct").value),o=model(n("cPrice"),n("cCost"),pct(n("cPx")),pct(n("cFee"))),name=product?.name||$("cProduct").value.trim()||"未選擇 PX 商品";
+ return [name,`商品代號：${product?.code||"尚未建檔"}`,`條碼：${product?.barcode||"尚未建檔"}`,`售價：$${m2(o.price)}`,`成本：$${m2(n("cCost"))}`,`公司費用：$${m2(o.feeAmt)}`,`毛利額：$${m2(o.profit)}`,`中科毛利率（費用後）：${pc(o.margin)}`].join("\n");
+}
+function fallbackCopyText(text){const area=document.createElement("textarea");area.value=text;area.setAttribute("readonly","");area.style.position="fixed";area.style.opacity="0";document.body.appendChild(area);area.select();const copied=document.execCommand("copy");area.remove();return copied}
+async function copyCalcResult(){const text=buildCalcResultText(),feedback=$("copyFeedback");let copied=false;try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);copied=true}}catch(e){}if(!copied)try{copied=fallbackCopyText(text)}catch(e){}feedback.textContent=copied?"已複製，可貼到 LINE 或 Email":"無法自動複製，請確認瀏覽器權限";setTimeout(()=>{feedback.textContent=""},3000)}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab,.panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");$(b.dataset.tab).classList.add("active")});
 ["cPrice","cCost","cPx","cFee"].forEach(id=>$(id).addEventListener("input",calcC));
 ["rCost","rTarget","rPx","rFee"].forEach(id=>$(id).addEventListener("input",calcR));
 document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{$("rTarget").value=b.dataset.r;calcR()});
-["sPrice","sCost","sPx","sFee"].forEach(id=>$(id).addEventListener("input",calcS));
+["sPriceA","sPromoA","sPrice","sPromoB","sPriceC","sPromoC","sCost","sPx","sFee"].forEach(id=>$(id).addEventListener("input",calcS));
 ["promoType","pCost","pPx","pFee","pA","pB"].forEach(id=>$(id).addEventListener("input",id==="promoType"?updatePromoUI:calcP));
-const storeIds=["cProduct","cPrice","cCost","cPx","cFee","rProduct","rCost","rTarget","rPx","rFee","sProduct","sPrice","sCost","sPx","sFee","promoType","pProduct","pCost","pPx","pFee","pA","pB"];
+$("copyResult").addEventListener("click",copyCalcResult);
+const storeIds=["cProduct","cPrice","cCost","cPx","cFee","rProduct","rCost","rTarget","rPx","rFee","sProduct","sPriceA","sPromoA","sPrice","sPromoB","sPriceC","sPromoC","sCost","sPx","sFee","promoType","pProduct","pCost","pPx","pFee","pA","pB"];
 function save(){try{localStorage.setItem("opMarginV3",JSON.stringify(Object.fromEntries(storeIds.map(id=>[id,$(id).value]))))}catch(e){}}
 try{const s=JSON.parse(localStorage.getItem("opMarginV3")||"null");if(s)storeIds.forEach(id=>{if(s[id]!==undefined)$(id).value=s[id]})}catch(e){}
 setupProductSelectors();
