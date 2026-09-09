@@ -41,6 +41,15 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Seg
 label{display:block;font-size:12px;font-weight:750;color:var(--muted);margin:0 0 6px 2px}
 .wrap{position:relative}input,select{width:100%;appearance:none;border:1.5px solid #e4d482;border-radius:15px;background:var(--cream);font-size:19px;font-weight:800;color:var(--ink);padding:13px 40px 13px 12px;outline:none}
 input:focus,select:focus{border-color:var(--op2);box-shadow:0 0 0 4px rgba(22,148,91,.11);background:#fffdf4}
+.product-picker{position:relative}
+.product-search{font-size:16px;padding-right:40px}
+.product-options{display:none;position:absolute;z-index:20;top:calc(100% + 5px);left:0;right:0;max-height:260px;overflow-y:auto;background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:0 14px 32px rgba(19,70,45,.18);padding:5px}
+.product-options.open{display:block}
+.product-option{display:block;width:100%;min-height:42px;padding:9px 10px;border-radius:10px;background:#fff;color:var(--ink);font-size:13px;font-weight:700;text-align:left}
+.product-option:hover,.product-option.active{background:var(--op3);color:var(--op)}
+.product-empty{padding:12px 10px;color:var(--muted);font-size:12px;text-align:center}
+.product-cost-note{display:none;margin:7px 2px 0;color:var(--op);font-size:11px;line-height:1.5;font-weight:700}
+.product-cost-note.visible{display:block}
 .unit{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:800;color:#8b928d;pointer-events:none}
 .quick{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:9px}
 button{appearance:none;border:0;cursor:pointer;border-radius:13px;min-height:41px;font-weight:850;color:#345f49;background:#edf4ef}
@@ -63,7 +72,7 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
 <main class="app">
 <header class="hero">
  <div class="brand"><img class="brand-logo" src="op-logo.png" alt="OP Logo"><div><h1>OP 中科毛利率試算器</h1><p>環保品牌風格・業務即時決策工具</p></div></div>
- <div class="meta"><span class="pill">VERSION 3.0</span><span class="pill">Developed by 弘昇</span><span class="pill">固定稅率 5%</span></div>
+ <div class="meta"><span class="pill">VERSION 3.1</span><span class="pill">Developed by 弘昇</span><span class="pill">固定稅率 5%</span></div>
 </header>
 
 <nav class="tabs">
@@ -78,6 +87,7 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
  <div class="card">
   <div class="head"><h2>毛利正算</h2><span class="tag">即時計算</span></div>
   <div class="grid">
+   <div class="full"><label for="cProduct">PX 商品</label><div class="product-picker"><input id="cProduct" class="product-search" type="search" placeholder="請選擇商品" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cProductOptions"><div id="cProductOptions" class="product-options" role="listbox"></div></div><small id="cProductCostNote" class="product-cost-note"></small></div>
    <div><label>售價（含稅）</label><div class="wrap"><input id="cPrice" type="number" inputmode="decimal" value="94.5"><span class="unit">元</span></div></div>
    <div><label>商品成本</label><div class="wrap"><input id="cCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div></div>
    <div><label>全聯毛利率</label><div class="wrap"><input id="cPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
@@ -91,6 +101,7 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
  <div class="card">
   <div class="head"><h2>回推售價</h2><span class="tag">目標毛利</span></div>
   <div class="grid">
+   <div class="full"><label for="rProduct">PX 商品</label><div class="product-picker"><input id="rProduct" class="product-search" type="search" placeholder="請選擇商品" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="rProductOptions"><div id="rProductOptions" class="product-options" role="listbox"></div></div><small id="rProductCostNote" class="product-cost-note"></small></div>
    <div><label>商品成本</label><div class="wrap"><input id="rCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div></div>
    <div><label>目標中科毛利率</label><div class="wrap"><input id="rTarget" type="number" inputmode="decimal" value="35"><span class="unit">%</span></div></div>
    <div><label>全聯毛利率</label><div class="wrap"><input id="rPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
@@ -105,6 +116,7 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
  <div class="card">
   <div class="head"><h2>售價情境比較</h2><span class="tag">±5 元</span></div>
   <div class="grid">
+   <div class="full"><label for="sProduct">PX 商品</label><div class="product-picker"><input id="sProduct" class="product-search" type="search" placeholder="請選擇商品" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sProductOptions"><div id="sProductOptions" class="product-options" role="listbox"></div></div><small id="sProductCostNote" class="product-cost-note"></small></div>
    <div><label>基準售價（含稅）</label><div class="wrap"><input id="sPrice" type="number" inputmode="decimal" value="99"><span class="unit">元</span></div></div>
    <div><label>商品成本</label><div class="wrap"><input id="sCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div></div>
    <div><label>全聯毛利率</label><div class="wrap"><input id="sPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
@@ -118,6 +130,7 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
  <div class="card">
   <div class="head"><h2>促銷試算</h2><span class="tag">平均單價</span></div>
   <div class="grid">
+   <div class="full"><label for="pProduct">PX 商品</label><div class="product-picker"><input id="pProduct" class="product-search" type="search" placeholder="請選擇商品" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pProductOptions"><div id="pProductOptions" class="product-options" role="listbox"></div></div><small id="pProductCostNote" class="product-cost-note"></small></div>
    <div class="full"><label>促銷類型</label><select id="promoType"><option value="bogo">買一送一</option><option value="half">第二件五折</option><option value="special">單特 XX 元／二特 XX 元</option></select></div>
    <div><label>商品成本（單件）</label><div class="wrap"><input id="pCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div></div>
    <div><label>全聯毛利率</label><div class="wrap"><input id="pPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
@@ -143,9 +156,68 @@ footer{text-align:center;color:#718178;font-size:11px;line-height:1.75;padding:8
  </div>
 </section>
 
-<footer><strong>OP 中科毛利率試算器</strong>Version 3.0・Developed by 弘昇<br>愛地球・減少紙張試算・資料僅儲存在本機</footer>
+<footer><strong>OP 中科毛利率試算器</strong>Version 3.1・Developed by 弘昇<br>愛地球・減少紙張試算・資料僅儲存在本機</footer>
 </main>
 <script>
+// PX Q3 product cost master
+// Source: 2026Q3 全產品成本表 / PX Q3
+// Costs are tax-exclusive
+const PX_Q3_PRODUCTS = [
+ {name:"OP專科防臭袋S",cost:38.61},
+ {name:"OP專科防臭袋M",cost:36.78},
+ {name:"OP安全無毒耐熱袋(小)PX(二)",cost:22.58},
+ {name:"OP安全無毒耐熱袋(中)PX(二)",cost:23.60},
+ {name:"OP生物抗菌密封袋M(PX)",cost:22.63},
+ {name:"OP生物抗菌密封袋L(PX)",cost:24.30},
+ {name:"OP生物分解抗菌密封袋XL",cost:24.62},
+ {name:"OP抗菌立體密封袋M+L",cost:24.62},
+ {name:"OP長效抗菌立體密封袋M",cost:22.09},
+ {name:"OP生物分解抗菌立體密封袋S",cost:19.56},
+ {name:"OP生物分解保鮮膜360尺(20入)",cost:43.52},
+ {name:"OP植材抗菌保鮮膜300尺",cost:31.23},
+ {name:"OP無雙酚A鋁箔800公分-12入",cost:25.22},
+ {name:"OP無雙酚A鋁箔1500公分-12入",cost:40.02},
+ {name:"OP無雙酚A料理紙32M(12入)",cost:56.37},
+ {name:"OP無漂白料理紙7M(加量)",cost:25.50},
+ {name:"OP加長保護手套耐用強化 M",cost:33.92},
+ {name:"OP環保舒適手套-綠茶香氛M(橘)",cost:18.57},
+ {name:"OP環保舒適手套-綠茶香氛L(橘)",cost:18.57},
+ {name:"OP環保舒適手套-綠茶香氛S",cost:18.77},
+ {name:"OP超音波馬卡龍瞬吸布PX",cost:21.32},
+ {name:"OP檸檬清新抗菌瞬吸布",cost:25.54},
+ {name:"OP天然棉紗布(3片入)",cost:22.66},
+ {name:"德適淨濕拖巾-薰衣草",cost:16.80},
+ {name:"德適淨濕拖巾-雪松清香",cost:16.89},
+ {name:"德適淨濕拖巾-海洋清新",cost:17.69},
+ {name:"OP柑橘抗菌EX菜瓜布(三)",cost:24.52},
+ {name:"OP細柔無砂海綿菜瓜布",cost:24.86},
+ {name:"OP抗菌木漿棉",cost:14.76},
+ {name:"檸檬馬鞭草菜瓜布-萬用速淨4入",cost:25.49},
+ {name:"OP生物分解濾水網80入",cost:21.78},
+ {name:"OP咖啡渣淨味濾水網80入(PX)",cost:20.64},
+ {name:"Amaze大地擴香-甜橘玫瑰果",cost:87.10},
+ {name:"AMAZE經典擴香-雪松中性淡香水",cost:89.44},
+ {name:"AMAZE經典擴香-白麝香琥珀淡香水",cost:88.25},
+ {name:"AMAZE 礦石香氛包-雪松中性淡香水",cost:27.61},
+ {name:"AMAZE 礦石香氛包-白麝香琥珀淡香水",cost:27.22},
+ {name:"Amaze礦石香氛-玫瑰淡香水",cost:27.30},
+ {name:"礦石香氛-沁藍海洋淡香水",cost:28.11},
+ {name:"礦石香氛-月光舒眠薰衣草",cost:28.04},
+ {name:"香氛豆補充包-玫瑰淡香水(二)",cost:38.51},
+ {name:"香氛豆補充包-海洋中性白麝香(二)",cost:37.20},
+ {name:"香氛豆-粉紅甜蜜果香淡香水",cost:31.80},
+ {name:"香氛豆-鳶尾粉邂逅淡香水",cost:33.49},
+ {name:"OP日本愛宕柿小蘇打(二)",cost:30.32},
+ {name:"OP愛岩柿消臭噴霧-抗病毒EX(黃)",cost:60.06},
+ {name:"OP抗菌消臭噴霧-清新海洋",cost:54.99},
+ {name:"茶酚淨洗潔精-清雅茶香(黃)",cost:49.66},
+ {name:"茶酚淨洗潔精-檸檬茶萃(黃)",cost:51.23},
+ {name:"茶酚淨洗潔精補充包-茶香(黃)",cost:29.50},
+ {name:"德適淨十抗菌酒精擦(PX)",cost:23.70},
+ {name:"凝膠型除濕袋-雪松清香",cost:29.84},
+ {name:"OP指尖強化手套-薰衣紫M",cost:13.79},
+ {name:"OP指尖強化手套-薰衣紫L",cost:13.79}
+];
 const $=id=>document.getElementById(id), n=id=>parseFloat($(id).value), pct=x=>x/100;
 const m2=v=>Number.isFinite(v)?v.toLocaleString("zh-TW",{minimumFractionDigits:2,maximumFractionDigits:2}):"—";
 const pc=v=>Number.isFinite(v)?(v*100).toFixed(2)+"%":"—";
@@ -158,15 +230,76 @@ function calcS(){const base=n("sPrice"),cost=n("sCost"),px=pct(n("sPx")),fee=pct
 function promoAverage(type,a){if(type==="bogo")return a/2;if(type==="half")return a*.75;return a}
 function updatePromoUI(){const t=$("promoType").value;$("promoInputB").style.display=t==="special"?"block":"none";if(t==="bogo"){$("pLabelA").textContent="活動總價（2件）";$("promoHint").textContent="買一送一：輸入兩件合計實付金額，系統以總價 ÷ 2 計算平均單價。"}else if(t==="half"){$("pLabelA").textContent="第一件售價";$("promoHint").textContent="第二件五折：平均單價＝第一件售價 × 75%。"}else{$("pLabelA").textContent="單特售價（1件）";$("pLabelB").textContent="二特總價（2件）";$("promoHint").textContent="單特／二特：系統同時計算單特毛利，以及二特總價 ÷ 2 後的平均單價毛利。"}calcP()}
 function calcP(){const t=$("promoType").value,cost=n("pCost"),px=pct(n("pPx")),fee=pct(n("pFee")),a=n("pA"),avg=promoAverage(t,a),o=model(avg,cost,px,fee);$("pMargin").textContent=pc(o.margin);$("pSub").textContent=`平均單價 ${m2(avg)} 元`;$("pRows").innerHTML=rows(o);styleResult($("pResult"),o.margin);const ex=$("specialExtra");if(t==="special"){const b=n("pB")/2,o2=model(b,cost,px,fee);ex.style.display="block";ex.innerHTML=`<b>二特平均單價：${m2(b)} 元</b><br>二特中科毛利率：<b>${pc(o2.margin)}</b><br>二特中科毛利額：<b>${m2(o2.profit)} 元</b>`}else ex.style.display="none";save()}
+const productBindings=[
+ {productId:"cProduct",optionsId:"cProductOptions",noteId:"cProductCostNote",costId:"cCost",calculate:calcC},
+ {productId:"rProduct",optionsId:"rProductOptions",noteId:"rProductCostNote",costId:"rCost",calculate:calcR},
+ {productId:"sProduct",optionsId:"sProductOptions",noteId:"sProductCostNote",costId:"sCost",calculate:calcS},
+ {productId:"pProduct",optionsId:"pProductOptions",noteId:"pProductCostNote",costId:"pCost",calculate:calcP}
+];
+function findProduct(name){const key=name.trim().toLocaleLowerCase("zh-TW");return PX_Q3_PRODUCTS.find(product=>product.name.toLocaleLowerCase("zh-TW")===key)}
+function updateProductCostNote(binding){
+ const note=$(binding.noteId),product=binding.selected;
+ if(!product){note.textContent="";note.classList.remove("visible");return}
+ const current=Number($(binding.costId).value),standard=product.cost.toFixed(2);
+ note.textContent=Number.isFinite(current)&&current.toFixed(2)!==standard
+  ?`PX Q3 公告成本：$${standard}｜目前試算成本：$${current.toFixed(2)}`
+  :`PX Q3 公告成本：$${standard}（未稅）`;
+ note.classList.add("visible");
+}
+function selectProduct(binding,product){
+ binding.selected=product;
+ $(binding.productId).value=product.name;
+ $(binding.costId).value=product.cost.toFixed(2);
+ closeProductOptions(binding);
+ updateProductCostNote(binding);
+ binding.calculate();
+}
+function closeProductOptions(binding){
+ $(binding.optionsId).classList.remove("open");
+ $(binding.productId).setAttribute("aria-expanded","false");
+}
+function renderProductOptions(binding){
+ const input=$(binding.productId),options=$(binding.optionsId),query=input.value.trim().toLocaleLowerCase("zh-TW");
+ const matches=PX_Q3_PRODUCTS.filter(product=>product.name.toLocaleLowerCase("zh-TW").includes(query));
+ options.replaceChildren();
+ if(!matches.length){const empty=document.createElement("div");empty.className="product-empty";empty.textContent="找不到符合的 PX Q3 商品";options.appendChild(empty)}
+ else matches.forEach(product=>{const button=document.createElement("button");button.type="button";button.className="product-option";button.setAttribute("role","option");button.textContent=`${product.name}｜$${product.cost.toFixed(2)}`;button.addEventListener("mousedown",event=>{event.preventDefault();selectProduct(binding,product)});options.appendChild(button)});
+ options.classList.add("open");input.setAttribute("aria-expanded","true");
+}
+function setupProductSelectors(){
+ productBindings.forEach(binding=>{
+  const input=$(binding.productId),cost=$(binding.costId),restored=findProduct(input.value);
+  if(restored){binding.selected=restored;updateProductCostNote(binding)}
+  input.addEventListener("focus",()=>renderProductOptions(binding));
+  input.addEventListener("input",()=>{
+   const exact=findProduct(input.value);
+   if(exact){selectProduct(binding,exact);return}
+   binding.selected=null;updateProductCostNote(binding);renderProductOptions(binding);save();
+  });
+  input.addEventListener("keydown",event=>{
+   const options=[...$(binding.optionsId).querySelectorAll(".product-option")];
+   let active=options.findIndex(option=>option.classList.contains("active"));
+   if(event.key==="ArrowDown"||event.key==="ArrowUp"){
+    event.preventDefault();options.forEach(option=>option.classList.remove("active"));
+    active=event.key==="ArrowDown"?Math.min(active+1,options.length-1):Math.max(active-1,0);
+    if(options[active]){options[active].classList.add("active");options[active].scrollIntoView({block:"nearest"})}
+   }else if(event.key==="Enter"&&active>=0){event.preventDefault();options[active].dispatchEvent(new MouseEvent("mousedown",{bubbles:true}))}
+   else if(event.key==="Escape")closeProductOptions(binding);
+  });
+  input.addEventListener("blur",()=>setTimeout(()=>closeProductOptions(binding),100));
+  cost.addEventListener("input",()=>updateProductCostNote(binding));
+ });
+}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab,.panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");$(b.dataset.tab).classList.add("active")});
 ["cPrice","cCost","cPx","cFee"].forEach(id=>$(id).addEventListener("input",calcC));
 ["rCost","rTarget","rPx","rFee"].forEach(id=>$(id).addEventListener("input",calcR));
 document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{$("rTarget").value=b.dataset.r;calcR()});
 ["sPrice","sCost","sPx","sFee"].forEach(id=>$(id).addEventListener("input",calcS));
 ["promoType","pCost","pPx","pFee","pA","pB"].forEach(id=>$(id).addEventListener("input",id==="promoType"?updatePromoUI:calcP));
-const storeIds=["cPrice","cCost","cPx","cFee","rCost","rTarget","rPx","rFee","sPrice","sCost","sPx","sFee","promoType","pCost","pPx","pFee","pA","pB"];
+const storeIds=["cProduct","cPrice","cCost","cPx","cFee","rProduct","rCost","rTarget","rPx","rFee","sProduct","sPrice","sCost","sPx","sFee","promoType","pProduct","pCost","pPx","pFee","pA","pB"];
 function save(){try{localStorage.setItem("opMarginV3",JSON.stringify(Object.fromEntries(storeIds.map(id=>[id,$(id).value]))))}catch(e){}}
 try{const s=JSON.parse(localStorage.getItem("opMarginV3")||"null");if(s)storeIds.forEach(id=>{if(s[id]!==undefined)$(id).value=s[id]})}catch(e){}
+setupProductSelectors();
 calcC();calcR();calcS();updatePromoUI();
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js"));
 </script>
