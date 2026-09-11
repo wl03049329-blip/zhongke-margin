@@ -74,6 +74,8 @@ async function main() {
   assert.doesNotMatch(staticHtml, />\s*(?:CHANNEL|WORKBENCH|ANALYTICS|INTELLIGENCE)\s*</i, "visible interface remains Chinese-first");
   assert.equal((staticHtml.match(/const MARGIN_THRESHOLDS=Object\.freeze\(\{excellentMin:40,targetMin:37,optimizeMin:33\}\)/g) || []).length, 1, "one centralized default threshold config");
   assert.deepEqual(await page.evaluate(() => MARGIN_THRESHOLDS), { excellentMin: 40, targetMin: 37, optimizeMin: 33 }, "central threshold config values");
+  assert.deepEqual(await page.locator(".quick [data-r]").evaluateAll(buttons => buttons.map(button => Number(button.dataset.r))), [32, 35, 38, 40, 45, 50], "reverse quick targets use the requested values and order");
+  assert.equal(await page.locator(".quick [data-r].primary").getAttribute("data-r"), "35", "initial quick target follows the current input value");
   const manifest = JSON.parse(fs.readFileSync(path.join(root, "manifest.webmanifest"), "utf8"));
   assert.equal(manifest.name, "PX 通路工作台", "PWA name");
   assert.equal(manifest.short_name, "PX 工作台", "PWA short name");
@@ -377,6 +379,28 @@ async function main() {
   assert.equal(await page.locator("#cMargin").innerText(), "—", "missing front margin is not inferred");
   assert.equal(await page.locator("#cStatus").innerText(), "—", "missing result has neutral status");
 
+  await page.locator(".tab[data-tab='reverse']").click();
+  await page.locator("#rProduct").fill("65010209");
+  for (const target of [32, 35, 38, 40, 45, 50]) {
+    await page.locator(`.quick [data-r='${target}']`).click();
+    assert.equal(await page.locator("#rTarget").inputValue(), String(target), `${target}% quick target updates input`);
+    assert.equal(await page.locator(".quick [data-r].primary").count(), 1, `${target}% leaves exactly one active quick target`);
+    assert.equal(await page.locator(".quick [data-r].primary").getAttribute("data-r"), String(target), `${target}% active state follows click`);
+  }
+  const reverseFormulaCheck = await page.evaluate(() => {
+    const cost = Number(document.querySelector("#rCost").value);
+    const target = Number(document.querySelector("#rTarget").value) / 100;
+    const px = parseFloat(document.querySelector("#rPx").textContent) / 100;
+    const fee = Number(document.querySelector("#rFee").value) / 100;
+    const expected = cost / ((1 - fee - target) * (1 - px)) * 1.05;
+    return { expected: expected.toFixed(2), displayed: document.querySelector("#rPrice").textContent };
+  });
+  assert.equal(reverseFormulaCheck.displayed, `${reverseFormulaCheck.expected} 元`, "quick target recalculates with the existing reverse-price formula");
+  await page.locator("#rTarget").fill("40");
+  assert.equal(await page.locator(".quick [data-r].primary").getAttribute("data-r"), "40", "manual exact-match target selects its quick button");
+  await page.locator("#rTarget").fill("42");
+  assert.equal(await page.locator(".quick [data-r].primary").count(), 0, "manual custom target clears all quick-button active states");
+
   const tabFrontMarginTests = [
     ["reverse", "#rProduct", "#rPx", "#rTarget", "32"],
     ["scenario", "#sProduct", "#sPx", "#sPriceA", "119"],
@@ -450,6 +474,22 @@ async function main() {
   }
   assert.equal(maxDocumentOverflow, 0, "maximum document overflow");
   console.log(`MAX_DOCUMENT_OVERFLOW=${maxDocumentOverflow}px`);
+  for (const width of [320, 360, 375, 390, 393, 430]) {
+    await page.setViewportSize({ width, height: 800 });
+    await page.locator(".tab[data-tab='reverse']").click();
+    const quickRows = await page.locator(".quick [data-r]").evaluateAll(buttons => {
+      const rowCounts = new Map();
+      for (const button of buttons) {
+        const top = Math.round(button.getBoundingClientRect().top);
+        rowCounts.set(top, (rowCounts.get(top) || 0) + 1);
+      }
+      return [...rowCounts.values()];
+    });
+    assert.deepEqual(quickRows, [3, 3], `${width}px reverse quick targets remain a 3x2 grid`);
+  }
+  await page.setViewportSize({ width: 1024, height: 768 });
+  await page.locator(".tab[data-tab='reverse']").click();
+  assert.equal(await page.locator(".quick [data-r]").evaluateAll(buttons => new Set(buttons.map(button => Math.round(button.getBoundingClientRect().top))).size), 1, "desktop reverse quick targets remain on one row");
   assert.equal(await page.locator(".tabs-shell").evaluate(element => getComputedStyle(element, "::after").content), "none", "desktop has no tab fade when the tabs fit");
   await page.setViewportSize({ width: 320, height: 568 });
   await page.locator(".tab[data-tab='calc']").click();

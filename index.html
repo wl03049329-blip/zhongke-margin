@@ -164,7 +164,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
    <div><label>全聯毛利率（前毛）</label><output id="rPx" class="fixed-attribute" aria-live="polite">—</output><small class="fixed-note">來源：最新 PX Excel，不隨試算變動</small></div>
    <div><label>公司費用率（可調整）</label><div class="wrap"><input id="rFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
   </div>
-  <div class="quick"><button data-r="26">26%</button><button data-r="28">28%</button><button data-r="30">30%</button><button data-r="32">32%</button><button data-r="35" class="primary">35%</button><button data-r="40">40%</button></div>
+  <div class="quick"><button data-r="32">32%</button><button data-r="35">35%</button><button data-r="38">38%</button><button data-r="40">40%</button><button data-r="45">45%</button><button data-r="50">50%</button></div>
  </div>
  <div id="rProductInfo"></div>
  <div class="card"><div id="rResult" class="result"><div class="result-label"><small>建議售價（含稅）</small><span id="rStatus" class="margin-status" aria-live="polite">—</span></div><strong id="rPrice">—</strong><em id="rSub">依目標毛利率反向運算</em></div><div id="rRows" class="rows"></div></div>
@@ -529,8 +529,11 @@ const tabsShell=document.querySelector(".tabs-shell"),tabsNav=document.querySele
 function updateTabScrollHint(){const noOverflow=tabsNav.scrollWidth<=tabsNav.clientWidth+1,atEnd=tabsNav.scrollLeft+tabsNav.clientWidth>=tabsNav.scrollWidth-1;tabsShell.classList.toggle("no-overflow",noOverflow);tabsShell.classList.toggle("at-end",atEnd)}
 tabsNav.addEventListener("scroll",updateTabScrollHint,{passive:true});window.addEventListener("resize",updateTabScrollHint);requestAnimationFrame(updateTabScrollHint);
 ["cPrice","cCost","cFee"].forEach(id=>$(id).addEventListener("input",calcC));
-["rCost","rTarget","rFee"].forEach(id=>$(id).addEventListener("input",calcR));
-document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{$("rTarget").value=b.dataset.r;calcR()});
+const reverseQuickTargets=[...document.querySelectorAll("[data-r]")];
+function syncReverseQuickTarget(){const raw=$("rTarget").value.trim(),value=Number(raw);reverseQuickTargets.forEach(button=>button.classList.toggle("primary",raw!==""&&Number.isFinite(value)&&value===Number(button.dataset.r)))}
+["rCost","rFee"].forEach(id=>$(id).addEventListener("input",calcR));
+$("rTarget").addEventListener("input",()=>{syncReverseQuickTarget();calcR()});
+reverseQuickTargets.forEach(button=>button.onclick=()=>{$("rTarget").value=button.dataset.r;syncReverseQuickTarget();calcR()});
 ["sPriceA","sPromoA","sPrice","sPromoB","sPriceC","sPromoC","sCost","sFee"].forEach(id=>$(id).addEventListener("input",calcS));
 ["promoType","pCost","pFee","pA","pB"].forEach(id=>$(id).addEventListener("input",id==="promoType"?updatePromoUI:calcP));
 $("copyResult").addEventListener("click",copyCalcResult);
@@ -540,6 +543,7 @@ function save(){try{localStorage.setItem("opMarginV3",JSON.stringify(Object.from
 try{const s=JSON.parse(localStorage.getItem("opMarginV3")||"null");if(s)storeIds.forEach(id=>{if(s[id]!==undefined)$(id).value=s[id]})}catch(e){}
 setupProductSelectors();
 setupThresholdSettings();
+syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2"));
 </script>
