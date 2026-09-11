@@ -7,10 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="PX 工作台">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-<link rel="icon" type="image/svg+xml" href="assets/brand/px-icon.svg">
+<link rel="manifest" href="manifest.webmanifest?v=4.1.2">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=4.1.2">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png?v=4.1.2">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=4.1.2">
+<link rel="icon" type="image/svg+xml" href="assets/brand/px-icon.svg?v=4.1.2">
 <title>PX 通路工作台</title>
 <style>
 :root{
@@ -115,22 +116,27 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 
 /* Version 4.1.1 — restrained result surfaces and author cleanup */
 .hero:after{opacity:.035}.result{color:#075f68;background:#f0f8f8;border:1px solid #c9e3e5;box-shadow:0 8px 20px rgba(16,42,67,.07)}.result.excellent{color:#174f38;background:#f2f8f4;border-color:#cfe4d7}.result.warn{color:#795316;background:#fff9ed;border-color:#ead9b5}.result.danger{color:#87363c;background:#fff4f4;border-color:#e9ced0}.result.neutral{color:#405a6a;background:#f3f6f8;border-color:#d8e2e8}.result small,.result em{color:#607482;opacity:1}.result strong{color:inherit;white-space:nowrap}.margin-status{border:0;color:#fff}.margin-status.excellent{background:#216847;color:#fff}.margin-status.target{background:#08727c;color:#fff}.margin-status.optimize{background:#936113;color:#fff}.margin-status.low{background:#9b4148;color:#fff}.scenario-state.excellent{background:#216847;color:#fff}.scenario-state.target{background:#08727c;color:#fff}.scenario-state.optimize{background:#936113;color:#fff}.scenario-state.low{background:#9b4148;color:#fff}.threshold-settings summary{gap:8px}.settings-icon{flex:0 0 auto;width:19px;height:19px;color:#405769;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.hs-footer{display:block;text-align:center}.hs-copy{min-width:0}.hs-copy .built-by{margin-top:2px;font-size:10px;color:#70818c}
+
+/* Version 4.1.2 — final micro-refinements and full-bleed app icons */
+.hs-copy .built-by{font-size:9px;font-weight:400;color:#70818c;opacity:.6}
+.tabs-shell{position:relative;min-width:0}
+@media(max-width:620px){.tabs-shell::after{content:"";position:absolute;z-index:3;top:10px;right:0;bottom:10px;width:32px;background:linear-gradient(90deg,rgba(243,246,248,0),rgba(243,246,248,.98));pointer-events:none}.tabs-shell.at-end::after,.tabs-shell.no-overflow::after{display:none}}
 </style>
 </head>
 <body>
 <main class="app">
 <header class="hero">
  <div class="brand"><img class="brand-logo" src="assets/brand/px-logo.svg" alt="PX"><div class="brand-copy"><h1>PX 通路工作台</h1><p><span class="developer-primary">開發者：弘昇</span><span class="developer-secondary">｜Built by HS</span></p></div></div>
- <div class="meta"><span class="pill">VERSION 4.1.1</span><span class="pill">個人工作輔助工具</span><span class="pill">固定稅率 5%</span></div>
+ <div class="meta"><span class="pill">VERSION 4.1.2</span><span class="pill">個人工作輔助工具</span><span class="pill">固定稅率 5%</span></div>
 </header>
 
-<nav class="tabs">
+<div class="tabs-shell"><nav class="tabs">
  <button class="tab active" data-tab="calc">毛利正算</button>
  <button class="tab" data-tab="reverse">回推售價</button>
  <button class="tab" data-tab="scenario">情境比較</button>
  <button class="tab" data-tab="promo">促銷試算</button>
  <button class="tab" data-tab="basis">計算依據</button>
-</nav>
+</nav></div>
 
 <section id="calc" class="panel active">
  <div class="card">
@@ -361,7 +367,7 @@ function productInfoMarkup(binding,product,data){
 function salesMarkup(data,analysis){
  if(!data||!analysis)return `<section class="card px-sales-card"><div class="px-section-head"><h2>PX 銷售表現</h2></div><div class="px-empty">此商品目前沒有可確認的 PX 實銷與前毛資料。成本主檔保留，前毛與相關試算不推算假資料。</div></section>`;
  const averageLabel=analysis.validCount>=3?"近 3 月均銷":"資料起始至今月均銷",monthRows=data.sales.map((value,index)=>{const prelaunch=index<analysis.launchIndex,label=prelaunch?"尚無資料":Number.isFinite(value)?countText(value):"—";return `<div class="month-row${prelaunch?" prelaunch":""}"><span>${PX_PERIODS[index]}</span><b>${label}</b></div>`}).join("");
- return `<section class="card px-sales-card"><div class="px-section-head"><h2>PX 銷售表現</h2>${analysis.isNew?'<span class="new-badge">近期新增資料</span>':""}</div><div class="px-kpi-grid"><div class="px-metric"><span>實銷資料起始</span><b>${analysis.launchMonth}</b></div><div class="px-metric"><span>最新月實銷</span><b>${countText(analysis.latest)}</b><small>${analysis.latestMonth}</small></div><div class="px-metric"><span>${averageLabel}</span><b>${nf1.format(analysis.shortAverage)}</b></div><div class="px-metric"><span>近期月均銷</span><b>${nf1.format(analysis.recentAverage)}</b><small>最多採最近 13 個有實銷資料月份</small></div><div class="px-metric"><span>去年同期 YoY</span><b>${analysis.yoyText}</b></div><div class="px-metric"><span>目前單店月銷</span><b>${Number.isFinite(analysis.perStore)?nf1.format(analysis.perStore)+" 支 / 店 / 月":"—"}</b></div></div><div class="trend-wrap"><div class="trend-title"><b>實銷趨勢</b><small>${PX_PERIODS[0]} ～ ${PX_PERIODS[PX_PERIODS.length-1]}</small></div>${trendChart(data,analysis)}</div><details class="monthly-details"><summary>查看完整實銷</summary><div class="monthly-grid">${monthRows}</div></details><div class="px-data-note">資料來源：@PX實銷_0902(1).xls；資料起始前空白保留為 null，資料起始後的真實 0 會納入平均與趨勢。</div></section>`;
+ return `<section class="card px-sales-card"><div class="px-section-head"><h2>PX 銷售表現</h2>${analysis.isNew?'<span class="new-badge">近期新增資料</span>':""}</div><div class="px-kpi-grid"><div class="px-metric"><span>實銷資料起始</span><b>${analysis.launchMonth}</b></div><div class="px-metric"><span>最新月實銷</span><b>${countText(analysis.latest)}</b><small>${analysis.latestMonth}</small></div><div class="px-metric"><span>${averageLabel}</span><b>${nf1.format(analysis.shortAverage)}</b></div><div class="px-metric"><span>近期月均銷</span><b>${nf1.format(analysis.recentAverage)}</b><small>最多採最近 13 個有實銷資料月份</small></div><div class="px-metric"><span>去年同期 YoY</span><b>${analysis.yoyText}</b><small>較去年同期</small></div><div class="px-metric"><span>目前單店月銷</span><b>${Number.isFinite(analysis.perStore)?nf1.format(analysis.perStore)+" 支 / 店 / 月":"—"}</b></div></div><div class="trend-wrap"><div class="trend-title"><b>實銷趨勢</b><small>${PX_PERIODS[0]} ～ ${PX_PERIODS[PX_PERIODS.length-1]}</small></div>${trendChart(data,analysis)}</div><details class="monthly-details"><summary>查看完整實銷</summary><div class="monthly-grid">${monthRows}</div></details><div class="px-data-note">資料來源：@PX實銷_0902(1).xls；資料起始前空白保留為 null，資料起始後的真實 0 會納入平均與趨勢。</div></section>`;
 }
 const numericIndexes=sales=>sales.map((value,index)=>Number.isFinite(value)?index:-1).filter(index=>index>=0);
 const latestNumericIndex=sales=>{const indexes=numericIndexes(sales);return indexes.length?indexes[indexes.length-1]:-1};
@@ -519,6 +525,9 @@ function fallbackCopyText(text){const area=document.createElement("textarea");ar
 async function copyCalcResult(){const text=buildCalcResultText(),feedback=$("copyFeedback");let copied=false;try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);copied=true}}catch(e){}if(!copied)try{copied=fallbackCopyText(text)}catch(e){}feedback.textContent=copied?"已複製，可貼到 LINE 或 Email":"無法自動複製，請確認瀏覽器權限";setTimeout(()=>{feedback.textContent=""},3000)}
 function clearCalculation(){["cPrice","sPriceA","sPrice","sPriceC","sPromoA","sPromoB","sPromoC","pA","pB"].forEach(id=>{$(id).value=""});$("promoType").value="bogo";calcC();calcS();updatePromoUI();$("copyFeedback").textContent="已清除試算輸入，商品與成本已保留";save()}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab,.panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");$(b.dataset.tab).classList.add("active")});
+const tabsShell=document.querySelector(".tabs-shell"),tabsNav=document.querySelector(".tabs");
+function updateTabScrollHint(){const noOverflow=tabsNav.scrollWidth<=tabsNav.clientWidth+1,atEnd=tabsNav.scrollLeft+tabsNav.clientWidth>=tabsNav.scrollWidth-1;tabsShell.classList.toggle("no-overflow",noOverflow);tabsShell.classList.toggle("at-end",atEnd)}
+tabsNav.addEventListener("scroll",updateTabScrollHint,{passive:true});window.addEventListener("resize",updateTabScrollHint);requestAnimationFrame(updateTabScrollHint);
 ["cPrice","cCost","cFee"].forEach(id=>$(id).addEventListener("input",calcC));
 ["rCost","rTarget","rFee"].forEach(id=>$(id).addEventListener("input",calcR));
 document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{$("rTarget").value=b.dataset.r;calcR()});
@@ -532,6 +541,6 @@ try{const s=JSON.parse(localStorage.getItem("opMarginV3")||"null");if(s)storeIds
 setupProductSelectors();
 setupThresholdSettings();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2"));
 </script>
 </body></html>

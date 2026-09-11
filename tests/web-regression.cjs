@@ -1,11 +1,32 @@
 const assert = require("node:assert/strict");
+const crypto = require("node:crypto");
 const fs = require("node:fs");
 const http = require("node:http");
 const path = require("node:path");
 const { chromium } = require("C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
+const sharp = require("C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/sharp");
 
 const root = path.resolve(__dirname, "..");
 const types = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".png": "image/png", ".svg": "image/svg+xml", ".webmanifest": "application/manifest+json" };
+const lockedLogoHash = "e845a80cd348b93a6d88c240f105d66ce5180401b29b67227578343c04bcf8ce";
+
+async function inspectPng(file) {
+  const { data, info } = await sharp(path.join(root, file)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const edgeIndexes = [];
+  for (let x = 0; x < info.width; x += 1) edgeIndexes.push(x, (info.height - 1) * info.width + x);
+  for (let y = 1; y < info.height - 1; y += 1) edgeIndexes.push(y * info.width, y * info.width + info.width - 1);
+  let edgeAlphaMin = 255;
+  let whiteEdgePixels = 0;
+  let semiTransparentWhiteFringe = 0;
+  for (const index of edgeIndexes) {
+    const offset = index * 4;
+    const [red, green, blue, alpha] = data.subarray(offset, offset + 4);
+    edgeAlphaMin = Math.min(edgeAlphaMin, alpha);
+    if (red >= 245 && green >= 245 && blue >= 245) whiteEdgePixels += 1;
+    if (alpha < 255 && red >= 200 && green >= 200 && blue >= 200) semiTransparentWhiteFringe += 1;
+  }
+  return { width: info.width, height: info.height, edgeAlphaMin, whiteEdgePixels, semiTransparentWhiteFringe };
+}
 
 const server = http.createServer((request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, "http://127.0.0.1").pathname);
@@ -32,7 +53,7 @@ async function main() {
   await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.1"], "Version 4.1.1 service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2"], "Version 4.1.2 service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   assert.equal(await page.evaluate(() => Object.keys(window.PX_SALES_DATA).length), 53, "validated mapping count");
@@ -44,7 +65,7 @@ async function main() {
   assert.ok((staticHtml.match(/全聯毛利率（前毛）/g) || []).length >= 9, "PX margin label coverage");
   assert.doesNotMatch(staticHtml, />全聯毛利率</, "legacy PX margin label removed");
   assert.match(staticHtml, /<title>PX 通路工作台<\/title>/, "site title");
-  assert.match(staticHtml, /VERSION 4\.1\.1/, "site version");
+  assert.match(staticHtml, /VERSION 4\.1\.2/, "site version");
   assert.match(staticHtml, /開發者：弘昇/, "Chinese-first developer credit");
   assert.match(staticHtml, /Built by HS/, "secondary English developer credit");
   assert.match(staticHtml, /非官方系統/, "non-official disclaimer");
@@ -56,19 +77,44 @@ async function main() {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, "manifest.webmanifest"), "utf8"));
   assert.equal(manifest.name, "PX 通路工作台", "PWA name");
   assert.equal(manifest.short_name, "PX 工作台", "PWA short name");
+  assert.deepEqual(manifest.icons.map(icon => icon.purpose), ["any", "any"], "PWA icons declare standard any purpose");
+  assert.ok(manifest.icons.every(icon => icon.src.endsWith("?v=4.1.2")), "PWA icons use the current cache-busting version");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.1'/, "service worker cache version");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2'/, "service worker cache version");
+  assert.match(staticHtml, /rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon\.png\?v=4\.1\.2"/, "dedicated Apple touch icon is linked");
   assert.doesNotMatch(staticHtml, /⚙|⚙️/, "settings control contains no emoji");
   assert.match(staticHtml, /class="settings-icon"[^>]*viewBox="0 0 24 24"/, "settings control uses a linear SVG icon");
   assert.equal(await page.locator("footer .hs-mark").count(), 0, "footer standalone HS icon removed");
   assert.equal(await page.locator("footer .built-by").textContent(), "Built by HS", "footer keeps one English author identifier");
-  for (const asset of ["assets/brand/px-logo.svg", "assets/brand/px-icon.svg", "favicon.png", "icon-192.png", "icon-512.png"]) assert.ok(fs.existsSync(path.join(root, asset)), `${asset} exists`);
+  const footerCreditStyle = await page.locator("footer .built-by").evaluate(element => { const style = getComputedStyle(element); return { fontSize: parseFloat(style.fontSize), fontWeight: style.fontWeight, opacity: parseFloat(style.opacity) }; });
+  assert.deepEqual(footerCreditStyle, { fontSize: 9, fontWeight: "400", opacity: 0.6 }, "footer English author identifier is quieter without disappearing");
+  for (const asset of ["assets/brand/px-logo.svg", "assets/brand/px-icon.svg", "apple-touch-icon.png", "favicon-16.png", "favicon.png", "icon-192.png", "icon-512.png"]) assert.ok(fs.existsSync(path.join(root, asset)), `${asset} exists`);
   const logoSource = fs.readFileSync(path.join(root, "assets/brand/px-logo.svg"), "utf8");
+  assert.equal(crypto.createHash("sha256").update(logoSource).digest("hex"), lockedLogoHash, "locked PX logo SVG is byte-for-byte unchanged");
   assert.doesNotMatch(logoSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇|<text[^>]*>[^<]+<\/text>/i, "logo contains only the PX lettermark");
   assert.match(logoSource, /viewBox="0 0 512 512"/, "reference-locked square logo viewBox");
   assert.match(logoSource, /x="113" y="376" width="286" height="20"/, "centered short cyan shelf line");
   const iconSource = fs.readFileSync(path.join(root, "assets/brand/px-icon.svg"), "utf8");
+  assert.equal(crypto.createHash("sha256").update(iconSource).digest("hex"), lockedLogoHash, "locked PX icon SVG is byte-for-byte unchanged");
   assert.doesNotMatch(iconSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇/i, "icon contains only the PX lettermark");
+
+  const rasterIcons = {
+    apple: await inspectPng("apple-touch-icon.png"),
+    pwa192: await inspectPng("icon-192.png"),
+    pwa512: await inspectPng("icon-512.png"),
+    favicon16: await inspectPng("favicon-16.png"),
+    favicon32: await inspectPng("favicon.png"),
+  };
+  assert.deepEqual([rasterIcons.apple.width, rasterIcons.apple.height], [180, 180], "Apple touch icon is exactly 180x180");
+  assert.deepEqual([rasterIcons.pwa192.width, rasterIcons.pwa192.height], [192, 192], "PWA 192 icon dimensions");
+  assert.deepEqual([rasterIcons.pwa512.width, rasterIcons.pwa512.height], [512, 512], "PWA 512 icon dimensions");
+  assert.deepEqual([rasterIcons.favicon16.width, rasterIcons.favicon16.height], [16, 16], "favicon 16 dimensions");
+  assert.deepEqual([rasterIcons.favicon32.width, rasterIcons.favicon32.height], [32, 32], "favicon 32 dimensions");
+  for (const [name, icon] of Object.entries(rasterIcons)) {
+    assert.equal(icon.edgeAlphaMin, 255, `${name} has a fully opaque outer edge`);
+    assert.equal(icon.whiteEdgePixels, 0, `${name} has no white edge pixels`);
+    assert.equal(icon.semiTransparentWhiteFringe, 0, `${name} has no semi-transparent white edge fringe`);
+  }
 
   const defaultMarginStates = await page.evaluate(() => [40, 39.99, 37, 36.99, 33, 32.99, 0].map(value => marginState(value / 100).label));
   assert.deepEqual(defaultMarginStates, ["非常好", "達標", "達標", "待優化", "待優化", "偏低", "偏低"], "Version 4.1 margin boundaries");
@@ -166,6 +212,7 @@ async function main() {
   assert.match(await page.locator("#cSalesPerformance").innerText(), /2024\/12/);
   assert.match(await page.locator("#cSalesPerformance").innerText(), /10,073/);
   assert.match(await page.locator("#cSalesPerformance").innerText(), /▲ 34\.4%/);
+  assert.equal(await page.locator("#cSalesPerformance .px-metric", { hasText: "去年同期 YoY" }).locator("small").textContent(), "較去年同期", "YoY helper text is present without changing the value");
   assert.equal(await page.locator("#cSalesPerformance .month-row").count(), 21, "full month expansion data");
   assert.ok(await page.locator("#cSalesPerformance .trend-line").getAttribute("d"), "trend path");
 
@@ -395,16 +442,27 @@ async function main() {
         return { overflow: Math.max(0, root.scrollWidth - innerWidth), clipped, minInputFont: inputFontSizes.length ? Math.min(...inputFontSizes) : Infinity, minTouchHeight: buttonHeights.length ? Math.min(...buttonHeights) : Infinity };
       });
       maxDocumentOverflow = Math.max(maxDocumentOverflow, layout.overflow);
-      assert.ok(layout.overflow <= 1, `${width}x${height} ${tab} document overflow: ${layout.overflow}px`);
+      assert.equal(layout.overflow, 0, `${width}x${height} ${tab} document overflow`);
       assert.equal(layout.clipped, 0, `${width}x${height} ${tab} clipped important elements`);
       if (width <= 430) assert.ok(layout.minInputFont >= 16, `${width}x${height} ${tab} mobile input font size`);
       if (width <= 430) assert.ok(layout.minTouchHeight >= 43.5, `${width}x${height} ${tab} touch target height`);
     }
   }
-  assert.ok(maxDocumentOverflow <= 1, `maximum document overflow ${maxDocumentOverflow}px`);
+  assert.equal(maxDocumentOverflow, 0, "maximum document overflow");
   console.log(`MAX_DOCUMENT_OVERFLOW=${maxDocumentOverflow}px`);
+  assert.equal(await page.locator(".tabs-shell").evaluate(element => getComputedStyle(element, "::after").content), "none", "desktop has no tab fade when the tabs fit");
   await page.setViewportSize({ width: 320, height: 568 });
   await page.locator(".tab[data-tab='calc']").click();
+  const mobileTabHint = await page.evaluate(() => {
+    const tabs = document.querySelector(".tabs"), shell = document.querySelector(".tabs-shell"), hint = getComputedStyle(shell, "::after");
+    tabs.scrollLeft = 0;
+    updateTabScrollHint();
+    return { ownOverflow: tabs.scrollWidth > tabs.clientWidth, display: hint.display, width: parseFloat(hint.width), pointerEvents: hint.pointerEvents };
+  });
+  assert.deepEqual({ ownOverflow: mobileTabHint.ownOverflow, display: mobileTabHint.display, pointerEvents: mobileTabHint.pointerEvents }, { ownOverflow: true, display: "block", pointerEvents: "none" }, "mobile tabs show a non-blocking horizontal-scroll hint");
+  assert.ok(mobileTabHint.width >= 24 && mobileTabHint.width <= 36, "mobile tab hint uses the requested subtle width");
+  await page.evaluate(() => { const tabs = document.querySelector(".tabs"); tabs.scrollLeft = tabs.scrollWidth; updateTabScrollHint(); });
+  assert.ok(await page.locator(".tabs-shell").evaluate(element => element.classList.contains("at-end")), "mobile tab hint disappears at the far right");
   await page.locator("#cProduct").click();
   assert.equal(await page.locator("#cProductOptions .product-option").count(), 54, "mobile dropdown shows all products");
   const dropdownBounds = await page.locator("#cProductOptions").evaluate(element => { const rect = element.getBoundingClientRect(); return { left: rect.left, right: rect.right, width: innerWidth }; });
