@@ -33,8 +33,13 @@ async function main() {
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
-  assert.equal(await page.evaluate(() => Object.keys(window.PX_SALES_DATA).length), 48, "safe mapping count");
+  assert.equal(await page.evaluate(() => Object.keys(window.PX_SALES_DATA).length), 53, "validated mapping count");
   assert.equal(await page.evaluate(() => window.PX_SALES_PERIODS.length), 21, "period count");
+  const auditRows = fs.readFileSync(path.join(root, "PX_SALES_MAPPING_AUDIT.csv"), "utf8").trim().split(/\r?\n/).slice(1);
+  assert.equal(auditRows.length, 58, "complete source audit count");
+  assert.equal(auditRows.filter(row => row.includes(",MATCHED,MATCHED,")).length, 48, "initial matched count");
+  assert.equal(auditRows.filter(row => row.includes(",UNMATCHED,UNMATCHED,")).length, 5, "initial unmatched count");
+  assert.equal(auditRows.filter(row => row.includes(",CONFLICT,MATCHED,")).length, 5, "manual mapping count");
 
   await page.locator("#cProduct").fill("鋁箔");
   assert.equal(await page.locator("#cProductOptions .product-option").count(), 2, "name search");
@@ -81,6 +86,20 @@ async function main() {
   });
   assert.equal(zeroCases.average, 100, "post-launch zero is included in average");
   assert.equal(zeroCases.yoy, "— 去年同期為 0", "YoY zero guard");
+
+  const manualMappings = {
+    "OP專科防臭袋S": 39,
+    "OP專科防臭袋M": 38,
+    "OP加長保護手套耐用強化 M": 51,
+    "OP環保舒適手套-綠茶香氛S": 44,
+    "OP細柔無砂海綿菜瓜布": 41,
+  };
+  for (const [productName, sourceRow] of Object.entries(manualMappings)) {
+    await page.locator("#cProduct").fill(productName);
+    assert.equal(await page.evaluate(name => window.PX_SALES_DATA[name].sourceRow, productName), sourceRow, `${productName} source row`);
+    assert.equal(await page.evaluate(name => window.PX_SALES_DATA[name].matchMethod, productName), "manual_mapping", `${productName} method`);
+    assert.doesNotMatch(await page.locator("#cSalesPerformance").innerText(), /尚無 PX 補充資料/, `${productName} PX data`);
+  }
 
   await page.locator("#cProduct").fill("OP天然棉紗布(3片入)");
   assert.equal(await page.locator("#cCost").inputValue(), "22.66", "missing PX data keeps cost fill");
