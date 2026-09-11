@@ -359,7 +359,7 @@ def main() -> None:
             for site_name, record in records.items()
         ]
         print("// PX sales supplemental data")
-        print("// Source: @PX實銷_0902.xls / sheet: PX實銷")
+        print("// Source: @PX實銷_0902(1).xls / sheet: PX實銷")
         print("// Generated from validated mappings; null preserves source blanks.")
         print(f"window.PX_SALES_PERIODS=Object.freeze({json.dumps(PERIODS, ensure_ascii=False, separators=(',', ':'))});")
         print(f"const PX_SALES_ROWS={json.dumps(rows, ensure_ascii=False, separators=(',', ':'))};")
