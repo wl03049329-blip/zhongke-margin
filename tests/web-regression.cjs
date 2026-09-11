@@ -53,7 +53,7 @@ async function main() {
   await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2"], "Version 4.1.2 service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2-social"], "social-preview service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   assert.equal(await page.evaluate(() => Object.keys(window.PX_SALES_DATA).length), 53, "validated mapping count");
@@ -65,12 +65,40 @@ async function main() {
   assert.ok((staticHtml.match(/全聯毛利率（前毛）/g) || []).length >= 9, "PX margin label coverage");
   assert.doesNotMatch(staticHtml, />全聯毛利率</, "legacy PX margin label removed");
   assert.match(staticHtml, /<title>PX 通路工作台<\/title>/, "site title");
+  assert.doesNotMatch(staticHtml, /OP 中科毛利率試算器|OP 毛利試算|op-logo\.png/i, "legacy OP share metadata and image references are removed");
   assert.match(staticHtml, /VERSION 4\.1\.2/, "site version");
   assert.match(staticHtml, /開發者：弘昇/, "Chinese-first developer credit");
   assert.match(staticHtml, /Built by HS/, "secondary English developer credit");
   assert.match(staticHtml, /非官方系統/, "non-official disclaimer");
   assert.match(staticHtml, /assets\/brand\/px-logo\.svg/, "shared PX logo asset");
   assert.doesNotMatch(staticHtml, /src="op-logo\.png"/, "legacy OP logo not used");
+  const socialMetadata = await page.evaluate(() => {
+    const content = selector => document.querySelector(selector)?.getAttribute("content");
+    return {
+      description: content('meta[name="description"]'),
+      ogTitle: content('meta[property="og:title"]'),
+      ogDescription: content('meta[property="og:description"]'),
+      ogImage: content('meta[property="og:image"]'),
+      ogUrl: content('meta[property="og:url"]'),
+      ogType: content('meta[property="og:type"]'),
+      twitterTitle: content('meta[name="twitter:title"]'),
+      twitterDescription: content('meta[name="twitter:description"]'),
+      twitterImage: content('meta[name="twitter:image"]'),
+      twitterCard: content('meta[name="twitter:card"]'),
+    };
+  });
+  assert.deepEqual(socialMetadata, {
+    description: "毛利正算、回推售價、情境比較、促銷試算、PX 商品資料、實銷分析與替代商品效益整合工具。",
+    ogTitle: "PX 通路工作台",
+    ogDescription: "整合毛利試算、回推售價、PX 商品資料、實銷分析與替代商品效益的工作輔助工具。",
+    ogImage: "https://wl03049329-blip.github.io/zhongke-margin/social-preview.png?v=4.1.2-social",
+    ogUrl: "https://wl03049329-blip.github.io/zhongke-margin/index.html",
+    ogType: "website",
+    twitterTitle: "PX 通路工作台",
+    twitterDescription: "整合毛利試算、回推售價、PX 商品資料、實銷分析與替代商品效益的工作輔助工具。",
+    twitterImage: "https://wl03049329-blip.github.io/zhongke-margin/social-preview.png?v=4.1.2-social",
+    twitterCard: "summary_large_image",
+  }, "social metadata matches the current PX brand");
   assert.doesNotMatch(staticHtml, />\s*(?:CHANNEL|WORKBENCH|ANALYTICS|INTELLIGENCE)\s*</i, "visible interface remains Chinese-first");
   assert.equal((staticHtml.match(/const MARGIN_THRESHOLDS=Object\.freeze\(\{excellentMin:40,targetMin:37,optimizeMin:33\}\)/g) || []).length, 1, "one centralized default threshold config");
   assert.deepEqual(await page.evaluate(() => MARGIN_THRESHOLDS), { excellentMin: 40, targetMin: 37, optimizeMin: 33 }, "central threshold config values");
@@ -82,7 +110,8 @@ async function main() {
   assert.deepEqual(manifest.icons.map(icon => icon.purpose), ["any", "any"], "PWA icons declare standard any purpose");
   assert.ok(manifest.icons.every(icon => icon.src.endsWith("?v=4.1.2")), "PWA icons use the current cache-busting version");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2'/, "service worker cache version");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2-social'/, "service worker cache version");
+  assert.match(serviceWorker, /social-preview\.png\?v=4\.1\.2-social/, "service worker precaches the current social image");
   assert.match(staticHtml, /rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon\.png\?v=4\.1\.2"/, "dedicated Apple touch icon is linked");
   assert.doesNotMatch(staticHtml, /⚙|⚙️/, "settings control contains no emoji");
   assert.match(staticHtml, /class="settings-icon"[^>]*viewBox="0 0 24 24"/, "settings control uses a linear SVG icon");
@@ -90,7 +119,9 @@ async function main() {
   assert.equal(await page.locator("footer .built-by").textContent(), "Built by HS", "footer keeps one English author identifier");
   const footerCreditStyle = await page.locator("footer .built-by").evaluate(element => { const style = getComputedStyle(element); return { fontSize: parseFloat(style.fontSize), fontWeight: style.fontWeight, opacity: parseFloat(style.opacity) }; });
   assert.deepEqual(footerCreditStyle, { fontSize: 9, fontWeight: "400", opacity: 0.6 }, "footer English author identifier is quieter without disappearing");
-  for (const asset of ["assets/brand/px-logo.svg", "assets/brand/px-icon.svg", "apple-touch-icon.png", "favicon-16.png", "favicon.png", "icon-192.png", "icon-512.png"]) assert.ok(fs.existsSync(path.join(root, asset)), `${asset} exists`);
+  for (const asset of ["assets/brand/px-logo.svg", "assets/brand/px-icon.svg", "apple-touch-icon.png", "favicon-16.png", "favicon.png", "icon-192.png", "icon-512.png", "social-preview.png"]) assert.ok(fs.existsSync(path.join(root, asset)), `${asset} exists`);
+  assert.equal(fs.existsSync(path.join(root, "op-logo.png")), false, "legacy OP image is removed");
+  assert.match(fs.readFileSync(path.join(root, "scripts/generate_social_preview.cjs"), "utf8"), /assets\/brand\/px-icon\.svg/, "social preview is generated from the locked PX icon asset");
   const logoSource = fs.readFileSync(path.join(root, "assets/brand/px-logo.svg"), "utf8");
   assert.equal(crypto.createHash("sha256").update(logoSource).digest("hex"), lockedLogoHash, "locked PX logo SVG is byte-for-byte unchanged");
   assert.doesNotMatch(logoSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇|<text[^>]*>[^<]+<\/text>/i, "logo contains only the PX lettermark");
@@ -117,6 +148,8 @@ async function main() {
     assert.equal(icon.whiteEdgePixels, 0, `${name} has no white edge pixels`);
     assert.equal(icon.semiTransparentWhiteFringe, 0, `${name} has no semi-transparent white edge fringe`);
   }
+  const socialImage = await sharp(path.join(root, "social-preview.png")).metadata();
+  assert.deepEqual([socialImage.width, socialImage.height], [1200, 630], "social preview image is 1200x630");
 
   const defaultMarginStates = await page.evaluate(() => [40, 39.99, 37, 36.99, 33, 32.99, 0].map(value => marginState(value / 100).label));
   assert.deepEqual(defaultMarginStates, ["非常好", "達標", "達標", "待優化", "待優化", "偏低", "偏低"], "Version 4.1 margin boundaries");
