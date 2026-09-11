@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
   <title id="title">PX</title>
   <rect width="512" height="512" rx="112" fill="#102A43"/>
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M104 326V154h92c55 0 88 30 88 77s-33 77-88 77h-92" stroke="#fff" stroke-width="42"/>
-    <path d="m306 162 104 164M410 162 306 326" stroke="#fff" stroke-width="42"/>
-    <path d="m368 228 42-66" stroke="#2DC4C8" stroke-width="42"/>
-    <path d="M104 378h306" stroke="#2DC4C8" stroke-width="16"/>
+    <path d="M92 326V164h88c52 0 82 23 82 56s-30 56-82 56H92" stroke="#fff" stroke-width="40"/>
+    <path d="m294 170 126 156M420 170 294 326" stroke="#fff" stroke-width="40"/>
+    <path d="m364 239 56-69" stroke="#2DC4C8" stroke-width="40"/>
+    <path d="M92 378h328" stroke="#2DC4C8" stroke-width="15"/>
   </g>
 </svg>

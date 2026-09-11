@@ -29,10 +29,10 @@ async function main() {
   const errors = [];
   page.on("pageerror", error => errors.push(error.message));
   page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
-  await page.addInitScript(() => localStorage.clear());
+  await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.0"], "Version 4.0 service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1"], "Version 4.1 service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   assert.equal(await page.evaluate(() => Object.keys(window.PX_SALES_DATA).length), 53, "validated mapping count");
@@ -44,16 +44,65 @@ async function main() {
   assert.ok((staticHtml.match(/全聯毛利率（前毛）/g) || []).length >= 9, "PX margin label coverage");
   assert.doesNotMatch(staticHtml, />全聯毛利率</, "legacy PX margin label removed");
   assert.match(staticHtml, /<title>PX 通路工作台<\/title>/, "site title");
-  assert.match(staticHtml, /VERSION 4\.0/, "site version");
+  assert.match(staticHtml, /VERSION 4\.1/, "site version");
+  assert.match(staticHtml, /開發者：弘昇/, "Chinese-first developer credit");
+  assert.match(staticHtml, /Built by HS/, "secondary English developer credit");
   assert.match(staticHtml, /非官方系統/, "non-official disclaimer");
   assert.match(staticHtml, /assets\/brand\/px-logo\.svg/, "shared PX logo asset");
   assert.doesNotMatch(staticHtml, /src="op-logo\.png"/, "legacy OP logo not used");
+  assert.doesNotMatch(staticHtml, />\s*(?:CHANNEL|WORKBENCH|ANALYTICS|INTELLIGENCE)\s*</i, "visible interface remains Chinese-first");
+  assert.equal((staticHtml.match(/const MARGIN_THRESHOLDS=Object\.freeze\(\{excellentMin:40,targetMin:37,optimizeMin:33\}\)/g) || []).length, 1, "one centralized default threshold config");
+  assert.deepEqual(await page.evaluate(() => MARGIN_THRESHOLDS), { excellentMin: 40, targetMin: 37, optimizeMin: 33 }, "central threshold config values");
   const manifest = JSON.parse(fs.readFileSync(path.join(root, "manifest.webmanifest"), "utf8"));
   assert.equal(manifest.name, "PX 通路工作台", "PWA name");
   assert.equal(manifest.short_name, "PX 工作台", "PWA short name");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.0'/, "service worker cache version");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1'/, "service worker cache version");
   for (const asset of ["assets/brand/px-logo.svg", "assets/brand/px-icon.svg", "favicon.png", "icon-192.png", "icon-512.png"]) assert.ok(fs.existsSync(path.join(root, asset)), `${asset} exists`);
+  const logoSource = fs.readFileSync(path.join(root, "assets/brand/px-logo.svg"), "utf8");
+  assert.doesNotMatch(logoSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇|<text[^>]*>[^<]+<\/text>/i, "logo contains only the PX lettermark");
+  assert.match(logoSource, /viewBox="0 0 104 64"/, "balanced horizontal logo viewBox");
+  const iconSource = fs.readFileSync(path.join(root, "assets/brand/px-icon.svg"), "utf8");
+  assert.doesNotMatch(iconSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇/i, "icon contains only the PX lettermark");
+
+  const defaultMarginStates = await page.evaluate(() => [40, 39.99, 37, 36.99, 33, 32.99, 0].map(value => marginState(value / 100).label));
+  assert.deepEqual(defaultMarginStates, ["非常好", "達標", "達標", "待優化", "待優化", "偏低", "偏低"], "Version 4.1 margin boundaries");
+  await page.locator("#thresholdSettings").evaluate(element => { element.open = true; });
+  await page.locator("#excellentMargin").fill("42");
+  await page.locator("#targetMargin").fill("38");
+  await page.locator("#optimizeMargin").fill("34");
+  assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem("pxMarginThresholdsV41"))), { excellentMin: 42, targetMin: 38, optimizeMin: 34 }, "custom thresholds stored");
+  await page.reload({ waitUntil: "networkidle" });
+  assert.deepEqual(await page.evaluate(() => [document.querySelector("#excellentMargin").value, document.querySelector("#targetMargin").value, document.querySelector("#optimizeMargin").value]), ["42", "38", "34"], "custom thresholds persist after refresh");
+  await page.locator("#thresholdSettings").evaluate(element => { element.open = true; });
+  await page.locator("#resetThresholds").click();
+  assert.deepEqual(await page.evaluate(() => [document.querySelector("#excellentMargin").value, document.querySelector("#targetMargin").value, document.querySelector("#optimizeMargin").value]), ["40", "37", "33"], "threshold reset defaults");
+  await page.locator("#optimizeMargin").fill("37");
+  assert.match(await page.locator("#thresholdError").textContent(), /待優化門檻必須低於達標門檻/, "invalid threshold order is rejected");
+  assert.deepEqual(await page.evaluate(() => thresholdState), { excellentMin: 40, targetMin: 37, optimizeMin: 33 }, "invalid thresholds are not applied");
+  await page.locator("#optimizeMargin").fill("33");
+
+  const logoSizes = await page.evaluate(async () => {
+    const results = [];
+    for (const size of [16, 32, 64, 192, 512]) {
+      const image = document.createElement("img");
+      image.src = "assets/brand/px-icon.svg";
+      image.alt = "";
+      image.style.cssText = `position:fixed;left:-1000px;top:0;width:${size}px;height:${size}px`;
+      document.body.appendChild(image);
+      await image.decode();
+      results.push({ size, width: image.getBoundingClientRect().width, height: image.getBoundingClientRect().height, naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight });
+      image.remove();
+    }
+    return results;
+  });
+  assert.ok(logoSizes.every(item => item.width === item.size && item.height === item.size && item.naturalWidth === 512 && item.naturalHeight === 512), "PX icon stays square and readable at 16/32/64/192/512");
+  const headerBrand = await page.locator(".brand-logo").evaluate(async image => { await image.decode(); const rect = image.getBoundingClientRect(); return { complete: image.complete, naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight, renderedRatio: rect.width / rect.height }; });
+  assert.deepEqual({ complete: headerBrand.complete, naturalWidth: headerBrand.naturalWidth, naturalHeight: headerBrand.naturalHeight }, { complete: true, naturalWidth: 104, naturalHeight: 64 }, "header logo loads without cropping");
+  assert.ok(Math.abs(headerBrand.renderedRatio - 104 / 64) < 0.01, "header logo keeps PX proportions");
+  const visualLanguage = await page.evaluate(() => ({ editable: getComputedStyle(document.querySelector("#cPrice")).backgroundColor, fixed: getComputedStyle(document.querySelector("#cPx")).backgroundColor, watermarkOpacity: parseFloat(getComputedStyle(document.querySelector(".hero"), "::after").opacity) }));
+  assert.notEqual(visualLanguage.editable, visualLanguage.fixed, "read-only and editable fields are visually distinct");
+  assert.ok(visualLanguage.watermarkOpacity >= 0.04 && visualLanguage.watermarkOpacity <= 0.08, "HS watermark remains subtle");
   const replacementSource = fs.readFileSync(path.join(root, "px-replacement-data.js"), "utf8");
   assert.doesNotMatch(replacementSource, /摺疊保鮮盒/, "excluded folding containers");
   assert.equal(await page.evaluate(() => Object.keys(window.PX_HISTORICAL_PRODUCTS).length), 3, "historical product count");
@@ -106,11 +155,11 @@ async function main() {
 
   await page.locator("#cProduct").fill("63020159");
   const newProductText = await page.locator("#cSalesPerformance").innerText();
-  assert.match(newProductText, /上市月份\s*2026\/08/);
-  assert.match(newProductText, /上市第 1 個月/);
-  assert.match(newProductText, /上市至今月均銷/);
-  assert.match(newProductText, /— 尚未上市/);
-  assert.ok(Number(await page.locator("#cSalesPerformance .prelaunch-zone").getAttribute("width")) > 0, "pre-launch region");
+  assert.match(newProductText, /實銷資料起始\s*2026\/08/);
+  assert.match(newProductText, /資料起始至今月均銷/);
+  assert.match(newProductText, /尚無資料/);
+  assert.doesNotMatch(newProductText, /上市月份|上市月齡|上市第/);
+  assert.ok(Number(await page.locator("#cSalesPerformance .prelaunch-zone").getAttribute("width")) > 0, "pre-data region");
 
   const zeroCases = await page.evaluate(() => {
     const postLaunchZero = Array(21).fill(null);
@@ -188,7 +237,7 @@ async function main() {
   assert.equal(filmView.salesEffect.changeText, "▼ 21.0%", "film sales difference");
   assert.equal(filmView.status.label, "低於舊品", "film replacement status");
   const filmCard = page.locator("[data-replacement-id='cling-film-420-to-plant-300']");
-  assert.match(await filmCard.innerText(), /新品上市\s*2025\/11/);
+  assert.match(await filmCard.innerText(), /新品導入\s*2025\/11/);
   assert.match(await filmCard.innerText(), /舊品替代前基準\s*4,168\.0/);
   assert.match(await filmCard.innerText(), /新品近 3 月均銷\s*3,293\.7/);
   assert.match(await filmCard.innerText(), /替代效益\s*▼ 21\.0%/);
@@ -221,7 +270,7 @@ async function main() {
   assert.match(await gloveCard.innerText(), /舊品替代前基準\s*11,572\.7/);
   assert.match(await gloveCard.innerText(), /新品目前實銷\s*7,082\.0/);
   assert.match(await gloveCard.innerText(), /接棒進度\s*61\.2%/);
-  assert.match(await gloveCard.innerText(), /資料累積中・上市第 1 個月/);
+  assert.match(await gloveCard.innerText(), /資料累積中・接棒第 1 個月/);
   assert.match(await gloveCard.innerText(), /交接月\s*2026\/08/);
   assert.doesNotMatch(await gloveCard.innerText(), /低於舊品|▼ 38\.8%|全聯毛利率（前毛）|商業條件/);
   assert.doesNotMatch(await gloveCard.innerText(), /舊品.*單店月銷|單店月銷.*→/);
@@ -270,6 +319,18 @@ async function main() {
   for (const card of await page.locator("#scenarioResults .scenario-card").all()) {
     assert.match(await card.innerText(), /全聯毛利率（前毛）\s*26\.18%/, "scenario uses the same fixed front margin");
   }
+  assert.equal(await page.locator("#scenarioResults .scenario-state").count(), 3, "every scenario uses the shared margin state");
+  const scenarioStateLabels = await page.locator("#scenarioResults .scenario-state").allTextContents();
+  assert.ok(scenarioStateLabels.every(label => ["非常好", "達標", "待優化", "偏低", "—"].includes(label)), "scenario state labels use shared thresholds");
+  await page.locator(".tab[data-tab='reverse']").click();
+  await page.locator("#rTarget").fill("35");
+  assert.equal(await page.locator("#rStatus").textContent(), "待優化", "reverse-price result uses shared 35% status");
+  await page.locator(".tab[data-tab='promo']").click();
+  assert.ok(["非常好", "達標", "待優化", "偏低"].includes(await page.locator("#pStatus").textContent()), "promotion result uses shared margin status");
+  await page.locator(".tab[data-tab='calc']").click();
+  await page.locator("#cProduct").fill("65010209");
+  await page.evaluate(() => { const px = parseFloat(document.querySelector("#cPx").textContent) / 100; const fee = Number(document.querySelector("#cFee").value) / 100; const cost = Number(document.querySelector("#cCost").value); document.querySelector("#cPrice").value = (cost / ((1 - fee - 0.41) * (1 - px)) * 1.05).toFixed(8); document.querySelector("#cPrice").dispatchEvent(new Event("input", { bubbles: true })); });
+  assert.equal(await page.locator("#cStatus").textContent(), "非常好", "main calculator uses shared 40% status");
 
   const stagedReplacement = await page.evaluate(() => {
     const oneMonth = window.__PX_ANALYTICS__.replacementNewSummary([null, 600], 1);
@@ -300,7 +361,7 @@ async function main() {
       await page.locator(`.tab[data-tab='${tab}']`).click();
       const layout = await page.evaluate(() => {
         const root = document.documentElement;
-        const important = [...document.querySelectorAll(".hero,.card,.trend-svg,.replacement-chart,input,select,output")].filter(element => element.offsetParent !== null);
+        const important = [...document.querySelectorAll(".hero,.brand-copy,.meta,.card,.trend-svg,.replacement-chart,input,select,output,.hs-footer")].filter(element => element.offsetParent !== null);
         const clipped = important.filter(element => { const rect = element.getBoundingClientRect(); return rect.left < -1 || rect.right > innerWidth + 1; }).length;
         const inputFontSizes = [...document.querySelectorAll("input,select")].filter(element => element.offsetParent !== null).map(element => parseFloat(getComputedStyle(element).fontSize));
         const buttonHeights = [...document.querySelectorAll("button,summary")].filter(element => element.offsetParent !== null).map(element => element.getBoundingClientRect().height);

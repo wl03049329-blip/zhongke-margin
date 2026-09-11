@@ -1,13 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 64" role="img" aria-labelledby="title desc">
-  <title id="title">PX 通路工作台</title>
-  <desc id="desc">深海軍藍圓角標誌，白色 PX 字樣搭配青藍通路線條</desc>
-  <rect width="220" height="64" rx="16" fill="#102A43"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="104" height="64" viewBox="0 0 104 64" role="img" aria-labelledby="title desc">
+  <title id="title">PX</title>
+  <desc id="desc">深海軍藍圓角底上的平衡 PX 字標</desc>
+  <rect width="104" height="64" rx="15" fill="#102A43"/>
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M20 44V19h13c8 0 13 4 13 11S41 41 33 41H20" stroke="#fff" stroke-width="6"/>
-    <path d="m53 20 18 24M71 20 53 44" stroke="#fff" stroke-width="6"/>
-    <path d="m64 31 7-11" stroke="#2DC4C8" stroke-width="6"/>
-    <path d="M19 52h54" stroke="#2DC4C8" stroke-width="2"/>
+    <path d="M17 43V19h13c8 0 12.5 3.7 12.5 8.5S38 36 30 36H17" stroke="#fff" stroke-width="6"/>
+    <path d="m58 20 22 23M80 20 58 43" stroke="#fff" stroke-width="6"/>
+    <path d="m70.3 30.2 9.7-10.2" stroke="#2DC4C8" stroke-width="6"/>
+    <path d="M17 51h63" stroke="#2DC4C8" stroke-width="2"/>
   </g>
-  <text x="91" y="30" fill="#fff" font-family="Segoe UI,Noto Sans TC,sans-serif" font-size="16" font-weight="700">通路工作台</text>
-  <text x="91" y="47" fill="#AFC4D4" font-family="Segoe UI,sans-serif" font-size="9" font-weight="600" letter-spacing="1.7">CHANNEL WORKBENCH</text>
 </svg>
