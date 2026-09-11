@@ -106,7 +106,7 @@ button.wide{grid-column:span 3}
    <div class="full"><label for="cProduct">PX 商品</label><div class="product-picker"><input id="cProduct" class="product-search" type="search" placeholder="請選擇商品" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cProductOptions"><button class="product-toggle" type="button" aria-label="顯示全部商品" title="顯示全部商品">▼</button><div id="cProductOptions" class="product-options" role="listbox"></div></div><small id="cProductCostNote" class="product-cost-note"></small></div>
    <div><label>售價（含稅）</label><div class="wrap"><input id="cPrice" type="number" inputmode="decimal" value="94.5"><span class="unit">元</span></div></div>
    <div><label>商品成本</label><div class="wrap"><input id="cCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div></div>
-   <div><label>全聯毛利率</label><div class="wrap"><input id="cPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
+   <div><label>全聯毛利率（前毛）</label><div class="wrap"><input id="cPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
    <div><label>公司費用率（可調整）</label><div class="wrap"><input id="cFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
   </div>
  </div>
@@ -122,7 +122,7 @@ button.wide{grid-column:span 3}
    <div class="full"><label for="rProduct">PX 商品</label><div class="product-picker"><input id="rProduct" class="product-search" type="search" placeholder="請選擇商品" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="rProductOptions"><button class="product-toggle" type="button" aria-label="顯示全部商品" title="顯示全部商品">▼</button><div id="rProductOptions" class="product-options" role="listbox"></div></div><small id="rProductCostNote" class="product-cost-note"></small></div>
    <div><label>商品成本</label><div class="wrap"><input id="rCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div></div>
    <div><label>目標中科毛利率</label><div class="wrap"><input id="rTarget" type="number" inputmode="decimal" value="35"><span class="unit">%</span></div></div>
-   <div><label>全聯毛利率</label><div class="wrap"><input id="rPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
+   <div><label>全聯毛利率（前毛）</label><div class="wrap"><input id="rPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
    <div><label>公司費用率（可調整）</label><div class="wrap"><input id="rFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
   </div>
   <div class="quick"><button data-r="26">26%</button><button data-r="28">28%</button><button data-r="30">30%</button><button data-r="32">32%</button><button data-r="35" class="primary">35%</button><button data-r="40">40%</button></div>
@@ -138,7 +138,7 @@ button.wide{grid-column:span 3}
   <div class="grid">
    <div class="full"><label for="sProduct">PX 商品</label><div class="product-picker"><input id="sProduct" class="product-search" type="search" placeholder="請選擇商品" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sProductOptions"><button class="product-toggle" type="button" aria-label="顯示全部商品" title="顯示全部商品">▼</button><div id="sProductOptions" class="product-options" role="listbox"></div></div><small id="sProductCostNote" class="product-cost-note"></small></div>
    <div><label>商品成本</label><div class="wrap"><input id="sCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div></div>
-   <div><label>全聯毛利率</label><div class="wrap"><input id="sPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
+   <div><label>全聯毛利率（前毛）</label><div class="wrap"><input id="sPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
    <div><label>公司費用率</label><div class="wrap"><input id="sFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
   </div>
   <div class="scenario-inputs">
@@ -159,7 +159,7 @@ button.wide{grid-column:span 3}
    <div class="full"><label for="pProduct">PX 商品</label><div class="product-picker"><input id="pProduct" class="product-search" type="search" placeholder="請選擇商品" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pProductOptions"><button class="product-toggle" type="button" aria-label="顯示全部商品" title="顯示全部商品">▼</button><div id="pProductOptions" class="product-options" role="listbox"></div></div><small id="pProductCostNote" class="product-cost-note"></small></div>
    <div class="full"><label>促銷類型</label><select id="promoType"><option value="bogo">買一送一</option><option value="half">第二件五折</option><option value="special">單特 XX 元／二特 XX 元</option></select></div>
    <div><label>商品成本（單件）</label><div class="wrap"><input id="pCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div></div>
-   <div><label>全聯毛利率</label><div class="wrap"><input id="pPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
+   <div><label>全聯毛利率（前毛）</label><div class="wrap"><input id="pPx" type="number" inputmode="decimal" value="24.68"><span class="unit">%</span></div></div>
    <div><label>公司費用率</label><div class="wrap"><input id="pFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
    <div id="promoInputA"><label id="pLabelA">活動總價（2件）</label><div class="wrap"><input id="pA" type="number" inputmode="decimal" value="99"><span class="unit">元</span></div></div>
    <div id="promoInputB" style="display:none"><label id="pLabelB">二特總價（2件）</label><div class="wrap"><input id="pB" type="number" inputmode="decimal" value="149"><span class="unit">元</span></div></div>
@@ -175,11 +175,11 @@ button.wide{grid-column:span 3}
  <div class="card">
   <div class="head"><h2>計算依據</h2><span class="tag">公司既有邏輯</span></div>
   <div class="formula"><b>① 未稅售價</b><code>含稅售價 ÷ 1.05</code></div>
-  <div class="formula"><b>② 公司出貨價</b><code>未稅售價 ×（1 − 全聯毛利率）</code></div>
+  <div class="formula"><b>② 公司出貨價</b><code>未稅售價 ×（1 − 全聯毛利率（前毛））</code></div>
   <div class="formula"><b>③ 公司費用</b><code>公司出貨價 × 公司費用率</code></div>
   <div class="formula"><b>④ 中科毛利額</b><code>公司出貨價 − 公司費用 − 商品成本</code></div>
   <div class="formula"><b>⑤ 中科毛利率</b><code>中科毛利額 ÷ 公司出貨價</code></div>
-  <div class="formula"><b>⑥ 回推售價</b><code>商品成本 ÷［（1 − 公司費用率 − 目標毛利率）×（1 − 全聯毛利率）］× 1.05</code></div>
+  <div class="formula"><b>⑥ 回推售價</b><code>商品成本 ÷［（1 − 公司費用率 − 目標毛利率）×（1 − 全聯毛利率（前毛））］× 1.05</code></div>
   <div class="note">稅率固定為 5%；公司費用率可自行調整；畫面統一顯示至小數點後 2 位。回推售價會再代回正算公式驗證目標毛利率。</div>
  </div>
 </section>
@@ -262,6 +262,13 @@ const nf0=new Intl.NumberFormat("zh-TW",{maximumFractionDigits:0}),nf1=new Intl.
 const countText=value=>Number.isFinite(value)?nf0.format(value):"—";
 const average=values=>values.length?values.reduce((sum,value)=>sum+value,0)/values.length:NaN;
 const rateText=(value,digits=2)=>Number.isFinite(value)?(value*100).toFixed(digits)+"%":"—";
+const REPLACEMENT_EFFECT_RULES=Object.freeze({sales:1,perStore:1,listingRate:1,stores:1,pxMargin:-1});
+function compareReplacementEffect(metric,previous,current){
+ const preference=REPLACEMENT_EFFECT_RULES[metric];
+ if(!preference||!Number.isFinite(previous)||!Number.isFinite(current))return{changeText:"—",effectText:"資料不足",tone:"neutral",delta:NaN};
+ const delta=current-previous,flat=Math.abs(delta)<1e-10,arrow=flat?"—":delta>0?"▲":"▼",amount=metric==="pxMargin"?`${Math.abs(delta*100).toFixed(1)}pt`:nf1.format(Math.abs(delta)),favorable=!flat&&delta*preference>0;
+ return{changeText:`${arrow} ${amount}`,effectText:flat?"中性":favorable?"對 OP 有利":"對 OP 不利",tone:flat?"neutral":favorable?"positive":"negative",delta};
+}
 function model(price,cost,px,fee){const untaxed=price/1.05,ship=untaxed*(1-px),feeAmt=ship*fee,profit=ship-feeAmt-cost,margin=ship?profit/ship:NaN;return{price,untaxed,ship,feeAmt,profit,margin}}
 function rows(o){return `<div class="row"><span>實際售價（含稅）</span><span class="value">${m2(o.price)} 元</span></div><div class="row"><span>未稅售價</span><span class="value">${m2(o.untaxed)} 元</span></div><div class="row"><span>公司出貨價（未稅）</span><span class="value">${m2(o.ship)} 元</span></div><div class="row"><span>公司費用</span><span class="value">${m2(o.feeAmt)} 元</span></div><div class="row"><span>中科毛利額</span><span class="value">${m2(o.profit)} 元</span></div>`}
 function marginState(margin){const value=margin*100;if(Number.isFinite(value)&&value>=thresholdState.targetMargin)return{label:"達標",key:"target"};if(Number.isFinite(value)&&value>=thresholdState.warningMargin)return{label:"接近達標",key:"warning"};return{label:"不達標",key:"danger"}}
@@ -307,7 +314,7 @@ function trendChart(data,analysis){
 }
 function productInfoMarkup(binding,product,data){
  const cost=Number($(binding.costId).value),warehouse=data?.warehouse==="寄"?"寄庫":data?.warehouse==="越"?"越庫":"—";
- return `<section class="card px-info-card"><div class="px-section-head"><h2>商品資訊</h2><span class="px-source">${data?"PX 實銷資料":"尚無 PX 補充資料"}</span></div><div class="px-info-grid"><div class="px-metric"><span>成本</span><b>$${m2(cost)}</b></div><div class="px-metric"><span>全聯毛利率</span><b>${rateText(data?.pxMargin)}</b></div><div class="px-metric"><span>庫別</span><b>${warehouse}</b></div><div class="px-metric"><span>上架率</span><b>${rateText(data?.listingRate,0)}</b></div><div class="px-metric"><span>上架數</span><b>${Number.isFinite(data?.stores)?countText(data.stores)+" 店":"—"}</b></div></div></section>`;
+ return `<section class="card px-info-card"><div class="px-section-head"><h2>商品資訊</h2><span class="px-source">${data?"PX 實銷資料":"尚無 PX 補充資料"}</span></div><div class="px-info-grid"><div class="px-metric"><span>成本</span><b>$${m2(cost)}</b></div><div class="px-metric"><span>全聯毛利率（前毛）</span><b>${rateText(data?.pxMargin)}</b></div><div class="px-metric"><span>庫別</span><b>${warehouse}</b></div><div class="px-metric"><span>上架率</span><b>${rateText(data?.listingRate,0)}</b></div><div class="px-metric"><span>上架數</span><b>${Number.isFinite(data?.stores)?countText(data.stores)+" 店":"—"}</b></div></div></section>`;
 }
 function salesMarkup(data,analysis){
  if(!data||!analysis)return `<section class="card px-sales-card"><div class="px-section-head"><h2>PX 銷售表現</h2></div><div class="px-empty">此商品目前沒有可確認的 PX 實銷補充資料，原毛利試算仍可正常使用。</div></section>`;
@@ -320,7 +327,7 @@ function renderProductInsights(binding){
  const data=PX_SALES[product.name]||null,analysis=analyzePxSales(data);
  info.innerHTML=productInfoMarkup(binding,product,data);performance.innerHTML=salesMarkup(data,analysis);
 }
-window.__PX_ANALYTICS__=Object.freeze({analyzePxSales});
+window.__PX_ANALYTICS__=Object.freeze({analyzePxSales,compareReplacementEffect,replacementEffectRules:REPLACEMENT_EFFECT_RULES});
 const productBindings=[
  {productId:"cProduct",optionsId:"cProductOptions",noteId:"cProductCostNote",costId:"cCost",infoId:"cProductInfo",salesId:"cSalesPerformance",calculate:calcC},
  {productId:"rProduct",optionsId:"rProductOptions",noteId:"rProductCostNote",costId:"rCost",infoId:"rProductInfo",salesId:"rSalesPerformance",calculate:calcR},

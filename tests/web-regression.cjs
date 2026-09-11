@@ -35,6 +35,9 @@ async function main() {
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   assert.equal(await page.evaluate(() => Object.keys(window.PX_SALES_DATA).length), 53, "validated mapping count");
   assert.equal(await page.evaluate(() => window.PX_SALES_PERIODS.length), 21, "period count");
+  const staticHtml = fs.readFileSync(path.join(root, "index.html"), "utf8");
+  assert.equal((staticHtml.match(/全聯毛利率（前毛）/g) || []).length, 7, "PX margin label coverage");
+  assert.doesNotMatch(staticHtml, />全聯毛利率</, "legacy PX margin label removed");
   const auditRows = fs.readFileSync(path.join(root, "PX_SALES_MAPPING_AUDIT.csv"), "utf8").trim().split(/\r?\n/).slice(1);
   assert.equal(auditRows.length, 58, "complete source audit count");
   assert.equal(auditRows.filter(row => row.includes(",MATCHED,MATCHED,")).length, 48, "initial matched count");
@@ -48,6 +51,7 @@ async function main() {
   assert.equal(await page.locator("#cCost").inputValue(), "25.22", "auto cost fill");
   assert.equal(await page.locator("#cPx").inputValue(), "24.68", "supplemental margin does not overwrite calculator input");
   assert.match(await page.locator("#cProductInfo").innerText(), /26\.18%/);
+  assert.match(await page.locator("#cProductInfo").innerText(), /全聯毛利率（前毛）/);
   assert.match(await page.locator("#cProductInfo").innerText(), /越庫/);
   assert.match(await page.locator("#cProductInfo").innerText(), /99%/);
   assert.match(await page.locator("#cProductInfo").innerText(), /1,271 店/);
@@ -86,6 +90,33 @@ async function main() {
   });
   assert.equal(zeroCases.average, 100, "post-launch zero is included in average");
   assert.equal(zeroCases.yoy, "— 去年同期為 0", "YoY zero guard");
+
+  const replacementEffects = await page.evaluate(() => ({
+    lowerMargin: window.__PX_ANALYTICS__.compareReplacementEffect("pxMargin", 0.285, 0.258),
+    higherMargin: window.__PX_ANALYTICS__.compareReplacementEffect("pxMargin", 0.25, 0.275),
+    flatMargin: window.__PX_ANALYTICS__.compareReplacementEffect("pxMargin", 0.25, 0.25),
+    higherSales: window.__PX_ANALYTICS__.compareReplacementEffect("sales", 100, 120),
+    lowerListingRate: window.__PX_ANALYTICS__.compareReplacementEffect("listingRate", 0.8, 0.7),
+    rules: window.__PX_ANALYTICS__.replacementEffectRules,
+  }));
+  assert.deepEqual(
+    { changeText: replacementEffects.lowerMargin.changeText, effectText: replacementEffects.lowerMargin.effectText, tone: replacementEffects.lowerMargin.tone },
+    { changeText: "▼ 2.7pt", effectText: "對 OP 有利", tone: "positive" },
+    "lower PX margin is favorable to OP",
+  );
+  assert.deepEqual(
+    { changeText: replacementEffects.higherMargin.changeText, effectText: replacementEffects.higherMargin.effectText, tone: replacementEffects.higherMargin.tone },
+    { changeText: "▲ 2.5pt", effectText: "對 OP 不利", tone: "negative" },
+    "higher PX margin is unfavorable to OP",
+  );
+  assert.deepEqual(
+    { changeText: replacementEffects.flatMargin.changeText, effectText: replacementEffects.flatMargin.effectText, tone: replacementEffects.flatMargin.tone },
+    { changeText: "— 0.0pt", effectText: "中性", tone: "neutral" },
+    "flat PX margin is neutral",
+  );
+  assert.equal(replacementEffects.higherSales.tone, "positive", "higher sales is favorable");
+  assert.equal(replacementEffects.lowerListingRate.tone, "negative", "lower listing rate is unfavorable");
+  assert.deepEqual(replacementEffects.rules, { sales: 1, perStore: 1, listingRate: 1, stores: 1, pxMargin: -1 }, "replacement metric directions");
 
   const manualMappings = {
     "OP專科防臭袋S": 39,
