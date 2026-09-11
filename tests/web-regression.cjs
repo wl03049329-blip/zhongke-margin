@@ -61,7 +61,8 @@ async function main() {
   for (const asset of ["assets/brand/px-logo.svg", "assets/brand/px-icon.svg", "favicon.png", "icon-192.png", "icon-512.png"]) assert.ok(fs.existsSync(path.join(root, asset)), `${asset} exists`);
   const logoSource = fs.readFileSync(path.join(root, "assets/brand/px-logo.svg"), "utf8");
   assert.doesNotMatch(logoSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇|<text[^>]*>[^<]+<\/text>/i, "logo contains only the PX lettermark");
-  assert.match(logoSource, /viewBox="0 0 104 64"/, "balanced horizontal logo viewBox");
+  assert.match(logoSource, /viewBox="0 0 512 512"/, "reference-locked square logo viewBox");
+  assert.match(logoSource, /x="113" y="376" width="286" height="20"/, "centered short cyan shelf line");
   const iconSource = fs.readFileSync(path.join(root, "assets/brand/px-icon.svg"), "utf8");
   assert.doesNotMatch(iconSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇/i, "icon contains only the PX lettermark");
 
@@ -97,9 +98,23 @@ async function main() {
     return results;
   });
   assert.ok(logoSizes.every(item => item.width === item.size && item.height === item.size && item.naturalWidth === 512 && item.naturalHeight === 512), "PX icon stays square and readable at 16/32/64/192/512");
+  const logoGeometry = await page.evaluate(async () => {
+    const host = document.createElement("div");
+    host.style.cssText = "position:fixed;left:-1000px;top:0;width:512px;height:512px";
+    host.innerHTML = await fetch("assets/brand/px-logo.svg").then(response => response.text());
+    document.body.appendChild(host);
+    const box = selector => { const value = host.querySelector(selector).getBBox(); return { x: value.x, y: value.y, width: value.width, height: value.height }; };
+    const result = { p: box(".letter-p"), x: box(".letter-x"), shelf: box(".shelf") };
+    host.remove();
+    return result;
+  });
+  assert.equal(logoGeometry.p.height, logoGeometry.x.height, "P and X have equal visual height");
+  assert.ok(logoGeometry.p.width / logoGeometry.x.width >= 0.75 && logoGeometry.p.width / logoGeometry.x.width <= 0.85, "P and X follow the reference width balance");
+  assert.equal(logoGeometry.shelf.x + logoGeometry.shelf.width / 2, 256, "short shelf line is centered");
+  assert.ok(logoGeometry.shelf.width < logoGeometry.x.width + logoGeometry.p.width, "shelf line remains shorter than the lettermark");
   const headerBrand = await page.locator(".brand-logo").evaluate(async image => { await image.decode(); const rect = image.getBoundingClientRect(); return { complete: image.complete, naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight, renderedRatio: rect.width / rect.height }; });
-  assert.deepEqual({ complete: headerBrand.complete, naturalWidth: headerBrand.naturalWidth, naturalHeight: headerBrand.naturalHeight }, { complete: true, naturalWidth: 104, naturalHeight: 64 }, "header logo loads without cropping");
-  assert.ok(Math.abs(headerBrand.renderedRatio - 104 / 64) < 0.01, "header logo keeps PX proportions");
+  assert.deepEqual({ complete: headerBrand.complete, naturalWidth: headerBrand.naturalWidth, naturalHeight: headerBrand.naturalHeight }, { complete: true, naturalWidth: 512, naturalHeight: 512 }, "header logo loads without cropping");
+  assert.ok(Math.abs(headerBrand.renderedRatio - 1) < 0.01, "header logo keeps square reference proportions");
   const visualLanguage = await page.evaluate(() => ({ editable: getComputedStyle(document.querySelector("#cPrice")).backgroundColor, fixed: getComputedStyle(document.querySelector("#cPx")).backgroundColor, watermarkOpacity: parseFloat(getComputedStyle(document.querySelector(".hero"), "::after").opacity) }));
   assert.notEqual(visualLanguage.editable, visualLanguage.fixed, "read-only and editable fields are visually distinct");
   assert.ok(visualLanguage.watermarkOpacity >= 0.04 && visualLanguage.watermarkOpacity <= 0.08, "HS watermark remains subtle");

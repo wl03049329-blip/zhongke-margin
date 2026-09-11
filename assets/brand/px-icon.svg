@@ -1,10 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
   <title id="title">PX</title>
-  <rect width="512" height="512" rx="112" fill="#102A43"/>
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M92 326V164h88c52 0 82 23 82 56s-30 56-82 56H92" stroke="#fff" stroke-width="40"/>
-    <path d="m294 170 126 156M420 170 294 326" stroke="#fff" stroke-width="40"/>
-    <path d="m364 239 56-69" stroke="#2DC4C8" stroke-width="40"/>
-    <path d="M92 378h328" stroke="#2DC4C8" stroke-width="15"/>
+  <desc id="desc">深海軍藍圓角方形底、白色 PX、青藍 X 右半筆與置中短橫線</desc>
+  <defs>
+    <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0786BE"/>
+      <stop offset="0.2" stop-color="#064C84"/>
+      <stop offset="0.58" stop-color="#032654"/>
+      <stop offset="1" stop-color="#00153E"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#19E2EA"/>
+      <stop offset="1" stop-color="#05B8EA"/>
+    </linearGradient>
+    <style>@media (max-width:20px){.shelf{display:none}}</style>
+  </defs>
+  <rect x="4" y="4" width="504" height="504" rx="92" fill="url(#navy)"/>
+  <path class="letter-p" fill="#fff" fill-rule="evenodd" d="M84 152h78c49 0 78 24 78 61s-29 61-78 61h-33v54H84V152Zm45 40v43h31c22 0 34-8 34-22s-12-21-34-21h-31Z"/>
+  <g class="letter-x">
+    <path fill="url(#cyan)" d="M230 152h57l42 55 42-55h57l-71 88 71 88h-57l-42-55-42 55h-57l71-88-71-88Z"/>
+    <path fill="#fff" d="M230 152h57l42 55-28 33-71-88Zm0 176h57l42-55-28-33-71 88Z"/>
   </g>
+  <rect class="shelf" x="113" y="376" width="286" height="20" rx="10" fill="url(#cyan)"/>
 </svg>
