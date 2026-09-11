@@ -78,16 +78,17 @@ button.wide{grid-column:span 3}
 .note{font-size:11px;line-height:1.6;color:#68766f;background:#f4f8f5;border-radius:14px;padding:10px 11px;margin-top:10px}
 .formula{border-left:4px solid var(--op2);padding:11px 12px;background:#f4faf6;border-radius:0 14px 14px 0;margin-bottom:9px}.formula b{display:block;font-size:12px;margin-bottom:4px}.formula code{font-size:11px;white-space:normal;color:#335544}
 .promo-box{padding:12px;border-radius:16px;background:#f6faf7;border:1px solid var(--line);margin-top:10px}
+.px-info-card,.px-sales-card{border-color:#e1eee6}.px-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.px-section-head h2{margin:0;font-size:15px}.px-source{font-size:9px;color:var(--muted);white-space:nowrap}.new-badge{display:inline-flex;padding:4px 7px;border-radius:999px;background:#fff0ba;color:#6f4b00;font-size:9px;font-weight:900}.px-info-grid,.px-kpi-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.px-metric{min-width:0;padding:10px 9px;border:1px solid var(--line);border-radius:13px;background:#f8fbf9;text-align:right}.px-metric span{display:block;color:var(--muted);font-size:10px;text-align:left}.px-metric b{display:block;margin-top:5px;color:var(--ink);font-size:14px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.px-metric small{display:block;margin-top:3px;color:var(--muted);font-size:9px}.px-empty{padding:10px 2px;color:var(--muted);font-size:11px}.trend-wrap{margin-top:13px;padding:11px;border:1px solid var(--line);border-radius:16px;background:#fbfdfb}.trend-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}.trend-title b{font-size:12px}.trend-title small{color:var(--muted);font-size:9px}.trend-svg{display:block;width:100%;height:auto;max-width:100%;overflow:visible}.trend-grid{stroke:#dfeae3;stroke-width:1}.trend-line{fill:none;stroke:var(--op2);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.trend-dot{fill:#fff;stroke:var(--op);stroke-width:2}.trend-axis{fill:#77857e;font-size:9px}.prelaunch-zone{fill:#eef1ef}.prelaunch-label{fill:#89938e;font-size:9px}.monthly-details{margin-top:10px;border-top:1px solid var(--line)}.monthly-details summary{cursor:pointer;padding:11px 2px 2px;color:var(--op);font-size:11px;font-weight:850}.monthly-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:9px}.month-row{display:flex;justify-content:space-between;gap:8px;padding:8px;border-radius:10px;background:#f7faf8;font-size:10px}.month-row span{color:var(--muted)}.month-row b{font-variant-numeric:tabular-nums;text-align:right}.month-row.prelaunch b{color:#949e99;font-weight:700}.px-data-note{margin-top:8px;color:var(--muted);font-size:9px;line-height:1.5}
 .hs-footer{display:flex;align-items:center;justify-content:center;gap:10px;margin:27px 5px 4px;padding:18px 12px;border-top:1px solid rgba(8,107,66,.15);color:#62736a;text-align:left;font-size:10px;line-height:1.6}.hs-mark{display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--op);color:#fff;font-size:12px;font-weight:950;letter-spacing:.5px;box-shadow:0 5px 12px rgba(8,107,66,.18)}.hs-copy strong{display:block;color:var(--ink);font-size:12px}.hs-copy span{display:block}.hs-copy .hs-purpose{font-size:11px;color:#51645a}.hs-copy b{color:var(--op);font-size:11px}
-@media(max-width:620px){.scenario-inputs,.scenario-results{grid-template-columns:1fr}}
-@media(max-width:480px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.quick{grid-template-columns:repeat(3,1fr)}.tabs{grid-template-columns:repeat(5,1fr)}.tab{font-size:10px}.brand-logo{width:68px}.copy-actions{flex-direction:column;gap:4px}.threshold-grid{grid-template-columns:1fr}.threshold-actions{align-items:flex-start;flex-direction:column}.hs-footer{text-align:center;flex-direction:column;gap:7px}}
+@media(max-width:620px){.scenario-inputs,.scenario-results{grid-template-columns:1fr}.px-info-grid,.px-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.monthly-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.quick{grid-template-columns:repeat(3,1fr)}.tabs{grid-template-columns:repeat(5,1fr)}.tab{font-size:10px}.brand-logo{width:68px}.copy-actions{flex-direction:column;gap:4px}.threshold-grid{grid-template-columns:1fr}.threshold-actions{align-items:flex-start;flex-direction:column}.px-source{white-space:normal;text-align:right}.hs-footer{text-align:center;flex-direction:column;gap:7px}}
 </style>
 </head>
 <body>
 <main class="app">
 <header class="hero">
  <div class="brand"><img class="brand-logo" src="op-logo.png" alt="OP Logo"><div><h1>OP 中科毛利率試算器</h1><p>環保品牌風格・業務即時決策工具</p></div></div>
- <div class="meta"><span class="pill">VERSION 3.4</span><span class="pill">Developed by 弘昇</span><span class="pill">固定稅率 5%</span></div>
+ <div class="meta"><span class="pill">VERSION 3.5</span><span class="pill">Developed by 弘昇</span><span class="pill">固定稅率 5%</span></div>
 </header>
 
 <nav class="tabs">
@@ -109,7 +110,9 @@ button.wide{grid-column:span 3}
    <div><label>公司費用率（可調整）</label><div class="wrap"><input id="cFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
   </div>
  </div>
+ <div id="cProductInfo"></div>
  <div class="card"><div id="cResult" class="result"><div class="result-label"><small>中科毛利率</small><span id="cStatus" class="margin-status" aria-live="polite">—</span></div><strong id="cMargin">—</strong><em>依輸入售價正算</em></div><details id="thresholdSettings" class="threshold-settings"><summary>⚙ 毛利門檻設定</summary><div class="threshold-body"><div class="threshold-grid"><label class="threshold-item">達標 ≥ <input id="targetMargin" type="number" inputmode="decimal" min="0" max="100" step="0.01"><span>%</span></label><label class="threshold-item">接近達標 ≥ <input id="warningMargin" type="number" inputmode="decimal" min="0" max="100" step="0.01"><span>%</span></label><div class="threshold-item threshold-derived">不達標 &lt; <b id="lowMarginText">25%</b></div></div><div class="threshold-actions"><button id="resetThresholds" class="threshold-reset secondary-action" type="button">恢復預設</button><span id="thresholdError" class="threshold-error" role="alert"></span></div></div></details><div id="cRows" class="rows"></div><div class="copy-actions"><button id="copyResult" class="copy-result" type="button">複製試算結果</button><button id="clearCalculation" class="secondary-action" type="button">清除試算</button><span id="copyFeedback" class="copy-feedback" role="status" aria-live="polite"></span></div></div>
+ <div id="cSalesPerformance"></div>
 </section>
 
 <section id="reverse" class="panel">
@@ -124,7 +127,9 @@ button.wide{grid-column:span 3}
   </div>
   <div class="quick"><button data-r="26">26%</button><button data-r="28">28%</button><button data-r="30">30%</button><button data-r="32">32%</button><button data-r="35" class="primary">35%</button><button data-r="40">40%</button></div>
  </div>
+ <div id="rProductInfo"></div>
  <div class="card"><div id="rResult" class="result"><small>建議售價（含稅）</small><strong id="rPrice">—</strong><em id="rSub">依目標毛利率反向運算</em></div><div id="rRows" class="rows"></div></div>
+ <div id="rSalesPerformance"></div>
 </section>
 
 <section id="scenario" class="panel">
@@ -142,7 +147,9 @@ button.wide{grid-column:span 3}
    <div class="scenario-plan"><h3>方案 C</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPriceC" type="number" inputmode="decimal" value="104"><span class="unit">元</span></div></div><div class="field"><label>促銷條件／額外費用</label><div class="wrap"><input id="sPromoC" type="number" inputmode="decimal" value="0"><span class="unit">元</span></div></div></div>
   </div>
  </div>
+ <div id="sProductInfo"></div>
  <div class="card"><div id="scenarioResults" class="scenario-results"></div><div class="note">費用後結果＝既有中科毛利額再扣除各方案額外促銷費用；未輸入額外費用時，結果與既有公式一致。</div></div>
+ <div id="sSalesPerformance"></div>
 </section>
 
 <section id="promo" class="panel">
@@ -159,7 +166,9 @@ button.wide{grid-column:span 3}
   </div>
   <div class="note" id="promoHint">買一送一：輸入兩件合計實付金額，系統以總價 ÷ 2 計算平均單價。</div>
  </div>
+ <div id="pProductInfo"></div>
  <div class="card"><div id="pResult" class="result"><small>促銷平均單價毛利率</small><strong id="pMargin">—</strong><em id="pSub">—</em></div><div id="pRows" class="rows"></div><div id="specialExtra" class="promo-box" style="display:none"></div></div>
+ <div id="pSalesPerformance"></div>
 </section>
 
 <section id="basis" class="panel">
@@ -175,8 +184,9 @@ button.wide{grid-column:span 3}
  </div>
 </section>
 
-<footer class="hs-footer"><div class="hs-mark" aria-label="HS Logo placeholder">HS</div><div class="hs-copy"><strong>HS Business Tools</strong><span>Developed by <b>弘昇</b></span><span class="hs-purpose">PX 業務毛利試算工具</span><span>OP PX Margin Tool · Version 3.4</span></div></footer>
+<footer class="hs-footer"><div class="hs-mark" aria-label="HS Logo placeholder">HS</div><div class="hs-copy"><strong>HS Business Tools</strong><span>Developed by <b>弘昇</b></span><span class="hs-purpose">PX 業務毛利試算工具</span><span>OP PX Margin Tool · Version 3.5</span></div></footer>
 </main>
+<script src="px-sales-data.js"></script>
 <script>
 // PX Q3 product cost master
 // Source: 2026Q3 全產品成本表 / PX Q3
@@ -246,6 +256,12 @@ let thresholdState=loadThresholds();
 const $=id=>document.getElementById(id), n=id=>parseFloat($(id).value), pct=x=>x/100;
 const m2=v=>Number.isFinite(v)?v.toLocaleString("zh-TW",{minimumFractionDigits:2,maximumFractionDigits:2}):"—";
 const pc=v=>Number.isFinite(v)?(v*100).toFixed(2)+"%":"—";
+const PX_PERIODS=Array.isArray(window.PX_SALES_PERIODS)?window.PX_SALES_PERIODS:[];
+const PX_SALES=window.PX_SALES_DATA||Object.freeze({});
+const nf0=new Intl.NumberFormat("zh-TW",{maximumFractionDigits:0}),nf1=new Intl.NumberFormat("zh-TW",{minimumFractionDigits:1,maximumFractionDigits:1});
+const countText=value=>Number.isFinite(value)?nf0.format(value):"—";
+const average=values=>values.length?values.reduce((sum,value)=>sum+value,0)/values.length:NaN;
+const rateText=(value,digits=2)=>Number.isFinite(value)?(value*100).toFixed(digits)+"%":"—";
 function model(price,cost,px,fee){const untaxed=price/1.05,ship=untaxed*(1-px),feeAmt=ship*fee,profit=ship-feeAmt-cost,margin=ship?profit/ship:NaN;return{price,untaxed,ship,feeAmt,profit,margin}}
 function rows(o){return `<div class="row"><span>實際售價（含稅）</span><span class="value">${m2(o.price)} 元</span></div><div class="row"><span>未稅售價</span><span class="value">${m2(o.untaxed)} 元</span></div><div class="row"><span>公司出貨價（未稅）</span><span class="value">${m2(o.ship)} 元</span></div><div class="row"><span>公司費用</span><span class="value">${m2(o.feeAmt)} 元</span></div><div class="row"><span>中科毛利額</span><span class="value">${m2(o.profit)} 元</span></div>`}
 function marginState(margin){const value=margin*100;if(Number.isFinite(value)&&value>=thresholdState.targetMargin)return{label:"達標",key:"target"};if(Number.isFinite(value)&&value>=thresholdState.warningMargin)return{label:"接近達標",key:"warning"};return{label:"不達標",key:"danger"}}
@@ -262,11 +278,54 @@ function calcS(){
 function promoAverage(type,a){if(type==="bogo")return a/2;if(type==="half")return a*.75;return a}
 function updatePromoUI(){const t=$("promoType").value;$("promoInputB").style.display=t==="special"?"block":"none";if(t==="bogo"){$("pLabelA").textContent="活動總價（2件）";$("promoHint").textContent="買一送一：輸入兩件合計實付金額，系統以總價 ÷ 2 計算平均單價。"}else if(t==="half"){$("pLabelA").textContent="第一件售價";$("promoHint").textContent="第二件五折：平均單價＝第一件售價 × 75%。"}else{$("pLabelA").textContent="單特售價（1件）";$("pLabelB").textContent="二特總價（2件）";$("promoHint").textContent="單特／二特：系統同時計算單特毛利，以及二特總價 ÷ 2 後的平均單價毛利。"}calcP()}
 function calcP(){const t=$("promoType").value,cost=n("pCost"),px=pct(n("pPx")),fee=pct(n("pFee")),a=n("pA"),avg=promoAverage(t,a),o=model(avg,cost,px,fee);$("pMargin").textContent=pc(o.margin);$("pSub").textContent=`平均單價 ${m2(avg)} 元`;$("pRows").innerHTML=rows(o);styleResult($("pResult"),o.margin);const ex=$("specialExtra");if(t==="special"){const b=n("pB")/2,o2=model(b,cost,px,fee);ex.style.display="block";ex.innerHTML=`<b>二特平均單價：${m2(b)} 元</b><br>二特中科毛利率：<b>${pc(o2.margin)}</b><br>二特中科毛利額：<b>${m2(o2.profit)} 元</b>`}else ex.style.display="none";save()}
+function analyzePxSales(data){
+ if(!data||!Array.isArray(data.sales)||!PX_PERIODS.length)return null;
+ const sales=data.sales,launchIndex=sales.findIndex(Number.isFinite);
+ if(launchIndex<0)return null;
+ let latestIndex=-1;
+ for(let index=sales.length-1;index>=launchIndex;index--)if(Number.isFinite(sales[index])){latestIndex=index;break}
+ if(latestIndex<0)return null;
+ const valid=sales.slice(launchIndex,latestIndex+1).filter(Number.isFinite),latest=sales[latestIndex],launchAge=latestIndex-launchIndex+1;
+ const shortAverage=average(valid.slice(-3)),recentAverage=average(valid.slice(-13)),previousIndex=latestIndex-12;
+ let yoyText="— 尚未上市",yoyValue=NaN;
+ if(previousIndex>=launchIndex){
+  const previous=sales[previousIndex];
+  if(!Number.isFinite(previous))yoyText="—";
+  else if(previous===0)yoyText="— 去年同期為 0";
+  else{yoyValue=(latest-previous)/previous;yoyText=`${yoyValue>0?"▲ ":yoyValue<0?"▼ ":""}${Math.abs(yoyValue*100).toFixed(1)}%`}
+ }
+ return{launchIndex,latestIndex,launchMonth:PX_PERIODS[launchIndex],latestMonth:PX_PERIODS[latestIndex],latest,launchAge,validCount:valid.length,shortAverage,recentAverage,yoyText,yoyValue,perStore:Number.isFinite(data.stores)&&data.stores>0?latest/data.stores:NaN,isNew:launchAge<=12};
+}
+function trendChart(data,analysis){
+ const width=620,height=180,left=42,right=12,top=16,bottom=28,plotWidth=width-left-right,plotHeight=height-top-bottom,sales=data.sales;
+ const numeric=sales.filter(Number.isFinite),maximum=Math.max(1,...numeric),x=index=>left+(index/Math.max(1,sales.length-1))*plotWidth,y=value=>top+plotHeight-(value/maximum)*plotHeight;
+ let path="",drawing=false;
+ sales.forEach((value,index)=>{if(index<analysis.launchIndex||!Number.isFinite(value)){drawing=false;return}path+=`${drawing?" L":" M"}${x(index).toFixed(1)} ${y(value).toFixed(1)}`;drawing=true});
+ const prelaunchWidth=Math.max(0,x(analysis.launchIndex)-left),ticks=[0,6,12,16,20].filter((value,index,array)=>value<sales.length&&array.indexOf(value)===index);
+ const dots=sales.map((value,index)=>index>=analysis.launchIndex&&Number.isFinite(value)?`<circle class="trend-dot" cx="${x(index).toFixed(1)}" cy="${y(value).toFixed(1)}" r="3"><title>${PX_PERIODS[index]}：${countText(value)}</title></circle>`:"").join("");
+ return `<svg class="trend-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${analysis.launchMonth} 至 ${analysis.latestMonth} 實銷趨勢"><rect class="prelaunch-zone" x="${left}" y="${top}" width="${prelaunchWidth.toFixed(1)}" height="${plotHeight}" rx="5"></rect>${prelaunchWidth>52?`<text class="prelaunch-label" x="${left+8}" y="${top+15}">尚未上市</text>`:""}<line class="trend-grid" x1="${left}" y1="${top}" x2="${width-right}" y2="${top}"></line><line class="trend-grid" x1="${left}" y1="${top+plotHeight}" x2="${width-right}" y2="${top+plotHeight}"></line><text class="trend-axis" x="${left-7}" y="${top+3}" text-anchor="end">${countText(maximum)}</text><text class="trend-axis" x="${left-7}" y="${top+plotHeight+3}" text-anchor="end">0</text><path class="trend-line" d="${path.trim()}"></path>${dots}${ticks.map(index=>`<text class="trend-axis" x="${x(index).toFixed(1)}" y="${height-7}" text-anchor="middle">${PX_PERIODS[index].slice(2)}</text>`).join("")}</svg>`;
+}
+function productInfoMarkup(binding,product,data){
+ const cost=Number($(binding.costId).value),warehouse=data?.warehouse==="寄"?"寄庫":data?.warehouse==="越"?"越庫":"—";
+ return `<section class="card px-info-card"><div class="px-section-head"><h2>商品資訊</h2><span class="px-source">${data?"PX 實銷資料":"尚無 PX 補充資料"}</span></div><div class="px-info-grid"><div class="px-metric"><span>成本</span><b>$${m2(cost)}</b></div><div class="px-metric"><span>全聯毛利率</span><b>${rateText(data?.pxMargin)}</b></div><div class="px-metric"><span>庫別</span><b>${warehouse}</b></div><div class="px-metric"><span>上架率</span><b>${rateText(data?.listingRate,0)}</b></div><div class="px-metric"><span>上架數</span><b>${Number.isFinite(data?.stores)?countText(data.stores)+" 店":"—"}</b></div></div></section>`;
+}
+function salesMarkup(data,analysis){
+ if(!data||!analysis)return `<section class="card px-sales-card"><div class="px-section-head"><h2>PX 銷售表現</h2></div><div class="px-empty">此商品目前沒有可確認的 PX 實銷補充資料，原毛利試算仍可正常使用。</div></section>`;
+ const averageLabel=analysis.validCount>=3?"近 3 月均銷":"上市至今月均銷",monthRows=data.sales.map((value,index)=>{const prelaunch=index<analysis.launchIndex,label=prelaunch?"尚未上市":Number.isFinite(value)?countText(value):"—";return `<div class="month-row${prelaunch?" prelaunch":""}"><span>${PX_PERIODS[index]}</span><b>${label}</b></div>`}).join("");
+ return `<section class="card px-sales-card"><div class="px-section-head"><h2>PX 銷售表現</h2>${analysis.isNew?'<span class="new-badge">新品</span>':""}</div><div class="px-kpi-grid"><div class="px-metric"><span>上市月份</span><b>${analysis.launchMonth}</b></div><div class="px-metric"><span>上市月齡</span><b>上市第 ${analysis.launchAge} 個月</b></div><div class="px-metric"><span>最新月實銷</span><b>${countText(analysis.latest)}</b><small>${analysis.latestMonth}</small></div><div class="px-metric"><span>${averageLabel}</span><b>${nf1.format(analysis.shortAverage)}</b></div><div class="px-metric"><span>近期月均銷</span><b>${nf1.format(analysis.recentAverage)}</b><small>最多採最近 13 個已上市月份</small></div><div class="px-metric"><span>去年同期 YoY</span><b>${analysis.yoyText}</b></div><div class="px-metric"><span>單店月銷</span><b>${Number.isFinite(analysis.perStore)?nf1.format(analysis.perStore)+" 支 / 店 / 月":"—"}</b></div></div><div class="trend-wrap"><div class="trend-title"><b>實銷趨勢</b><small>${PX_PERIODS[0]} ～ ${PX_PERIODS[PX_PERIODS.length-1]}</small></div>${trendChart(data,analysis)}</div><details class="monthly-details"><summary>查看完整實銷</summary><div class="monthly-grid">${monthRows}</div></details><div class="px-data-note">資料來源：PX實銷_0902.xls；空白保留為未上市或缺資料，上市後的數字 0 會納入平均與趨勢。</div></section>`;
+}
+function renderProductInsights(binding){
+ const product=binding.selected,info=$(binding.infoId),performance=$(binding.salesId);
+ if(!product){info.replaceChildren();performance.replaceChildren();return}
+ const data=PX_SALES[product.name]||null,analysis=analyzePxSales(data);
+ info.innerHTML=productInfoMarkup(binding,product,data);performance.innerHTML=salesMarkup(data,analysis);
+}
+window.__PX_ANALYTICS__=Object.freeze({analyzePxSales});
 const productBindings=[
- {productId:"cProduct",optionsId:"cProductOptions",noteId:"cProductCostNote",costId:"cCost",calculate:calcC},
- {productId:"rProduct",optionsId:"rProductOptions",noteId:"rProductCostNote",costId:"rCost",calculate:calcR},
- {productId:"sProduct",optionsId:"sProductOptions",noteId:"sProductCostNote",costId:"sCost",calculate:calcS},
- {productId:"pProduct",optionsId:"pProductOptions",noteId:"pProductCostNote",costId:"pCost",calculate:calcP}
+ {productId:"cProduct",optionsId:"cProductOptions",noteId:"cProductCostNote",costId:"cCost",infoId:"cProductInfo",salesId:"cSalesPerformance",calculate:calcC},
+ {productId:"rProduct",optionsId:"rProductOptions",noteId:"rProductCostNote",costId:"rCost",infoId:"rProductInfo",salesId:"rSalesPerformance",calculate:calcR},
+ {productId:"sProduct",optionsId:"sProductOptions",noteId:"sProductCostNote",costId:"sCost",infoId:"sProductInfo",salesId:"sSalesPerformance",calculate:calcS},
+ {productId:"pProduct",optionsId:"pProductOptions",noteId:"pProductCostNote",costId:"pCost",infoId:"pProductInfo",salesId:"pSalesPerformance",calculate:calcP}
 ];
 const RECENT_PRODUCTS_STORAGE_KEY="opRecentProductsV34";
 function loadRecentProducts(){try{const saved=JSON.parse(localStorage.getItem(RECENT_PRODUCTS_STORAGE_KEY)||"[]");if(Array.isArray(saved))return saved.filter((name,index)=>typeof name==="string"&&saved.indexOf(name)===index&&PX_Q3_PRODUCTS.some(product=>product.name===name)).slice(0,5)}catch(e){}return[]}
@@ -291,6 +350,7 @@ function selectProduct(binding,product){
  rememberRecentProduct(product);
  closeProductOptions(binding);
  updateProductCostNote(binding);
+ renderProductInsights(binding);
  binding.calculate();
 }
 function closeProductOptions(binding){
@@ -311,12 +371,12 @@ function renderProductOptions(binding,queryOverride){
 function setupProductSelectors(){
  productBindings.forEach(binding=>{
   const input=$(binding.productId),cost=$(binding.costId),toggle=input.parentElement.querySelector(".product-toggle"),restored=findProduct(input.value);
-  if(restored){binding.selected=restored;updateProductCostNote(binding)}
+  if(restored){binding.selected=restored;updateProductCostNote(binding);renderProductInsights(binding)}
   input.addEventListener("focus",()=>{input.select();renderProductOptions(binding,"")});
   input.addEventListener("input",()=>{
    const exact=findProduct(input.value);
    if(exact){selectProduct(binding,exact);return}
-   binding.selected=null;updateProductCostNote(binding);renderProductOptions(binding);save();
+   binding.selected=null;updateProductCostNote(binding);renderProductInsights(binding);renderProductOptions(binding);save();
   });
   input.addEventListener("keydown",event=>{
    const options=[...$(binding.optionsId).querySelectorAll(".product-option")];
@@ -331,7 +391,7 @@ function setupProductSelectors(){
   input.addEventListener("blur",()=>setTimeout(()=>closeProductOptions(binding),100));
   toggle.addEventListener("mousedown",event=>event.preventDefault());
   toggle.addEventListener("click",()=>{input.focus();input.select();renderProductOptions(binding,"")});
-  cost.addEventListener("input",()=>updateProductCostNote(binding));
+  cost.addEventListener("input",()=>{updateProductCostNote(binding);renderProductInsights(binding)});
  });
 }
 function updateThresholdUI(){$("targetMargin").value=thresholdState.targetMargin;$("warningMargin").value=thresholdState.warningMargin;$("lowMarginText").textContent=`${thresholdState.warningMargin}%`}
