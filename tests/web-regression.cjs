@@ -36,8 +36,23 @@ async function main() {
   assert.equal(await page.evaluate(() => Object.keys(window.PX_SALES_DATA).length), 53, "validated mapping count");
   assert.equal(await page.evaluate(() => window.PX_SALES_PERIODS.length), 21, "period count");
   const staticHtml = fs.readFileSync(path.join(root, "index.html"), "utf8");
-  assert.equal((staticHtml.match(/全聯毛利率（前毛）/g) || []).length, 7, "PX margin label coverage");
+  assert.equal((staticHtml.match(/全聯毛利率（前毛）/g) || []).length, 9, "PX margin label coverage");
   assert.doesNotMatch(staticHtml, />全聯毛利率</, "legacy PX margin label removed");
+  const replacementSource = fs.readFileSync(path.join(root, "px-replacement-data.js"), "utf8");
+  assert.doesNotMatch(replacementSource, /摺疊保鮮盒/, "excluded folding containers");
+  assert.equal(await page.evaluate(() => Object.keys(window.PX_HISTORICAL_PRODUCTS).length), 3, "historical product count");
+  assert.equal(await page.evaluate(() => window.PRODUCT_REPLACEMENT_MAPPING.length), 2, "replacement group count");
+  const replacementModel = await page.evaluate(() => ({
+    historical: Object.values(window.PX_HISTORICAL_PRODUCTS).map(product => ({ name: product.name, status: product.status, cost: product.cost })),
+    activeNames: window.PRODUCT_REPLACEMENT_MAPPING.flatMap(group => group.activeProductNames),
+    oldIds: window.PRODUCT_REPLACEMENT_MAPPING.flatMap(group => group.oldProductIds),
+    historicalIds: Object.keys(window.PX_HISTORICAL_PRODUCTS),
+    activeMasterNames: eval("PX_Q3_PRODUCTS.map(product => product.name)"),
+  }));
+  assert.ok(replacementModel.historical.every(product => product.status === "DISCONTINUED" && product.cost === null), "historical products have no inferred cost");
+  assert.ok(replacementModel.activeNames.every(name => replacementModel.activeMasterNames.filter(item => item === name).length === 1), "active replacements uniquely exist in product master");
+  assert.ok(replacementModel.oldIds.every(id => replacementModel.historicalIds.includes(id)), "all mapped historical IDs exist");
+  assert.ok(replacementModel.historical.every(product => !replacementModel.activeMasterNames.includes(product.name)), "historical products excluded from active master");
   const auditRows = fs.readFileSync(path.join(root, "PX_SALES_MAPPING_AUDIT.csv"), "utf8").trim().split(/\r?\n/).slice(1);
   assert.equal(auditRows.length, 58, "complete source audit count");
   assert.equal(auditRows.filter(row => row.includes(",MATCHED,MATCHED,")).length, 48, "initial matched count");
@@ -97,6 +112,15 @@ async function main() {
     flatMargin: window.__PX_ANALYTICS__.compareReplacementEffect("pxMargin", 0.25, 0.25),
     higherSales: window.__PX_ANALYTICS__.compareReplacementEffect("sales", 100, 120),
     lowerListingRate: window.__PX_ANALYTICS__.compareReplacementEffect("listingRate", 0.8, 0.7),
+    higherListingRate: window.__PX_ANALYTICS__.compareReplacementEffect("listingRate", 0.82, 0.97),
+    moreStores: window.__PX_ANALYTICS__.compareReplacementEffect("stores", 1050, 1240),
+    zeroBase: window.__PX_ANALYTICS__.compareReplacementEffect("sales", 0, 100),
+    missing: window.__PX_ANALYTICS__.compareReplacementEffect("pxMargin", NaN, 0.25),
+    accumulating: window.__PX_ANALYTICS__.replacementStatus(4000, 5000, 2),
+    plusFive: window.__PX_ANALYTICS__.replacementStatus(4000, 4200, 3),
+    aboveFive: window.__PX_ANALYTICS__.replacementStatus(4000, 4204, 3),
+    minusFive: window.__PX_ANALYTICS__.replacementStatus(4000, 3800, 3),
+    belowFive: window.__PX_ANALYTICS__.replacementStatus(4000, 3796, 3),
     rules: window.__PX_ANALYTICS__.replacementEffectRules,
   }));
   assert.deepEqual(
@@ -116,7 +140,69 @@ async function main() {
   );
   assert.equal(replacementEffects.higherSales.tone, "positive", "higher sales is favorable");
   assert.equal(replacementEffects.lowerListingRate.tone, "negative", "lower listing rate is unfavorable");
-  assert.deepEqual(replacementEffects.rules, { sales: 1, perStore: 1, listingRate: 1, stores: 1, pxMargin: -1 }, "replacement metric directions");
+  assert.equal(replacementEffects.higherSales.changeText, "▲ 20.0%", "sales uses relative change");
+  assert.equal(replacementEffects.higherListingRate.changeText, "▲ 15.0pt", "listing rate uses percentage points");
+  assert.equal(replacementEffects.moreStores.changeText, "▲ 190店", "store count uses absolute stores");
+  assert.equal(replacementEffects.zeroBase.changeText, "—", "zero old sales guard");
+  assert.equal(replacementEffects.missing.changeText, "—", "missing KPI guard");
+  assert.equal(replacementEffects.accumulating.label, "資料累積中", "under three months status");
+  assert.equal(replacementEffects.plusFive.label, "大致持平", "positive 5% boundary");
+  assert.equal(replacementEffects.aboveFive.label, "優於舊品", "above positive 5% boundary");
+  assert.equal(replacementEffects.minusFive.label, "大致持平", "negative 5% boundary");
+  assert.equal(replacementEffects.belowFive.label, "低於舊品", "below negative 5% boundary");
+  assert.equal(replacementEffects.rules.sales.direction, 1, "sales higher is better");
+  assert.equal(replacementEffects.rules.perStore.direction, 1, "per-store sales higher is better");
+  assert.equal(replacementEffects.rules.listingRate.direction, 1, "listing rate higher is better");
+  assert.equal(replacementEffects.rules.stores.direction, 1, "stores higher is better");
+  assert.equal(replacementEffects.rules.pxMargin.direction, -1, "front margin lower is better for OP");
+
+  await page.locator("#cProduct").fill("OP植材抗菌保鮮膜300尺");
+  const filmView = await page.evaluate(() => window.__PX_ANALYTICS__.buildReplacementView(window.PRODUCT_REPLACEMENT_MAPPING[0]));
+  assert.equal(filmView.oldLastIndex, 10, "film old last month index");
+  assert.equal(filmView.newFirstIndex, 11, "film new launch index");
+  assert.equal(filmView.oldAverage, 4168, "film old last 3M average");
+  assert.ok(Math.abs(filmView.newAverage - 3293.6666666667) < 1e-8, "film new latest 3M average");
+  assert.equal(filmView.salesEffect.changeText, "▼ 21.0%", "film sales difference");
+  assert.equal(filmView.status.label, "低於舊品", "film replacement status");
+  const filmCard = page.locator("[data-replacement-id='cling-film-420-to-plant-300']");
+  assert.match(await filmCard.innerText(), /舊品最後銷售\s*2025\/10/);
+  assert.match(await filmCard.innerText(), /新品開始銷售\s*2025\/11/);
+  assert.match(await filmCard.innerText(), /4,168\.0 → 3,293\.7/);
+  assert.match(await filmCard.innerText(), /全聯毛利率（前毛）\s*— → 26\.68%/);
+  assert.ok(await filmCard.locator(".replacement-old-line").getAttribute("d"), "film old timeline path");
+  assert.ok(await filmCard.locator(".replacement-new-line").getAttribute("d"), "film new timeline path");
+  assert.equal(await filmCard.locator(".replacement-new-dot").count(), 10, "film new timeline numeric points");
+  assert.equal(await filmCard.locator(".replacement-marker-text").textContent(), "商品替換", "film replacement marker");
+
+  await page.locator("#cProduct").fill("OP指尖強化手套-薰衣紫M");
+  const gloveView = await page.evaluate(() => window.__PX_ANALYTICS__.buildReplacementView(window.PRODUCT_REPLACEMENT_MAPPING[1]));
+  assert.equal(gloveView.oldLastIndex, 20, "glove old last month index");
+  assert.equal(gloveView.newFirstIndex, 20, "glove new launch index");
+  assert.ok(Math.abs(gloveView.oldAverage - 8741.6666666667) < 1e-8, "glove old series last 3M average");
+  assert.equal(gloveView.newAverage, 7082, "glove new series launch average");
+  assert.deepEqual(gloveView.oldSales.slice(-3), [12619, 11606, 2000], "glove M+L is summed by month before averaging");
+  assert.equal(gloveView.newSales[20], 7082, "glove new M+L launch month total");
+  assert.ok(gloveView.newSales.slice(0, 20).every(value => value === null), "glove pre-launch series months remain null");
+  assert.equal(gloveView.salesEffect.changeText, "▼ 19.0%", "glove series sales difference");
+  assert.equal(gloveView.status.label, "資料累積中", "glove accumulating status");
+  assert.equal(gloveView.sizeViews.length, 2, "glove size-level rows");
+  assert.ok(Math.abs(gloveView.sizeViews[0].oldPerStore - 1173 / 1263) < 1e-10, "old M per-store sales");
+  assert.ok(Math.abs(gloveView.sizeViews[0].newPerStore - 4022 / 1242) < 1e-10, "new M per-store sales");
+  assert.ok(Math.abs(gloveView.sizeViews[1].oldPerStore - 827 / 1243) < 1e-10, "old L per-store sales");
+  assert.ok(Math.abs(gloveView.sizeViews[1].newPerStore - 3060 / 1242) < 1e-10, "new L per-store sales");
+  const gloveCard = page.locator("[data-replacement-id='lemon-to-lavender-gloves']");
+  assert.equal(await gloveCard.locator(".replacement-kpi").count(), 1, "series overview only aggregates sales");
+  assert.equal(await gloveCard.locator(".replacement-size").count(), 2, "series size-level KPI cards");
+  assert.match(await gloveCard.innerText(), /資料累積中・上市第 1 個月/);
+  assert.match(await gloveCard.innerText(), /24\.68% → 26\.68%/);
+  assert.match(await gloveCard.innerText(), /24\.69% → 26\.68%/);
+  assert.doesNotMatch(await gloveCard.innerText(), /系列單店月銷/);
+  assert.ok(await gloveCard.locator(".replacement-old-line").getAttribute("d"), "glove old series timeline path");
+  assert.ok(await gloveCard.locator(".replacement-new-line").getAttribute("d"), "glove new series timeline path");
+  assert.equal(await gloveCard.locator(".replacement-new-dot").count(), 1, "single-month new series remains visible as a point");
+
+  await page.locator("#cProduct").fill("OP無雙酚A鋁箔800公分-12入");
+  assert.equal(await page.locator(".replacement-card").count(), 0, "unrelated active product has no replacement card");
 
   const manualMappings = {
     "OP專科防臭袋S": 39,
@@ -149,7 +235,7 @@ async function main() {
   assert.ok(desktopDimensions.scroll <= desktopDimensions.client, `desktop overflow: ${JSON.stringify(desktopDimensions)}`);
   if (process.env.PX_SCREENSHOT) {
     await page.setViewportSize({ width: 375, height: 812 });
-    await page.locator("#cProduct").fill("65010209");
+    await page.locator("#cProduct").fill(process.env.PX_SCREENSHOT_PRODUCT || "65010209");
     await page.screenshot({ path: process.env.PX_SCREENSHOT, fullPage: true });
   }
   assert.equal(errors.length, 0, `browser errors: ${errors.join(" | ")}`);
