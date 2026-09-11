@@ -32,7 +32,7 @@ async function main() {
   await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.1"], "Version 4.1 service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.1"], "Version 4.1.1 service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   assert.equal(await page.evaluate(() => Object.keys(window.PX_SALES_DATA).length), 53, "validated mapping count");
@@ -44,7 +44,7 @@ async function main() {
   assert.ok((staticHtml.match(/全聯毛利率（前毛）/g) || []).length >= 9, "PX margin label coverage");
   assert.doesNotMatch(staticHtml, />全聯毛利率</, "legacy PX margin label removed");
   assert.match(staticHtml, /<title>PX 通路工作台<\/title>/, "site title");
-  assert.match(staticHtml, /VERSION 4\.1/, "site version");
+  assert.match(staticHtml, /VERSION 4\.1\.1/, "site version");
   assert.match(staticHtml, /開發者：弘昇/, "Chinese-first developer credit");
   assert.match(staticHtml, /Built by HS/, "secondary English developer credit");
   assert.match(staticHtml, /非官方系統/, "non-official disclaimer");
@@ -57,7 +57,11 @@ async function main() {
   assert.equal(manifest.name, "PX 通路工作台", "PWA name");
   assert.equal(manifest.short_name, "PX 工作台", "PWA short name");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1'/, "service worker cache version");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.1'/, "service worker cache version");
+  assert.doesNotMatch(staticHtml, /⚙|⚙️/, "settings control contains no emoji");
+  assert.match(staticHtml, /class="settings-icon"[^>]*viewBox="0 0 24 24"/, "settings control uses a linear SVG icon");
+  assert.equal(await page.locator("footer .hs-mark").count(), 0, "footer standalone HS icon removed");
+  assert.equal(await page.locator("footer .built-by").textContent(), "Built by HS", "footer keeps one English author identifier");
   for (const asset of ["assets/brand/px-logo.svg", "assets/brand/px-icon.svg", "favicon.png", "icon-192.png", "icon-512.png"]) assert.ok(fs.existsSync(path.join(root, asset)), `${asset} exists`);
   const logoSource = fs.readFileSync(path.join(root, "assets/brand/px-logo.svg"), "utf8");
   assert.doesNotMatch(logoSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇|<text[^>]*>[^<]+<\/text>/i, "logo contains only the PX lettermark");
@@ -117,7 +121,15 @@ async function main() {
   assert.ok(Math.abs(headerBrand.renderedRatio - 1) < 0.01, "header logo keeps square reference proportions");
   const visualLanguage = await page.evaluate(() => ({ editable: getComputedStyle(document.querySelector("#cPrice")).backgroundColor, fixed: getComputedStyle(document.querySelector("#cPx")).backgroundColor, watermarkOpacity: parseFloat(getComputedStyle(document.querySelector(".hero"), "::after").opacity) }));
   assert.notEqual(visualLanguage.editable, visualLanguage.fixed, "read-only and editable fields are visually distinct");
-  assert.ok(visualLanguage.watermarkOpacity >= 0.04 && visualLanguage.watermarkOpacity <= 0.08, "HS watermark remains subtle");
+  assert.equal(visualLanguage.watermarkOpacity, 0.035, "HS watermark uses the requested 3.5% opacity");
+  const resultSurfaces = await page.evaluate(() => [0.42, 0.38, 0.35, 0.3].map(value => {
+    styleResult(document.querySelector("#cResult"), value, "cStatus");
+    const resultStyle = getComputedStyle(document.querySelector("#cResult"));
+    const badgeStyle = getComputedStyle(document.querySelector("#cStatus"));
+    return { label: document.querySelector("#cStatus").textContent, backgroundImage: resultStyle.backgroundImage, resultColor: resultStyle.color, badgeColor: badgeStyle.color, badgeBackground: badgeStyle.backgroundColor };
+  }));
+  assert.deepEqual(resultSurfaces.map(surface => surface.label), ["非常好", "達標", "待優化", "偏低"], "all four status badges remain visible");
+  assert.ok(resultSurfaces.every(surface => surface.backgroundImage === "none" && surface.resultColor !== "rgb(255, 255, 255)" && surface.badgeColor === "rgb(255, 255, 255)"), "result cards use pale surfaces, dark numbers, and compact dark badges");
   const replacementSource = fs.readFileSync(path.join(root, "px-replacement-data.js"), "utf8");
   assert.doesNotMatch(replacementSource, /摺疊保鮮盒/, "excluded folding containers");
   assert.equal(await page.evaluate(() => Object.keys(window.PX_HISTORICAL_PRODUCTS).length), 3, "historical product count");
@@ -376,7 +388,7 @@ async function main() {
       await page.locator(`.tab[data-tab='${tab}']`).click();
       const layout = await page.evaluate(() => {
         const root = document.documentElement;
-        const important = [...document.querySelectorAll(".hero,.brand-copy,.meta,.card,.trend-svg,.replacement-chart,input,select,output,.hs-footer")].filter(element => element.offsetParent !== null);
+        const important = [...document.querySelectorAll(".hero,.brand-copy,.meta,.card,.result strong,.margin-status,.trend-svg,.replacement-chart,input,select,output,.hs-footer")].filter(element => element.offsetParent !== null);
         const clipped = important.filter(element => { const rect = element.getBoundingClientRect(); return rect.left < -1 || rect.right > innerWidth + 1; }).length;
         const inputFontSizes = [...document.querySelectorAll("input,select")].filter(element => element.offsetParent !== null).map(element => parseFloat(getComputedStyle(element).fontSize));
         const buttonHeights = [...document.querySelectorAll("button,summary")].filter(element => element.offsetParent !== null).map(element => element.getBoundingClientRect().height);

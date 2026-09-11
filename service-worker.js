@@ -1,4 +1,4 @@
-const CACHE='px-workbench-v4.1';
+const CACHE='px-workbench-v4.1.1';
 const ASSETS=['./','./index.html','./px-sales-data.js','./px-replacement-data.js','./manifest.webmanifest','./assets/brand/px-logo.svg','./assets/brand/px-icon.svg','./favicon.png','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)))});
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));
