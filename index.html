@@ -62,6 +62,7 @@ input:focus,select:focus{border-color:var(--op2);box-shadow:0 0 0 4px rgba(22,14
 .product-section-title{padding:8px 9px 5px;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.35px;border-top:1px solid var(--line)}.product-section-title:first-child{border-top:0}
 .product-option{display:block;width:100%;min-height:42px;padding:9px 10px;border-radius:10px;background:#fff;color:var(--ink);font-size:13px;font-weight:700;text-align:left}
 .product-option:hover,.product-option.active{background:var(--op3);color:var(--op)}
+.product-category{display:flex;align-items:center;justify-content:space-between;font-weight:850}.product-back{color:var(--op2);font-weight:850;border-bottom:1px solid var(--line);border-radius:10px 10px 4px 4px}
 .product-empty{padding:12px 10px;color:var(--muted);font-size:12px;text-align:center}
 .product-cost-note{display:none;margin:7px 2px 0;color:var(--op);font-size:11px;line-height:1.65;font-weight:700;white-space:pre-line}
 .product-cost-note.visible{display:block}
@@ -297,6 +298,26 @@ const PX_Q3_PRODUCTS = [
  {name:"OP指尖強化手套-薰衣紫M",code:"63020159",barcode:"4710660888745",cost:13.79},
  {name:"OP指尖強化手套-薰衣紫L",code:"63020160",barcode:"4710660888752",cost:13.79}
 ];
+// Product navigation only. Product attributes remain sourced from PX_Q3_PRODUCTS.
+const PX_PRODUCT_CATEGORIES = [
+ {name:"手持清潔",products:[
+  "OP加長保護手套耐用強化 M","OP環保舒適手套-綠茶香氛M(橘)","OP環保舒適手套-綠茶香氛L(橘)","OP環保舒適手套-綠茶香氛S","OP指尖強化手套-薰衣紫M","OP指尖強化手套-薰衣紫L","OP超音波馬卡龍瞬吸布PX","OP檸檬清新抗菌瞬吸布","OP天然棉紗布(3片入)","OP柑橘抗菌EX菜瓜布(三)","OP細柔無砂海綿菜瓜布","OP抗菌木漿棉","檸檬馬鞭草菜瓜布-萬用速淨4入"
+ ]},
+ {name:"食品保鮮",products:[
+  "OP安全無毒耐熱袋(小)PX(二)","OP安全無毒耐熱袋(中)PX(二)","OP生物抗菌密封袋M(PX)","OP生物抗菌密封袋L(PX)","OP生物分解抗菌密封袋XL","OP抗菌立體密封袋M+L","OP長效抗菌立體密封袋M","OP生物分解抗菌立體密封袋S","OP生物分解保鮮膜360尺(20入)","OP植材抗菌保鮮膜300尺","OP無雙酚A鋁箔800公分-12入","OP無雙酚A鋁箔1500公分-12入","OP無雙酚A料理紙32M(12入)","OP無漂白料理紙7M(加量)","OP生物分解濾水網80入","OP咖啡渣淨味濾水網80入(PX)"
+ ]},
+ {name:"香氛",products:[
+  "Amaze大地擴香-甜橘玫瑰果","AMAZE經典擴香-雪松中性淡香水","AMAZE經典擴香-白麝香琥珀淡香水","AMAZE 礦石香氛包-雪松中性淡香水","AMAZE 礦石香氛包-白麝香琥珀淡香水","Amaze礦石香氛-玫瑰淡香水","礦石香氛-沁藍海洋淡香水","礦石香氛-月光舒眠薰衣草","香氛豆補充包-玫瑰淡香水(二)","香氛豆補充包-海洋中性白麝香(二)","香氛豆-粉紅甜蜜果香淡香水","香氛豆-鳶尾粉邂逅淡香水"
+ ]},
+ {name:"茶酚／噴霧／除濕",products:[
+  "OP日本愛宕柿小蘇打(二)","OP愛岩柿消臭噴霧-抗病毒EX(黃)","OP抗菌消臭噴霧-清新海洋","茶酚淨洗潔精-清雅茶香(黃)","茶酚淨洗潔精-檸檬茶萃(黃)","茶酚淨洗潔精補充包-茶香(黃)","凝膠型除濕袋-雪松清香"
+ ]},
+ {name:"濕巾／酒精擦",products:[
+  "德適淨濕拖巾-薰衣草","德適淨濕拖巾-雪松清香","德適淨濕拖巾-海洋清新","德適淨十抗菌酒精擦(PX)"
+ ]},
+ {name:"寵物",products:["OP專科防臭袋S","OP專科防臭袋M"]}
+];
+const PX_PRODUCTS_BY_NAME=new Map(PX_Q3_PRODUCTS.map(product=>[product.name,product]));
 // Shared user-adjustable margin thresholds (percentage points).
 const MARGIN_THRESHOLDS=Object.freeze({excellentMin:40,targetMin:37,optimizeMin:33});
 const DEFAULT_MARGIN_THRESHOLDS=MARGIN_THRESHOLDS;
@@ -479,16 +500,28 @@ function selectProduct(binding,product){
 function closeProductOptions(binding){
  $(binding.optionsId).classList.remove("open");
  $(binding.productId).setAttribute("aria-expanded","false");
+ binding.categoryName=null;
 }
-function appendProductOption(options,binding,product){const button=document.createElement("button");button.type="button";button.className="product-option";button.setAttribute("role","option");button.textContent=`${product.name}｜$${product.cost.toFixed(2)}`;button.addEventListener("mousedown",event=>{event.preventDefault();selectProduct(binding,product)});options.appendChild(button)}
-function appendProductSection(options,title,products,binding){if(!products.length)return;const heading=document.createElement("div");heading.className="product-section-title";heading.textContent=title;options.appendChild(heading);products.forEach(product=>appendProductOption(options,binding,product))}
+function appendProductOption(options,binding,product){const button=document.createElement("button");button.type="button";button.className="product-option product-item";button.dataset.productName=product.name;button.setAttribute("role","option");button.textContent=`${product.name}｜$${product.cost.toFixed(2)}`;button.addEventListener("mousedown",event=>event.preventDefault());button.addEventListener("click",()=>selectProduct(binding,product));options.appendChild(button)}
+function renderProductCategories(binding){
+ const options=$(binding.optionsId);binding.categoryName=null;options.replaceChildren();
+ PX_PRODUCT_CATEGORIES.forEach(category=>{const button=document.createElement("button");button.type="button";button.className="product-option product-category";button.dataset.category=category.name;button.setAttribute("role","option");button.textContent=`${category.name} ›`;button.addEventListener("mousedown",event=>event.preventDefault());button.addEventListener("click",()=>renderProductCategory(binding,category));options.appendChild(button)});
+ options.classList.add("open");$(binding.productId).setAttribute("aria-expanded","true");
+}
+function renderProductCategory(binding,category){
+ const options=$(binding.optionsId);binding.categoryName=category.name;options.replaceChildren();
+ const back=document.createElement("button");back.type="button";back.className="product-option product-back";back.setAttribute("role","option");back.textContent="← 返回大類";back.addEventListener("mousedown",event=>event.preventDefault());back.addEventListener("click",()=>renderProductCategories(binding));options.appendChild(back);
+ category.products.map(name=>PX_PRODUCTS_BY_NAME.get(name)).filter(Boolean).forEach(product=>appendProductOption(options,binding,product));
+ options.classList.add("open");$(binding.productId).setAttribute("aria-expanded","true");
+}
 function renderProductOptions(binding,queryOverride){
  const input=$(binding.productId),options=$(binding.optionsId),query=(queryOverride??input.value).trim().toLocaleLowerCase("zh-TW");
+ if(!query){renderProductCategories(binding);return}
+ binding.categoryName=null;
  const matches=PX_Q3_PRODUCTS.filter(product=>productSearchText(product).includes(query));
  options.replaceChildren();
  if(!matches.length){const empty=document.createElement("div");empty.className="product-empty";empty.textContent="找不到符合的 PX Q3 商品";options.appendChild(empty)}
- else if(!query){const recent=recentProductNames.map(name=>PX_Q3_PRODUCTS.find(product=>product.name===name)).filter(Boolean),recentNames=new Set(recent.map(product=>product.name));appendProductSection(options,"最近使用",recent,binding);appendProductSection(options,"全部商品",matches.filter(product=>!recentNames.has(product.name)),binding)}
- else appendProductSection(options,"搜尋結果",matches,binding);
+ else matches.forEach(product=>appendProductOption(options,binding,product));
  options.classList.add("open");input.setAttribute("aria-expanded","true");
 }
 function setupProductSelectors(){
@@ -508,7 +541,7 @@ function setupProductSelectors(){
     event.preventDefault();options.forEach(option=>option.classList.remove("active"));
     active=event.key==="ArrowDown"?Math.min(active+1,options.length-1):Math.max(active-1,0);
     if(options[active]){options[active].classList.add("active");options[active].scrollIntoView({block:"nearest"})}
-   }else if(event.key==="Enter"&&active>=0){event.preventDefault();options[active].dispatchEvent(new MouseEvent("mousedown",{bubbles:true}))}
+   }else if(event.key==="Enter"&&active>=0){event.preventDefault();options[active].click()}
    else if(event.key==="Escape")closeProductOptions(binding);
   });
   input.addEventListener("blur",()=>setTimeout(()=>closeProductOptions(binding),100));
@@ -555,6 +588,6 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-categories"));
 </script>
 </body></html>

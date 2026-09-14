@@ -53,9 +53,36 @@ async function main() {
   await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2-social"], "social-preview service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2-categories"], "two-level product menu service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
+  const expectedProductCategories = [
+    ["手持清潔", ["OP加長保護手套耐用強化 M","OP環保舒適手套-綠茶香氛M(橘)","OP環保舒適手套-綠茶香氛L(橘)","OP環保舒適手套-綠茶香氛S","OP指尖強化手套-薰衣紫M","OP指尖強化手套-薰衣紫L","OP超音波馬卡龍瞬吸布PX","OP檸檬清新抗菌瞬吸布","OP天然棉紗布(3片入)","OP柑橘抗菌EX菜瓜布(三)","OP細柔無砂海綿菜瓜布","OP抗菌木漿棉","檸檬馬鞭草菜瓜布-萬用速淨4入"]],
+    ["食品保鮮", ["OP安全無毒耐熱袋(小)PX(二)","OP安全無毒耐熱袋(中)PX(二)","OP生物抗菌密封袋M(PX)","OP生物抗菌密封袋L(PX)","OP生物分解抗菌密封袋XL","OP抗菌立體密封袋M+L","OP長效抗菌立體密封袋M","OP生物分解抗菌立體密封袋S","OP生物分解保鮮膜360尺(20入)","OP植材抗菌保鮮膜300尺","OP無雙酚A鋁箔800公分-12入","OP無雙酚A鋁箔1500公分-12入","OP無雙酚A料理紙32M(12入)","OP無漂白料理紙7M(加量)","OP生物分解濾水網80入","OP咖啡渣淨味濾水網80入(PX)"]],
+    ["香氛", ["Amaze大地擴香-甜橘玫瑰果","AMAZE經典擴香-雪松中性淡香水","AMAZE經典擴香-白麝香琥珀淡香水","AMAZE 礦石香氛包-雪松中性淡香水","AMAZE 礦石香氛包-白麝香琥珀淡香水","Amaze礦石香氛-玫瑰淡香水","礦石香氛-沁藍海洋淡香水","礦石香氛-月光舒眠薰衣草","香氛豆補充包-玫瑰淡香水(二)","香氛豆補充包-海洋中性白麝香(二)","香氛豆-粉紅甜蜜果香淡香水","香氛豆-鳶尾粉邂逅淡香水"]],
+    ["茶酚／噴霧／除濕", ["OP日本愛宕柿小蘇打(二)","OP愛岩柿消臭噴霧-抗病毒EX(黃)","OP抗菌消臭噴霧-清新海洋","茶酚淨洗潔精-清雅茶香(黃)","茶酚淨洗潔精-檸檬茶萃(黃)","茶酚淨洗潔精補充包-茶香(黃)","凝膠型除濕袋-雪松清香"]],
+    ["濕巾／酒精擦", ["德適淨濕拖巾-薰衣草","德適淨濕拖巾-雪松清香","德適淨濕拖巾-海洋清新","德適淨十抗菌酒精擦(PX)"]],
+    ["寵物", ["OP專科防臭袋S","OP專科防臭袋M"]],
+  ];
+  const productCategoryAudit = await page.evaluate(() => {
+    const masterNames = PX_Q3_PRODUCTS.map(product => product.name);
+    const categories = PX_PRODUCT_CATEGORIES.map(category => [category.name, [...category.products]]);
+    const assigned = categories.flatMap(([, products]) => products);
+    return {
+      categories,
+      total: assigned.length,
+      duplicateCount: assigned.length - new Set(assigned).size,
+      missing: masterNames.filter(name => !assigned.includes(name)),
+      unknown: assigned.filter(name => !masterNames.includes(name)),
+    };
+  });
+  assert.deepEqual(productCategoryAudit.categories, expectedProductCategories, "category and product order exactly matches the specification");
+  assert.equal(productCategoryAudit.total, 54, "category product count");
+  assert.equal(productCategoryAudit.duplicateCount, 0, "no duplicate category products");
+  assert.deepEqual(productCategoryAudit.missing, [], "no products omitted from categories");
+  assert.deepEqual(productCategoryAudit.unknown, [], "categories contain no unknown product names");
+  assert.deepEqual(productCategoryAudit.categories.map(([, products]) => products.length), [13, 16, 12, 7, 4, 2], "category counts");
+  assert.equal(productCategoryAudit.categories[4][1][3], "德適淨十抗菌酒精擦(PX)", "alcohol wipes belong to the wipes category");
   assert.equal(await page.evaluate(() => Object.keys(window.PX_SALES_DATA).length), 53, "validated mapping count");
   assert.equal(await page.evaluate(() => window.PX_SALES_PERIODS.length), 21, "period count");
   const staticHtml = fs.readFileSync(path.join(root, "index.html"), "utf8");
@@ -110,7 +137,8 @@ async function main() {
   assert.deepEqual(manifest.icons.map(icon => icon.purpose), ["any", "any"], "PWA icons declare standard any purpose");
   assert.ok(manifest.icons.every(icon => icon.src.endsWith("?v=4.1.2")), "PWA icons use the current cache-busting version");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2-social'/, "service worker cache version");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2-categories'/, "service worker cache version");
+  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.2-categories/, "service worker registration cache buster");
   assert.match(serviceWorker, /social-preview\.png\?v=4\.1\.2-social/, "service worker precaches the current social image");
   assert.match(staticHtml, /rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon\.png\?v=4\.1\.2"/, "dedicated Apple touch icon is linked");
   assert.doesNotMatch(staticHtml, /⚙|⚙️/, "settings control contains no emoji");
@@ -233,8 +261,23 @@ async function main() {
   assert.equal(auditRows.filter(row => row.includes(",UNMATCHED,UNMATCHED,")).length, 5, "initial unmatched count");
   assert.equal(auditRows.filter(row => row.includes(",CONFLICT,MATCHED,")).length, 5, "manual mapping count");
 
+  await page.locator("#cProduct").click();
+  assert.deepEqual(await page.locator("#cProductOptions .product-category").allTextContents(), ["手持清潔 ›", "食品保鮮 ›", "香氛 ›", "茶酚／噴霧／除濕 ›", "濕巾／酒精擦 ›", "寵物 ›"], "first level shows only categories in the required order");
+  assert.equal(await page.locator("#cProductOptions .product-item").count(), 0, "first level shows no products");
+  assert.doesNotMatch(await page.locator("#cProductOptions").innerText(), /最近使用/, "first level has no recent-products section");
+  await page.locator("#cProductOptions [data-category='食品保鮮']").click();
+  assert.equal(await page.locator("#cProductOptions .product-back").textContent(), "← 返回大類", "second level provides the back control");
+  assert.deepEqual(await page.locator("#cProductOptions .product-item").evaluateAll(items => items.map(item => item.dataset.productName)), expectedProductCategories[1][1], "second level keeps the specified category order");
+  await page.locator("#cProductOptions .product-back").click();
+  assert.equal(await page.locator("#cProductOptions .product-category").count(), 6, "back control returns to category list");
+  await page.locator("#cProductOptions [data-category='食品保鮮']").click();
+  await page.locator("#cProductOptions [data-product-name='OP無雙酚A鋁箔800公分-12入']").click();
+  assert.equal(await page.locator("#cProduct").inputValue(), "OP無雙酚A鋁箔800公分-12入", "category product can be selected");
+  assert.equal(await page.locator("#cCost").inputValue(), "25.22", "category selection preserves auto cost fill");
   await page.locator("#cProduct").fill("鋁箔");
-  assert.equal(await page.locator("#cProductOptions .product-option").count(), 2, "name search");
+  assert.equal(await page.locator("#cProductOptions .product-item").count(), 2, "name search crosses all categories");
+  await page.locator("#cProduct").fill("指尖");
+  assert.deepEqual(await page.locator("#cProductOptions .product-item").evaluateAll(items => items.map(item => item.dataset.productName)), ["OP指尖強化手套-薰衣紫M", "OP指尖強化手套-薰衣紫L"], "keyword search finds both fingertip glove sizes");
   await page.locator("#cProduct").fill("65010209");
   assert.equal(await page.locator("#cProduct").inputValue(), "OP無雙酚A鋁箔800公分-12入", "code search selection");
   assert.equal(await page.locator("#cCost").inputValue(), "25.22", "auto cost fill");
@@ -537,7 +580,14 @@ async function main() {
   await page.evaluate(() => { const tabs = document.querySelector(".tabs"); tabs.scrollLeft = tabs.scrollWidth; updateTabScrollHint(); });
   assert.ok(await page.locator(".tabs-shell").evaluate(element => element.classList.contains("at-end")), "mobile tab hint disappears at the far right");
   await page.locator("#cProduct").click();
-  assert.equal(await page.locator("#cProductOptions .product-option").count(), 54, "mobile dropdown shows all products");
+  assert.equal(await page.locator("#cProductOptions .product-category").count(), 6, "mobile dropdown opens on six categories");
+  assert.equal(await page.locator("#cProductOptions .product-item").count(), 0, "mobile first level contains no products");
+  assert.ok(await page.locator("#cProductOptions .product-category").evaluateAll(items => items.every(item => item.getBoundingClientRect().height >= 43.5)), "mobile category touch targets remain at least 44px tall");
+  await page.locator("#cProductOptions [data-category='手持清潔']").click();
+  assert.equal(await page.locator("#cProductOptions .product-item").count(), 13, "mobile category opens its product list");
+  await page.locator("#cProductOptions [data-product-name='OP指尖強化手套-薰衣紫M']").click();
+  assert.equal(await page.locator("#cCost").inputValue(), "13.79", "mobile product selection preserves auto cost fill");
+  await page.locator("#cProduct").click();
   const dropdownBounds = await page.locator("#cProductOptions").evaluate(element => { const rect = element.getBoundingClientRect(); return { left: rect.left, right: rect.right, width: innerWidth }; });
   assert.ok(dropdownBounds.left >= -1 && dropdownBounds.right <= dropdownBounds.width + 1, "mobile dropdown fits viewport");
   await page.keyboard.press("Escape");
