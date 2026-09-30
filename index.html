@@ -247,6 +247,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 <script src="px-replacement-data.js"></script>
 <script src="competitor-price-core.js"></script>
 <script src="competitor-prices.js"></script>
+<script src="competitor-comparison-core.js"></script>
 <script>
 // PX Q3 product cost master
 // Source: 2026Q3 全產品成本表 / PX Q3
@@ -597,7 +598,7 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-competitor-radar"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-competitor-comparison"));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="competitor-price-ui.js"></script>

@@ -1,33 +1,63 @@
-/* Scoped to the competitor layer; existing workbench layout is untouched. */
-.competitor-section{margin-top:24px;min-width:0}
+/* Single-column mobile-first comparison; scoped to this layer. */
+.competitor-section{margin-top:24px;min-width:0;scroll-margin-top:16px}
 .competitor-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.competitor-heading h2{font-size:20px;margin:0}
-.competitor-heading label{display:flex;align-items:center;gap:8px;font-size:13px}
-.competitor-heading select{width:auto;min-width:100px;min-height:48px;font-size:16px}
-.competitor-disclaimer{font-size:12px;line-height:1.7;color:#526779;margin:12px 0}
-.competitor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.competitor-card{min-width:0;margin:0;overflow-wrap:anywhere}
-.competitor-brand{font-size:13px;font-weight:700;color:#466176;display:flex;align-items:center;gap:10px}
-.competitor-material{font-size:11px;font-weight:500;background:#eef5f7;padding:3px 8px;border-radius:5px}
-.competitor-card h3{font-size:17px;line-height:1.5;margin:8px 0 16px;color:#102a43}
-.competitor-price{display:flex;flex-direction:column;gap:4px}
-.competitor-price>span{font-size:12px;color:#526779}
-.competitor-price strong{font-size:32px;color:#102a43;line-height:1.2;white-space:nowrap}
-.competitor-price small{color:#6b7d8b;font-size:12px}
-.competitor-spec{font-size:14px;margin:16px 0 0}
-.competitor-units{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0;background:#f4f7fa;border-radius:8px;padding:12px 8px}
-.competitor-units span{display:block;font-size:11px;color:#526779;margin-bottom:6px}
-.competitor-units b{font-size:14px;color:#163a50}
-.competitor-retailer{font-size:12px;color:#526779;margin:12px 0}
-.competitor-card details{font-size:12px;margin:4px 0;color:#526779}
-.competitor-card summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
-.competitor-card summary:before{content:'›';margin-right:8px}
-.competitor-card details[open] summary:before{content:'⌄'}
-.competitor-card details p{line-height:1.8;white-space:pre-line}
-.competitor-card details small{display:block;line-height:1.7}
-.competitor-freshness{font-size:12px;line-height:1.8;margin:16px 0 8px;color:#526779}
-.competitor-freshness span{display:block}
-.competitor-freshness[data-source-status="FAILED"],.competitor-freshness[data-source-status="STALE"]{color:#8d5a1f}
-.competitor-freshness small{display:block;font-size:11px}
-.competitor-source-link{display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:#087d91;font-weight:600}
-@media(max-width:700px){.competitor-grid{grid-template-columns:minmax(0,1fr)}.competitor-heading h2{font-size:18px}}
+.competitor-heading h2{font-size:20px;margin:0 0 4px}
+.competitor-heading>div>span{font-size:12px;color:#526779}
+.competitor-heading label{display:flex;align-items:center;gap:6px;font-size:12px;margin:0}
+.competitor-heading select{width:auto;min-width:106px;min-height:44px;font-size:16px;padding:8px}
+.competitor-disclaimer,.competitor-selection-hint,.competitor-sort-note{font-size:12px;line-height:1.6;color:#526779;margin:12px 0}
+.competitor-selection-hint{padding:10px 12px;background:#eef4f8;border-radius:8px}
+.competitor-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.competitor-section .competitor-card,.competitor-section .competitor-benchmark{padding:16px;min-width:0;margin:0;overflow-wrap:anywhere}
+.competitor-product-head{display:flex;gap:12px;justify-content:space-between;align-items:flex-start}
+.competitor-product-head>div{min-width:0}
+.competitor-brand{font-size:11px;font-weight:600;color:#526779}
+.competitor-card h3,.competitor-benchmark h3{font-size:15px;line-height:1.5;color:#102a43;margin:4px 0 0;font-weight:650}
+.competitor-retailer{font-size:11px;color:#526779;flex:none;margin-top:3px}
+.competitor-card-main,.competitor-benchmark-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:14px;align-items:start}
+.competitor-price,.competitor-benchmark-price{display:flex;flex-direction:column;gap:4px;min-width:0}
+.competitor-price>span,.competitor-benchmark-price>span,.competitor-primary-metric>span{font-size:11px;color:#526779}
+.competitor-price strong{font-size:26px;line-height:1.2;color:#102a43;white-space:nowrap}
+.competitor-spec{font-size:12px;line-height:1.6;margin:4px 0 0;color:#526779}
+.competitor-primary-metric{display:flex;flex-direction:column;gap:5px;min-width:0}
+.competitor-primary-metric b{font-size:21px;color:#163a50;line-height:1.25;white-space:nowrap}
+.competitor-primary-metric b small,.competitor-comparison-strip b small,.competitor-benchmark-price strong small{font-size:12px;font-weight:500;margin-left:2px}
+.competitor-secondary-metrics{font-size:11px;color:#6b7d8b}
+.metric-unavailable{font-size:12px;line-height:1.6;color:#6b7d8b}
+.competitor-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.competitor-badges:empty{display:none}
+.competitor-badges span{font-size:10px;line-height:1.6;background:#f0f4f7;color:#526779;padding:3px 7px;border-radius:4px}
+.competitor-comparison-strip{margin-top:12px;border:1px solid #e1e9ee;border-radius:8px;padding:10px 12px;background:#f3f7fa;color:#23495e}
+.competitor-comparison-strip>span{font-size:12px;display:block;font-weight:600;line-height:1.5}
+.competitor-comparison-strip>div{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:4px}
+.competitor-comparison-strip b{font-size:21px;white-space:nowrap}
+.competitor-comparison-strip strong{font-size:13px;white-space:nowrap}
+.competitor-comparison-strip.same b{display:block;margin-top:4px}
+.competitor-comparison-strip.unavailable{color:#6b7d8b;background:#f8fafb;border-color:#edf1f4}
+.competitor-comparison-strip.unavailable>span{font-weight:500}
+.competitor-comparison-strip.unavailable small{font-size:11px;display:block;line-height:1.6}
+.competitor-meta{font-size:11px;color:#6b7d8b;margin-top:10px}
+.competitor-details{font-size:12px;color:#526779;margin-top:6px}
+.competitor-details summary{min-height:44px;display:flex;align-items:center;cursor:pointer;color:#36556c;list-style:none}
+.competitor-details summary::-webkit-details-marker{display:none}
+.competitor-details summary:before{content:'›';margin-right:8px}
+.competitor-details[open] summary:before{content:'⌄'}
+.competitor-detail-content{padding-top:8px;border-top:1px solid #e8eef3}
+.competitor-detail-content p{font-size:12px;line-height:1.8;margin:6px 0;overflow-wrap:anywhere}
+.competitor-promotion-text{white-space:pre-line}
+.competitor-detail-units{margin:8px 0;display:flex;flex-wrap:wrap;gap:12px}
+.competitor-detail-units>div{display:flex;gap:6px}
+.competitor-detail-units dt,.competitor-detail-units dd{margin:0}
+.competitor-source-link{display:inline-flex;align-items:center;min-height:44px;font-size:12px;color:#087d91;font-weight:600}
+.competitor-section .competitor-benchmark{border:1px solid #b8d9ca;border-left:3px solid #438b6f;margin-bottom:16px}
+.competitor-benchmark-head{display:flex;align-items:center;gap:8px;color:#31644e;background:#edf7f1;border-radius:5px;padding:7px 9px;margin-bottom:12px;font-size:12px;flex-wrap:wrap}
+.competitor-benchmark-head span{font-size:10px;border:1px solid #c6dfd3;padding:1px 5px;border-radius:3px}
+.competitor-benchmark-head small{font-size:10px;margin-left:auto;color:#4d6b5a}
+.competitor-benchmark-price strong{font-size:29px;color:#20533d;line-height:1.2;white-space:nowrap}
+.competitor-benchmark-price>small{font-size:11px;color:#526779;line-height:1.6}
+.benchmark-price-missing{font-size:15px;font-weight:600;color:#526779}
+.competitor-benchmark-notice{font-size:12px;line-height:1.7;color:#526779;margin:12px 0 0}
+.competitor-list-heading{font-size:13px;color:#526779;margin:0 0 10px}
+.competitor-use-benchmark{min-height:44px;font-size:12px;background:#f0f6f3;color:#31644e;border:1px solid #c9dfd3;margin-top:12px}
+@media(min-width:640px){.competitor-card:has(.competitor-comparison-strip):not(:has(.unavailable)){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:12px}.competitor-card .competitor-product-head,.competitor-card .competitor-meta,.competitor-card .competitor-details{grid-column:1/-1}.competitor-card:has(.competitor-comparison-strip):not(:has(.unavailable)) .competitor-card-main,.competitor-card:has(.competitor-comparison-strip):not(:has(.unavailable)) .competitor-badges{grid-column:1/3}.competitor-card:has(.competitor-comparison-strip):not(:has(.unavailable)) .competitor-comparison-strip{grid-column:3;grid-row:2/4;align-self:start;margin-top:14px;padding:10px}}
+@media(max-width:359px){.competitor-heading{gap:8px}.competitor-heading h2{font-size:18px}.competitor-heading select{min-width:95px}.competitor-card h3{font-size:14px}.competitor-primary-metric b{font-size:19px}}
