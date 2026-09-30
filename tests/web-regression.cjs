@@ -53,7 +53,7 @@ async function main() {
   await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2-campaigns-2026-11"], "campaign service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2-period-comparison"], "campaign service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   const expectedProductCategories = [
@@ -137,8 +137,8 @@ async function main() {
   assert.deepEqual(manifest.icons.map(icon => icon.purpose), ["any", "any"], "PWA icons declare standard any purpose");
   assert.ok(manifest.icons.every(icon => icon.src.endsWith("?v=4.1.2")), "PWA icons use the current cache-busting version");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2-campaigns-2026-11'/, "service worker cache version");
-  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.2-campaigns-2026-11/, "service worker registration cache buster");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2-period-comparison'/, "service worker cache version");
+  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.2-period-comparison/, "service worker registration cache buster");
   assert.match(serviceWorker, /social-preview\.png\?v=4\.1\.2-social/, "service worker precaches the current social image");
   assert.match(staticHtml, /rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon\.png\?v=4\.1\.2"/, "dedicated Apple touch icon is linked");
   assert.doesNotMatch(staticHtml, /⚙|⚙️/, "settings control contains no emoji");

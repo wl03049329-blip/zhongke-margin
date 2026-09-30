@@ -29,7 +29,28 @@
  }
  function periods(data){const unique=new Map();data.products.forEach(p=>Object.values(p.periods).forEach(period=>unique.set(period.id,period)));return [...unique.values()].sort((a,b)=>a.startDate.localeCompare(b.startDate));}
  function context(data,date){const list=periods(data),current=list.find(p=>p.startDate<=date&&p.endDate>=date)||null,next=list.find(p=>p.startDate>date)||null;return {current,next,preferred:current||next,list};}
+ // Comparison is read-only and uses the global schedule, never the product's last available price.
+ function bestAverageUnitPrice(period){
+  const prices=(period?.promotions||[]).filter(p=>p.promotionType!=='UNKNOWN'&&Number.isFinite(p.averageUnitPrice)&&p.averageUnitPrice>=0).map(p=>p.averageUnitPrice);
+  return prices.length?Math.min(...prices):null;
+ }
+ function promotionSet(period){
+  return [...new Set((period?.promotions||[]).map(p=>JSON.stringify([p.promotionType,p.payQuantity,p.receiveQuantity,Boolean(p.optional),p.discountRate??null,p.promotionType==='UNKNOWN'?clean(p.label):null])))].sort();
+ }
+ function comparePeriods(data,product,currentPeriodId){
+  const schedule=periods(data),index=schedule.findIndex(p=>p.id===currentPeriodId),currentPeriod=schedule[index]||null,previousPeriod=index>0?schedule[index-1]:null;
+  const record=data.products.find(p=>p.productName===product.name),current=record?.periods[currentPeriodId]||null,previous=record?.periods[previousPeriod?.id]||null;
+  const currentBest=bestAverageUnitPrice(current),previousBest=bestAverageUnitPrice(previous);
+  const promotionChange=current&&previous?JSON.stringify(promotionSet(current))!==JSON.stringify(promotionSet(previous)):false;
+  const base={currentPeriod,previousPeriod,current,previous,currentBest,previousBest,promotionChange,priceDelta:null,changePercent:null,isNew:product.newProductPeriod===currentPeriod?.id.slice(0,7)};
+  if(currentBest===null)return {...base,status:'CURRENT_UNAVAILABLE'};
+  if(!previousPeriod)return {...base,status:'NO_PREVIOUS_PERIOD'};
+  if(!previous)return {...base,status:'PREVIOUS_MISSING'};
+  if(previousBest===null)return {...base,status:'PREVIOUS_UNAVAILABLE'};
+  const priceDelta=currentBest-previousBest,changePercent=previousBest>0?priceDelta/previousBest*100:null;
+  return {...base,priceDelta,changePercent,status:priceDelta===0?'UNCHANGED':priceDelta>0?'INCREASED':'DECREASED'};
+ }
  function today(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());}
- const api={clean,identifier,name,money,parse,periods,context,today};
+ const api={clean,identifier,name,money,parse,periods,context,today,bestAverageUnitPrice,promotionSet,comparePeriods};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.PXPromo=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
