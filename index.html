@@ -139,6 +139,12 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 .scenario-summary-rows{display:grid;gap:0;margin-top:7px}.scenario-summary-row{display:grid;grid-template-columns:auto auto 1fr;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid #e3eaed;font-size:12px}.scenario-summary-row:last-child{border-bottom:0}.scenario-summary-row strong{font-size:14px;white-space:nowrap}.scenario-summary-row span:last-child{text-align:right;line-height:1.5}
 .scenario-summary-context{margin:6px 0 0;color:#526779;font-size:11px;line-height:1.6}.scenario-summary-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:9px}.scenario-summary-actions button{min-height:44px;padding:9px 12px;font-size:12px}.scenario-summary-feedback{font-size:11px;color:var(--op)}
 @media(max-width:430px){.scenario-summary-row{grid-template-columns:1fr auto;gap:2px 8px}.scenario-summary-row span:last-child{grid-column:1/-1;text-align:left}}
+.decision-card{margin:0 0 14px;padding:14px;border:1px solid #d2e2e7;border-left:3px solid #318a83;border-radius:14px;background:#f8fbfc;min-width:0}
+.decision-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}.decision-head h3{font-size:15px;color:var(--op);margin:0}.decision-head span,.decision-product{color:#526779;font-size:11px;line-height:1.5}.decision-product{margin:5px 0 10px;overflow-wrap:anywhere}
+.decision-core{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.decision-metric{min-width:0;padding:9px 10px;background:#fff;border:1px solid #e2ebee;border-radius:10px}.decision-metric span{display:block;color:#526779;font-size:11px;line-height:1.4}.decision-metric strong{display:block;margin-top:4px;font-size:21px;color:#173c50;line-height:1.2;white-space:nowrap}
+.decision-card h4{font-size:11px;color:#526779;margin:12px 0 4px}.decision-deltas{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px}.decision-deltas b{color:#23495e}.decision-notices{margin:0;padding-left:18px;font-size:12px;line-height:1.6;color:var(--ink)}.decision-next{font-size:11px;line-height:1.5;color:#526779;margin:0}.decision-context{font-size:11px;line-height:1.6;color:#526779;margin:9px 0 0}
+.decision-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:10px}.decision-actions button{min-height:44px;padding:9px 12px;font-size:12px}.decision-feedback{font-size:11px;color:var(--op)}
+@media(max-width:360px){.decision-metric{padding:8px}.decision-metric strong{font-size:18px}}
 </style>
 </head>
 <body>
@@ -206,7 +212,21 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
   </div>
  </div>
  <div id="sProductInfo"></div>
- <div class="card"><div id="scenarioResults" class="scenario-results"></div><section id="scenarioSummary" class="scenario-summary" aria-label="方案比較摘要"><div class="scenario-summary-head"><h3>方案比較摘要</h3><span id="scenarioSummaryHighest" class="scenario-summary-highest"></span></div><div id="scenarioSummaryRows" class="scenario-summary-rows" aria-live="polite"></div><p id="scenarioSummaryThreshold" class="scenario-summary-context"></p><p id="scenarioSummaryDetails" class="scenario-summary-context"></p><div class="scenario-summary-actions"><button id="copyScenarioSummary" class="secondary-action" type="button">複製方案比較</button><span id="scenarioSummaryFeedback" class="scenario-summary-feedback" role="status" aria-live="polite"></span></div></section><div class="note">費用後結果＝既有中科毛利額再扣除各方案額外促銷費用；未輸入額外費用時，結果與既有公式一致。</div></div>
+ <div class="card">
+  <section id="decisionSummary" class="decision-card" aria-label="決策摘要">
+   <div class="decision-head"><h3>決策摘要</h3><span>A 為目前狀況</span></div>
+   <p id="decisionProduct" class="decision-product"></p>
+   <div class="decision-core"><div class="decision-metric"><span>中科毛利率（費用後）</span><strong id="decisionMargin">資料不足</strong></div><div class="decision-metric"><span>全聯毛利率（前毛）</span><strong id="decisionFrontMargin">資料不足</strong></div></div>
+   <div class="decision-block"><h4>目前需要注意</h4><ul id="decisionNotices" class="decision-notices" aria-live="polite"></ul></div>
+   <div class="decision-block"><h4>方案差異</h4><div class="decision-deltas"><span>B vs A：<b id="decisionDeltaB">資料不足</b></span><span>C vs A：<b id="decisionDeltaC">資料不足</b></span></div></div>
+   <div class="decision-block"><h4>可進一步確認</h4><p id="decisionNext" class="decision-next"></p></div>
+   <p id="decisionContext" class="decision-context"></p>
+   <div class="decision-actions"><button id="copyDecisionSummary" class="secondary-action" type="button">複製決策摘要</button><span id="decisionFeedback" class="decision-feedback" role="status" aria-live="polite"></span></div>
+  </section>
+  <div id="scenarioResults" class="scenario-results"></div>
+  <section id="scenarioSummary" class="scenario-summary" aria-label="方案比較摘要"><div class="scenario-summary-head"><h3>方案比較摘要</h3><span id="scenarioSummaryHighest" class="scenario-summary-highest"></span></div><div id="scenarioSummaryRows" class="scenario-summary-rows" aria-live="polite"></div><p id="scenarioSummaryThreshold" class="scenario-summary-context"></p><p id="scenarioSummaryDetails" class="scenario-summary-context"></p><div class="scenario-summary-actions"><button id="copyScenarioSummary" class="secondary-action" type="button">複製方案比較</button><span id="scenarioSummaryFeedback" class="scenario-summary-feedback" role="status" aria-live="polite"></span></div></section>
+  <div class="note">費用後結果＝既有中科毛利額再扣除各方案額外促銷費用；未輸入額外費用時，結果與既有公式一致。</div>
+ </div>
  <div id="sSalesPerformance"></div>
 </section>
 
@@ -603,9 +623,10 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-scenario-summary"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-decision-summary"));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="scenario-summary.js"></script>
+<script src="decision-summary.js"></script>
 <script src="competitor-price-ui.js"></script>
 </body></html>
