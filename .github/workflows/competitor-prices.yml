@@ -1,0 +1,67 @@
+name: Competitor price radar and Pages
+on:
+  push:
+    branches: [main, feature/competitor-price-radar]
+  schedule:
+    - cron: '0 0,10 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: px-pages
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref == 'refs/heads/main' && 'github-pages' || 'competitor-source-probe' }}
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Restore last runtime observation from our own public site
+        if: github.ref == 'refs/heads/main'
+        run: node scripts/restore_competitor_runtime.cjs
+      - name: Observe public product pages (no authentication)
+        run: node scripts/scrape_competitor_prices.cjs
+      - name: Probe source feasibility before release
+        if: github.ref != 'refs/heads/main'
+        run: node -e "const r=require('./COMPETITOR_VALIDATION.json');if(r.successful!==4||r.errors)process.exit(1)"
+      - name: Competitor unit checks
+        run: node tests/competitor-prices.cjs --unit
+      - name: Publish validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: competitor-source-validation
+          path: |
+            COMPETITOR_SOURCE_AUDIT.json
+            COMPETITOR_VALIDATION.json
+            competitor-runtime.json
+          retention-days: 14
+      - name: Commit only semantic snapshot changes
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git add competitor-prices.json competitor-products.json competitor-prices.js competitor-price-history.json
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Update verified competitor price snapshots"
+            git push origin HEAD:main
+          fi
+      - name: Build static Pages with uncommitted runtime metadata
+        if: github.ref == 'refs/heads/main'
+        run: node scripts/build_px_pages.cjs
+      - uses: actions/configure-pages@v5
+        if: github.ref == 'refs/heads/main'
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: public
+      - uses: actions/deploy-pages@v4
+        if: github.ref == 'refs/heads/main'
+        id: deploy

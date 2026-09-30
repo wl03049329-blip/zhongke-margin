@@ -1,0 +1,14 @@
+{
+  "added": 2,
+  "changed": 2,
+  "successful": 4,
+  "warnings": 1,
+  "errors": 0,
+  "issues": [
+    {
+      "id": "萬家福:3142391100101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    }
+  ]
+}

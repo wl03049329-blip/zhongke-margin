@@ -1,0 +1,4 @@
+# Deployed runtime checks; do not commit timestamp-only observations.
+competitor-runtime.json
+COMPETITOR_SOURCE_AUDIT.json
+public/
