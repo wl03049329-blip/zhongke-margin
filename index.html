@@ -134,6 +134,11 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 .hs-copy .built-by{font-size:9px;font-weight:400;color:#70818c;opacity:.6}
 .tabs-shell{position:relative;min-width:0}
 @media(max-width:620px){.tabs-shell::after{content:"";position:absolute;z-index:3;top:10px;right:0;bottom:10px;width:32px;background:linear-gradient(90deg,rgba(243,246,248,0),rgba(243,246,248,.98));pointer-events:none}.tabs-shell.at-end::after,.tabs-shell.no-overflow::after{display:none}}
+.scenario-summary{margin-top:14px;padding:13px 14px;border:1px solid #d7e4e6;border-radius:14px;background:#f7fafb;color:var(--ink);min-width:0}
+.scenario-summary-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.scenario-summary h3{margin:0;color:var(--op);font-size:14px}.scenario-summary-highest{font-size:11px;color:#36566a;font-weight:700}
+.scenario-summary-rows{display:grid;gap:0;margin-top:7px}.scenario-summary-row{display:grid;grid-template-columns:auto auto 1fr;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid #e3eaed;font-size:12px}.scenario-summary-row:last-child{border-bottom:0}.scenario-summary-row strong{font-size:14px;white-space:nowrap}.scenario-summary-row span:last-child{text-align:right;line-height:1.5}
+.scenario-summary-context{margin:6px 0 0;color:#526779;font-size:11px;line-height:1.6}.scenario-summary-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:9px}.scenario-summary-actions button{min-height:44px;padding:9px 12px;font-size:12px}.scenario-summary-feedback{font-size:11px;color:var(--op)}
+@media(max-width:430px){.scenario-summary-row{grid-template-columns:1fr auto;gap:2px 8px}.scenario-summary-row span:last-child{grid-column:1/-1;text-align:left}}
 </style>
 </head>
 <body>
@@ -201,7 +206,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
   </div>
  </div>
  <div id="sProductInfo"></div>
- <div class="card"><div id="scenarioResults" class="scenario-results"></div><div class="note">費用後結果＝既有中科毛利額再扣除各方案額外促銷費用；未輸入額外費用時，結果與既有公式一致。</div></div>
+ <div class="card"><div id="scenarioResults" class="scenario-results"></div><section id="scenarioSummary" class="scenario-summary" aria-label="方案比較摘要"><div class="scenario-summary-head"><h3>方案比較摘要</h3><span id="scenarioSummaryHighest" class="scenario-summary-highest"></span></div><div id="scenarioSummaryRows" class="scenario-summary-rows" aria-live="polite"></div><p id="scenarioSummaryThreshold" class="scenario-summary-context"></p><p id="scenarioSummaryDetails" class="scenario-summary-context"></p><div class="scenario-summary-actions"><button id="copyScenarioSummary" class="secondary-action" type="button">複製方案比較</button><span id="scenarioSummaryFeedback" class="scenario-summary-feedback" role="status" aria-live="polite"></span></div></section><div class="note">費用後結果＝既有中科毛利額再扣除各方案額外促銷費用；未輸入額外費用時，結果與既有公式一致。</div></div>
  <div id="sSalesPerformance"></div>
 </section>
 
@@ -598,8 +603,9 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-competitor-comparison"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-scenario-summary"));
 </script>
 <script src="px-promo-ui.js"></script>
+<script src="scenario-summary.js"></script>
 <script src="competitor-price-ui.js"></script>
 </body></html>
