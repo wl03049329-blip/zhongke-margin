@@ -10,7 +10,7 @@ assert.ok(core.parse('任選優惠 $abc').warnings.includes('UNKNOWN_PROMOTION')
 assert.ok(core.parse('').warnings.includes('MISSING_PRICE'));
 for(const [date,label] of [['2026-10-02','10-1'],['2026-10-15','10-1'],['2026-10-16','10-2'],['2026-10-29','10-2']])assert.equal(core.context(data,date).current.label,label);
 assert.equal(core.context(data,'2026-09-30').current,null);assert.equal(core.context(data,'2026-09-30').next.label,'10-1');
-assert.equal(data.products.length,53);assert.equal(core.periods(data).length,2);assert.equal(master.length,54);
+assert.equal(data.products.length,55);assert.equal(core.periods(data).length,4);assert.equal(master.length,54);
 const gloves=data.products.find(p=>p.productId==='63020159');assert.equal(gloves.periods['2026-10-1'].campaignType,'IP');assert.equal(gloves.periods['2026-10-2'].campaignType,'DM');
 const fixture={issues:[],rows:[{sheet:'test',row:1,raw:{code:'65010209\n',barcode:'',name:'test'},periods:[{id:'2026-10-1',label:'10-1',startDate:'2026-10-02',endDate:'2026-10-15',rawText:'單特 $89'}]},{sheet:'test',row:2,raw:{code:'65010209',barcode:'',name:'test'},periods:[{id:'2026-10-1',label:'10-1',startDate:'2026-10-02',endDate:'2026-10-15',rawText:'單特 $99'}]},{sheet:'test',row:3,raw:{code:'bad',barcode:'',name:'missing'},periods:[]}]};
 const imported=importRows(fixture,master);assert.equal(imported.report.successfulPeriods,1);assert.ok(imported.report.issues.some(i=>i.reason==='PERIOD_PRICE_CONFLICT'));assert.ok(imported.report.warningCount>0);
@@ -18,7 +18,7 @@ const server=http.createServer((req,res)=>{const file=path.join(root,new URL(req
 (async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});const page=await browser.newPage({viewport:{width:390,height:844}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
 await page.goto(process.env.PX_LIVE||`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'networkidle'});await page.locator('[data-tab="campaign"]').click();
 for(const query of ['鋁箔','65010209','4710660884433']){await page.locator('#campaignSearch').fill(query);assert.ok((await page.locator('#campaignResults').innerText()).includes('均價 $69.5'));assert.equal(await page.locator('.campaign-result').count(),query==='鋁箔'?2:1);}
-await page.locator('#campaignSearch').fill('天然棉紗布');assert.match(await page.locator('#campaignResults').innerText(),/未提供檔期售價/);
+await page.evaluate(()=>{PXPromo.today=()=> '2026-09-30';renderCampaignSearch()});await page.locator('#campaignSearch').fill('天然棉紗布');assert.match(await page.locator('#campaignResults').innerText(),/本檔未提供促銷價格/);
 await page.locator('#campaignSearch').fill('65010209');
 for(const [date,label] of [['2026-09-30','下一檔 10-1'],['2026-10-02','本檔 10-1'],['2026-10-16','本檔 10-2']]){await page.evaluate(date=>{PXPromo.today=()=>date;renderCampaignSearch()},date);assert.ok((await page.locator('#campaignResults').innerText()).includes(label));}
 await page.evaluate(()=>{PXPromo.today=()=> '2026-09-30';renderCampaignSearch()});

@@ -1,153 +1,168 @@
 {
-  "sourceProducts": 53,
-  "importedProducts": 53,
-  "successfulPeriods": 106,
+  "sourceProducts": 54,
+  "importedProducts": 54,
+  "successfulPeriods": 108,
+  "added": 108,
+  "updated": 0,
+  "skipped": 0,
   "matchMethods": {
-    "CODE": 53,
-    "BARCODE": 0,
+    "CODE": 52,
+    "BARCODE": 2,
     "NAME": 0
   },
-  "warningCount": 22,
+  "warningCount": 24,
   "errorCount": 0,
   "issues": [
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 5,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 9,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 10,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 11,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 12,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 13,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 15,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 18,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
+      "row": 19,
+      "reason": "MISSING_CODE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.11",
       "row": 19,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 20,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 22,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 24,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 25,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 33,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 37,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 38,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 50,
-      "reason": "NORMALIZED_WHITESPACE"
+      "reason": "MISSING_CODE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 51,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
-      "row": 53,
+      "sheet": "2026.11",
+      "row": 52,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 54,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 55,
       "reason": "NORMALIZED_WHITESPACE"
     },
     {
       "severity": "warning",
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 56,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.11",
+      "row": 57,
       "reason": "NORMALIZED_WHITESPACE"
     }
   ],
-  "sourceFile": "台灣中科促銷訂單- 2026-10月IP(For 維義)-0821.xlsx",
-  "sourceSHA256": "a24d4f9c03e432654122079d910af69d135f3df8dc75b9583f3e3b2ff0a80eef",
+  "sourceFile": "台灣中科促銷訂單- 2026-11月IP(For 維義)-0915.xlsx",
+  "sourceSHA256": "427acbd90cbdc8112ce030388ab9e3f65bbd5498c6ed6285469424ed3c152a4d",
   "rawRows": [
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 4,
       "raw": {
         "code": "61050067",
@@ -157,24 +172,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $278\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $298\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $278\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $298\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 5,
       "raw": {
         "code": "61050079 ",
@@ -184,24 +199,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $278\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP單特 $169\n二特 $298"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $278\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP單特 $169\n二特 $298"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 6,
       "raw": {
         "code": "61050069",
@@ -211,24 +226,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $218\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $218\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 7,
       "raw": {
         "code": "61050035",
@@ -238,24 +253,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $119\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $119\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 8,
       "raw": {
         "code": 61030090,
@@ -265,24 +280,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $238\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $238\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 9,
       "raw": {
         "code": "61030274       ",
@@ -292,24 +307,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $238\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $238\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 10,
       "raw": {
         "code": "61030152 ",
@@ -319,24 +334,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP單特 $199\n二特 $358"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $338\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP單特 $199\n二特 $358"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $338\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 11,
       "raw": {
         "code": "61030162  ",
@@ -346,24 +361,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP單特 $199\n二特 $358"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $338\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP單特 $199\n二特 $358"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $338\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 12,
       "raw": {
         "code": "61030315\n",
@@ -373,24 +388,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP單特 $199\n二特 $358"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $338\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP單特 $199\n二特 $358"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $338\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 13,
       "raw": {
         "code": "61030158     ",
@@ -400,24 +415,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $158\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $158\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 14,
       "raw": {
         "code": "61030321",
@@ -427,24 +442,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $158\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $158\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 15,
       "raw": {
         "code": "61030316\n",
@@ -454,24 +469,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $158\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $158\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 16,
       "raw": {
         "code": "61030143",
@@ -481,24 +496,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $158\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $158\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 17,
       "raw": {
         "code": "61030142",
@@ -508,24 +523,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $158\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $158\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 18,
       "raw": {
         "code": "59020345",
@@ -535,51 +550,51 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $198\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "DM $198\n任選買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $198\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 19,
       "raw": {
-        "code": "59020344",
-        "barcode": 4710660888127,
-        "name": "AMAZE法國稙萃衣物香氛豆-\n粉紅甜蜜果香淡香水-(補充包)"
+        "code": null,
+        "barcode": "4710660888530\n",
+        "name": "Amaze 法國淡香水香氛豆-挪威雪松森林-(補充包)"
       },
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $198\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $198\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 20,
       "raw": {
         "code": "61020440",
@@ -589,24 +604,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $218\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $218\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 21,
       "raw": {
         "code": "61020441",
@@ -616,24 +631,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $218\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $218\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 22,
       "raw": {
         "code": "65011135               ",
@@ -643,24 +658,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $299\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $299\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 23,
       "raw": {
         "code": "65013511",
@@ -670,24 +685,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $179\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $179\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 24,
       "raw": {
         "code": "65010240",
@@ -697,24 +712,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $99\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $99\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 25,
       "raw": {
         "code": "65010241",
@@ -724,24 +739,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $99\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $99\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 26,
       "raw": {
         "code": "86210115",
@@ -751,24 +766,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP單特 $128"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP單特 $128"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 27,
       "raw": {
         "code": "63012168",
@@ -778,24 +793,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $289\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $289\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 28,
       "raw": {
         "code": "65010209",
@@ -805,24 +820,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP單特 $89\n二特 $139"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP單特 $89\n二特 $139"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 29,
       "raw": {
         "code": "65010647",
@@ -832,24 +847,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $219\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP單特 $139\n二特 $238"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $219\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP單特 $139\n二特 $238"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 30,
       "raw": {
         "code": "65014102",
@@ -859,24 +874,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $110\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $110\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 31,
       "raw": {
         "code": 65010181,
@@ -886,24 +901,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $110\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $110\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 32,
       "raw": {
         "code": "86020136",
@@ -913,24 +928,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $110\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $110\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 33,
       "raw": {
         "code": "65013454        ",
@@ -940,24 +955,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $159\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $159\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 34,
       "raw": {
         "code": "65013459",
@@ -967,24 +982,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP單特 $65\n第二件5折"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP單特 $74\n第二件5折"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP單特 $65\n第二件5折"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP單特 $74\n第二件5折"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 35,
       "raw": {
         "code": "65013458",
@@ -994,24 +1009,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP單特 $65\n第二件5折"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP單特 $65\n第二件5折"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 36,
       "raw": {
         "code": "65020089",
@@ -1021,24 +1036,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP單特 $78\n第二件5折"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "DM $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP單特 $78\n第二件5折"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 37,
       "raw": {
         "code": "65020125               ",
@@ -1048,24 +1063,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $118\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $118\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 38,
       "raw": {
         "code": "65020135         ",
@@ -1075,24 +1090,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $118\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $118\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 39,
       "raw": {
         "code": "65020116",
@@ -1102,24 +1117,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $118\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $118\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 40,
       "raw": {
         "code": "65020101",
@@ -1129,24 +1144,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $119\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $119\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 41,
       "raw": {
         "code": "63020121",
@@ -1156,24 +1171,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP單特 $75\n二特 $129"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP單特 $75\n二特 $129"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 42,
       "raw": {
         "code": 63020159,
@@ -1183,24 +1198,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $109\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "DM $109\n任選買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $109\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 43,
       "raw": {
         "code": 63020160,
@@ -1210,24 +1225,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $109\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $109\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 44,
       "raw": {
         "code": "86080018",
@@ -1237,24 +1252,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP單特 $99\n二特$189"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP單特 $99\n二特$189"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 45,
       "raw": {
         "code": "65051312",
@@ -1264,24 +1279,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $109\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $109\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 46,
       "raw": {
         "code": "65050023",
@@ -1291,24 +1306,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $109\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $109\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 47,
       "raw": {
         "code": 65050024,
@@ -1318,24 +1333,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "DM $109\n任選買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $109\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $109\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 48,
       "raw": {
         "code": "65020228",
@@ -1345,24 +1360,24 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP單特 $79\n二特$139"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP單特 $79\n二特$139"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 49,
       "raw": {
         "code": "63020126",
@@ -1372,25 +1387,52 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $198\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $198\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
+      "sheet": "2026.11",
       "row": 50,
+      "raw": {
+        "code": null,
+        "barcode": "4710660888820",
+        "name": "OP天然棉紗布"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP單特 $69\n二特$118"
+        },
+        {
+          "column": 7,
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP單特 $69\n二特$118"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.11",
+      "row": 51,
       "raw": {
         "code": "59060175      ",
         "barcode": "4710660886819",
@@ -1399,25 +1441,25 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $199\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $199\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
-      "row": 51,
+      "sheet": "2026.11",
+      "row": 52,
       "raw": {
         "code": "59060174         ",
         "barcode": "4710660886802",
@@ -1426,25 +1468,25 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $199\n任選買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $199\n任選買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
-      "row": 52,
+      "sheet": "2026.11",
+      "row": 53,
       "raw": {
         "code": "61040174",
         "barcode": "4710660887823",
@@ -1453,25 +1495,25 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $159\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $159\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
-      "row": 53,
+      "sheet": "2026.11",
+      "row": 54,
       "raw": {
         "code": "61030278",
         "barcode": "4710660887601",
@@ -1480,25 +1522,25 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
           "rawText": "IP $118\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
           "rawText": "IP $118\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
-      "row": 54,
+      "sheet": "2026.11",
+      "row": 55,
       "raw": {
         "code": 63040315,
         "barcode": "4710660888578",
@@ -1507,25 +1549,25 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $118\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $118\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
-      "row": 55,
+      "sheet": "2026.11",
+      "row": 56,
       "raw": {
         "code": 63040317,
         "barcode": "4710660888561",
@@ -1534,25 +1576,25 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $118\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $118\n買1送1"
         }
       ]
     },
     {
-      "sheet": "2026.10",
-      "row": 56,
+      "sheet": "2026.11",
+      "row": 57,
       "raw": {
         "code": 63040316,
         "barcode": "4710660888554",
@@ -1561,19 +1603,19 @@
       "periods": [
         {
           "column": 5,
-          "id": "2026-10-1",
-          "label": "10-1",
-          "startDate": "2026-10-02",
-          "endDate": "2026-10-15",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "rawText": "IP $118\n買1送1"
         },
         {
           "column": 7,
-          "id": "2026-10-2",
-          "label": "10-2",
-          "startDate": "2026-10-16",
-          "endDate": "2026-10-29",
-          "rawText": "IP $99\n買1送1"
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "rawText": "IP $118\n買1送1"
         }
       ]
     }

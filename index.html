@@ -241,6 +241,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 </main>
 <script src="px-promo-core.js"></script>
 <script src="px-promo-prices.js"></script>
+<script src="px-product-additions.js"></script>
 <script src="px-sales-data.js"></script>
 <script src="px-replacement-data.js"></script>
 <script>
@@ -270,7 +271,7 @@ const PX_Q3_PRODUCTS = [
  {name:"OP環保舒適手套-綠茶香氛S",code:"65051312",barcode:"4710660888066",cost:18.77},
  {name:"OP超音波馬卡龍瞬吸布PX",code:"65020228",barcode:"4710660887007",cost:21.32},
  {name:"OP檸檬清新抗菌瞬吸布",code:"63020126",barcode:"4710660888462",cost:25.54},
- {name:"OP天然棉紗布(3片入)",code:"",barcode:"",cost:22.66},
+ {name:"OP天然棉紗布(3片入)",code:"",barcode:"4710660888820",cost:22.66},
  {name:"德適淨濕拖巾-薰衣草",code:"63040316",barcode:"4710660888554",cost:16.80},
  {name:"德適淨濕拖巾-雪松清香",code:"63040315",barcode:"4710660888578",cost:16.89},
  {name:"德適淨濕拖巾-海洋清新",code:"63040317",barcode:"4710660888561",cost:17.69},
@@ -593,7 +594,7 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-campaigns"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-campaigns-2026-11"));
 </script>
 <script src="px-promo-ui.js"></script>
 </body></html>

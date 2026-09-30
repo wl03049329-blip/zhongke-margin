@@ -6,8 +6,8 @@
  const money=value=>Number.isFinite(value)?Number(value.toFixed(2)).toString():'—';
  const quantity=value=>({一:1,二:2,兩:2,三:3,四:4,五:5,六:6}[value]||Number(value));
  function parse(raw){
-  const text=clean(raw),campaignType=text.match(/\b(IP|DM)\b/i)?.[1]?.toUpperCase()||'其他';
-  const body=text.replace(/\b(IP|DM)\b/ig,'').trim(),promotions=[],warnings=[];
+  const text=clean(raw),campaignType=text.match(/\b(IP|DM)(?![a-z])/i)?.[1]?.toUpperCase()||'其他';
+  const body=text.replace(/\b(IP|DM)(?![a-z])/ig,'').trim(),promotions=[],warnings=[];
   const add=(promotionType,label,payQuantity,receiveQuantity,promotionPrice,optional=false)=>promotions.push({promotionType,label,payQuantity,receiveQuantity,promotionPrice,averageUnitPrice:Number.isFinite(promotionPrice)&&receiveQuantity>0?promotionPrice/receiveQuantity:null,optional});
   const cash='\\$?\\s*(\\d+(?:\\.\\d+)?)';
   const gift=body.match(/買\s*([\d一二兩三四五六]+)\s*送\s*([\d一二兩三四五六]+)/);

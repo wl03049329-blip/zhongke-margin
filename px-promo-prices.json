@@ -49,6 +49,50 @@
           "sourceRow": 4,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 298,
+              "averageUnitPrice": 149,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $298 買1送1",
+          "sourceRow": 4,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 298,
+              "averageUnitPrice": 149,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $298 買1送1",
+          "sourceRow": 4,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -99,6 +143,68 @@
           "sourceText": "IP $278 買1送1",
           "sourceRow": 5,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 169,
+              "averageUnitPrice": 169,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 298,
+              "averageUnitPrice": 149,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $169 二特 $298",
+          "sourceRow": 5,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 169,
+              "averageUnitPrice": 169,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 298,
+              "averageUnitPrice": 149,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $169 二特 $298",
+          "sourceRow": 5,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -151,6 +257,50 @@
           "sourceRow": 6,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $218 買1送1",
+          "sourceRow": 6,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $218 買1送1",
+          "sourceRow": 6,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -201,6 +351,50 @@
           "sourceText": "IP $119 買1送1",
           "sourceRow": 7,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 119,
+              "averageUnitPrice": 59.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $119 買1送1",
+          "sourceRow": 7,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 119,
+              "averageUnitPrice": 59.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $119 買1送1",
+          "sourceRow": 7,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -253,6 +447,50 @@
           "sourceRow": 8,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $238 買1送1",
+          "sourceRow": 8,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $238 買1送1",
+          "sourceRow": 8,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -303,6 +541,50 @@
           "sourceText": "IP $238 買1送1",
           "sourceRow": 9,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $238 買1送1",
+          "sourceRow": 9,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $238 買1送1",
+          "sourceRow": 9,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -373,6 +655,50 @@
           "sourceRow": 10,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 338,
+              "averageUnitPrice": 169,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $338 買1送1",
+          "sourceRow": 10,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 338,
+              "averageUnitPrice": 169,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $338 買1送1",
+          "sourceRow": 10,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -441,6 +767,50 @@
           "sourceText": "IP單特 $199 二特 $358",
           "sourceRow": 11,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 338,
+              "averageUnitPrice": 169,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $338 買1送1",
+          "sourceRow": 11,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 338,
+              "averageUnitPrice": 169,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $338 買1送1",
+          "sourceRow": 11,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -511,6 +881,50 @@
           "sourceRow": 12,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 338,
+              "averageUnitPrice": 169,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $338 買1送1",
+          "sourceRow": 12,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 338,
+              "averageUnitPrice": 169,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $338 買1送1",
+          "sourceRow": 12,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -561,6 +975,50 @@
           "sourceText": "IP $158 任選買1送1",
           "sourceRow": 13,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 13,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 13,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -613,6 +1071,50 @@
           "sourceRow": 14,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 14,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 14,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -663,6 +1165,50 @@
           "sourceText": "IP $158 任選買1送1",
           "sourceRow": 15,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 15,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 15,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -715,6 +1261,50 @@
           "sourceRow": 16,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 16,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 16,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -766,6 +1356,50 @@
           "sourceRow": 17,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 17,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 17,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -816,6 +1450,50 @@
           "sourceText": "DM $198 任選買1送1",
           "sourceRow": 18,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $198 任選買1送1",
+          "sourceRow": 18,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $198 任選買1送1",
+          "sourceRow": 18,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -919,6 +1597,50 @@
           "sourceRow": 20,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $218 任選買1送1",
+          "sourceRow": 20,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $218 任選買1送1",
+          "sourceRow": 20,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -969,6 +1691,50 @@
           "sourceText": "IP $218 任選買1送1",
           "sourceRow": 21,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $218 任選買1送1",
+          "sourceRow": 21,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $218 任選買1送1",
+          "sourceRow": 21,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -1021,6 +1787,50 @@
           "sourceRow": 22,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 299,
+              "averageUnitPrice": 149.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $299 買1送1",
+          "sourceRow": 22,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 299,
+              "averageUnitPrice": 149.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $299 買1送1",
+          "sourceRow": 22,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1071,6 +1881,50 @@
           "sourceText": "IP $179 買1送1",
           "sourceRow": 23,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 179,
+              "averageUnitPrice": 89.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $179 買1送1",
+          "sourceRow": 23,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 179,
+              "averageUnitPrice": 89.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $179 買1送1",
+          "sourceRow": 23,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -1123,6 +1977,50 @@
           "sourceRow": 24,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 24,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 24,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1173,6 +2071,50 @@
           "sourceText": "IP $99 買1送1",
           "sourceRow": 25,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 25,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 25,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -1225,6 +2167,50 @@
           "sourceRow": 26,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 128,
+              "averageUnitPrice": 128,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $128",
+          "sourceRow": 26,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 128,
+              "averageUnitPrice": 128,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $128",
+          "sourceRow": 26,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1275,6 +2261,50 @@
           "sourceText": "IP $289 買1送1",
           "sourceRow": 27,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 289,
+              "averageUnitPrice": 144.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $289 買1送1",
+          "sourceRow": 27,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 289,
+              "averageUnitPrice": 144.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $289 買1送1",
+          "sourceRow": 27,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -1345,6 +2375,68 @@
           "sourceRow": 28,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 89,
+              "averageUnitPrice": 89,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 139,
+              "averageUnitPrice": 69.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $89 二特 $139",
+          "sourceRow": 28,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 89,
+              "averageUnitPrice": 89,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 139,
+              "averageUnitPrice": 69.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $89 二特 $139",
+          "sourceRow": 28,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1395,6 +2487,68 @@
           "sourceText": "IP $219 買1送1",
           "sourceRow": 29,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 139,
+              "averageUnitPrice": 139,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $139 二特 $238",
+          "sourceRow": 29,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 139,
+              "averageUnitPrice": 139,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $139 二特 $238",
+          "sourceRow": 29,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -1447,6 +2601,50 @@
           "sourceRow": 30,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 110,
+              "averageUnitPrice": 55,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $110 買1送1",
+          "sourceRow": 30,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 110,
+              "averageUnitPrice": 55,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $110 買1送1",
+          "sourceRow": 30,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1497,6 +2695,50 @@
           "sourceText": "IP $99 買1送1",
           "sourceRow": 31,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 110,
+              "averageUnitPrice": 55,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $110 買1送1",
+          "sourceRow": 31,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 110,
+              "averageUnitPrice": 55,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $110 買1送1",
+          "sourceRow": 31,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -1549,6 +2791,50 @@
           "sourceRow": 32,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 110,
+              "averageUnitPrice": 55,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $110 買1送1",
+          "sourceRow": 32,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 110,
+              "averageUnitPrice": 55,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $110 買1送1",
+          "sourceRow": 32,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1599,6 +2885,50 @@
           "sourceText": "IP $159 買1送1",
           "sourceRow": 33,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 159,
+              "averageUnitPrice": 79.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $159 買1送1",
+          "sourceRow": 33,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 159,
+              "averageUnitPrice": 79.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $159 買1送1",
+          "sourceRow": 33,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -1669,6 +2999,68 @@
           "sourceRow": 34,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 74,
+              "averageUnitPrice": 74,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 111,
+              "averageUnitPrice": 55.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $74 第二件5折",
+          "sourceRow": 34,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 74,
+              "averageUnitPrice": 74,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 111,
+              "averageUnitPrice": 55.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $74 第二件5折",
+          "sourceRow": 34,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1738,6 +3130,68 @@
           "sourceRow": 35,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 65,
+              "averageUnitPrice": 65,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 97.5,
+              "averageUnitPrice": 48.75,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $65 第二件5折",
+          "sourceRow": 35,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 65,
+              "averageUnitPrice": 65,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 97.5,
+              "averageUnitPrice": 48.75,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $65 第二件5折",
+          "sourceRow": 35,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1788,6 +3242,68 @@
           "sourceText": "DM $99 買1送1",
           "sourceRow": 36,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 78,
+              "averageUnitPrice": 78,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 117,
+              "averageUnitPrice": 58.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $78 第二件5折",
+          "sourceRow": 36,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 78,
+              "averageUnitPrice": 78,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 117,
+              "averageUnitPrice": 58.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $78 第二件5折",
+          "sourceRow": 36,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -1840,6 +3356,50 @@
           "sourceRow": 37,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 37,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 37,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1890,6 +3450,50 @@
           "sourceText": "IP $99 買1送1",
           "sourceRow": 38,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 38,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 38,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -1942,6 +3546,50 @@
           "sourceRow": 39,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 39,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 39,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -1992,6 +3640,50 @@
           "sourceText": "IP $119 買1送1",
           "sourceRow": 40,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 119,
+              "averageUnitPrice": 59.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $119 買1送1",
+          "sourceRow": 40,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 119,
+              "averageUnitPrice": 59.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $119 買1送1",
+          "sourceRow": 40,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -2062,6 +3754,68 @@
           "sourceRow": 41,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 75,
+              "averageUnitPrice": 75,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 129,
+              "averageUnitPrice": 64.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $75 二特 $129",
+          "sourceRow": 41,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 75,
+              "averageUnitPrice": 75,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 129,
+              "averageUnitPrice": 64.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $75 二特 $129",
+          "sourceRow": 41,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -2113,6 +3867,50 @@
           "sourceRow": 42,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 42,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 42,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -2163,6 +3961,50 @@
           "sourceText": "IP $109 買1送1",
           "sourceRow": 43,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 43,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 43,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -2233,6 +4075,68 @@
           "sourceRow": 44,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 99,
+              "averageUnitPrice": 99,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 189,
+              "averageUnitPrice": 94.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $99 二特$189",
+          "sourceRow": 44,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 99,
+              "averageUnitPrice": 99,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 189,
+              "averageUnitPrice": 94.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $99 二特$189",
+          "sourceRow": 44,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -2283,6 +4187,50 @@
           "sourceText": "IP $109 買1送1",
           "sourceRow": 45,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $109 任選買1送1",
+          "sourceRow": 45,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 45,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -2335,6 +4283,50 @@
           "sourceRow": 46,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $109 任選買1送1",
+          "sourceRow": 46,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 46,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -2385,6 +4377,50 @@
           "sourceText": "IP $109 買1送1",
           "sourceRow": 47,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 47,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 47,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -2455,6 +4491,68 @@
           "sourceRow": 48,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 79,
+              "averageUnitPrice": 79,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 139,
+              "averageUnitPrice": 69.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $79 二特$139",
+          "sourceRow": 48,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 79,
+              "averageUnitPrice": 79,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 139,
+              "averageUnitPrice": 69.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $79 二特$139",
+          "sourceRow": 48,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -2505,6 +4603,50 @@
           "sourceText": "IP $198 買1送1",
           "sourceRow": 49,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $198 買1送1",
+          "sourceRow": 49,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $198 買1送1",
+          "sourceRow": 49,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -2557,6 +4699,50 @@
           "sourceRow": 50,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 199,
+              "averageUnitPrice": 99.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $199 任選買1送1",
+          "sourceRow": 51,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 199,
+              "averageUnitPrice": 99.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $199 任選買1送1",
+          "sourceRow": 51,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -2607,6 +4793,50 @@
           "sourceText": "IP $199 任選買1送1",
           "sourceRow": 51,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 199,
+              "averageUnitPrice": 99.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $199 任選買1送1",
+          "sourceRow": 52,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 199,
+              "averageUnitPrice": 99.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $199 任選買1送1",
+          "sourceRow": 52,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -2659,6 +4889,50 @@
           "sourceRow": 52,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 159,
+              "averageUnitPrice": 79.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $159 買1送1",
+          "sourceRow": 53,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 159,
+              "averageUnitPrice": 79.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $159 買1送1",
+          "sourceRow": 53,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -2709,6 +4983,50 @@
           "sourceText": "IP $118 買1送1",
           "sourceRow": 53,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 54,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 54,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -2761,6 +5079,50 @@
           "sourceRow": 54,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 55,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 55,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
         }
       }
     },
@@ -2811,6 +5173,50 @@
           "sourceText": "IP $99 買1送1",
           "sourceRow": 55,
           "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 56,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 56,
+          "sourceSheet": "2026.11",
           "matchMethod": "CODE"
         }
       }
@@ -2863,11 +5269,175 @@
           "sourceRow": 56,
           "sourceSheet": "2026.10",
           "matchMethod": "CODE"
+        },
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 57,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 57,
+          "sourceSheet": "2026.11",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "",
+      "barcode": "4710660888530",
+      "productName": "Amaze 法國淡香水香氛豆-挪威雪松森林-(補充包)",
+      "periods": {
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $198 任選買1送1",
+          "sourceRow": 19,
+          "sourceSheet": "2026.11",
+          "matchMethod": "BARCODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $198 任選買1送1",
+          "sourceRow": 19,
+          "sourceSheet": "2026.11",
+          "matchMethod": "BARCODE"
+        }
+      }
+    },
+    {
+      "productId": "",
+      "barcode": "4710660888820",
+      "productName": "OP天然棉紗布(3片入)",
+      "periods": {
+        "2026-11-1": {
+          "id": "2026-11-1",
+          "label": "11-1",
+          "startDate": "2026-10-30",
+          "endDate": "2026-11-19",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 69,
+              "averageUnitPrice": 69,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $69 二特$118",
+          "sourceRow": 50,
+          "sourceSheet": "2026.11",
+          "matchMethod": "BARCODE"
+        },
+        "2026-11-2": {
+          "id": "2026-11-2",
+          "label": "11-2",
+          "startDate": "2026-11-20",
+          "endDate": "2026-12-03",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 69,
+              "averageUnitPrice": 69,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $69 二特$118",
+          "sourceRow": 50,
+          "sourceSheet": "2026.11",
+          "matchMethod": "BARCODE"
         }
       }
     }
   ],
-  "sourceFile": "台灣中科促銷訂單- 2026-10月IP(For 維義)-0821.xlsx",
-  "sourceSHA256": "a24d4f9c03e432654122079d910af69d135f3df8dc75b9583f3e3b2ff0a80eef",
-  "dataVersion": "2026-10"
+  "sourceFile": "台灣中科促銷訂單- 2026-11月IP(For 維義)-0915.xlsx",
+  "sourceSHA256": "427acbd90cbdc8112ce030388ab9e3f65bbd5498c6ed6285469424ed3c152a4d",
+  "dataVersion": "2026-10 / 2026-11"
 }
