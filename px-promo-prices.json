@@ -1,0 +1,2873 @@
+{
+  "schemaVersion": 1,
+  "products": [
+    {
+      "productId": "61050067",
+      "barcode": "4710660886574",
+      "productName": "茶酚淨洗潔精-清雅茶香(黃)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 278,
+              "averageUnitPrice": 139,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $278 買1送1",
+          "sourceRow": 4,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 278,
+              "averageUnitPrice": 139,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $278 買1送1",
+          "sourceRow": 4,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61050079",
+      "barcode": "4710660886970",
+      "productName": "茶酚淨洗潔精-檸檬茶萃(黃)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 278,
+              "averageUnitPrice": 139,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $278 買1送1",
+          "sourceRow": 5,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 278,
+              "averageUnitPrice": 139,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $278 買1送1",
+          "sourceRow": 5,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61050069",
+      "barcode": "4710660886659",
+      "productName": "茶酚淨洗潔精補充包-茶香(黃)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $218 買1送1",
+          "sourceRow": 6,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $218 買1送1",
+          "sourceRow": 6,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61050035",
+      "barcode": "4710660884501",
+      "productName": "OP日本愛宕柿小蘇打(二)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 119,
+              "averageUnitPrice": 59.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $119 買1送1",
+          "sourceRow": 7,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 119,
+              "averageUnitPrice": 59.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $119 買1送1",
+          "sourceRow": 7,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030090",
+      "barcode": "4710660885560",
+      "productName": "OP愛岩柿消臭噴霧-抗病毒EX(黃)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $238 買1送1",
+          "sourceRow": 8,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $238 買1送1",
+          "sourceRow": 8,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030274",
+      "barcode": "4710660887595",
+      "productName": "OP抗菌消臭噴霧-清新海洋",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $238 買1送1",
+          "sourceRow": 9,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 238,
+              "averageUnitPrice": 119,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $238 買1送1",
+          "sourceRow": 9,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030152",
+      "barcode": "4710660884624",
+      "productName": "Amaze大地擴香-甜橘玫瑰果",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 199,
+              "averageUnitPrice": 199,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 358,
+              "averageUnitPrice": 179,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $199 二特 $358",
+          "sourceRow": 10,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 199,
+              "averageUnitPrice": 199,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 358,
+              "averageUnitPrice": 179,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $199 二特 $358",
+          "sourceRow": 10,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030162",
+      "barcode": "4710660886925",
+      "productName": "AMAZE經典擴香-雪松中性淡香水",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 199,
+              "averageUnitPrice": 199,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 358,
+              "averageUnitPrice": 179,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $199 二特 $358",
+          "sourceRow": 11,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 199,
+              "averageUnitPrice": 199,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 358,
+              "averageUnitPrice": 179,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $199 二特 $358",
+          "sourceRow": 11,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030315",
+      "barcode": "4710660886932",
+      "productName": "AMAZE經典擴香-白麝香琥珀淡香水",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 199,
+              "averageUnitPrice": 199,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 358,
+              "averageUnitPrice": 179,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $199 二特 $358",
+          "sourceRow": 12,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 199,
+              "averageUnitPrice": 199,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 358,
+              "averageUnitPrice": 179,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $199 二特 $358",
+          "sourceRow": 12,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030158",
+      "barcode": "4710660886895",
+      "productName": "Amaze礦石香氛-玫瑰淡香水",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 13,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 13,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030321",
+      "barcode": "4710660886987",
+      "productName": "礦石香氛-月光舒眠薰衣草",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 14,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 14,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030316",
+      "barcode": "4710660887977",
+      "productName": "礦石香氛-沁藍海洋淡香水",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 15,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 15,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030143",
+      "barcode": "4710660886598",
+      "productName": "AMAZE 礦石香氛包-雪松中性淡香水",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 16,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 16,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030142",
+      "barcode": "4710660886604",
+      "productName": "AMAZE 礦石香氛包-白麝香琥珀淡香水",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 17,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 158,
+              "averageUnitPrice": 79,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $158 任選買1送1",
+          "sourceRow": 17,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "59020345",
+      "barcode": "4710660888134",
+      "productName": "香氛豆-鳶尾粉邂逅淡香水",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $198 任選買1送1",
+          "sourceRow": 18,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "DM",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": true
+            }
+          ],
+          "sourceText": "DM $198 任選買1送1",
+          "sourceRow": 18,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "59020344",
+      "barcode": "4710660888127",
+      "productName": "香氛豆-粉紅甜蜜果香淡香水",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $198 任選買1送1",
+          "sourceRow": 19,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $198 任選買1送1",
+          "sourceRow": 19,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61020440",
+      "barcode": "4710660887618",
+      "productName": "香氛豆補充包-玫瑰淡香水(二)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $218 任選買1送1",
+          "sourceRow": 20,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $218 任選買1送1",
+          "sourceRow": 20,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61020441",
+      "barcode": "4710660887625",
+      "productName": "香氛豆補充包-海洋中性白麝香(二)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $218 任選買1送1",
+          "sourceRow": 21,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 218,
+              "averageUnitPrice": 109,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $218 任選買1送1",
+          "sourceRow": 21,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65011135",
+      "barcode": "4710660886628",
+      "productName": "OP無雙酚A料理紙32M(12入)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 299,
+              "averageUnitPrice": 149.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $299 買1送1",
+          "sourceRow": 22,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 299,
+              "averageUnitPrice": 149.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $299 買1送1",
+          "sourceRow": 22,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65013511",
+      "barcode": "4710660887632",
+      "productName": "OP無漂白料理紙7M(加量)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 179,
+              "averageUnitPrice": 89.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $179 買1送1",
+          "sourceRow": 23,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 179,
+              "averageUnitPrice": 89.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $179 買1送1",
+          "sourceRow": 23,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65010240",
+      "barcode": "4710660885515",
+      "productName": "OP安全無毒耐熱袋(中)PX(二)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 24,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 24,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65010241",
+      "barcode": "4710660885409",
+      "productName": "OP安全無毒耐熱袋(小)PX(二)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 25,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 25,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "86210115",
+      "barcode": "4710660882088",
+      "productName": "OP生物分解保鮮膜360尺(20入)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 128,
+              "averageUnitPrice": 128,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $128",
+          "sourceRow": 26,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 128,
+              "averageUnitPrice": 128,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $128",
+          "sourceRow": 26,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "63012168",
+      "barcode": "4710660888264",
+      "productName": "OP植材抗菌保鮮膜300尺",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 289,
+              "averageUnitPrice": 144.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $289 買1送1",
+          "sourceRow": 27,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 289,
+              "averageUnitPrice": 144.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $289 買1送1",
+          "sourceRow": 27,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65010209",
+      "barcode": "4710660884433",
+      "productName": "OP無雙酚A鋁箔800公分-12入",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 89,
+              "averageUnitPrice": 89,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 139,
+              "averageUnitPrice": 69.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $89 二特 $139",
+          "sourceRow": 28,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 89,
+              "averageUnitPrice": 89,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 139,
+              "averageUnitPrice": 69.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $89 二特 $139",
+          "sourceRow": 28,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65010647",
+      "barcode": "4710660886567",
+      "productName": "OP無雙酚A鋁箔1500公分-12入",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 219,
+              "averageUnitPrice": 109.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $219 買1送1",
+          "sourceRow": 29,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 219,
+              "averageUnitPrice": 109.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $219 買1送1",
+          "sourceRow": 29,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65014102",
+      "barcode": "4710660888288",
+      "productName": "OP生物分解抗菌立體密封袋S",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 30,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 30,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65010181",
+      "barcode": "4710660884426",
+      "productName": "OP長效抗菌立體密封袋M",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 31,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 31,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "86020136",
+      "barcode": "4710660883764",
+      "productName": "OP抗菌立體密封袋M+L",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 32,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 32,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65013454",
+      "barcode": "4710660887113",
+      "productName": "OP生物分解抗菌密封袋XL",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 159,
+              "averageUnitPrice": 79.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $159 買1送1",
+          "sourceRow": 33,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 159,
+              "averageUnitPrice": 79.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $159 買1送1",
+          "sourceRow": 33,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65013459",
+      "barcode": "4710660883436",
+      "productName": "OP生物抗菌密封袋M(PX)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 65,
+              "averageUnitPrice": 65,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 97.5,
+              "averageUnitPrice": 48.75,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $65 第二件5折",
+          "sourceRow": 34,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 65,
+              "averageUnitPrice": 65,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 97.5,
+              "averageUnitPrice": 48.75,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $65 第二件5折",
+          "sourceRow": 34,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65013458",
+      "barcode": "4710660883443",
+      "productName": "OP生物抗菌密封袋L(PX)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 65,
+              "averageUnitPrice": 65,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 97.5,
+              "averageUnitPrice": 48.75,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $65 第二件5折",
+          "sourceRow": 35,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 65,
+              "averageUnitPrice": 65,
+              "optional": false
+            },
+            {
+              "promotionType": "SECOND_HALF_PRICE",
+              "label": "第二件5折",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 97.5,
+              "averageUnitPrice": 48.75,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $65 第二件5折",
+          "sourceRow": 35,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65020089",
+      "barcode": "4710660884358",
+      "productName": "OP柑橘抗菌EX菜瓜布(三)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 36,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "DM",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "DM $99 買1送1",
+          "sourceRow": 36,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65020125",
+      "barcode": "4710660887076",
+      "productName": "OP細柔無砂海綿菜瓜布",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 37,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 37,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65020135",
+      "barcode": "4710660887069",
+      "productName": "檸檬馬鞭草菜瓜布-萬用速淨4入",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 38,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 38,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65020116",
+      "barcode": "4710660886499",
+      "productName": "OP抗菌木漿棉",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 39,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 39,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65020101",
+      "barcode": "4710660886048",
+      "productName": "OP生物分解濾水網80入",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 119,
+              "averageUnitPrice": 59.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $119 買1送1",
+          "sourceRow": 40,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 119,
+              "averageUnitPrice": 59.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $119 買1送1",
+          "sourceRow": 40,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "63020121",
+      "barcode": "4710660886512",
+      "productName": "OP咖啡渣淨味濾水網80入(PX)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 75,
+              "averageUnitPrice": 75,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 129,
+              "averageUnitPrice": 64.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $75 二特 $129",
+          "sourceRow": 41,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 75,
+              "averageUnitPrice": 75,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 129,
+              "averageUnitPrice": 64.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $75 二特 $129",
+          "sourceRow": 41,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "63020159",
+      "barcode": "4710660888745",
+      "productName": "OP指尖強化手套-薰衣紫M",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 42,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "DM",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "DM $109 任選買1送1",
+          "sourceRow": 42,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "63020160",
+      "barcode": "4710660888752",
+      "productName": "OP指尖強化手套-薰衣紫L",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 43,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 43,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "86080018",
+      "barcode": "4710660882378",
+      "productName": "OP加長保護手套耐用強化 M",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 99,
+              "averageUnitPrice": 99,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 189,
+              "averageUnitPrice": 94.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $99 二特$189",
+          "sourceRow": 44,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 99,
+              "averageUnitPrice": 99,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 189,
+              "averageUnitPrice": 94.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $99 二特$189",
+          "sourceRow": 44,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65051312",
+      "barcode": "4710660888066",
+      "productName": "OP環保舒適手套-綠茶香氛S",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $109 任選買1送1",
+          "sourceRow": 45,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 45,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65050023",
+      "barcode": "4710660885539",
+      "productName": "OP環保舒適手套-綠茶香氛M(橘)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $109 任選買1送1",
+          "sourceRow": 46,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 46,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65050024",
+      "barcode": "4710660885546",
+      "productName": "OP環保舒適手套-綠茶香氛L(橘)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "DM",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "DM $109 任選買1送1",
+          "sourceRow": 47,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 109,
+              "averageUnitPrice": 54.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $109 買1送1",
+          "sourceRow": 47,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "65020228",
+      "barcode": "4710660887007",
+      "productName": "OP超音波馬卡龍瞬吸布PX",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 79,
+              "averageUnitPrice": 79,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 139,
+              "averageUnitPrice": 69.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $79 二特$139",
+          "sourceRow": 48,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "SINGLE",
+              "label": "單特",
+              "payQuantity": 1,
+              "receiveQuantity": 1,
+              "promotionPrice": 79,
+              "averageUnitPrice": 79,
+              "optional": false
+            },
+            {
+              "promotionType": "MULTI_BUY",
+              "label": "二特",
+              "payQuantity": 2,
+              "receiveQuantity": 2,
+              "promotionPrice": 139,
+              "averageUnitPrice": 69.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP單特 $79 二特$139",
+          "sourceRow": 48,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "63020126",
+      "barcode": "4710660888462",
+      "productName": "OP檸檬清新抗菌瞬吸布",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $198 買1送1",
+          "sourceRow": 49,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 198,
+              "averageUnitPrice": 99,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $198 買1送1",
+          "sourceRow": 49,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "59060175",
+      "barcode": "4710660886819",
+      "productName": "OP專科防臭袋S",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 199,
+              "averageUnitPrice": 99.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $199 任選買1送1",
+          "sourceRow": 50,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 199,
+              "averageUnitPrice": 99.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $199 任選買1送1",
+          "sourceRow": 50,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "59060174",
+      "barcode": "4710660886802",
+      "productName": "OP專科防臭袋M",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 199,
+              "averageUnitPrice": 99.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $199 任選買1送1",
+          "sourceRow": 51,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "任選 買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 199,
+              "averageUnitPrice": 99.5,
+              "optional": true
+            }
+          ],
+          "sourceText": "IP $199 任選買1送1",
+          "sourceRow": 51,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61040174",
+      "barcode": "4710660887823",
+      "productName": "德適淨十抗菌酒精擦(PX)",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 159,
+              "averageUnitPrice": 79.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $159 買1送1",
+          "sourceRow": 52,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 159,
+              "averageUnitPrice": 79.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $159 買1送1",
+          "sourceRow": 52,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "61030278",
+      "barcode": "4710660887601",
+      "productName": "凝膠型除濕袋-雪松清香",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 53,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 118,
+              "averageUnitPrice": 59,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $118 買1送1",
+          "sourceRow": 53,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "63040315",
+      "barcode": "4710660888578",
+      "productName": "德適淨濕拖巾-雪松清香",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 54,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 54,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "63040317",
+      "barcode": "4710660888561",
+      "productName": "德適淨濕拖巾-海洋清新",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 55,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 55,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    },
+    {
+      "productId": "63040316",
+      "barcode": "4710660888554",
+      "productName": "德適淨濕拖巾-薰衣草",
+      "periods": {
+        "2026-10-1": {
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 56,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        },
+        "2026-10-2": {
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "campaignType": "IP",
+          "promotions": [
+            {
+              "promotionType": "BUY_X_GET_Y",
+              "label": "買1送1",
+              "payQuantity": 1,
+              "receiveQuantity": 2,
+              "promotionPrice": 99,
+              "averageUnitPrice": 49.5,
+              "optional": false
+            }
+          ],
+          "sourceText": "IP $99 買1送1",
+          "sourceRow": 56,
+          "sourceSheet": "2026.10",
+          "matchMethod": "CODE"
+        }
+      }
+    }
+  ],
+  "sourceFile": "台灣中科促銷訂單- 2026-10月IP(For 維義)-0821.xlsx",
+  "sourceSHA256": "a24d4f9c03e432654122079d910af69d135f3df8dc75b9583f3e3b2ff0a80eef",
+  "dataVersion": "2026-10"
+}

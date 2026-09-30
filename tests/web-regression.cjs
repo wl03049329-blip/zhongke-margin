@@ -7,7 +7,7 @@ const { chromium } = require("C:/Users/林弘昇/.cache/codex-runtimes/codex-pri
 const sharp = require("C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/sharp");
 
 const root = path.resolve(__dirname, "..");
-const types = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".png": "image/png", ".svg": "image/svg+xml", ".webmanifest": "application/manifest+json" };
+const types = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".png": "image/png", ".svg": "image/svg+xml", ".webmanifest": "application/manifest+json" };
 const lockedLogoHash = "e845a80cd348b93a6d88c240f105d66ce5180401b29b67227578343c04bcf8ce";
 
 async function inspectPng(file) {
@@ -53,7 +53,7 @@ async function main() {
   await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(`http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2-categories"], "two-level product menu service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2-campaigns"], "campaign service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   const expectedProductCategories = [
@@ -137,8 +137,8 @@ async function main() {
   assert.deepEqual(manifest.icons.map(icon => icon.purpose), ["any", "any"], "PWA icons declare standard any purpose");
   assert.ok(manifest.icons.every(icon => icon.src.endsWith("?v=4.1.2")), "PWA icons use the current cache-busting version");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2-categories'/, "service worker cache version");
-  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.2-categories/, "service worker registration cache buster");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2-campaigns'/, "service worker cache version");
+  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.2-campaigns/, "service worker registration cache buster");
   assert.match(serviceWorker, /social-preview\.png\?v=4\.1\.2-social/, "service worker precaches the current social image");
   assert.match(staticHtml, /rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon\.png\?v=4\.1\.2"/, "dedicated Apple touch icon is linked");
   assert.doesNotMatch(staticHtml, /⚙|⚙️/, "settings control contains no emoji");
@@ -545,7 +545,7 @@ async function main() {
       assert.equal(layout.overflow, 0, `${width}x${height} ${tab} document overflow`);
       assert.equal(layout.clipped, 0, `${width}x${height} ${tab} clipped important elements`);
       if (width <= 430) assert.ok(layout.minInputFont >= 16, `${width}x${height} ${tab} mobile input font size`);
-      if (width <= 430) assert.ok(layout.minTouchHeight >= 43.5, `${width}x${height} ${tab} touch target height`);
+      if (width <= 430) assert.ok(layout.minTouchHeight >= 43.5, `${width}x${height} ${tab} touch target height: ${JSON.stringify(await page.locator('button,summary').evaluateAll(elements=>elements.filter(e=>e.offsetParent!==null&&e.getBoundingClientRect().height<43.5).map(e=>({text:e.textContent,height:e.getBoundingClientRect().height}))))}`);
     }
   }
   assert.equal(maxDocumentOverflow, 0, "maximum document overflow");

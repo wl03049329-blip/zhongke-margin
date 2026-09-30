@@ -23,6 +23,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=4.1.2">
 <link rel="icon" type="image/svg+xml" href="assets/brand/px-icon.svg?v=4.1.2">
 <title>PX 通路工作台</title>
+<link rel="stylesheet" href="px-promo.css">
 <style>
 :root{
  --op:#086b42;--op2:#16945b;--op3:#dff3e8;--earth:#8bc78f;
@@ -146,6 +147,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
  <button class="tab" data-tab="reverse">回推售價</button>
  <button class="tab" data-tab="scenario">情境比較</button>
  <button class="tab" data-tab="promo">促銷試算</button>
+ <button class="tab" data-tab="campaign">檔期查價</button>
  <button class="tab" data-tab="basis">計算依據</button>
 </nav></div>
 
@@ -234,8 +236,11 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
  </div>
 </section>
 
+<section id="campaign" class="panel"><div class="card"><div class="head"><h2>檔期售價查詢</h2><span class="tag">搜尋即查價</span></div><div id="campaignStatus" class="campaign-status"></div><div class="campaign-controls"><div><label for="campaignSearch">商品名稱／品號／條碼</label><input id="campaignSearch" type="search" placeholder="輸入鋁箔、65010209 或條碼" autocomplete="off"></div><div><label for="campaignFilter">檔期</label><select id="campaignFilter"><option value="current">本檔</option><option value="next">下一檔</option><option value="all">全部檔期</option></select></div></div><small>售價僅供查詢，不會覆蓋試算售價、商品成本或促銷條件。</small></div><div id="campaignResults" aria-live="polite"></div></section>
 <footer class="hs-footer"><div class="hs-copy"><strong>PX 通路工作台</strong><span class="hs-purpose">個人工作輔助工具｜非官方系統｜開發者：弘昇</span><span class="built-by">Built by HS</span></div></footer>
 </main>
+<script src="px-promo-core.js"></script>
+<script src="px-promo-prices.js"></script>
 <script src="px-sales-data.js"></script>
 <script src="px-replacement-data.js"></script>
 <script>
@@ -457,7 +462,7 @@ function renderProductInsights(binding){
  const product=binding.selected,info=$(binding.infoId),performance=$(binding.salesId);
  if(!product){info.replaceChildren();performance.replaceChildren();return}
  const data=PX_SALES[product.name]||null,analysis=analyzePxSales(data);
- info.innerHTML=productInfoMarkup(binding,product,data);performance.innerHTML=salesMarkup(data,analysis)+replacementMarkup(product.name);
+ info.innerHTML=productInfoMarkup(binding,product,data)+(typeof promoInfoMarkup==='function'?promoInfoMarkup(product):'');performance.innerHTML=salesMarkup(data,analysis)+replacementMarkup(product.name);
 }
 window.__PX_ANALYTICS__=Object.freeze({analyzePxSales,compareReplacementEffect,replacementEffectRules:REPLACEMENT_EFFECT_RULES,strictSeriesSales,baselineBeforeLaunch,replacementNewSummary,replacementStatus,buildReplacementView});
 const productBindings=[
@@ -502,7 +507,7 @@ function closeProductOptions(binding){
  $(binding.productId).setAttribute("aria-expanded","false");
  binding.categoryName=null;
 }
-function appendProductOption(options,binding,product){const button=document.createElement("button");button.type="button";button.className="product-option product-item";button.dataset.productName=product.name;button.setAttribute("role","option");button.textContent=`${product.name}｜$${product.cost.toFixed(2)}`;button.addEventListener("mousedown",event=>event.preventDefault());button.addEventListener("click",()=>selectProduct(binding,product));options.appendChild(button)}
+function appendProductOption(options,binding,product){const button=document.createElement("button");button.type="button";button.className="product-option product-item";button.dataset.productName=product.name;button.setAttribute("role","option");button.textContent=`${product.name}｜$${product.cost.toFixed(2)}`;if(typeof promoOptionMarkup==='function')button.insertAdjacentHTML('beforeend',promoOptionMarkup(product));button.addEventListener("mousedown",event=>event.preventDefault());button.addEventListener("click",()=>selectProduct(binding,product));options.appendChild(button)}
 function renderProductCategories(binding){
  const options=$(binding.optionsId);binding.categoryName=null;options.replaceChildren();
  PX_PRODUCT_CATEGORIES.forEach(category=>{const button=document.createElement("button");button.type="button";button.className="product-option product-category";button.dataset.category=category.name;button.setAttribute("role","option");button.textContent=`${category.name} ›`;button.addEventListener("mousedown",event=>event.preventDefault());button.addEventListener("click",()=>renderProductCategory(binding,category));options.appendChild(button)});
@@ -588,6 +593,7 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-categories"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-campaigns"));
 </script>
+<script src="px-promo-ui.js"></script>
 </body></html>

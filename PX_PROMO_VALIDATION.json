@@ -1,0 +1,1581 @@
+{
+  "sourceProducts": 53,
+  "importedProducts": 53,
+  "successfulPeriods": 106,
+  "matchMethods": {
+    "CODE": 53,
+    "BARCODE": 0,
+    "NAME": 0
+  },
+  "warningCount": 22,
+  "errorCount": 0,
+  "issues": [
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 5,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 9,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 10,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 11,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 12,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 13,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 15,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 18,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 19,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 20,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 22,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 24,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 25,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 33,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 37,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 38,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 50,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 51,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 53,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 54,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 55,
+      "reason": "NORMALIZED_WHITESPACE"
+    },
+    {
+      "severity": "warning",
+      "sheet": "2026.10",
+      "row": 56,
+      "reason": "NORMALIZED_WHITESPACE"
+    }
+  ],
+  "sourceFile": "台灣中科促銷訂單- 2026-10月IP(For 維義)-0821.xlsx",
+  "sourceSHA256": "a24d4f9c03e432654122079d910af69d135f3df8dc75b9583f3e3b2ff0a80eef",
+  "rawRows": [
+    {
+      "sheet": "2026.10",
+      "row": 4,
+      "raw": {
+        "code": "61050067",
+        "barcode": "4710660886574",
+        "name": "OP茶酚淨洗潔精-清雅茶香"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $278\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $278\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 5,
+      "raw": {
+        "code": "61050079 ",
+        "barcode": "4710660886970",
+        "name": "OP茶酚淨洗潔精-檸檬茶萃"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $278\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $278\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 6,
+      "raw": {
+        "code": "61050069",
+        "barcode": "4710660886659",
+        "name": "OP茶酚淨洗潔精補充包-清雅茶香"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $218\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $218\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 7,
+      "raw": {
+        "code": "61050035",
+        "barcode": "4710660884501",
+        "name": "OP日本愛宕柿小蘇打"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $119\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $119\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 8,
+      "raw": {
+        "code": 61030090,
+        "barcode": "4710660885560",
+        "name": "OP愛岩柿除菌消臭噴霧-抗病毒EX"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $238\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $238\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 9,
+      "raw": {
+        "code": "61030274       ",
+        "barcode": "4710660887595",
+        "name": "OP抗菌消臭防螨噴霧- 清新海洋"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $238\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $238\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 10,
+      "raw": {
+        "code": "61030152 ",
+        "barcode": 4710660884624,
+        "name": "Amaze大地擴香-甜橘玫瑰果"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $199\n二特 $358"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $199\n二特 $358"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 11,
+      "raw": {
+        "code": "61030162  ",
+        "barcode": 4710660886925,
+        "name": "Amaze經典擴香-雪松中性淡香水"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $199\n二特 $358"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $199\n二特 $358"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 12,
+      "raw": {
+        "code": "61030315\n",
+        "barcode": 4710660886932,
+        "name": "Amaze經典擴香-白麝香琥珀中性淡香水"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $199\n二特 $358"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $199\n二特 $358"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 13,
+      "raw": {
+        "code": "61030158     ",
+        "barcode": 4710660886895,
+        "name": "AMAZE 擴石香氛包-玫瑰淡香水"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $158\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $158\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 14,
+      "raw": {
+        "code": "61030321",
+        "barcode": 4710660886987,
+        "name": "AMAZE 礦石香氛包-月光舒眠薰衣草"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $158\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $158\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 15,
+      "raw": {
+        "code": "61030316\n",
+        "barcode": 4710660887977,
+        "name": "Amaze 礦石香氛包-沁藍海洋淡香水 "
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $158\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $158\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 16,
+      "raw": {
+        "code": "61030143",
+        "barcode": 4710660886598,
+        "name": "AMAZE 礦石香氛包-雪松中性淡香水"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $158\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $158\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 17,
+      "raw": {
+        "code": "61030142",
+        "barcode": 4710660886604,
+        "name": "AMAZE 礦石香氛包-白麝香琥珀淡香水"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $158\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $158\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 18,
+      "raw": {
+        "code": "59020345",
+        "barcode": 4710660888134,
+        "name": "AMAZE法國稙萃衣物香氛豆-\n鳶尾粉邂逅淡香水-(補充包)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $198\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "DM $198\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 19,
+      "raw": {
+        "code": "59020344",
+        "barcode": 4710660888127,
+        "name": "AMAZE法國稙萃衣物香氛豆-\n粉紅甜蜜果香淡香水-(補充包)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $198\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $198\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 20,
+      "raw": {
+        "code": "61020440",
+        "barcode": 4710660887618,
+        "name": "AMAZE法國稙萃衣物香氛豆-\n玫瑰淡香水-(補充包)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $218\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $218\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 21,
+      "raw": {
+        "code": "61020441",
+        "barcode": 4710660887625,
+        "name": "AMAZE法國稙萃衣物香氛豆-海洋中性白麝香-(補充包)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $218\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $218\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 22,
+      "raw": {
+        "code": "65011135               ",
+        "barcode": "4710660886628",
+        "name": "OP無雙酚A料理紙-(32M)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $299\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $299\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 23,
+      "raw": {
+        "code": "65013511",
+        "barcode": "4710660887632",
+        "name": "OP無漂白料理紙-(7M)+加量5M"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $179\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $179\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 24,
+      "raw": {
+        "code": "65010240",
+        "barcode": 4710660885515,
+        "name": "OP 安全無毒耐熱袋-(中)-\n(160入+50入)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 25,
+      "raw": {
+        "code": "65010241",
+        "barcode": 4710660885409,
+        "name": "OP 安全無毒耐熱袋-(小)-\n(200入+80入)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 26,
+      "raw": {
+        "code": "86210115",
+        "barcode": "4710660882088",
+        "name": "OP 生物分解保鮮膜- (360尺)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $128"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $128"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 27,
+      "raw": {
+        "code": "63012168",
+        "barcode": "4710660888264",
+        "name": "OP 植材來源無氯抗菌保鮮膜- (300尺)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $289\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $289\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 28,
+      "raw": {
+        "code": "65010209",
+        "barcode": "4710660884433",
+        "name": "OP無雙酚A鋁箔800cm"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $89\n二特 $139"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $89\n二特 $139"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 29,
+      "raw": {
+        "code": "65010647",
+        "barcode": "4710660886567",
+        "name": "OP無雙酚A鋁箔1500cm"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $219\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $219\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 30,
+      "raw": {
+        "code": "65014102",
+        "barcode": "4710660888288",
+        "name": "OP抗菌立體密封袋-(S)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 31,
+      "raw": {
+        "code": 65010181,
+        "barcode": "4710660884426",
+        "name": "OP抗菌立體密封袋-(M)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 32,
+      "raw": {
+        "code": "86020136",
+        "barcode": "4710660883764",
+        "name": "OP生物分解抗菌密封袋 -(M+L)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 33,
+      "raw": {
+        "code": "65013454        ",
+        "barcode": "4710660887113",
+        "name": "OP生物分解立體抗菌密封袋 -(XL)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $159\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $159\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 34,
+      "raw": {
+        "code": "65013459",
+        "barcode": "4710660883436",
+        "name": "OP生物分解抗菌密封袋-(M)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $65\n第二件5折"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $65\n第二件5折"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 35,
+      "raw": {
+        "code": "65013458",
+        "barcode": "4710660883443",
+        "name": "OP生物分解抗菌密封袋-(L)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $65\n第二件5折"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $65\n第二件5折"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 36,
+      "raw": {
+        "code": "65020089",
+        "barcode": "4710660884358",
+        "name": "OP 柑橘抗菌海綿 菜瓜布-4入"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "DM $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 37,
+      "raw": {
+        "code": "65020125               ",
+        "barcode": "4710660887076",
+        "name": "OP 細柔無砂海綿 菜瓜布-4入"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 38,
+      "raw": {
+        "code": "65020135         ",
+        "barcode": "4710660887069",
+        "name": "OP 檸檬馬鞭草海綿 菜瓜布-4入"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 39,
+      "raw": {
+        "code": "65020116",
+        "barcode": "4710660886499",
+        "name": "OP抗菌木漿棉"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 40,
+      "raw": {
+        "code": "65020101",
+        "barcode": "4710660886048",
+        "name": "OP生物分解濾水網80入"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $119\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $119\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 41,
+      "raw": {
+        "code": "63020121",
+        "barcode": "4710660886512",
+        "name": "OP咖啡渣淨味濾水網80入"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $75\n二特 $129"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $75\n二特 $129"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 42,
+      "raw": {
+        "code": 63020159,
+        "barcode": "4710660888745",
+        "name": "OP指尖強化手套-薰衣草 M"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $109\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "DM $109\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 43,
+      "raw": {
+        "code": 63020160,
+        "barcode": "4710660888752",
+        "name": "OP指尖強化手套-薰衣草 L"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $109\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $109\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 44,
+      "raw": {
+        "code": "86080018",
+        "barcode": "4710660882378",
+        "name": "OP 加長耐用強化手套- (M)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $99\n二特$189"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $99\n二特$189"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 45,
+      "raw": {
+        "code": "65051312",
+        "barcode": "4710660888066",
+        "name": "OP舒適耐用手套綠茶香氛-(S)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $109\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $109\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 46,
+      "raw": {
+        "code": "65050023",
+        "barcode": "4710660885539",
+        "name": "OP舒適耐用手套綠茶香氛-(M)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $109\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $109\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 47,
+      "raw": {
+        "code": 65050024,
+        "barcode": "4710660885546",
+        "name": "OP舒適耐用手套綠茶香氛-(L)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "DM $109\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $109\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 48,
+      "raw": {
+        "code": "65020228",
+        "barcode": "4710660887007",
+        "name": "OP 超音波馬卡隆瞬吸布"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP單特 $79\n二特$139"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP單特 $79\n二特$139"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 49,
+      "raw": {
+        "code": "63020126",
+        "barcode": "4710660888462",
+        "name": "OP 檸檬清新抗菌瞬吸布"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $198\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $198\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 50,
+      "raw": {
+        "code": "59060175      ",
+        "barcode": "4710660886819",
+        "name": "OP專科防臭袋-(S)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $199\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $199\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 51,
+      "raw": {
+        "code": "59060174         ",
+        "barcode": "4710660886802",
+        "name": "OP專科防臭袋-(M)"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $199\n任選買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $199\n任選買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 52,
+      "raw": {
+        "code": "61040174",
+        "barcode": "4710660887823",
+        "name": "德適淨十抗菌酒精擦90抽"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $159\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $159\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 53,
+      "raw": {
+        "code": "61030278",
+        "barcode": "4710660887601",
+        "name": "OP EcoDry 凝膠型吊掛除濕袋-\n雪松清香"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $118\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $118\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 54,
+      "raw": {
+        "code": 63040315,
+        "barcode": "4710660888578",
+        "name": "德適淨十抗病毒濕拖巾-雪松清香\n22x30公分；12張"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 55,
+      "raw": {
+        "code": 63040317,
+        "barcode": "4710660888561",
+        "name": "德適淨十抗病毒濕拖巾-海洋清新\n22x30公分；12張"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    },
+    {
+      "sheet": "2026.10",
+      "row": 56,
+      "raw": {
+        "code": 63040316,
+        "barcode": "4710660888554",
+        "name": "德適淨十抗病毒濕拖巾-薰衣草\n22x30公分；12張"
+      },
+      "periods": [
+        {
+          "column": 5,
+          "id": "2026-10-1",
+          "label": "10-1",
+          "startDate": "2026-10-02",
+          "endDate": "2026-10-15",
+          "rawText": "IP $99\n買1送1"
+        },
+        {
+          "column": 7,
+          "id": "2026-10-2",
+          "label": "10-2",
+          "startDate": "2026-10-16",
+          "endDate": "2026-10-29",
+          "rawText": "IP $99\n買1送1"
+        }
+      ]
+    }
+  ]
+}
