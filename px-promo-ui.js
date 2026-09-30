@@ -37,9 +37,10 @@ function renderCampaignSearch(){
  const query=document.getElementById('campaignSearch').value.trim().toLowerCase(),mode=document.getElementById('campaignFilter').value,results=document.getElementById('campaignResults');
  document.getElementById('campaignStatus').textContent=promoStatus();
  const current=PXPromo.context(PX_PROMO_PRICES,PXPromo.today()).current;document.querySelector('#campaignFilter option[value="current"]').textContent=current?'本檔':'下一檔（最近）';
- if(!query){results.innerHTML='<p class="campaign-empty">輸入名稱、關鍵字、品號或條碼，直接查看售價與均價。</p>';return;}
+ if(!query){results.innerHTML='<p class="campaign-empty">輸入名稱、關鍵字、品號或條碼，直接查看售價與均價。</p>';if(typeof renderCompetitorSearch==='function')renderCompetitorSearch('',[]);return;}
  const products=PX_PRODUCT_MASTER.filter(p=>productSearchText(p).includes(query));
- results.innerHTML=products.length?products.map(p=>`<article class="card campaign-result" data-product-name="${promoEscape(p.name)}"><h2>${promoEscape(p.name)}</h2><div class="campaign-identifiers">品號：${p.code||'尚未建檔'}<br>條碼：${p.barcode||'尚未建檔'}</div>${promoProductMarkup(p,mode)}</article>`).join(''):'<p class="campaign-empty">沒有符合的商品</p>';
+ results.innerHTML=products.length?'<h2 class="campaign-own-heading">PX 自家商品</h2>'+products.map(p=>`<article class="card campaign-result" data-product-name="${promoEscape(p.name)}"><h2>${promoEscape(p.name)}</h2><div class="campaign-identifiers">品號：${p.code||'尚未建檔'}<br>條碼：${p.barcode||'尚未建檔'}</div>${promoProductMarkup(p,mode)}</article>`).join(''):'<p class="campaign-empty">沒有符合的 PX 商品</p>';
+ if(typeof renderCompetitorSearch==='function')renderCompetitorSearch(query,products);
 }
 document.getElementById('campaignSearch').addEventListener('input',renderCampaignSearch);
 document.getElementById('campaignFilter').addEventListener('change',renderCampaignSearch);

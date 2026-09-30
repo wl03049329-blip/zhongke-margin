@@ -5,7 +5,7 @@ function save(result){
  write('competitor-prices.json',result.records);write('competitor-price-history.json',result.history);
  write('competitor-products.json',result.records.map(({competitorProductId,brand,productName,normalizedName,category,retailer,retailerProductId,sourceUrl,packQuantity,widthCm,lengthM,totalLengthM,material,specText})=>({competitorProductId,brand,productName,normalizedName,category,retailer,retailerProductId,sourceUrl,packQuantity,widthCm,lengthM,totalLengthM,material,specText})));
  // Runtime observations are deployed but never committed solely for a timestamp.
- write('competitor-runtime.json',result.runtime);write('COMPETITOR_VALIDATION.json',result.report);
+ write('competitor-runtime.json',{...read('competitor-runtime.json',{}),...result.runtime});write('COMPETITOR_VALIDATION.json',result.report);
  const wrapper='// Generated competitor snapshots; do not hand-code prices in UI.\nconst COMPETITOR_DATA = '+JSON.stringify({records:result.records,categoryMap:read('competitor-category-map.json',{})})+';\n';
  const file=path.join(root,'competitor-prices.js');if(!fs.existsSync(file)||fs.readFileSync(file,'utf8').replace(/\r\n/g,'\n')!==wrapper)fs.writeFileSync(file,wrapper);
 }

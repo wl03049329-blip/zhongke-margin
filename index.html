@@ -24,6 +24,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/brand/px-icon.svg?v=4.1.2">
 <title>PX 通路工作台</title>
 <link rel="stylesheet" href="px-promo.css">
+<link rel="stylesheet" href="competitor-price.css">
 <style>
 :root{
  --op:#086b42;--op2:#16945b;--op3:#dff3e8;--earth:#8bc78f;
@@ -236,7 +237,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
  </div>
 </section>
 
-<section id="campaign" class="panel"><div class="card"><div class="head"><h2>檔期售價查詢</h2><span class="tag">搜尋即查價</span></div><div id="campaignStatus" class="campaign-status"></div><div class="campaign-controls"><div><label for="campaignSearch">商品名稱／品號／條碼</label><input id="campaignSearch" type="search" placeholder="輸入鋁箔、65010209 或條碼" autocomplete="off"></div><div><label for="campaignFilter">檔期</label><select id="campaignFilter"><option value="current">本檔</option><option value="next">下一檔</option><option value="all">全部檔期</option></select></div></div><small>售價僅供查詢，不會覆蓋試算售價、商品成本或促銷條件。</small></div><div id="campaignResults" aria-live="polite"></div></section>
+<section id="campaign" class="panel"><div class="card"><div class="head"><h2>檔期售價查詢</h2><span class="tag">搜尋即查價</span></div><div id="campaignStatus" class="campaign-status"></div><div class="campaign-controls"><div><label for="campaignSearch">商品名稱／品號／條碼</label><input id="campaignSearch" type="search" placeholder="輸入保鮮膜、妙潔、品號或條碼" autocomplete="off"></div><div><label for="campaignFilter">檔期</label><select id="campaignFilter"><option value="current">本檔</option><option value="next">下一檔</option><option value="all">全部檔期</option></select></div></div><small>售價僅供查詢，不會覆蓋試算售價、商品成本或促銷條件。</small></div><div id="campaignResults" aria-live="polite"></div><div id="competitorResults" aria-live="polite"></div></section>
 <footer class="hs-footer"><div class="hs-copy"><strong>PX 通路工作台</strong><span class="hs-purpose">個人工作輔助工具｜非官方系統｜開發者：弘昇</span><span class="built-by">Built by HS</span></div></footer>
 </main>
 <script src="px-promo-core.js"></script>
@@ -244,6 +245,8 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 <script src="px-product-additions.js"></script>
 <script src="px-sales-data.js"></script>
 <script src="px-replacement-data.js"></script>
+<script src="competitor-price-core.js"></script>
+<script src="competitor-prices.js"></script>
 <script>
 // PX Q3 product cost master
 // Source: 2026Q3 全產品成本表 / PX Q3
@@ -463,7 +466,7 @@ function renderProductInsights(binding){
  const product=binding.selected,info=$(binding.infoId),performance=$(binding.salesId);
  if(!product){info.replaceChildren();performance.replaceChildren();return}
  const data=PX_SALES[product.name]||null,analysis=analyzePxSales(data);
- info.innerHTML=productInfoMarkup(binding,product,data)+(typeof promoInfoMarkup==='function'?promoInfoMarkup(product):'');performance.innerHTML=salesMarkup(data,analysis)+replacementMarkup(product.name);
+ info.innerHTML=productInfoMarkup(binding,product,data)+(typeof promoInfoMarkup==='function'?promoInfoMarkup(product):'')+(typeof competitorInfoMarkup==='function'?competitorInfoMarkup(product):'');performance.innerHTML=salesMarkup(data,analysis)+replacementMarkup(product.name);
 }
 window.__PX_ANALYTICS__=Object.freeze({analyzePxSales,compareReplacementEffect,replacementEffectRules:REPLACEMENT_EFFECT_RULES,strictSeriesSales,baselineBeforeLaunch,replacementNewSummary,replacementStatus,buildReplacementView});
 const productBindings=[
@@ -594,7 +597,8 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-period-comparison"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-competitor-radar"));
 </script>
 <script src="px-promo-ui.js"></script>
+<script src="competitor-price-ui.js"></script>
 </body></html>

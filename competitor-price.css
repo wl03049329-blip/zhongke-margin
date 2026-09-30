@@ -1,0 +1,33 @@
+/* Scoped to the competitor layer; existing workbench layout is untouched. */
+.competitor-section{margin-top:24px;min-width:0}
+.competitor-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.competitor-heading h2{font-size:20px;margin:0}
+.competitor-heading label{display:flex;align-items:center;gap:8px;font-size:13px}
+.competitor-heading select{width:auto;min-width:100px;min-height:48px;font-size:16px}
+.competitor-disclaimer{font-size:12px;line-height:1.7;color:#526779;margin:12px 0}
+.competitor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.competitor-card{min-width:0;margin:0;overflow-wrap:anywhere}
+.competitor-brand{font-size:13px;font-weight:700;color:#466176;display:flex;align-items:center;gap:10px}
+.competitor-material{font-size:11px;font-weight:500;background:#eef5f7;padding:3px 8px;border-radius:5px}
+.competitor-card h3{font-size:17px;line-height:1.5;margin:8px 0 16px;color:#102a43}
+.competitor-price{display:flex;flex-direction:column;gap:4px}
+.competitor-price>span{font-size:12px;color:#526779}
+.competitor-price strong{font-size:32px;color:#102a43;line-height:1.2;white-space:nowrap}
+.competitor-price small{color:#6b7d8b;font-size:12px}
+.competitor-spec{font-size:14px;margin:16px 0 0}
+.competitor-units{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0;background:#f4f7fa;border-radius:8px;padding:12px 8px}
+.competitor-units span{display:block;font-size:11px;color:#526779;margin-bottom:6px}
+.competitor-units b{font-size:14px;color:#163a50}
+.competitor-retailer{font-size:12px;color:#526779;margin:12px 0}
+.competitor-card details{font-size:12px;margin:4px 0;color:#526779}
+.competitor-card summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
+.competitor-card summary:before{content:'›';margin-right:8px}
+.competitor-card details[open] summary:before{content:'⌄'}
+.competitor-card details p{line-height:1.8;white-space:pre-line}
+.competitor-card details small{display:block;line-height:1.7}
+.competitor-freshness{font-size:12px;line-height:1.8;margin:16px 0 8px;color:#526779}
+.competitor-freshness span{display:block}
+.competitor-freshness[data-source-status="FAILED"],.competitor-freshness[data-source-status="STALE"]{color:#8d5a1f}
+.competitor-freshness small{display:block;font-size:11px}
+.competitor-source-link{display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:#087d91;font-weight:600}
+@media(max-width:700px){.competitor-grid{grid-template-columns:minmax(0,1fr)}.competitor-heading h2{font-size:18px}}

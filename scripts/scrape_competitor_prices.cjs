@@ -5,6 +5,7 @@ function parseProduct(html,url,retailer){
  if(!p||!p.offers||Array.isArray(p.offers))throw Error('PUBLIC_PRODUCT_OFFER_MISSING');
  const price=Number(p.offers.price),visible=html.match(/class="money"[^>]*>\s*([\d.]+)\s*</)?.[1];if(!Number.isFinite(price)||price<=0||visible&&Number(visible)!==price)throw Error('PRICE_FIELDS_DISAGREE_OR_INVALID');
  if(p.offers.priceCurrency!=='TWD')throw Error('UNSUPPORTED_CURRENCY');
+ const urlId=url.match(/\/(\d+)\.html$/)?.[1];if(urlId&&String(p.sku||p.mpn||'')!==urlId)throw Error('RETAILER_PRODUCT_ID_MISMATCH');
  const h1=text(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1]);if(h1!==p.name||!h1.includes('保鮮膜'))throw Error('PRODUCT_NAME_OR_CATEGORY_MISMATCH');
  const sourceSpec=text(html.match(/◎規格[：:]([\s\S]*?)<\/span>/)?.[1]);
  const pack=sourceSpec.match(/^1PC(?:支|個)\s*x\s*1\s*x\s*(\d+)PC(?:支|個)$/i)?.[1];
