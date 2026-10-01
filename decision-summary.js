@@ -21,7 +21,7 @@
   return{
    product:complete?selected.name:missing,barcode:complete&&selected.barcode?selected.barcode:missing,
    margin:percent(aRow?.querySelector('strong')?.textContent.trim()||''),front:percent(metric(a,'全聯毛利率（前毛）')),
-   price:amount(metric(a,'售價')),cost:amount(metric(a,'商品成本')),promo:complete&&$('sPromoA').value.trim()?amount(metric(a,'促銷費用')):missing,
+   price:amount(metric(a,'售價')),cost:amount(metric(a,'商品成本')),
    target:complete?target:missing,deltas,relation,
    reached:state?.contains('excellent')||state?.contains('target')?true:state?.contains('optimize')||state?.contains('low')?false:null
   };
@@ -37,7 +37,7 @@
    else if(/低於 A 方案/.test(detail))notices.push(`${name} 方案低於 A 方案。`);
    else if(/與 A 方案持平/.test(detail))notices.push(`${name} 方案與 A 方案持平。`);
   }
-  const next=data.cost===missing?'可確認目前使用的商品成本版本。':data.promo===missing||data.promo==='$0.00'?'可確認相關促銷費用是否已完整納入。':'可進一步比較不同售價／商品成本條件下的結果。';
+  const next=data.cost===missing?'可確認目前使用的商品成本版本。':'可進一步比較不同售價／商品成本條件下的結果。';
   return{notices:notices.slice(0,3),next};
  }
  function render(){
@@ -47,11 +47,11 @@
   $('decisionDeltaB').textContent=data.deltas.B;$('decisionDeltaC').textContent=data.deltas.C;
   list.replaceChildren(...view.notices.map(text=>{const item=document.createElement('li');item.textContent=text;return item}));
   $('decisionNext').textContent=view.next;
-  $('decisionContext').textContent=`A 售價：${data.price}｜商品成本：${data.cost}｜額外促銷費用：${data.promo}｜目前設定中科毛利門檻：${data.target}`;
+  $('decisionContext').textContent=`A 售價：${data.price}｜商品成本：${data.cost}｜目前設定中科毛利門檻：${data.target}`;
   return{data,view};
  }
  $('copyDecisionSummary').addEventListener('click',async()=>{
-  const {data,view}=render(),text=['【PX 商品決策摘要】',`商品：${data.product}`,`條碼：${data.barcode}`,'','目前狀況',`中科毛利率（費用後）：${data.margin}`,`全聯毛利率（前毛）：${data.front}`,'','方案比較',`B vs A：${data.deltas.B}`,`C vs A：${data.deltas.C}`,`目前設定中科毛利門檻：${data.target}`,'','目前需要注意',...view.notices,'','可進一步確認',view.next,`A 售價：${data.price}｜商品成本：${data.cost}｜額外促銷費用：${data.promo}`].join('\n');
+  const {data,view}=render(),text=['【PX 商品決策摘要】',`商品：${data.product}`,`條碼：${data.barcode}`,'','目前狀況',`中科毛利率（費用後）：${data.margin}`,`全聯毛利率（前毛）：${data.front}`,'','方案比較',`B vs A：${data.deltas.B}`,`C vs A：${data.deltas.C}`,`目前設定中科毛利門檻：${data.target}`,'','目前需要注意',...view.notices,'','可進一步確認',view.next,`A 售價：${data.price}｜商品成本：${data.cost}`].join('\n');
   let copied=false;try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);copied=true}}catch(e){}
   if(!copied)try{copied=fallbackCopyText(text)}catch(e){}
   const feedback=$('decisionFeedback');feedback.textContent=copied?'已複製，可貼到 LINE 或 Email':'無法自動複製，請確認瀏覽器權限';

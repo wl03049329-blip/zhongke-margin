@@ -9,9 +9,9 @@ const root=path.resolve(__dirname,'..');
 const base='119220d38417397b0cc81a9c1400a310e8084e40';
 const baseline=file=>execFileSync('git',['show',`${base}:${file}`],{encoding:'utf8'}).replace(/\r\n/g,'\n');
 const current=file=>fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n');
-for(const file of ['px-sales-data.js','px-replacement-data.js','px-promo-core.js','px-promo-prices.js','scenario-summary.js','decision-summary.js'])assert.equal(current(file),baseline(file),`${file} unchanged`);
+for(const file of ['px-sales-data.js','px-replacement-data.js','px-promo-core.js','px-promo-prices.js','scenario-summary.js'])assert.equal(current(file),baseline(file),`${file} unchanged`);
 const html=current('index.html'),oldHtml=baseline('index.html');
-for(const [start,end] of [['function model(','function rows('],['function calcC(','function calcR('],['function calcR(','const SCENARIO_CONFIG='],['const SCENARIO_CONFIG=','function promoAverage('],['function calcP(','function analyzePxSales('],['function analyzePxSales(','function trendChart('],['function trendChart(','function productInfoMarkup('],['function salesMarkup(','function strictSeriesSales(']])assert.equal(html.slice(html.indexOf(start),html.indexOf(end)),oldHtml.slice(oldHtml.indexOf(start),oldHtml.indexOf(end)),`${start} unchanged`);
+for(const [start,end] of [['function model(','function rows('],['function calcC(','function calcR('],['function calcR(','const SCENARIO_CONFIG='],['function calcP(','function analyzePxSales('],['function analyzePxSales(','function trendChart('],['function trendChart(','function productInfoMarkup('],['function salesMarkup(','function strictSeriesSales(']])assert.equal(html.slice(html.indexOf(start),html.indexOf(end)),oldHtml.slice(oldHtml.indexOf(start),oldHtml.indexOf(end)),`${start} unchanged`);
 assert.equal(html.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1],oldHtml.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1],'product master unchanged');
 assert.doesNotMatch(current('same-period-sales.js'),/市場需求強勁|商品很受歡迎|行銷成功|促銷奏效|消費者認同|未來將持續成長|銷售動能強|銷售額/);
 

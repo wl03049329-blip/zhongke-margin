@@ -215,9 +215,9 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
    <div><label>公司費用率</label><div class="wrap"><input id="sFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
   </div>
   <div class="scenario-inputs">
-   <div class="scenario-plan"><h3>方案 A</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPriceA" type="number" inputmode="decimal" value="94"><span class="unit">元</span></div></div><div class="field"><label>促銷條件／額外費用</label><div class="wrap"><input id="sPromoA" type="number" inputmode="decimal" value="0"><span class="unit">元</span></div></div></div>
-   <div class="scenario-plan"><h3>方案 B</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPrice" type="number" inputmode="decimal" value="99"><span class="unit">元</span></div></div><div class="field"><label>促銷條件／額外費用</label><div class="wrap"><input id="sPromoB" type="number" inputmode="decimal" value="0"><span class="unit">元</span></div></div></div>
-   <div class="scenario-plan"><h3>方案 C</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPriceC" type="number" inputmode="decimal" value="104"><span class="unit">元</span></div></div><div class="field"><label>促銷條件／額外費用</label><div class="wrap"><input id="sPromoC" type="number" inputmode="decimal" value="0"><span class="unit">元</span></div></div></div>
+   <div class="scenario-plan"><h3>方案 A</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPriceA" type="number" inputmode="decimal" value="94"><span class="unit">元</span></div></div></div>
+   <div class="scenario-plan"><h3>方案 B</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPrice" type="number" inputmode="decimal" value="99"><span class="unit">元</span></div></div></div>
+   <div class="scenario-plan"><h3>方案 C</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPriceC" type="number" inputmode="decimal" value="104"><span class="unit">元</span></div></div></div>
   </div>
  </div>
  <div id="sProductInfo"></div>
@@ -234,7 +234,6 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
   </section>
   <div id="scenarioResults" class="scenario-results"></div>
   <section id="scenarioSummary" class="scenario-summary" aria-label="方案比較摘要"><div class="scenario-summary-head"><h3>方案比較摘要</h3><span id="scenarioSummaryHighest" class="scenario-summary-highest"></span></div><div id="scenarioSummaryRows" class="scenario-summary-rows" aria-live="polite"></div><p id="scenarioSummaryThreshold" class="scenario-summary-context"></p><p id="scenarioSummaryDetails" class="scenario-summary-context"></p><div class="scenario-summary-actions"><button id="copyScenarioSummary" class="secondary-action" type="button">複製方案比較</button><span id="scenarioSummaryFeedback" class="scenario-summary-feedback" role="status" aria-live="polite"></span></div></section>
-  <div class="note">費用後結果＝既有中科毛利額再扣除各方案額外促銷費用；未輸入額外費用時，結果與既有公式一致。</div>
  </div>
  <div id="sSalesPerformance"></div>
 </section>
@@ -398,13 +397,13 @@ function marginState(margin){const value=margin*100;if(!Number.isFinite(value))r
 function styleResult(el,margin,statusId){const state=marginState(margin);el.className="result";if(state.key==="excellent")el.classList.add("excellent");else if(state.key==="optimize")el.classList.add("warn");else if(state.key==="low")el.classList.add("danger");else if(state.key==="neutral")el.classList.add("neutral");if(statusId){const status=$(statusId);status.textContent=state.label;status.className=`margin-status ${state.key}`.trim()}void el.offsetWidth;el.classList.add("pulse")}
 function calcC(){const o=model(n("cPrice"),n("cCost"),pct(n("cPx")),pct(n("cFee")));$("cMargin").textContent=pc(o.margin);$("cRows").innerHTML=rows(o);styleResult($("cResult"),o.margin,"cStatus");save()}
 function calcR(){const cost=n("rCost"),target=pct(n("rTarget")),px=pct(n("rPx")),fee=pct(n("rFee")),den=(1-fee-target)*(1-px),price=den>0?cost/den*1.05:NaN,o=model(price,cost,px,fee);$("rPrice").textContent=Number.isFinite(price)?m2(price)+" 元":"無法計算";$("rSub").textContent=Number.isFinite(o.margin)?"代回驗證："+pc(o.margin):"請檢查輸入條件";$("rRows").innerHTML=rows(o);styleResult($("rResult"),o.margin,"rStatus");save()}
-const SCENARIO_CONFIG=[{name:"A",priceId:"sPriceA",promoId:"sPromoA"},{name:"B",priceId:"sPrice",promoId:"sPromoB"},{name:"C",priceId:"sPriceC",promoId:"sPromoC"}];
+const SCENARIO_CONFIG=[{name:"A",priceId:"sPriceA"},{name:"B",priceId:"sPrice"},{name:"C",priceId:"sPriceC"}];
 function calcS(){
  const cost=n("sCost"),px=pct(n("sPx")),fee=pct(n("sFee"));
- const results=SCENARIO_CONFIG.map(config=>{const price=n(config.priceId),promo=n(config.promoId),promoCost=Number.isFinite(promo)?promo:0,o=model(price,cost,px,fee),finalProfit=o.profit-promoCost,finalMargin=o.ship?finalProfit/o.ship:NaN;return{...config,promoCost,o,finalProfit,finalMargin}});
- const maxMargin=Math.max(...results.map(result=>Number.isFinite(result.finalMargin)?result.finalMargin:-Infinity)),maxProfit=Math.max(...results.map(result=>Number.isFinite(result.finalProfit)?result.finalProfit:-Infinity));
+ const results=SCENARIO_CONFIG.map(config=>({...config,o:model(n(config.priceId),cost,px,fee)}));
+ const maxMargin=Math.max(...results.map(result=>Number.isFinite(result.o.margin)?result.o.margin:-Infinity)),maxProfit=Math.max(...results.map(result=>Number.isFinite(result.o.profit)?result.o.profit:-Infinity));
  const selectedProduct=findProduct($("sProduct").value),fixedPxMargin=PX_SALES[selectedProduct?.name]?.pxMargin;
- $("scenarioResults").innerHTML=results.map(result=>{const marginBest=Number.isFinite(result.finalMargin)&&Math.abs(result.finalMargin-maxMargin)<1e-10,profitBest=Number.isFinite(result.finalProfit)&&Math.abs(result.finalProfit-maxProfit)<1e-10,state=marginState(result.finalMargin);return `<article class="scenario-card"><div class="scenario-title"><h3>方案 ${result.name}</h3><div class="scenario-badges"><span class="scenario-state ${state.key}">${state.label}</span>${marginBest?'<span class="best-badge">毛利率最高</span>':""}${profitBest?'<span class="best-badge">毛利額最高</span>':""}</div></div><div class="scenario-metrics"><div class="scenario-metric"><span>售價</span><b>${m2(result.o.price)} 元</b></div><div class="scenario-metric"><span>商品成本</span><b>${m2(cost)} 元</b></div><div class="scenario-metric"><span>全聯毛利率（前毛）</span><b>${rateText(fixedPxMargin)}</b></div><div class="scenario-metric"><span>促銷費用</span><b>${m2(result.promoCost)} 元</b></div><div class="scenario-metric"><span>毛利額</span><b>${m2(result.o.profit)} 元</b></div><div class="scenario-metric"><span>毛利率</span><b>${pc(result.o.margin)}</b></div><div class="scenario-metric scenario-final"><span>費用後結果</span><b>${m2(result.finalProfit)} 元<br>${pc(result.finalMargin)}</b></div></div></article>`}).join("");save()
+ $("scenarioResults").innerHTML=results.map(result=>{const marginBest=Number.isFinite(result.o.margin)&&Math.abs(result.o.margin-maxMargin)<1e-10,profitBest=Number.isFinite(result.o.profit)&&Math.abs(result.o.profit-maxProfit)<1e-10,state=marginState(result.o.margin);return `<article class="scenario-card"><div class="scenario-title"><h3>方案 ${result.name}</h3><div class="scenario-badges"><span class="scenario-state ${state.key}">${state.label}</span>${marginBest?'<span class="best-badge">毛利率最高</span>':""}${profitBest?'<span class="best-badge">毛利額最高</span>':""}</div></div><div class="scenario-metrics"><div class="scenario-metric"><span>售價</span><b>${m2(result.o.price)} 元</b></div><div class="scenario-metric"><span>商品成本</span><b>${m2(cost)} 元</b></div><div class="scenario-metric"><span>全聯毛利率（前毛）</span><b>${rateText(fixedPxMargin)}</b></div><div class="scenario-metric"><span>毛利額</span><b>${m2(result.o.profit)} 元</b></div><div class="scenario-metric"><span>毛利率</span><b>${pc(result.o.margin)}</b></div><div class="scenario-metric scenario-final"><span>費用後結果</span><b>${m2(result.o.profit)} 元<br>${pc(result.o.margin)}</b></div></div></article>`}).join("");save()
 }
 function promoAverage(type,a){if(type==="bogo")return a/2;if(type==="half")return a*.75;return a}
 function updatePromoUI(){const t=$("promoType").value;$("promoInputB").style.display=t==="special"?"block":"none";if(t==="bogo"){$("pLabelA").textContent="活動總價（2件）";$("promoHint").textContent="買一送一：輸入兩件合計實付金額，系統以總價 ÷ 2 計算平均單價。"}else if(t==="half"){$("pLabelA").textContent="第一件售價";$("promoHint").textContent="第二件五折：平均單價＝第一件售價 × 75%。"}else{$("pLabelA").textContent="單特售價（1件）";$("pLabelB").textContent="二特總價（2件）";$("promoHint").textContent="單特／二特：系統同時計算單特毛利，以及二特總價 ÷ 2 後的平均單價毛利。"}calcP()}
@@ -611,7 +610,7 @@ function buildCalcResultText(){
 }
 function fallbackCopyText(text){const area=document.createElement("textarea");area.value=text;area.setAttribute("readonly","");area.style.position="fixed";area.style.opacity="0";document.body.appendChild(area);area.select();const copied=document.execCommand("copy");area.remove();return copied}
 async function copyCalcResult(){const text=buildCalcResultText(),feedback=$("copyFeedback");let copied=false;try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);copied=true}}catch(e){}if(!copied)try{copied=fallbackCopyText(text)}catch(e){}feedback.textContent=copied?"已複製，可貼到 LINE 或 Email":"無法自動複製，請確認瀏覽器權限";setTimeout(()=>{feedback.textContent=""},3000)}
-function clearCalculation(){["cPrice","sPriceA","sPrice","sPriceC","sPromoA","sPromoB","sPromoC","pA","pB"].forEach(id=>{$(id).value=""});$("promoType").value="bogo";calcC();calcS();updatePromoUI();$("copyFeedback").textContent="已清除試算輸入，商品與成本已保留";save()}
+function clearCalculation(){["cPrice","sPriceA","sPrice","sPriceC","pA","pB"].forEach(id=>{$(id).value=""});$("promoType").value="bogo";calcC();calcS();updatePromoUI();$("copyFeedback").textContent="已清除試算輸入，商品與成本已保留";save()}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab,.panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");$(b.dataset.tab).classList.add("active")});
 const tabsShell=document.querySelector(".tabs-shell"),tabsNav=document.querySelector(".tabs");
 function updateTabScrollHint(){const noOverflow=tabsNav.scrollWidth<=tabsNav.clientWidth+1,atEnd=tabsNav.scrollLeft+tabsNav.clientWidth>=tabsNav.scrollWidth-1;tabsShell.classList.toggle("no-overflow",noOverflow);tabsShell.classList.toggle("at-end",atEnd)}
@@ -622,11 +621,11 @@ function syncReverseQuickTarget(){const raw=$("rTarget").value.trim(),value=Numb
 ["rCost","rFee"].forEach(id=>$(id).addEventListener("input",calcR));
 $("rTarget").addEventListener("input",()=>{syncReverseQuickTarget();calcR()});
 reverseQuickTargets.forEach(button=>button.onclick=()=>{$("rTarget").value=button.dataset.r;syncReverseQuickTarget();calcR()});
-["sPriceA","sPromoA","sPrice","sPromoB","sPriceC","sPromoC","sCost","sFee"].forEach(id=>$(id).addEventListener("input",calcS));
+["sPriceA","sPrice","sPriceC","sCost","sFee"].forEach(id=>$(id).addEventListener("input",calcS));
 ["promoType","pCost","pFee","pA","pB"].forEach(id=>$(id).addEventListener("input",id==="promoType"?updatePromoUI:calcP));
 $("copyResult").addEventListener("click",copyCalcResult);
 $("clearCalculation").addEventListener("click",clearCalculation);
-const storeIds=["cProduct","cPrice","cCost","cFee","rProduct","rCost","rTarget","rFee","sProduct","sPriceA","sPromoA","sPrice","sPromoB","sPriceC","sPromoC","sCost","sFee","promoType","pProduct","pCost","pFee","pA","pB"];
+const storeIds=["cProduct","cPrice","cCost","cFee","rProduct","rCost","rTarget","rFee","sProduct","sPriceA","sPrice","sPriceC","sCost","sFee","promoType","pProduct","pCost","pFee","pA","pB"];
 function save(){try{localStorage.setItem("opMarginV3",JSON.stringify(Object.fromEntries(storeIds.map(id=>[id,$(id).value]))))}catch(e){}}
 try{const s=JSON.parse(localStorage.getItem("opMarginV3")||"null");if(s)storeIds.forEach(id=>{if(s[id]!==undefined)$(id).value=s[id]})}catch(e){}
 setupProductSelectors();

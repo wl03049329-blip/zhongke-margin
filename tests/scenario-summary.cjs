@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),{execFileSync}=require('node:child_process');
 const {chromium}=require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const root=path.resolve(__dirname,'..'),current=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/\r\n/g,'\n'),base=execFileSync('git',['show','HEAD:index.html'],{encoding:'utf8'}).replace(/\r\n/g,'\n');
-for(const [from,to] of [['function model(','function rows('],['function calcC(','function calcR('],['function calcR(','const SCENARIO_CONFIG='],['const SCENARIO_CONFIG=','function promoAverage('],['function calcP(','function analyzePxSales(']])assert.equal(current.slice(current.indexOf(from),current.indexOf(to)),base.slice(base.indexOf(from),base.indexOf(to)),from+' core unchanged');
+for(const [from,to] of [['function model(','function rows('],['function calcC(','function calcR('],['function calcR(','const SCENARIO_CONFIG='],['function calcP(','function analyzePxSales(']])assert.equal(current.slice(current.indexOf(from),current.indexOf(to)),base.slice(base.indexOf(from),base.indexOf(to)),from+' core unchanged');
 assert.equal(current.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1],base.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1]);
 const server=http.createServer((req,res)=>{const file=path.join(root,decodeURIComponent(new URL(req.url,'http://localhost').pathname).slice(1)||'index.html');if(!fs.existsSync(file)){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.png':'image/png'})[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file));});
 (async()=>{
@@ -12,8 +12,11 @@ const server=http.createServer((req,res)=>{const file=path.join(root,decodeURICo
  const summary=page.locator('#scenarioSummary'),row=name=>summary.locator(`[data-plan="${name}"]`),rate=async name=>Number((await page.locator(`#scenarioResults .scenario-card:has(h3:text-is("方案 ${name}")) .scenario-final b`).innerText()).match(/([\d.]+)%/)[1]);
  assert.match(await summary.innerText(),/資料不足/);assert.equal(await summary.locator('[data-plan]').count(),3);
  await page.locator('#sProduct').fill('65010209');await page.locator('#sPriceA').fill('62');await page.locator('#sPrice').fill('77');await page.locator('#sPriceC').fill('90');
- for(const id of ['sPromoA','sPromoB','sPromoC'])await page.locator('#'+id).fill('0');
+ assert.equal(await page.locator('[id^="sPromo"]').count(),0,'A/B/C have no extra-fee inputs');
  const existingCards=await page.locator('#scenarioResults .scenario-card').allInnerTexts(),a=await rate('A'),b=await rate('B'),c=await rate('C');
+ const scenarioValues=await page.evaluate(()=>['A','B','C'].map((name,index)=>{const card=[...document.querySelectorAll('#scenarioResults .scenario-card')][index],text=card.querySelector('.scenario-final b').innerText,price=Number(document.getElementById(['sPriceA','sPrice','sPriceC'][index]).value),cost=Number(document.getElementById('sCost').value),front=Number(document.getElementById('sPx').textContent.replace('%',''))/100,fee=Number(document.getElementById('sFee').value)/100,ship=price/1.05*(1-front),profit=ship*(1-fee)-cost;return{name,shownProfit:Number(text.match(/([\d.]+) 元/)[1]),shownMargin:Number(text.match(/([\d.]+)%/)[1]),expectedProfit:profit,expectedMargin:profit/ship*100}}));
+ for(const value of scenarioValues){assert.ok(Math.abs(value.shownProfit-value.expectedProfit)<0.005,value.name+' company fee applied exactly once to profit');assert.ok(Math.abs(value.shownMargin-value.expectedMargin)<0.005,value.name+' company fee applied exactly once to margin')}
+ assert.doesNotMatch(await page.locator('#scenarioResults').innerText(),/促銷費用|額外費用/);
  assert.ok(a<b&&b<c);assert.match(await summary.locator('#scenarioSummaryHighest').innerText(),/C/);
  assert.match(await row('A').innerText(),new RegExp(a.toFixed(2)));
  const pointValue=text=>Number(text.match(/\+([\d.]+) 個百分點/)[1]);
@@ -25,9 +28,9 @@ const server=http.createServer((req,res)=>{const file=path.join(root,decodeURICo
  assert.match(await summary.locator('#scenarioSummaryDetails').innerText(),/全聯前毛 26\.18%（三方案相同）/);
  assert.match(await summary.locator('#scenarioSummaryDetails').innerText(),/售價較 A：B \+\$15\.00、C \+\$28\.00/);
  await summary.locator('#copyScenarioSummary').click();const copied=await page.evaluate(()=>navigator.clipboard.readText());
- assert.match(copied,/【方案比較】/);assert.match(copied,/商品：OP無雙酚A鋁箔800公分-12入/);assert.match(copied,/B 方案：中科毛利率（費用後）/);assert.ok(Math.abs(pointValue(copied)-(b-a))<0.005);assert.match(copied,/目前設定中科毛利門檻：37%/);
+ assert.match(copied,/【方案比較】/);assert.match(copied,/商品：OP無雙酚A鋁箔800公分-12入/);assert.match(copied,/B 方案：中科毛利率（費用後）/);assert.ok(Math.abs(pointValue(copied)-(b-a))<0.005);assert.match(copied,/目前設定中科毛利門檻：37%/);assert.doesNotMatch(copied,/促銷費用|額外費用/);
  assert.deepEqual(await page.locator('#scenarioResults .scenario-card').allInnerTexts(),existingCards,'copy/summary cannot alter A/B/C cards');
- await page.locator('#sPromoB').fill('4');const bAfterFee=await rate('B');assert.ok(bAfterFee<b,'existing fee-adjusted result changes');assert.match(await row('B').innerText(),new RegExp(bAfterFee.toFixed(2)));assert.ok(Math.abs(pointValue(await row('B').innerText())-(bAfterFee-a))<0.005);await page.locator('#sPromoB').fill('0');
+ await page.locator('#sFee').fill('15');const bAfterFee=await rate('B');assert.ok(bAfterFee<b,'shared company fee changes existing result');assert.match(await row('B').innerText(),new RegExp(bAfterFee.toFixed(2)));assert.ok(Math.abs(pointValue(await row('B').innerText())-(bAfterFee-await rate('A')))<0.005);await page.locator('#sFee').fill('10.95');
  await page.locator('#sCost').fill('24.50');assert.match(await summary.locator('#scenarioSummaryDetails').innerText(),/成本 \$24\.50（共用）/);assert.match(await page.locator('#scenarioResults .scenario-card').first().innerText(),/商品成本\s*24\.50 元/);await page.locator('#sCost').fill('25.22');
  await page.locator('#sPriceC').fill('');assert.match(await row('C').innerText(),/資料不足/);assert.ok(!(await row('C').innerText()).includes('0.0%'));assert.match(await summary.locator('#scenarioSummaryHighest').innerText(),/B/);
  await page.locator('#sPriceC').fill('90');await page.locator('#sPrice').fill('62');assert.match(await row('B').innerText(),/與 A 方案持平/);assert.match(await row('B').innerText(),/0\.0 個百分點/);
