@@ -296,8 +296,8 @@ async function main() {
   assert.match(await page.locator("#cProductInfo").innerText(), /1,271 店/);
   assert.match(await page.locator("#cSalesPerformance").innerText(), /2024\/12/);
   assert.match(await page.locator("#cSalesPerformance").innerText(), /10,073/);
-  assert.match(await page.locator("#cSalesPerformance").innerText(), /▲ 34\.4%/);
-  assert.equal(await page.locator("#cSalesPerformance .px-metric", { hasText: "去年同期 YoY" }).locator("small").textContent(), "較去年同期", "YoY helper text is present without changing the value");
+  assert.match(await page.locator("#cSalesPerformance").innerText(), /\+34\.4%/);
+  assert.match(await page.locator("#cSalesPerformance .sales-analysis-hero").innerText(), /YoY・較去年同月/, "single-month YoY is clearly labeled");
   assert.equal(await page.locator("#cSalesPerformance .month-row").count(), 21, "full month expansion data");
   assert.ok(await page.locator("#cSalesPerformance .trend-line").getAttribute("d"), "trend path");
 
@@ -315,7 +315,7 @@ async function main() {
   await page.locator("#cProduct").fill("63020159");
   const newProductText = await page.locator("#cSalesPerformance").innerText();
   assert.match(newProductText, /實銷資料起始\s*2026\/08/);
-  assert.match(newProductText, /資料起始至今月均銷/);
+  assert.match(newProductText, /近期月均銷/);
   assert.match(newProductText, /尚無資料/);
   assert.doesNotMatch(newProductText, /上市月份|上市月齡|上市第/);
   assert.ok(Number(await page.locator("#cSalesPerformance .prelaunch-zone").getAttribute("width")) > 0, "pre-data region");
