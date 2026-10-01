@@ -661,11 +661,11 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-product-organizer"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-scenario-source"));
 </script>
 <script src="px-promo-ui.js"></script>
-<script src="scenario-summary.js"></script>
-<script src="decision-summary.js"></script>
+<script src="scenario-summary.js?v=4.1.2-scenario-source"></script>
+<script src="decision-summary.js?v=4.1.2-scenario-source"></script>
 <script src="same-period-sales.js"></script>
 <script src="new-product-organizer.js"></script>
 <script src="competitor-price-ui.js"></script>
