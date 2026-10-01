@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),vm=require('node:vm'),{execFileSync}=require('node:child_process');
 const comparison=require('../competitor-comparison-core'),price=require('../competitor-price-core'),promo=require('../px-promo-core'),data=require('../px-promo-prices.json'),competitors=require('../competitor-prices.json');
-const root=path.resolve(__dirname,'..'),base='5fb922712068405ac79a94ad12da3a946bced26f',html=fs.readFileSync(path.join(root,'index.html'),'utf8'),master=vm.runInNewContext(html.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1]);
+const root=path.resolve(__dirname,'..'),base='8b12dcddc16f9371613ec4932cae4ff369dcc6fd',html=fs.readFileSync(path.join(root,'index.html'),'utf8'),master=vm.runInNewContext(html.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1]);
 const near=(actual,expected)=>assert.ok(Math.abs(actual-expected)<1e-10,actual+' != '+expected);
 const px={name:'Test fixture only',widthCm:30,lengthM:100,packQuantity:1,material:'植材'},period={label:'fixture',promotions:[{promotionType:'SINGLE',label:'單特',promotionPrice:139,averageUnitPrice:139},{promotionType:'MULTI_BUY',label:'二特',promotionPrice:238,averageUnitPrice:119}]};
 const b=comparison.getPxBenchmark(px,period);assert.equal(b.effectivePrice,119);assert.equal(b.winningPromotions[0].label,'二特');near(b.pricePer10M,11.9);near(b.pricePerSquareMeter,119/30);

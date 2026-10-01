@@ -198,6 +198,26 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 #scenario .scenario-summary-more>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;color:#526779;font-size:11px;font-weight:700}
 #scenario .scenario-summary-more .scenario-summary-context{margin:0 0 5px}
 #scenario .decision-card{margin-bottom:12px}
+#promo [hidden]{display:none!important}
+#promo .promo-empty{padding:15px 16px;color:#526779;font-size:13px;line-height:1.55;text-align:center}
+#promo .promo-result{margin-bottom:10px;padding:15px 14px}
+#promo .promo-average{display:block;font-size:11px;font-weight:700;color:#607482}
+#promo .promo-average-value{display:block;margin:4px 0 10px;font-size:35px;line-height:1.1;font-weight:950;white-space:nowrap;font-variant-numeric:tabular-nums}
+#promo .promo-average-value small{display:inline;font-size:14px;color:inherit}
+#promo .promo-margin-line{display:flex;align-items:baseline;justify-content:center;gap:9px;flex-wrap:wrap}
+#promo .promo-margin-line span{font-size:12px;font-weight:750}
+#promo .promo-margin-line strong{display:inline;font-size:24px;letter-spacing:-.5px}
+#promo .promo-result em{margin-top:8px}
+#promo .promo-detail{padding:0 14px}
+#promo .promo-detail>summary{min-height:48px;display:flex;align-items:center;cursor:pointer;color:#405769;font-size:13px;font-weight:800}
+#promo .promo-detail[open]>summary{border-bottom:1px solid var(--line)}
+#promo .promo-detail .rows{padding:5px 0 9px}
+#promo .promo-detail .row{min-height:35px;padding:5px 2px}
+#promo .promo-product-data{padding:13px 14px}
+#promo .promo-product-data .px-section-head{margin-bottom:8px}
+#promo .promo-product-data .px-info-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#promo .promo-product-data .px-metric{padding:8px}
+@media(max-width:360px){#promo .promo-product-data .px-metric{padding:6px}#promo .promo-product-data .px-metric b{font-size:13px}#promo .promo-average-value{font-size:31px}}
 #scenario .decision-card .decision-block h4{margin-top:9px}
 #scenario .scenario-detail-card .head{margin-bottom:0}
 #scenario .scenario-detail-card .scenario-results{margin-top:10px}
@@ -288,13 +308,16 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
    <div><label>商品成本（單件）</label><div class="wrap"><input id="pCost" type="number" inputmode="decimal" value="40.7"><span class="unit">元</span></div><small class="cost-override-note">選品後自動帶入，仍可手動修改</small></div>
    <div><label>全聯毛利率（前毛）</label><output id="pPx" class="fixed-attribute" aria-live="polite">—</output><small class="fixed-note">來源：最新 PX Excel，不隨試算變動</small></div>
    <div><label>公司費用率</label><div class="wrap"><input id="pFee" type="number" inputmode="decimal" value="10.95"><span class="unit">%</span></div></div>
-   <div id="promoInputA"><label id="pLabelA">活動總價（2件）</label><div class="wrap"><input id="pA" type="number" inputmode="decimal" value="99"><span class="unit">元</span></div></div>
-   <div id="promoInputB" style="display:none"><label id="pLabelB">二特總價（2件）</label><div class="wrap"><input id="pB" type="number" inputmode="decimal" value="149"><span class="unit">元</span></div></div>
+   <div id="promoInputA"><label id="pLabelA">活動總價（2件）</label><div class="wrap"><input id="pA" type="number" inputmode="decimal" value=""><span class="unit">元</span></div></div>
+   <div id="promoInputB" style="display:none"><label id="pLabelB">二特總價（2件）</label><div class="wrap"><input id="pB" type="number" inputmode="decimal" value=""><span class="unit">元</span></div></div>
   </div>
   <div class="note" id="promoHint">買一送一：輸入兩件合計實付金額，系統以總價 ÷ 2 計算平均單價。</div>
  </div>
+ <div id="pEmpty" class="card promo-empty">輸入活動總價後，即時計算平均單價與中科毛利</div>
+ <div id="pResult" class="result promo-result" hidden><div class="result-label"><small>促銷試算結果</small><span id="pStatus" class="margin-status" aria-live="polite">—</span></div><span class="promo-average">促銷平均單價</span><b class="promo-average-value"><span id="pAverage">—</span><small> / 件</small></b><div class="promo-margin-line"><span>中科毛利率（費用後）</span><strong id="pMargin">—</strong></div><em id="pSub"></em></div>
+ <details id="pDetail" class="card promo-detail" hidden><summary>試算明細</summary><div id="pRows" class="rows"></div><div id="specialExtra" class="promo-box" style="display:none"></div></details>
+ <div id="pCampaignInfo"></div>
  <div id="pProductInfo"></div>
- <div class="card"><div id="pResult" class="result"><div class="result-label"><small>促銷平均單價毛利率</small><span id="pStatus" class="margin-status" aria-live="polite">—</span></div><strong id="pMargin">—</strong><em id="pSub">—</em></div><div id="pRows" class="rows"></div><div id="specialExtra" class="promo-box" style="display:none"></div></div>
  <div id="pSalesPerformance"></div>
 </section>
 
@@ -450,7 +473,7 @@ function calcS(){
 new MutationObserver(()=>{const profitRow=[...$("cRows").querySelectorAll(".row")].find(row=>row.firstElementChild?.textContent==="中科毛利額");$("cProfit").textContent=profitRow?.lastElementChild?.textContent||"—"}).observe($("cRows"),{childList:true});
 function promoAverage(type,a){if(type==="bogo")return a/2;if(type==="half")return a*.75;return a}
 function updatePromoUI(){const t=$("promoType").value;$("promoInputB").style.display=t==="special"?"block":"none";if(t==="bogo"){$("pLabelA").textContent="活動總價（2件）";$("promoHint").textContent="買一送一：輸入兩件合計實付金額，系統以總價 ÷ 2 計算平均單價。"}else if(t==="half"){$("pLabelA").textContent="第一件售價";$("promoHint").textContent="第二件五折：平均單價＝第一件售價 × 75%。"}else{$("pLabelA").textContent="單特售價（1件）";$("pLabelB").textContent="二特總價（2件）";$("promoHint").textContent="單特／二特：系統同時計算單特毛利，以及二特總價 ÷ 2 後的平均單價毛利。"}calcP()}
-function calcP(){const t=$("promoType").value,cost=n("pCost"),px=pct(n("pPx")),fee=pct(n("pFee")),a=n("pA"),avg=promoAverage(t,a),o=model(avg,cost,px,fee);$("pMargin").textContent=pc(o.margin);$("pSub").textContent=`平均單價 ${m2(avg)} 元`;$("pRows").innerHTML=rows(o);styleResult($("pResult"),o.margin,"pStatus");const ex=$("specialExtra");if(t==="special"){const b=n("pB")/2,o2=model(b,cost,px,fee);ex.style.display="block";ex.innerHTML=`<b>二特平均單價：${m2(b)} 元</b><br>二特中科毛利率：<b>${pc(o2.margin)}</b><br>二特中科毛利額：<b>${m2(o2.profit)} 元</b>`}else ex.style.display="none";save()}
+function calcP(){const t=$("promoType").value,cost=n("pCost"),px=pct(n("pPx")),fee=pct(n("pFee")),a=n("pA"),avg=promoAverage(t,a),o=model(avg,cost,px,fee),valid=$("pA").value.trim()!==""&&Number.isFinite(a)&&a>0&&Number.isFinite(o.margin);$("pEmpty").hidden=valid;$("pResult").hidden=!valid;$("pDetail").hidden=!valid;if(!valid){$("pEmpty").textContent=$("pA").value.trim()===""?"輸入活動總價後，即時計算平均單價與中科毛利":"請檢查活動價格與商品試算條件";$("pDetail").open=false;$("pAverage").textContent="—";$("pMargin").textContent="—";$("pSub").textContent="";$("pRows").replaceChildren();$("specialExtra").style.display="none";save();return}$("pAverage").textContent=`$${m2(avg)}`;$("pMargin").textContent=pc(o.margin);$("pSub").textContent=t==="bogo"?`2 件總價 $${m2(a)}`:t==="half"?`第二件五折・第一件售價 $${m2(a)}`:`單特 1 件售價 $${m2(a)}`;$("pRows").innerHTML=rows(o);styleResult($("pResult"),o.margin,"pStatus");$("pResult").classList.add("promo-result");const ex=$("specialExtra");if(t==="special"&&$("pB").value.trim()!==""&&n("pB")>0){const b=n("pB")/2,o2=model(b,cost,px,fee);ex.style.display="block";ex.innerHTML=`<b>二特平均單價：${m2(b)} 元</b><br>二特中科毛利率：<b>${pc(o2.margin)}</b><br>二特中科毛利額：<b>${m2(o2.profit)} 元</b>`}else ex.style.display="none";save()}
 function analyzePxSales(data){
  if(!data||!Array.isArray(data.sales)||!PX_PERIODS.length)return null;
  const sales=data.sales,launchIndex=sales.findIndex(Number.isFinite);
@@ -479,9 +502,9 @@ function trendChart(data,analysis){
  return `<svg class="trend-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${analysis.launchMonth} 起至 ${analysis.latestMonth} 實銷趨勢"><rect class="prelaunch-zone" x="${left}" y="${top}" width="${prelaunchWidth.toFixed(1)}" height="${plotHeight}" rx="5"></rect>${prelaunchWidth>52?`<text class="prelaunch-label" x="${left+8}" y="${top+15}">尚無資料</text>`:""}<line class="trend-grid" x1="${left}" y1="${top}" x2="${width-right}" y2="${top}"></line><line class="trend-grid" x1="${left}" y1="${top+plotHeight}" x2="${width-right}" y2="${top+plotHeight}"></line><text class="trend-axis" x="${left-7}" y="${top+3}" text-anchor="end">${countText(maximum)}</text><text class="trend-axis" x="${left-7}" y="${top+plotHeight+3}" text-anchor="end">0</text><path class="trend-line" d="${path.trim()}"></path>${dots}${ticks.map(index=>`<text class="trend-axis" x="${x(index).toFixed(1)}" y="${height-7}" text-anchor="middle">${PX_PERIODS[index].slice(2)}</text>`).join("")}</svg>`;
 }
 function productInfoMarkup(binding,product,data){
- const calcView=binding.productId==="cProduct",reverseView=binding.productId==="rProduct",cost=Number($(binding.costId).value),warehouse=data?.warehouse==="寄"?"寄庫":data?.warehouse==="越"?"越庫":"—";
- const repeated=calcView||reverseView?"":`<div class="px-metric"><span>成本</span><b>$${m2(cost)}</b></div><div class="px-metric px-front-margin"><span>全聯毛利率（前毛）</span><b>${rateText(data?.pxMargin)}</b></div>`;
- return `<section class="card px-info-card${calcView?" calc-product-data":reverseView?" reverse-product-data":""}"><div class="px-section-head"><h2>${product.name}</h2><span class="px-source">${data?"PX 商品資料":"尚無 PX 補充資料"}</span></div><div class="px-info-grid">${repeated}<div class="px-metric"><span>庫別</span><b>${warehouse}</b></div><div class="px-metric"><span>上架率</span><b>${rateText(data?.listingRate,0)}</b></div><div class="px-metric"><span>上架數</span><b>${Number.isFinite(data?.stores)?countText(data.stores)+" 店":"—"}</b></div></div></section>`;
+ const calcView=binding.productId==="cProduct",reverseView=binding.productId==="rProduct",promoView=binding.productId==="pProduct",cost=Number($(binding.costId).value),warehouse=data?.warehouse==="寄"?"寄庫":data?.warehouse==="越"?"越庫":"—";
+ const repeated=calcView||reverseView||promoView?"":`<div class="px-metric"><span>成本</span><b>$${m2(cost)}</b></div><div class="px-metric px-front-margin"><span>全聯毛利率（前毛）</span><b>${rateText(data?.pxMargin)}</b></div>`;
+ return `<section class="card px-info-card${calcView?" calc-product-data":reverseView?" reverse-product-data":promoView?" promo-product-data":""}"><div class="px-section-head"><h2>${product.name}</h2><span class="px-source">${data?"PX 商品資料":"尚無 PX 補充資料"}</span></div><div class="px-info-grid">${repeated}<div class="px-metric"><span>庫別</span><b>${warehouse}</b></div><div class="px-metric"><span>上架率</span><b>${rateText(data?.listingRate,0)}</b></div><div class="px-metric"><span>上架數</span><b>${Number.isFinite(data?.stores)?countText(data.stores)+" 店":"—"}</b></div></div></section>`;
 }
 function salesMarkup(data,analysis){
  if(!data||!analysis)return `<section class="card px-sales-card"><div class="px-section-head"><h2>PX 銷售表現</h2></div><div class="px-empty">此商品目前沒有可確認的 PX 實銷與前毛資料。成本主檔保留，前毛與相關試算不推算假資料。</div></section>`;
@@ -542,10 +565,12 @@ function replacementMarkup(productName){
  return `<section class="card replacement-card" data-replacement-id="${group.id}"><div class="px-section-head replacement-head"><h2>替代商品效益</h2><span class="replacement-status ${view.status.tone}">${view.status.label}</span></div><div class="replacement-route"><span>替代路徑</span><br><b>${group.oldSeriesLabel}</b><br>→ ${group.newSeriesLabel}</div><div class="replacement-dates"><div class="replacement-date">新品導入<b>${newMonth}</b></div>${overlap}</div><div class="replacement-layer"><h3>銷售接棒</h3><div class="replacement-kpis">${salesKpis}</div></div>${channelMarkup(view)}${replacementTimeline(view)}</section>`;
 }
 function renderProductInsights(binding){
- const product=binding.selected,info=$(binding.infoId),performance=$(binding.salesId);
- if(!product){info.replaceChildren();performance.replaceChildren();return}
+ const product=binding.selected,info=$(binding.infoId),performance=$(binding.salesId),promoView=binding.productId==="pProduct",campaign=promoView?$("pCampaignInfo"):null;
+ if(!product){info.replaceChildren();performance.replaceChildren();campaign?.replaceChildren();return}
  const data=PX_SALES[product.name]||null,analysis=analyzePxSales(data);
- info.innerHTML=productInfoMarkup(binding,product,data)+(typeof promoInfoMarkup==='function'?(binding.productId==='cProduct'?promoCalcInfoMarkup(product):promoInfoMarkup(product)):'')+(typeof competitorInfoMarkup==='function'?competitorInfoMarkup(product):'');performance.innerHTML=salesMarkup(data,analysis)+replacementMarkup(product.name);
+ const campaignMarkup=typeof promoInfoMarkup==='function'?(binding.productId==='cProduct'?promoCalcInfoMarkup(product):promoInfoMarkup(product)):'';
+ if(promoView)campaign.innerHTML=campaignMarkup;
+ info.innerHTML=productInfoMarkup(binding,product,data)+(promoView?'':campaignMarkup)+(typeof competitorInfoMarkup==='function'?competitorInfoMarkup(product):'');performance.innerHTML=salesMarkup(data,analysis)+replacementMarkup(product.name);
 }
 window.__PX_ANALYTICS__=Object.freeze({analyzePxSales,compareReplacementEffect,replacementEffectRules:REPLACEMENT_EFFECT_RULES,strictSeriesSales,baselineBeforeLaunch,replacementNewSummary,replacementStatus,buildReplacementView});
 const productBindings=[
