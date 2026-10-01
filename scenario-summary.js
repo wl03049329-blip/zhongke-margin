@@ -14,7 +14,7 @@
    const card=cards.find(item=>item.querySelector('h3')?.textContent.trim()===`方案 ${name}`);
    if(!card)return{name,margin:null,front:null,price:null,cost:null,reached:null,highest:false};
    const state=card.querySelector('.scenario-state'),classes=state?.classList;
-   return{name,margin:rate(metric(card,'費用後結果')),front:rate(metric(card,'全聯毛利率（前毛）')),price:price(metric(card,'售價')),cost:price(metric(card,'商品成本')),reached:classes?.contains('excellent')||classes?.contains('target')?true:classes?.contains('optimize')||classes?.contains('low')?false:null,highest:[...card.querySelectorAll('.best-badge')].some(badge=>badge.textContent.trim()==='毛利率最高')};
+   return{name,margin:rate(metric(card,'中科毛利率（費用後）')),front:rate(metric(card,'全聯毛利率（前毛）')),price:price(metric(card,'售價')),cost:price(metric(card,'商品成本')),reached:classes?.contains('excellent')||classes?.contains('target')?true:classes?.contains('optimize')||classes?.contains('low')?false:null,highest:[...card.querySelectorAll('.best-badge')].some(badge=>badge.textContent.trim()==='毛利率最高')};
   });
  }
  function statusText(plans){

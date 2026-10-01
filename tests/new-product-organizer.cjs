@@ -9,7 +9,7 @@ const {inspect,ordered,makeOutputs}=require('../new-product-organizer.js');
 const root=path.resolve(__dirname,'..'),base='3857e215e4c386f6113772a3fbc7f7649117e9eb';
 const current=file=>fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n');
 const baseline=file=>execFileSync('git',['show',`${base}:${file}`],{encoding:'utf8'}).replace(/\r\n/g,'\n');
-for(const file of ['px-sales-data.js','px-replacement-data.js','px-promo-core.js','px-promo-prices.js','scenario-summary.js','same-period-sales.js'])assert.equal(current(file),baseline(file),`${file} unchanged`);
+for(const file of ['px-sales-data.js','px-replacement-data.js','px-promo-core.js','px-promo-prices.js','same-period-sales.js'])assert.equal(current(file),baseline(file),`${file} unchanged`);
 const html=current('index.html'),oldHtml=baseline('index.html');
 for(const [start,end] of [['function compareReplacementEffect(','function model('],['function model(','function rows('],['function calcC(','function calcR('],['function calcR(','const SCENARIO_CONFIG='],['function calcP(','function analyzePxSales('],['function analyzePxSales(','function trendChart('],['function trendChart(','function productInfoMarkup('],['function salesMarkup(','function strictSeriesSales(']])assert.equal(html.slice(html.indexOf(start),html.indexOf(end)),oldHtml.slice(oldHtml.indexOf(start),oldHtml.indexOf(end)),`${start} unchanged`);
 assert.equal(html.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1],oldHtml.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1]);

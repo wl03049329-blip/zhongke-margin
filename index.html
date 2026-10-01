@@ -180,6 +180,15 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 #calc .campaign-info-compact .campaign-history{margin-top:8px;padding-top:5px}
 @media(max-width:620px){#calc .grid{grid-template-columns:repeat(2,minmax(0,1fr))}#calc .grid>.full{grid-column:1/-1}}
 @media(max-width:360px){#calc .calc-product-data .px-info-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#calc .calc-product-data .px-metric{padding:6px}#calc .calc-product-data .px-metric b{font-size:13px}}
+#scenario .scenario-summary{margin-top:0;margin-bottom:12px}
+#scenario .scenario-summary-more{margin-top:5px;border-top:1px solid #e3eaed}
+#scenario .scenario-summary-more>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;color:#526779;font-size:11px;font-weight:700}
+#scenario .scenario-summary-more .scenario-summary-context{margin:0 0 5px}
+#scenario .decision-card{margin-bottom:12px}
+#scenario .decision-card .decision-block h4{margin-top:9px}
+#scenario .scenario-detail-card .head{margin-bottom:0}
+#scenario .scenario-detail-card .scenario-results{margin-top:10px}
+@media(max-width:620px){#scenario .grid{grid-template-columns:repeat(2,minmax(0,1fr))}#scenario .grid>.full{grid-column:1/-1}#scenario .scenario-inputs{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}#scenario .scenario-plan{padding:8px}#scenario .scenario-plan h3{font-size:12px;margin-bottom:7px}#scenario .scenario-plan label{font-size:10px}#scenario .scenario-plan input{font-size:16px;padding:10px 25px 10px 8px}#scenario .scenario-plan .unit{right:7px}}
 </style>
 </head>
 <body>
@@ -249,21 +258,10 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
    <div class="scenario-plan"><h3>方案 C</h3><div class="field"><label>售價（含稅）</label><div class="wrap"><input id="sPriceC" type="number" inputmode="decimal" value="104"><span class="unit">元</span></div></div></div>
   </div>
  </div>
+ <section id="scenarioSummary" class="card scenario-summary" aria-label="方案比較摘要"><div class="scenario-summary-head"><h3>方案比較摘要</h3><span id="scenarioSummaryHighest" class="scenario-summary-highest"></span></div><div id="scenarioSummaryRows" class="scenario-summary-rows" aria-live="polite"></div><p id="scenarioSummaryThreshold" class="scenario-summary-context"></p><details class="scenario-summary-more"><summary>查看售價與共用資料差異</summary><p id="scenarioSummaryDetails" class="scenario-summary-context"></p></details><div class="scenario-summary-actions"><button id="copyScenarioSummary" class="secondary-action" type="button">複製方案比較</button><span id="scenarioSummaryFeedback" class="scenario-summary-feedback" role="status" aria-live="polite"></span></div></section>
+ <section id="decisionSummary" class="card decision-card" aria-label="決策摘要"><div class="decision-head"><h3>決策摘要</h3></div><div class="decision-block"><h4>目前需要注意</h4><ul id="decisionNotices" class="decision-notices" aria-live="polite"></ul></div><div class="decision-block"><h4>可進一步確認</h4><p id="decisionNext" class="decision-next"></p></div><div class="decision-actions"><button id="copyDecisionSummary" class="secondary-action" type="button">複製決策摘要</button><span id="decisionFeedback" class="decision-feedback" role="status" aria-live="polite"></span></div></section>
+ <div class="card scenario-detail-card"><div class="head"><h2>方案詳細結果</h2><span class="tag">A / B / C</span></div><div id="scenarioResults" class="scenario-results"></div></div>
  <div id="sProductInfo"></div>
- <div class="card">
-  <section id="decisionSummary" class="decision-card" aria-label="決策摘要">
-   <div class="decision-head"><h3>決策摘要</h3><span>A 為目前狀況</span></div>
-   <p id="decisionProduct" class="decision-product"></p>
-   <div class="decision-core"><div class="decision-metric"><span>中科毛利率（費用後）</span><strong id="decisionMargin">資料不足</strong></div><div class="decision-metric"><span>全聯毛利率（前毛）</span><strong id="decisionFrontMargin">資料不足</strong></div></div>
-   <div class="decision-block"><h4>目前需要注意</h4><ul id="decisionNotices" class="decision-notices" aria-live="polite"></ul></div>
-   <div class="decision-block"><h4>方案差異</h4><div class="decision-deltas"><span>B vs A：<b id="decisionDeltaB">資料不足</b></span><span>C vs A：<b id="decisionDeltaC">資料不足</b></span></div></div>
-   <div class="decision-block"><h4>可進一步確認</h4><p id="decisionNext" class="decision-next"></p></div>
-   <p id="decisionContext" class="decision-context"></p>
-   <div class="decision-actions"><button id="copyDecisionSummary" class="secondary-action" type="button">複製決策摘要</button><span id="decisionFeedback" class="decision-feedback" role="status" aria-live="polite"></span></div>
-  </section>
-  <div id="scenarioResults" class="scenario-results"></div>
-  <section id="scenarioSummary" class="scenario-summary" aria-label="方案比較摘要"><div class="scenario-summary-head"><h3>方案比較摘要</h3><span id="scenarioSummaryHighest" class="scenario-summary-highest"></span></div><div id="scenarioSummaryRows" class="scenario-summary-rows" aria-live="polite"></div><p id="scenarioSummaryThreshold" class="scenario-summary-context"></p><p id="scenarioSummaryDetails" class="scenario-summary-context"></p><div class="scenario-summary-actions"><button id="copyScenarioSummary" class="secondary-action" type="button">複製方案比較</button><span id="scenarioSummaryFeedback" class="scenario-summary-feedback" role="status" aria-live="polite"></span></div></section>
- </div>
  <div id="sSalesPerformance"></div>
 </section>
 
@@ -432,7 +430,7 @@ function calcS(){
  const results=SCENARIO_CONFIG.map(config=>({...config,o:model(n(config.priceId),cost,px,fee)}));
  const maxMargin=Math.max(...results.map(result=>Number.isFinite(result.o.margin)?result.o.margin:-Infinity)),maxProfit=Math.max(...results.map(result=>Number.isFinite(result.o.profit)?result.o.profit:-Infinity));
  const selectedProduct=findProduct($("sProduct").value),fixedPxMargin=PX_SALES[selectedProduct?.name]?.pxMargin;
- $("scenarioResults").innerHTML=results.map(result=>{const marginBest=Number.isFinite(result.o.margin)&&Math.abs(result.o.margin-maxMargin)<1e-10,profitBest=Number.isFinite(result.o.profit)&&Math.abs(result.o.profit-maxProfit)<1e-10,state=marginState(result.o.margin);return `<article class="scenario-card"><div class="scenario-title"><h3>方案 ${result.name}</h3><div class="scenario-badges"><span class="scenario-state ${state.key}">${state.label}</span>${marginBest?'<span class="best-badge">毛利率最高</span>':""}${profitBest?'<span class="best-badge">毛利額最高</span>':""}</div></div><div class="scenario-metrics"><div class="scenario-metric"><span>售價</span><b>${m2(result.o.price)} 元</b></div><div class="scenario-metric"><span>商品成本</span><b>${m2(cost)} 元</b></div><div class="scenario-metric"><span>全聯毛利率（前毛）</span><b>${rateText(fixedPxMargin)}</b></div><div class="scenario-metric"><span>毛利額</span><b>${m2(result.o.profit)} 元</b></div><div class="scenario-metric"><span>毛利率</span><b>${pc(result.o.margin)}</b></div><div class="scenario-metric scenario-final"><span>費用後結果</span><b>${m2(result.o.profit)} 元<br>${pc(result.o.margin)}</b></div></div></article>`}).join("");save()
+ $("scenarioResults").innerHTML=results.map(result=>{const marginBest=Number.isFinite(result.o.margin)&&Math.abs(result.o.margin-maxMargin)<1e-10,profitBest=Number.isFinite(result.o.profit)&&Math.abs(result.o.profit-maxProfit)<1e-10,state=marginState(result.o.margin);return `<article class="scenario-card"><div class="scenario-title"><h3>方案 ${result.name}</h3><div class="scenario-badges"><span class="scenario-state ${state.key}">${state.label}</span>${marginBest?'<span class="best-badge">毛利率最高</span>':""}${profitBest?'<span class="best-badge">毛利額最高</span>':""}</div></div><div class="scenario-metrics"><div class="scenario-metric"><span>售價</span><b>${m2(result.o.price)} 元</b></div><div class="scenario-metric"><span>商品成本</span><b>${m2(cost)} 元</b></div><div class="scenario-metric"><span>全聯毛利率（前毛）</span><b>${rateText(fixedPxMargin)}</b></div><div class="scenario-metric scenario-final"><span>中科毛利率（費用後）</span><b>${pc(result.o.margin)}</b></div><div class="scenario-metric"><span>中科毛利額</span><b>${m2(result.o.profit)} 元</b></div></div></article>`}).join("");save()
 }
 new MutationObserver(()=>{const profitRow=[...$("cRows").querySelectorAll(".row")].find(row=>row.firstElementChild?.textContent==="中科毛利額");$("cProfit").textContent=profitRow?.lastElementChild?.textContent||"—"}).observe($("cRows"),{childList:true});
 function promoAverage(type,a){if(type==="bogo")return a/2;if(type==="half")return a*.75;return a}
