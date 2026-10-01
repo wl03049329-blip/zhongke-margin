@@ -23,12 +23,17 @@ const server=http.createServer((req,res)=>{
  await page.evaluate(()=>{PXPromo.today=()=> '2026-10-01';renderProductInsights(productBindings[0])});
  const layout=await page.evaluate(()=>{
   const rect=selector=>{const element=document.querySelector(selector);if(!element)return null;const bounds=element.getBoundingClientRect();return{top:Math.round(bounds.top+scrollY),bottom:Math.round(bounds.bottom+scrollY),height:Math.round(bounds.height)}};
-  return{input:rect('#calc>.card:first-child'),hero:rect('#cResult'),detail:rect('#cDetail'),product:rect('#cProductInfo .px-info-card'),campaign:rect('#cProductInfo .campaign-info'),sales:rect('#cSalesPerformance .px-sales-card'),calcHeight:Math.round(document.querySelector('#calc').getBoundingClientRect().height),overflow:Math.max(0,document.documentElement.scrollWidth-innerWidth)};
+  return{input:rect('#calc>.card:first-child'),hero:rect('#cResult'),threshold:rect('#thresholdSettings'),detail:rect('#cDetail'),product:rect('#cProductInfo .px-info-card'),campaign:rect('#cProductInfo .campaign-info'),sales:rect('#cSalesPerformance .px-sales-card'),calcHeight:Math.round(document.querySelector('#calc').getBoundingClientRect().height),overflow:Math.max(0,document.documentElement.scrollWidth-innerWidth)};
  });
  if(process.argv.includes('--baseline')){console.log(JSON.stringify({baseline:layout,errors},null,2));await browser.close();server.close();return}
- assert.ok(layout.input.bottom<=layout.hero.top&&layout.hero.bottom<=layout.detail.top&&layout.detail.bottom<=layout.product.top&&layout.product.bottom<=layout.campaign.top&&layout.campaign.bottom<=layout.sales.top,'mobile section order');
+ assert.ok(layout.input.bottom<=layout.hero.top&&layout.hero.bottom<=layout.threshold.top&&layout.threshold.bottom<=layout.detail.top&&layout.detail.bottom<=layout.product.top&&layout.product.bottom<=layout.campaign.top&&layout.campaign.bottom<=layout.sales.top,'mobile section order');
+ assert.ok(layout.hero.top<679,'hero moves above the prior 390px position');
+ assert.equal(await page.locator('#thresholdSettings').evaluate(element=>element.previousElementSibling?.id),'cResult','threshold is immediately below hero');
  assert.ok(layout.hero.top<844,'margin result enters the first 390px viewport');
  assert.ok(layout.calcHeight<2862,'390px calculator height below measured pre-change baseline');
+ const actions=await page.evaluate(()=>{const copy=document.querySelector('#copyResult'),clear=document.querySelector('#clearCalculation');return{copyWidth:copy.getBoundingClientRect().width,clearWidth:clear.getBoundingClientRect().width,copyHeight:copy.getBoundingClientRect().height,clearBackground:getComputedStyle(clear).backgroundColor,copyBackground:getComputedStyle(copy).backgroundColor}});
+ assert.ok(actions.copyWidth>actions.clearWidth*2&&actions.clearWidth<120,'copy is primary and clear is compact');
+ assert.ok(actions.copyHeight>=40&&actions.copyBackground!==actions.clearBackground,'copy remains a visible primary action');
  assert.equal(await page.locator('#cDetail').evaluate(element=>element.open),false,'details are collapsed initially');
  await page.locator('#cDetail>summary').click();
  const detailLabels=await page.locator('#cRows .row span:first-child').allTextContents();
@@ -54,6 +59,10 @@ const server=http.createServer((req,res)=>{
  for(const [width,height] of viewports){await page.setViewportSize({width,height});assert.equal(await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),0,`${width}px overflow`)}
  await page.setViewportSize({width:390,height:844});
  const preview=path.join(os.tmpdir(),'px-calc-hierarchy-mobile.png');await page.screenshot({path:preview});
+ await page.locator('#clearCalculation').click();
+ assert.equal(await page.locator('#cPrice').inputValue(),'','clear action still clears this calculation');
+ assert.equal(await page.locator('#cCost').inputValue(),'24.50','clear action keeps cost');
+ assert.equal(await page.locator('#cProduct').inputValue(),'OP無雙酚A鋁箔800公分-12入','clear action keeps selected product');
  assert.deepEqual(errors,[]);
- console.log(JSON.stringify({status:'PASS',layout,detailLabels,heroProfit:'synced',campaignHistory:'available',viewports,maximumOverflow:0,consoleErrors:errors,preview},null,2));await browser.close();server.close();
+ console.log(JSON.stringify({status:'PASS',layout,actions,detailLabels,heroProfit:'synced',campaignHistory:'available',clearAction:'PASS',viewports,maximumOverflow:0,consoleErrors:errors,preview},null,2));await browser.close();server.close();
 })().catch(error=>{console.error(error);server.close();process.exit(1)});
