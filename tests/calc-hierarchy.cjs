@@ -53,7 +53,8 @@ const server=http.createServer((req,res)=>{
  await page.locator('#cProductInfo .campaign-history>summary').click();
  await page.locator('#cDetail>summary').click();
  await page.locator('[data-tab="reverse"]').click();await page.locator('#rProduct').fill('65010209');
- assert.match(await page.locator('#rProductInfo .px-info-card').innerText(),/成本[\s\S]*全聯毛利率（前毛）/,'other tabs retain their product details');
+ assert.doesNotMatch(await page.locator('#rProductInfo .px-info-card').innerText(),/成本|全聯毛利率（前毛）/,'reverse page removes only its duplicated product metrics');
+ await page.locator('[data-tab="scenario"]').click();await page.locator('#sProduct').fill('65010209');assert.match(await page.locator('#sProductInfo .px-info-card').innerText(),/成本[\s\S]*全聯毛利率（前毛）/,'scenario tab retains its product details');
  await page.locator('[data-tab="calc"]').click();
  const viewports=[[320,568],[360,800],[375,667],[390,844],[430,932],[768,1024],[1280,720]];
  for(const [width,height] of viewports){await page.setViewportSize({width,height});assert.equal(await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),0,`${width}px overflow`)}

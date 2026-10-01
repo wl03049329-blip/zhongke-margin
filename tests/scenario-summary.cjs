@@ -1,7 +1,9 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),{execFileSync}=require('node:child_process');
 const {chromium}=require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const root=path.resolve(__dirname,'..'),current=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/\r\n/g,'\n'),base=execFileSync('git',['show','HEAD:index.html'],{encoding:'utf8'}).replace(/\r\n/g,'\n');
-for(const [from,to] of [['function model(','function rows('],['function calcC(','function calcR('],['function calcR(','const SCENARIO_CONFIG='],['function calcP(','function analyzePxSales(']])assert.equal(current.slice(current.indexOf(from),current.indexOf(to)),base.slice(base.indexOf(from),base.indexOf(to)),from+' core unchanged');
+for(const [from,to] of [['function model(','function rows('],['function calcC(','function calcR('],['function calcP(','function analyzePxSales(']])assert.equal(current.slice(current.indexOf(from),current.indexOf(to)),base.slice(base.indexOf(from),base.indexOf(to)),from+' core unchanged');
+const reverseFormula=html=>html.match(/function calcR\(\)\{([\s\S]*?);\$\("rRows"\)\.innerHTML=rows\(o\)/)?.[1];
+assert.ok(reverseFormula(current));assert.equal(reverseFormula(current),reverseFormula(base),'reverse formula unchanged');
 assert.equal(current.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1],base.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1]);
 const server=http.createServer((req,res)=>{const file=path.join(root,decodeURIComponent(new URL(req.url,'http://localhost').pathname).slice(1)||'index.html');if(!fs.existsSync(file)){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.png':'image/png'})[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file));});
 (async()=>{

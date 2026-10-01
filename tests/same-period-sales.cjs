@@ -11,7 +11,9 @@ const baseline=file=>execFileSync('git',['show',`${base}:${file}`],{encoding:'ut
 const current=file=>fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n');
 for(const file of ['px-sales-data.js','px-replacement-data.js','px-promo-core.js','px-promo-prices.js'])assert.equal(current(file),baseline(file),`${file} unchanged`);
 const html=current('index.html'),oldHtml=baseline('index.html');
-for(const [start,end] of [['function model(','function rows('],['function calcC(','function calcR('],['function calcR(','const SCENARIO_CONFIG='],['function calcP(','function analyzePxSales('],['function analyzePxSales(','function trendChart('],['function trendChart(','function productInfoMarkup('],['function salesMarkup(','function strictSeriesSales(']])assert.equal(html.slice(html.indexOf(start),html.indexOf(end)),oldHtml.slice(oldHtml.indexOf(start),oldHtml.indexOf(end)),`${start} unchanged`);
+for(const [start,end] of [['function model(','function rows('],['function calcC(','function calcR('],['function calcP(','function analyzePxSales('],['function analyzePxSales(','function trendChart('],['function trendChart(','function productInfoMarkup('],['function salesMarkup(','function strictSeriesSales(']])assert.equal(html.slice(html.indexOf(start),html.indexOf(end)),oldHtml.slice(oldHtml.indexOf(start),oldHtml.indexOf(end)),`${start} unchanged`);
+const reverseFormula=source=>source.match(/function calcR\(\)\{([\s\S]*?);\$\("rRows"\)\.innerHTML=rows\(o\)/)?.[1];
+assert.ok(reverseFormula(html));assert.equal(reverseFormula(html),reverseFormula(oldHtml),'reverse formula unchanged');
 assert.equal(html.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1],oldHtml.match(/const PX_Q3_PRODUCTS\s*=\s*(\[[\s\S]*?\]);/)[1],'product master unchanged');
 assert.doesNotMatch(current('same-period-sales.js'),/市場需求強勁|商品很受歡迎|行銷成功|促銷奏效|消費者認同|未來將持續成長|銷售動能強|銷售額/);
 

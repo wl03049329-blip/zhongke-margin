@@ -501,7 +501,7 @@ async function main() {
   assert.ok(scenarioStateLabels.every(label => ["非常好", "達標", "待優化", "偏低", "—"].includes(label)), "scenario state labels use shared thresholds");
   await page.locator(".tab[data-tab='reverse']").click();
   await page.locator("#rTarget").fill("35");
-  assert.equal(await page.locator("#rStatus").textContent(), "待優化", "reverse-price result uses shared 35% status");
+  assert.equal(await page.locator("#rStatus").textContent(), "目標 35%", "reverse-price badge names the entered target instead of the global threshold status");
   await page.locator(".tab[data-tab='promo']").click();
   assert.ok(["非常好", "達標", "待優化", "偏低"].includes(await page.locator("#pStatus").textContent()), "promotion result uses shared margin status");
   await page.locator(".tab[data-tab='calc']").click();
