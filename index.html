@@ -151,6 +151,8 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 .same-period-scope-note{margin:-4px 0 9px;color:#526779;font-size:10px;line-height:1.45}
 .same-period-description{margin:9px 0;color:var(--ink);font-size:11px;line-height:1.5}.same-period-foot{display:flex;align-items:center;justify-content:space-between;gap:6px 10px;flex-wrap:wrap;color:#526779;font-size:10px;line-height:1.5}.same-period-foot b{color:#173c50}.same-period-copy{min-height:44px;padding:8px 11px;font-size:11px}.same-period-feedback{display:block;color:var(--op);font-size:10px}
 @media(max-width:360px){.same-period-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.same-period-stats>div:last-child{grid-column:1/-1}.same-period-yoy{font-size:18px}}
+.organizer-intro{margin:0;color:#526779;font-size:12px;line-height:1.6}.organizer-toolbar,.organizer-copy-actions,.organizer-views{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.organizer-toolbar button,.organizer-copy-actions button,.organizer-views button{min-height:44px}.organizer-items{display:grid;gap:9px;margin-top:12px}.organizer-item{position:relative;min-width:0;border:1px solid #d9e5e9;border-radius:12px;background:#f9fbfc}.organizer-item details{min-width:0}.organizer-item summary{display:flex;align-items:center;min-height:48px;padding:9px 76px 9px 12px;cursor:pointer;color:#173c50;font-size:13px;font-weight:800;overflow-wrap:anywhere}.organizer-delete{position:absolute;right:5px;top:4px;min-height:40px;padding:5px 9px;border:1px solid #d9e5e9;background:#fff;color:#74545a;font-size:11px}.organizer-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 12px 12px}.organizer-fields label{display:grid;gap:5px;min-width:0;font-size:11px}.organizer-fields input,.organizer-fields select,.organizer-fields textarea{width:100%;min-width:0;min-height:44px;font:inherit;font-size:16px;padding:9px 10px;border:1px solid #cddae2;border-radius:10px;background:#fff;color:var(--ink)}.organizer-fields textarea{min-height:68px;resize:vertical}.organizer-fields .wide,.organizer-replacement{grid-column:1/-1}.organizer-replacement{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:9px;border:1px solid #eed7d4;border-radius:10px;background:#fffafa}.organizer-replacement[hidden]{display:none}.organizer-warning{display:block;margin:0 12px 11px;color:#9c4b39;font-size:11px;font-weight:800}.organizer-warning[hidden]{display:none}.organizer-empty{margin:0;color:#526779;font-size:12px}.organizer-views button{padding:8px 12px;background:#f2f6f8;color:#334e60;border:1px solid #d9e5e9;font-size:12px}.organizer-views button.active{background:#173c50;color:#fff}.organizer-preview{max-height:340px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;margin:10px 0 0;padding:12px;border:1px solid #d9e5e9;border-radius:11px;background:#f8fbfc;color:#173c50;font-family:inherit;font-size:12px;line-height:1.65}.organizer-feedback{display:block;min-height:16px;margin-top:7px;color:var(--op);font-size:11px}
+@media(max-width:430px){.organizer-fields,.organizer-replacement{grid-template-columns:1fr}.organizer-copy-actions button{flex:1 1 130px}}
 </style>
 </head>
 <body>
@@ -166,6 +168,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
  <button class="tab" data-tab="scenario">情境比較</button>
  <button class="tab" data-tab="promo">促銷試算</button>
  <button class="tab" data-tab="campaign">檔期查價</button>
+ <button class="tab" data-tab="organizer">新品整理</button>
  <button class="tab" data-tab="basis">計算依據</button>
 </nav></div>
 
@@ -269,6 +272,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 </section>
 
 <section id="campaign" class="panel"><div class="card"><div class="head"><h2>檔期售價查詢</h2><span class="tag">搜尋即查價</span></div><div id="campaignStatus" class="campaign-status"></div><div class="campaign-controls"><div><label for="campaignSearch">商品名稱／品號／條碼</label><input id="campaignSearch" type="search" placeholder="輸入保鮮膜、妙潔、品號或條碼" autocomplete="off"></div><div><label for="campaignFilter">檔期</label><select id="campaignFilter"><option value="current">本檔</option><option value="next">下一檔</option><option value="all">全部檔期</option></select></div></div><small>售價僅供查詢，不會覆蓋試算售價、商品成本或促銷條件。</small></div><div id="campaignResults" aria-live="polite"></div><div id="competitorResults" aria-live="polite"></div></section>
+<section id="organizer" class="panel"><div class="card"><div class="head"><h2>新品／替換整理器</h2><span class="tag">文字工作流程</span></div><p class="organizer-intro">通路：PX 僅 PX；大 PX 為專屬；PX＋大 PX 同時涵蓋兩通路。資料僅依本次輸入整理，不推定替換關係、條碼或時程。此頁重新整理後草稿不保留。</p><div class="organizer-toolbar"><button id="organizerAdd" type="button">新增品項</button><button id="organizerClear" class="secondary-action" type="button">清空本批</button></div><div id="organizerItems" class="organizer-items"></div></div><div class="card"><div class="head"><h2>文字輸出</h2><span class="tag">三種版本</span></div><div class="organizer-views" role="group" aria-label="輸出版本"><button class="active" type="button" data-organizer-view="tracking" aria-pressed="true">自己追蹤版</button><button type="button" data-organizer-view="manager" aria-pressed="false">主管摘要版</button><button type="button" data-organizer-view="agent" aria-pressed="false">代理商通知版</button></div><pre id="organizerPreview" class="organizer-preview" aria-live="polite"></pre><div class="organizer-copy-actions"><button id="organizerCopyManager" class="secondary-action" type="button">複製主管摘要</button><button id="organizerCopyAgent" class="secondary-action" type="button">複製代理商通知</button></div><span id="organizerFeedback" class="organizer-feedback" role="status" aria-live="polite"></span></div></section>
 <footer class="hs-footer"><div class="hs-copy"><strong>PX 通路工作台</strong><span class="hs-purpose">個人工作輔助工具｜非官方系統｜開發者：弘昇</span><span class="built-by">Built by HS</span></div></footer>
 </main>
 <script src="px-promo-core.js"></script>
@@ -629,11 +633,12 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-same-period-sales"));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-product-organizer"));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="scenario-summary.js"></script>
 <script src="decision-summary.js"></script>
 <script src="same-period-sales.js"></script>
+<script src="new-product-organizer.js"></script>
 <script src="competitor-price-ui.js"></script>
 </body></html>
