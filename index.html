@@ -25,6 +25,7 @@
 <title>PX 通路工作台</title>
 <link rel="stylesheet" href="px-promo.css">
 <link rel="stylesheet" href="competitor-price.css">
+<link rel="stylesheet" href="px-sales-explorer.css?v=4.1.2-sales-phase2">
 <style>
 :root{
  --op:#086b42;--op2:#16945b;--op3:#dff3e8;--earth:#8bc78f;
@@ -704,13 +705,15 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-promo-hierarchy",{updateViaCache:"none"}));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.2-sales-phase2",{updateViaCache:"none"}));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="scenario-summary.js?v=4.1.2-scenario-source"></script>
 <script src="decision-summary.js?v=4.1.2-scenario-source"></script>
-<script src="same-period-sales.js"></script>
-<script src="px-sales-analysis.js"></script>
+<script src="same-period-sales.js?v=4.1.2-sales-phase2"></script>
+<script src="px-sales-analysis.js?v=4.1.2-sales-phase2"></script>
+<script src="px-sales-explorer-core.js?v=4.1.2-sales-phase2"></script>
+<script src="px-sales-explorer.js?v=4.1.2-sales-phase2"></script>
 <script src="new-product-organizer.js"></script>
 <script src="competitor-price-ui.js"></script>
 </body></html>

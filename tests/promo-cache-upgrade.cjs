@@ -10,11 +10,18 @@ const previous='1c85d24fba6a0e91a622d77a5204d5790b7b4348';
 const oldHtml=execFileSync('git',['show',`${previous}:index.html`],{cwd:root});
 const oldWorker=execFileSync('git',['show',`${previous}:service-worker.js`],{cwd:root});
 let upgraded=false;
+const oldAssets=new Map();
 const server=http.createServer((request,response)=>{
  const pathname=decodeURIComponent(new URL(request.url,'http://127.0.0.1').pathname);
+ if(pathname==='/favicon.ico'){response.writeHead(204).end();return}
  let body;
  if(!upgraded&&pathname==='/index.html')body=oldHtml;
  else if(!upgraded&&pathname==='/service-worker.js')body=oldWorker;
+ else if(pathname==='/competitor-runtime.json')body=fs.readFileSync(path.join(root,'competitor-runtime.json'));
+ else if(!upgraded){
+  const file=pathname.slice(1)||'index.html';
+  try{if(!oldAssets.has(file))oldAssets.set(file,execFileSync('git',['show',`${previous}:${file}`],{cwd:root,stdio:['ignore','pipe','ignore']}));body=oldAssets.get(file)}catch(error){response.writeHead(404).end();return}
+ }
  else{
   const file=path.join(root,pathname.slice(1)||'index.html');
   if(!fs.existsSync(file)){response.writeHead(404).end();return}
@@ -31,7 +38,7 @@ const server=http.createServer((request,response)=>{
  const context=await browser.newContext({viewport:{width:390,height:844}});
  const page=await context.newPage(),errors=[];
  page.on('pageerror',error=>errors.push(error.message));
- page.on('console',message=>{if(message.type()==='error')errors.push(message.text())});
+ page.on('console',message=>{if(message.type()==='error')errors.push(`${message.text()} ${message.location().url}`)});
  await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'networkidle'});
  await page.evaluate(()=>navigator.serviceWorker.ready);
  await page.waitForFunction(async()=>{const keys=await caches.keys();return keys.includes('px-workbench-v4.1.2-scenario-source')});
@@ -39,7 +46,7 @@ const server=http.createServer((request,response)=>{
  const oldKeys=await page.evaluate(()=>caches.keys());
  upgraded=true;
  await page.evaluate(async()=>{const registration=await navigator.serviceWorker.ready;await registration.update()});
- await page.waitForFunction(async()=>{const keys=await caches.keys();return keys.length===1&&keys[0]==='px-workbench-v4.1.2-promo-hierarchy'},null,{timeout:20000});
+ await page.waitForFunction(async()=>{const keys=await caches.keys();return keys.length===1&&keys[0]==='px-workbench-v4.1.2-sales-phase2'},null,{timeout:20000});
  await page.reload({waitUntil:'networkidle'});
  const current=await page.evaluate(async()=>({keys:await caches.keys(),controller:navigator.serviceWorker.controller?.scriptURL||null,active:(await navigator.serviceWorker.ready).active?.scriptURL||null,empty:!!document.querySelector('#pEmpty'),average:!!document.querySelector('#pAverage')}));
  console.log(JSON.stringify({oldKeys,current},null,2));
