@@ -32,6 +32,13 @@ function promoProductMarkup(product,mode='current',details=true){
  return result;
 }
 function promoInfoMarkup(product){return `<section class="card campaign-info"><div class="px-section-head"><h2>檔期售價</h2><span class="px-source">資料版本：${promoEscape(PX_PROMO_PRICES.dataVersion)}</span></div><div class="campaign-status">${promoStatus()}</div>${promoProductMarkup(product)}</section>`;}
+function promoCalcInfoMarkup(product){
+ const next=PXPromo.context(PX_PROMO_PRICES,PXPromo.today()).next;
+ const period=next&&promoDataByName.get(product.name)?.periods[next.id];
+ const average=period?PXPromo.comparePeriods(PX_PROMO_PRICES,product,next.id).currentBest:null;
+ const kind=period?`${period.campaignType}・${[...new Set(period.promotions.map(p=>p.label))].join('／')}`:'未提供促銷價格';
+ return `<section class="card campaign-info campaign-info-compact"><div class="px-section-head"><h2>檔期售價</h2><span class="px-source">資料版本：${promoEscape(PX_PROMO_PRICES.dataVersion)}</span></div><div class="campaign-preview"><div><span>下一檔</span><b>${next?promoEscape(next.label):'尚無下一檔'}</b><small>${next?promoDateRange(next):'—'}</small></div><div><span>促銷型態</span><b>${promoEscape(kind)}</b></div><div><span>最低均價</span><b>${average===null?'暫無法計算':`$${PXPromo.money(average)}／件`}</b></div></div><details class="campaign-history"><summary>查看完整檔期與歷史售價</summary>${promoProductMarkup(product,'all',false)}</details></section>`;
+}
 function promoOptionMarkup(product){const data=promoDataByName.get(product.name),ctx=PXPromo.context(PX_PROMO_PRICES,PXPromo.today()),p=data?.periods[ctx.preferred?.id];return `<span class="campaign-option">${p?`${ctx.current?'本檔':'下一檔'} ${p.label} · ${p.campaignType}<br>`+p.promotions.map(p=>`${promoEscape(p.label)} ${p.promotionPrice===null?'—':'$'+PXPromo.money(p.promotionPrice)}｜${p.averageUnitPrice===null?'均價暫無法計算':'均價 $'+PXPromo.money(p.averageUnitPrice)}`).join('<br>'):'未提供檔期售價'}${p?promoComparisonMarkup(product,p.id,true):''}</span>`;}
 function renderCampaignSearch(){
  const query=document.getElementById('campaignSearch').value.trim().toLowerCase(),mode=document.getElementById('campaignFilter').value,results=document.getElementById('campaignResults');

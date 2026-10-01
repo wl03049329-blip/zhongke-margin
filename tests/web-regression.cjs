@@ -282,8 +282,7 @@ async function main() {
   assert.equal(await page.locator("#cProduct").inputValue(), "OP無雙酚A鋁箔800公分-12入", "code search selection");
   assert.equal(await page.locator("#cCost").inputValue(), "25.22", "auto cost fill");
   assert.equal(await page.locator("#cPx").textContent(), "26.18%", "Excel front margin is fixed product metadata");
-  assert.match(await page.locator("#cProductInfo").innerText(), /26\.18%/);
-  assert.match(await page.locator("#cProductInfo").innerText(), /全聯毛利率（前毛）/);
+  assert.doesNotMatch(await page.locator("#cProductInfo .px-info-card").innerText(), /成本|全聯毛利率（前毛）/, "calculator product card omits inputs already shown above");
   assert.match(await page.locator("#cProductInfo").innerText(), /越庫/);
   assert.match(await page.locator("#cProductInfo").innerText(), /99%/);
   assert.match(await page.locator("#cProductInfo").innerText(), /1,271 店/);
@@ -300,7 +299,7 @@ async function main() {
   assert.equal(await page.locator("#cPx").textContent(), fixedFrontMargin, "front margin does not follow price or cost override");
   assert.match(await page.evaluate(() => buildCalcResultText()), /全聯毛利率（前毛）：26\.18%/, "copied result uses fixed front margin");
 
-  assert.match(await page.locator("#cProductInfo").innerText(), /\$24\.50/);
+  assert.equal(await page.locator("#cCost").inputValue(), "24.50", "manual cost override remains in the calculator input");
   await page.locator("#cProduct").fill("4710660886567");
   assert.equal(await page.locator("#cProduct").inputValue(), "OP無雙酚A鋁箔1500公分-12入", "barcode search selection");
   assert.equal(await page.locator("#cCost").inputValue(), "40.02", "new product overwrites manual cost");
