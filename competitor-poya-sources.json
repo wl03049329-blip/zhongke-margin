@@ -1,0 +1,27 @@
+{
+  "retailer": "寶雅",
+  "baseUrl": "https://www.poyabuy.com.tw",
+  "robotsUrl": "https://www.poyabuy.com.tw/robots.txt",
+  "policy": "Public product HTML only; no login, search-snippet prices, conditional offers or cross-retailer redirects. Eligible codes limit candidates, not price equivalence.",
+  "products": [
+    {"id":"11100796","name":"妙潔三層細緻海綿菜瓜布2入(款式隨機出貨)","brand":"妙潔","category":"SPONGE","eligibleProductCodes":["65020089","65020125","65020135"],"reason":"餐具清潔海綿菜瓜布；不配木漿棉。"},
+    {"id":"9931992","name":"3M百利餐具專用海綿菜瓜布3片","brand":"3M","category":"SPONGE","eligibleProductCodes":["65020089","65020125","65020135"],"reason":"餐具清潔海綿菜瓜布；不配木漿棉。"},
+    {"id":"9932003","name":"3M百利超吸水抹布單片包","brand":"3M","category":"DISH_CLOTH","eligibleProductCodes":["65020228","63020126","4710660888820"],"reason":"居家擦拭抹布；材質與包裝數不同，不產生換算價差。"},
+    {"id":"9932002","name":"3M百利木漿棉吸水抹布","brand":"3M","category":"DISH_CLOTH","eligibleProductCodes":["65020228","63020126","4710660888820"],"reason":"吸水擦拭抹布，不當成餐具木漿棉海綿。"},
+    {"id":"9937736","name":"驅塵氏強韌食物耐熱袋300入-中20x25cm","brand":"驅塵氏","category":"HEAT_BAG","eligibleProductCodes":["65010240"],"reason":"食品耐熱袋中尺寸。"},
+    {"id":"9949576","name":"驅塵氏強韌食物耐熱袋-小","brand":"驅塵氏","category":"HEAT_BAG","eligibleProductCodes":["65010241"],"reason":"食品耐熱袋小尺寸；來源未明示的入數不推估。"},
+    {"id":"9937735","name":"驅塵氏雙軌密封夾鏈袋29入-中19x20.5cm","brand":"驅塵氏","category":"ZIP_BAG","eligibleProductCodes":["65013459"],"reason":"同為平面密封袋 M，19×20.5cm、29入；不配立體袋、L或XL。"},
+    {"id":"9932001","name":"3M百利快乾抗菌掛勾手套-中","brand":"3M","category":"GLOVES","eligibleProductCodes":["86080018","65050023","63020159"],"reason":"重複使用家事乳膠手套中尺寸；不配S、L或拋棄式手套。"},
+    {"id":"9932000","name":"3M百利快乾抗菌掛勾手套-大","brand":"3M","category":"GLOVES","eligibleProductCodes":["65050024","63020160"],"reason":"重複使用家事乳膠手套大尺寸；不配S、M或拋棄式手套。"},
+    {"id":"9951414","name":"樂品超細目日系萬用濾水網45入","brand":"樂品","category":"DRAIN_NET","eligibleProductCodes":["65020101","63020121"],"reason":"廚房排水口濾水網，不配一般濾材。"},
+    {"id":"11981229","name":"KP空間香氛包1入-多款任選","brand":"KP","category":"FRAGRANCE","eligibleProductCodes":["61030143","61030142","61030158","61030316","61030321"],"reason":"空間香氛包候選；不配擴香瓶或衣物香氛豆，香味與包數不視為相同。"},
+    {"id":"11889740","name":"花仙子自然0室內擴香90ml-木質雪松-多款任選","brand":"花仙子","category":"FRAGRANCE","eligibleProductCodes":["61030152","61030162","61030315"],"reason":"室內擴香瓶候選；不配香氛包、補充豆，香味不同不視為同規格。"},
+    {"id":"10716246","name":"LENOR衣物芳香豆450ml-多款任選","brand":"LENOR","category":"FRAGRANCE","eligibleProductCodes":["61020440","61020441","59020344","59020345","4710660888530"],"reason":"衣物留香豆候選，公開品類為香氛豆；容量、配方與香味不同，不產生換算價差。"},
+    {"id":"9931707","name":"風倍清織物除菌消臭噴霧370ml-高效除菌-款式隨機","brand":"風倍清","category":"SPRAY","eligibleProductCodes":["61030090","61030274"],"reason":"居家織物消臭噴霧候選，不把除菌、抗病毒或防螨效果視為等效。"},
+    {"id":"9929445","name":"毛寶小蘇打洗碗精1000g","brand":"毛寶","category":"DISHWASH","eligibleProductCodes":["61050067","61050079","61050069"],"reason":"餐具清潔洗碗精；不同容量與補充包裝僅列原始價格。"},
+    {"id":"10456003","name":"洗劑革命小蘇打粉1kg","brand":"洗劑革命","category":"BAKING_SODA","eligibleProductCodes":["61050035"],"reason":"居家清潔小蘇打粉1kg，不配小蘇打洗碗液。"},
+    {"id":"10721721","name":"白元吊掛式衣櫃用除濕包4入-金木犀香","brand":"白元","category":"DEHUMIDIFIER","eligibleProductCodes":["61030278"],"reason":"衣櫃吊掛、吸濕後凝膠的除濕包；不同包數不自行換算。"},
+    {"id":"9931891","name":"威拂超保水濕拖巾清新花香-12枚","brand":"威拂","category":"WIPES","eligibleProductCodes":["63040316","63040315","63040317"],"reason":"地板濕拖巾，不配酒精擦或個人濕紙巾。"},
+    {"id":"9955034","name":"醫強75%酒精布60抽-含蓋加厚","brand":"醫強","category":"WIPES","eligibleProductCodes":["61040174"],"reason":"公開用途包含餐具、桌椅及生活用品清潔；不配濕拖巾。"}
+  ]
+}

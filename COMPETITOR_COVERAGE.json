@@ -1,0 +1,807 @@
+{
+  "ownProductCount": 55,
+  "carrefourProductCount": 0,
+  "poyaProductCount": 40,
+  "allowedSourceCovered": 40,
+  "allowedSourceMissing": 15,
+  "allowedSourceCoveragePercent": 72.72727272727273,
+  "allSourceCovered": 46,
+  "newCarrefourRecords": 0,
+  "newPoyaRecords": 19,
+  "otherNewSources": false,
+  "guessedPrices": false,
+  "carrefourSourceCheck": {
+    "url": "https://www.carrefour.com.tw/",
+    "httpStatus": 301,
+    "location": "https://www.uni-prosperity.com.tw:443/",
+    "policy": "The redirect is not Carrefour evidence. No relabelled Uni-PROSPERITY price is added."
+  },
+  "products": [
+    {
+      "name": "OP專科防臭袋S",
+      "productKey": "59060175",
+      "category": "DEODORANT_BAG",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP專科防臭袋M",
+      "productKey": "59060174",
+      "category": "DEODORANT_BAG",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP安全無毒耐熱袋(小)PX(二)",
+      "productKey": "65010241",
+      "category": "HEAT_BAG",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9949576"
+      ],
+      "allSources": [
+        "寶雅:9949576"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP安全無毒耐熱袋(中)PX(二)",
+      "productKey": "65010240",
+      "category": "HEAT_BAG",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9937736"
+      ],
+      "allSources": [
+        "寶雅:9937736"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP生物抗菌密封袋M(PX)",
+      "productKey": "65013459",
+      "category": "ZIP_BAG",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9937735"
+      ],
+      "allSources": [
+        "寶雅:9937735"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP生物抗菌密封袋L(PX)",
+      "productKey": "65013458",
+      "category": "ZIP_BAG",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP生物分解抗菌密封袋XL",
+      "productKey": "65013454",
+      "category": "ZIP_BAG",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP抗菌立體密封袋M+L",
+      "productKey": "86020136",
+      "category": "ZIP_BAG",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP長效抗菌立體密封袋M",
+      "productKey": "65010181",
+      "category": "ZIP_BAG",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP生物分解抗菌立體密封袋S",
+      "productKey": "65014102",
+      "category": "ZIP_BAG",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP生物分解保鮮膜360尺(20入)",
+      "productKey": "86210115",
+      "category": "CLING_FILM",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [
+        "萬家福:3142300100101",
+        "萬家福:3142301900103",
+        "萬家福:3142391100101",
+        "萬家福:3142391500101",
+        "萬家福:3142500900101",
+        "萬家福:3142301000101",
+        "萬家福:3142500700101",
+        "萬家福:3142390200101",
+        "萬家福:3142301300101",
+        "萬家福:3142389700101",
+        "萬家福:3142300400101",
+        "萬家福:3142391000101",
+        "萬家福:3142300800101",
+        "萬家福:3142390100101"
+      ],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP植材抗菌保鮮膜300尺",
+      "productKey": "63012168",
+      "category": "CLING_FILM",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [
+        "萬家福:3142300100101",
+        "萬家福:3142301900103",
+        "萬家福:3142391100101",
+        "萬家福:3142391500101",
+        "萬家福:3142500900101",
+        "萬家福:3142301000101",
+        "萬家福:3142500700101",
+        "萬家福:3142390200101",
+        "萬家福:3142301300101",
+        "萬家福:3142389700101",
+        "萬家福:3142300400101",
+        "萬家福:3142391000101",
+        "萬家福:3142300800101",
+        "萬家福:3142390100101"
+      ],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP無雙酚A鋁箔800公分-12入",
+      "productKey": "65010209",
+      "category": "FOIL",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [
+        "萬家福:3142002500101",
+        "萬家福:3142002200101",
+        "萬家福:3142002400101",
+        "萬家福:3142002300101",
+        "萬家福:3142002900101",
+        "萬家福:3142001700101",
+        "萬家福:3142002100101",
+        "萬家福:3142002600101"
+      ],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP無雙酚A鋁箔1500公分-12入",
+      "productKey": "65010647",
+      "category": "FOIL",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [
+        "萬家福:3142002500101",
+        "萬家福:3142002200101",
+        "萬家福:3142002400101",
+        "萬家福:3142002300101",
+        "萬家福:3142002900101",
+        "萬家福:3142001700101",
+        "萬家福:3142002100101",
+        "萬家福:3142002600101"
+      ],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP無雙酚A料理紙32M(12入)",
+      "productKey": "65011135",
+      "category": "BAKING_PAPER",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [
+        "萬家福:3145502700101",
+        "萬家福:3145500200101",
+        "萬家福:3145502300101",
+        "萬家福:3145500300101",
+        "萬家福:3145501400101",
+        "萬家福:3146615600101",
+        "萬家福:3145500800101"
+      ],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP無漂白料理紙7M(加量)",
+      "productKey": "65013511",
+      "category": "BAKING_PAPER",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [
+        "萬家福:3145502700101",
+        "萬家福:3145500200101",
+        "萬家福:3145502300101",
+        "萬家福:3145500300101",
+        "萬家福:3145501400101",
+        "萬家福:3146615600101",
+        "萬家福:3145500800101"
+      ],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP加長保護手套耐用強化 M",
+      "productKey": "86080018",
+      "category": "GLOVES",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9932001"
+      ],
+      "allSources": [
+        "寶雅:9932001"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP環保舒適手套-綠茶香氛M(橘)",
+      "productKey": "65050023",
+      "category": "GLOVES",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9932001"
+      ],
+      "allSources": [
+        "寶雅:9932001"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP環保舒適手套-綠茶香氛L(橘)",
+      "productKey": "65050024",
+      "category": "GLOVES",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9932000"
+      ],
+      "allSources": [
+        "寶雅:9932000"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP環保舒適手套-綠茶香氛S",
+      "productKey": "65051312",
+      "category": "GLOVES",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "OP超音波馬卡龍瞬吸布PX",
+      "productKey": "65020228",
+      "category": "DISH_CLOTH",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9932003",
+        "寶雅:9932002"
+      ],
+      "allSources": [
+        "寶雅:9932003",
+        "寶雅:9932002"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP檸檬清新抗菌瞬吸布",
+      "productKey": "63020126",
+      "category": "DISH_CLOTH",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9932003",
+        "寶雅:9932002"
+      ],
+      "allSources": [
+        "寶雅:9932003",
+        "寶雅:9932002"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP天然棉紗布(3片入)",
+      "productKey": "4710660888820",
+      "category": "DISH_CLOTH",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9932003",
+        "寶雅:9932002"
+      ],
+      "allSources": [
+        "寶雅:9932003",
+        "寶雅:9932002"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "德適淨濕拖巾-薰衣草",
+      "productKey": "63040316",
+      "category": "WIPES",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9931891"
+      ],
+      "allSources": [
+        "寶雅:9931891"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "德適淨濕拖巾-雪松清香",
+      "productKey": "63040315",
+      "category": "WIPES",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9931891"
+      ],
+      "allSources": [
+        "寶雅:9931891"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "德適淨濕拖巾-海洋清新",
+      "productKey": "63040317",
+      "category": "WIPES",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9931891"
+      ],
+      "allSources": [
+        "寶雅:9931891"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP柑橘抗菌EX菜瓜布(三)",
+      "productKey": "65020089",
+      "category": "SPONGE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11100796",
+        "寶雅:9931992"
+      ],
+      "allSources": [
+        "寶雅:11100796",
+        "寶雅:9931992"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP細柔無砂海綿菜瓜布",
+      "productKey": "65020125",
+      "category": "SPONGE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11100796",
+        "寶雅:9931992"
+      ],
+      "allSources": [
+        "寶雅:11100796",
+        "寶雅:9931992"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP抗菌木漿棉",
+      "productKey": "65020116",
+      "category": "SPONGE",
+      "carrefour": [],
+      "poya": [],
+      "allSources": [],
+      "status": "NO_VERIFIED_ALLOWED_CANDIDATE",
+      "note": "暫無家樂福／寶雅可比競品；未用其他通路或不符用途／尺寸的商品補位。"
+    },
+    {
+      "name": "檸檬馬鞭草菜瓜布-萬用速淨4入",
+      "productKey": "65020135",
+      "category": "SPONGE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11100796",
+        "寶雅:9931992"
+      ],
+      "allSources": [
+        "寶雅:11100796",
+        "寶雅:9931992"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP生物分解濾水網80入",
+      "productKey": "65020101",
+      "category": "DRAIN_NET",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9951414"
+      ],
+      "allSources": [
+        "寶雅:9951414"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP咖啡渣淨味濾水網80入(PX)",
+      "productKey": "63020121",
+      "category": "DRAIN_NET",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9951414"
+      ],
+      "allSources": [
+        "寶雅:9951414"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "Amaze大地擴香-甜橘玫瑰果",
+      "productKey": "61030152",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11889740"
+      ],
+      "allSources": [
+        "寶雅:11889740"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "AMAZE經典擴香-雪松中性淡香水",
+      "productKey": "61030162",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11889740"
+      ],
+      "allSources": [
+        "寶雅:11889740"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "AMAZE經典擴香-白麝香琥珀淡香水",
+      "productKey": "61030315",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11889740"
+      ],
+      "allSources": [
+        "寶雅:11889740"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "AMAZE 礦石香氛包-雪松中性淡香水",
+      "productKey": "61030143",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11981229"
+      ],
+      "allSources": [
+        "寶雅:11981229"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "AMAZE 礦石香氛包-白麝香琥珀淡香水",
+      "productKey": "61030142",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11981229"
+      ],
+      "allSources": [
+        "寶雅:11981229"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "Amaze礦石香氛-玫瑰淡香水",
+      "productKey": "61030158",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11981229"
+      ],
+      "allSources": [
+        "寶雅:11981229"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "礦石香氛-沁藍海洋淡香水",
+      "productKey": "61030316",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11981229"
+      ],
+      "allSources": [
+        "寶雅:11981229"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "礦石香氛-月光舒眠薰衣草",
+      "productKey": "61030321",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:11981229"
+      ],
+      "allSources": [
+        "寶雅:11981229"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "香氛豆補充包-玫瑰淡香水(二)",
+      "productKey": "61020440",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:10716246"
+      ],
+      "allSources": [
+        "寶雅:10716246"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "香氛豆補充包-海洋中性白麝香(二)",
+      "productKey": "61020441",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:10716246"
+      ],
+      "allSources": [
+        "寶雅:10716246"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "香氛豆-粉紅甜蜜果香淡香水",
+      "productKey": "59020344",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:10716246"
+      ],
+      "allSources": [
+        "寶雅:10716246"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "香氛豆-鳶尾粉邂逅淡香水",
+      "productKey": "59020345",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:10716246"
+      ],
+      "allSources": [
+        "寶雅:10716246"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP日本愛宕柿小蘇打(二)",
+      "productKey": "61050035",
+      "category": "BAKING_SODA",
+      "carrefour": [],
+      "poya": [
+        "寶雅:10456003"
+      ],
+      "allSources": [
+        "寶雅:10456003"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP愛岩柿消臭噴霧-抗病毒EX(黃)",
+      "productKey": "61030090",
+      "category": "SPRAY",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9931707"
+      ],
+      "allSources": [
+        "寶雅:9931707"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP抗菌消臭噴霧-清新海洋",
+      "productKey": "61030274",
+      "category": "SPRAY",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9931707"
+      ],
+      "allSources": [
+        "寶雅:9931707"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "茶酚淨洗潔精-清雅茶香(黃)",
+      "productKey": "61050067",
+      "category": "DISHWASH",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9929445"
+      ],
+      "allSources": [
+        "寶雅:9929445"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "茶酚淨洗潔精-檸檬茶萃(黃)",
+      "productKey": "61050079",
+      "category": "DISHWASH",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9929445"
+      ],
+      "allSources": [
+        "寶雅:9929445"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "茶酚淨洗潔精補充包-茶香(黃)",
+      "productKey": "61050069",
+      "category": "DISHWASH",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9929445"
+      ],
+      "allSources": [
+        "寶雅:9929445"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "德適淨十抗菌酒精擦(PX)",
+      "productKey": "61040174",
+      "category": "WIPES",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9955034"
+      ],
+      "allSources": [
+        "寶雅:9955034"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "凝膠型除濕袋-雪松清香",
+      "productKey": "61030278",
+      "category": "DEHUMIDIFIER",
+      "carrefour": [],
+      "poya": [
+        "寶雅:10721721"
+      ],
+      "allSources": [
+        "寶雅:10721721"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP指尖強化手套-薰衣紫M",
+      "productKey": "63020159",
+      "category": "GLOVES",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9932001"
+      ],
+      "allSources": [
+        "寶雅:9932001"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "OP指尖強化手套-薰衣紫L",
+      "productKey": "63020160",
+      "category": "GLOVES",
+      "carrefour": [],
+      "poya": [
+        "寶雅:9932000"
+      ],
+      "allSources": [
+        "寶雅:9932000"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    },
+    {
+      "name": "Amaze 法國淡香水香氛豆-挪威雪松森林-(補充包)",
+      "productKey": "4710660888530",
+      "category": "FRAGRANCE",
+      "carrefour": [],
+      "poya": [
+        "寶雅:10716246"
+      ],
+      "allSources": [
+        "寶雅:10716246"
+      ],
+      "status": "HAS_ALLOWED_CANDIDATES",
+      "note": "用途候選；不代表規格、效能或價格可公平換算。"
+    }
+  ]
+}

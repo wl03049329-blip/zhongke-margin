@@ -10,8 +10,8 @@
   const rules={
    FRAGRANCE:[['sachet',/香氛包|礦石香氛|香包|sachet/],['diffuser',/擴香|diffuser/],['laundry',/香氛豆|衣物香氛|laundry/]],
    SPONGE:[['dish',/菜瓜布|洗碗海綿|木漿棉|dish.*sponge/]],
-   GLOVES:[['household',/耐用.*手套|舒適.*手套|指尖.*手套|保護.*手套|洗碗手套|household/]],
-   WIPES:[['floor',/濕拖巾|拖地|floor/],['alcohol',/酒精擦|酒精濕巾|alcohol/]],
+   GLOVES:[['household',/耐用.*手套|舒適.*手套|指尖.*手套|保護.*手套|快乾.*手套|洗碗手套|household/]],
+   WIPES:[['floor',/濕拖巾|拖地|floor/],['alcohol',/酒精擦|酒精濕巾|酒精布|alcohol/]],
    DISH_CLOTH:[['dish',/瞬吸布|棉紗布|抹布|dish.*cloth/]],
    SPRAY:[['deodorant',/消臭|除臭|deodor/]]
   };
@@ -22,7 +22,8 @@
  function find(product,records,{category,metadata,categories}){
   const kind=category(product),meta=metadata(product)||{};
   if(!kind||kind==='OTHER'||!Object.prototype.hasOwnProperty.call(categories,kind))return {level:'NONE',category:kind||'OTHER',records:[]};
-  const sameCategory=records.filter(row=>row.category===kind);
+  // Reviewed public candidates can be restricted by size/use without copying the master.
+  const sameCategory=records.filter(row=>row.category===kind&&(!row.eligibleProductCodes||row.eligibleProductCodes.includes(product.code||product.barcode)));
   if(FORMAL_CATEGORIES.has(kind))return {level:'FORMAL',category:kind,records:sameCategory};
   // Use actual product text, not broad category aliases or invented specifications.
   const ownPurpose=purpose(kind,[product.name,product.specText,meta.specSearchText].filter(Boolean).join(' '));

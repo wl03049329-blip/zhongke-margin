@@ -1,132 +1,162 @@
 {
   "added": 0,
   "changed": 0,
-  "successful": 29,
-  "warnings": 25,
+  "successful": 19,
+  "warnings": 31,
   "errors": 0,
   "issues": [
     {
-      "id": "萬家福:3142391100101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3142301000101",
+      "id": "寶雅:11100796",
       "severity": "warning",
       "reason": "UNPARSEABLE_SPEC"
     },
     {
-      "id": "萬家福:3142301000101",
+      "id": "寶雅:11100796",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     },
     {
-      "id": "萬家福:3142390200101",
+      "id": "寶雅:9931992",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:9932003",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:9932002",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:9937736",
       "severity": "warning",
       "reason": "UNPARSEABLE_SPEC"
     },
     {
-      "id": "萬家福:3142390200101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3142300400101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3142391000101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3142300800101",
+      "id": "寶雅:9949576",
       "severity": "warning",
       "reason": "UNPARSEABLE_SPEC"
     },
     {
-      "id": "萬家福:3142300800101",
+      "id": "寶雅:9949576",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     },
     {
-      "id": "萬家福:3142002500101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3142002200101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3142002400101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3142002300101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3142002900101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3142002100101",
+      "id": "寶雅:9937735",
       "severity": "warning",
       "reason": "UNPARSEABLE_SPEC"
     },
     {
-      "id": "萬家福:3142002100101",
+      "id": "寶雅:9932001",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     },
     {
-      "id": "萬家福:3142002600101",
+      "id": "寶雅:9932000",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     },
     {
-      "id": "萬家福:3145502700101",
-      "severity": "warning",
-      "reason": "MISSING_WIDTH"
-    },
-    {
-      "id": "萬家福:3145500200101",
+      "id": "寶雅:9951414",
       "severity": "warning",
       "reason": "UNPARSEABLE_SPEC"
     },
     {
-      "id": "萬家福:3145500200101",
+      "id": "寶雅:9951414",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     },
     {
-      "id": "萬家福:3145502300101",
+      "id": "寶雅:11981229",
       "severity": "warning",
       "reason": "UNPARSEABLE_SPEC"
     },
     {
-      "id": "萬家福:3145502300101",
+      "id": "寶雅:11981229",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     },
     {
-      "id": "萬家福:3145501400101",
+      "id": "寶雅:11889740",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:11889740",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     },
     {
-      "id": "萬家福:3146615600101",
+      "id": "寶雅:10716246",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:10716246",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     },
     {
-      "id": "萬家福:3145500800101",
+      "id": "寶雅:9931707",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:9931707",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:9929445",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:9929445",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:10456003",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:10456003",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:10721721",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:10721721",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:9931891",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:9931891",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:9955034",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:9955034",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     }

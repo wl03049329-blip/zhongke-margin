@@ -37,7 +37,8 @@
   if(!safeUrl(row.sourceUrl))errors.push('INVALID_SOURCE_URL');
   if(typeof row.currentPrice!=='number'||!Number.isFinite(row.currentPrice)||row.currentPrice<=0)errors.push('INVALID_PRICE');
   if(row.originalPrice!==null&&row.originalPrice!==undefined&&(!Number.isFinite(row.originalPrice)||row.originalPrice<=0))errors.push('INVALID_ORIGINAL_PRICE');
-  if(!['CLING_FILM','FOIL','BAKING_PAPER'].includes(row.category))errors.push('UNKNOWN_CATEGORY');
+  // Accept catalog categories for raw public prices; this grants no new unit conversion.
+  if(!['CLING_FILM','FOIL','BAKING_PAPER','HEAT_BAG','ZIP_BAG','GLOVES','DISH_CLOTH','SPONGE','DRAIN_NET','DEODORANT_BAG','WIPES','DISHWASH','BAKING_SODA','SPRAY','DEHUMIDIFIER','FRAGRANCE'].includes(row.category))errors.push('UNKNOWN_CATEGORY');
   if(!Number.isFinite(Date.parse(row.observedAt)))errors.push('INVALID_OBSERVED_AT');
   for(const field of ['widthCm','lengthM','packQuantity'])if(row[field]!=null&&(!Number.isFinite(row[field])||row[field]<=0||(field==='packQuantity'&&!Number.isInteger(row[field]))))errors.push('INVALID_'+field.toUpperCase());
   const spec=parseSpec(row.specText);if(spec.lengthM===null||spec.packQuantity===null)warnings.push('UNPARSEABLE_SPEC');if(spec.widthCm===null)warnings.push('MISSING_WIDTH');
@@ -45,13 +46,15 @@
   if(row.sourceStatus&&!statuses.includes(row.sourceStatus))errors.push('INVALID_SOURCE_STATUS');
   return {errors,warnings};
  }
- function semantic(record){const fields=['brand','productName','category','retailer','retailerProductId','sourceUrl','specText','widthCm','lengthM','packQuantity','totalLengthM','material','currentPrice','originalPrice','promotionText','availability','sourceStatus','sourceMethod'];return JSON.stringify(fields.map(k=>record[k]??null));}
+ function semantic(record){const fields=['brand','productName','category','retailer','retailerProductId','sourceUrl','specText','widthCm','lengthM','packQuantity','totalLengthM','material','currentPrice','originalPrice','promotionText','availability','sourceStatus','sourceMethod','eligibleProductCodes','matchReason','unitConversionVerified'];return JSON.stringify(fields.map(k=>record[k]??null));}
  function applyObservations(existing,history,rows,now=new Date().toISOString()){
   const records=structuredClone(existing),nextHistory=structuredClone(history),runtime={},issues=[],seen=new Map(),urls=new Map();let added=0,changed=0;
   for(const raw of rows){
    if(raw.error){const id=raw.competitorProductId,old=records.find(p=>p.competitorProductId===id);if(old){runtime[id]={lastCheckedAt:now,lastSuccessAt:raw.lastSuccessAt||old.lastSuccessAt,sourceStatus:'FAILED',reason:normalize(raw.error)};}issues.push({id,severity:'error',reason:'PRICE_PARSER_FAILURE',message:normalize(raw.error)});continue;}
    const row={...raw,retailer:normalize(raw.retailer),brand:normalize(raw.brand),productName:normalize(raw.productName),promotionText:normalize(raw.promotionText),originalPrice:raw.originalPrice??null,availability:raw.availability||'UNKNOWN'};
    const validation=validate(row),spec=parseSpec(row.specText),id=productId(row);validation.errors.forEach(reason=>issues.push({id,severity:'error',reason}));validation.warnings.forEach(reason=>issues.push({id,severity:'warning',reason}));if(validation.errors.length)continue;
+   // A glove/bag dimension must not become a roll/area conversion by inference.
+   if(row.unitConversionVerified===false)Object.assign(spec,{widthCm:null,lengthM:null,totalLengthM:null});
    const prepared={...row,competitorProductId:id,normalizedName:key(row.productName),...spec,...units(row.currentPrice,spec),material:row.material||null,currency:'TWD',lastCheckedAt:now,lastSuccessAt:row.observedAt,sourceMethod:row.sourceMethod||'MANUAL',sourceStatus:row.sourceMethod==='PUBLIC_HTML'?'FRESH':'MANUAL',effectiveAverageUnitPrice:effectiveAverage(row.currentPrice,row.promotionText)};
    if(seen.has(id)){issues.push({id,severity:semantic(seen.get(id))===semantic(prepared)?'warning':'error',reason:semantic(seen.get(id))===semantic(prepared)?'DUPLICATE_PRODUCT':'CONFLICTING_PRICE'});continue;}
    if(urls.has(row.sourceUrl)||records.some(p=>p.sourceUrl===row.sourceUrl&&p.competitorProductId!==id)){issues.push({id,severity:'error',reason:'DUPLICATE_SOURCE_URL'});continue;}seen.set(id,prepared);urls.set(row.sourceUrl,id);

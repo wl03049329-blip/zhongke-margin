@@ -30,9 +30,11 @@ jobs:
         run: node scripts/scrape_competitor_prices.cjs
       - name: Probe source feasibility before release
         if: github.ref != 'refs/heads/main'
-        run: node -e "const r=require('./COMPETITOR_VALIDATION.json');if(r.successful!==require('./competitor-sources.json').reduce((n,s)=>n+s.productUrls.length,0)||r.errors)process.exit(1)"
+        run: node -e "const r=require('./COMPETITOR_VALIDATION.json');const count=require('./competitor-sources.json').reduce((n,s)=>n+s.productUrls.length,0)+require('./competitor-poya-sources.json').products.length;if(r.successful!==count||r.errors)process.exit(1)"
       - name: Competitor unit checks
-        run: node tests/competitor-prices.cjs --unit
+        run: |
+          node tests/competitor-prices.cjs --unit
+          node tests/poya-expansion.cjs --unit --source-only
       - name: Publish validation evidence
         if: always()
         uses: actions/upload-artifact@v4

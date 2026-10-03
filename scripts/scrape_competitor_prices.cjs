@@ -26,10 +26,12 @@ function robotsAllowed(robots,url){const path=new URL(url).pathname+new URL(url)
 async function publicGet(url){const res=await fetch(url,{headers:{'User-Agent':'PXWorkbenchPriceRadar/1.0 (public price observation; no account access)'},signal:AbortSignal.timeout(20000),redirect:'error'});if(!res.ok)throw Error('HTTP_'+res.status);return res.text();}
 async function run(){
  const existing=read('competitor-prices.json',[]),history=read('competitor-price-history.json',{}),priorRuntime=read('competitor-runtime.json',{}),rows=[],sourceAudit=[];
- for(const source of read('competitor-sources.json',[])){
+ for(const source of process.argv.includes('--poya-only')?[]:read('competitor-sources.json',[])){
   let robots;try{robots=await publicGet(source.robotsUrl)}catch(error){sourceAudit.push({retailer:source.retailer,status:'ROBOTS_UNAVAILABLE',error:error.message});}
   for(const url of source.productUrls){const id=core.productId({retailer:source.retailer,retailerProductId:url.match(/\/(\d+)\.html$/)?.[1]});try{if(!core.safeUrl(url)||new URL(url).origin!==new URL(source.baseUrl).origin||!robots||!robotsAllowed(robots,url))throw Error('SOURCE_NOT_ALLOWED');const html=await publicGet(url);if(/<title[^>]*>[^<]*(?:captcha|access denied|just a moment)/i.test(html))throw Error('BOT_CHALLENGE_STOP');rows.push(parseProduct(html,url,source.retailer,source.category));sourceAudit.push({url,status:'SUCCESS',method:'PUBLIC_HTML_JSON_LD',noLogin:true});}catch(error){rows.push({competitorProductId:id,error:error.message,lastSuccessAt:priorRuntime[id]?.lastSuccessAt});sourceAudit.push({url,status:'FAILED',error:error.message});}await new Promise(r=>setTimeout(r,1000));}
  }
+ const poya=read('competitor-poya-sources.json',null);
+ if(poya){try{const collected=await require('./poya-price-source.cjs').collect(poya,{publicGet,robotsAllowed,priorRuntime});rows.push(...collected.rows);sourceAudit.push(...collected.audit)}catch(error){sourceAudit.push({retailer:'寶雅',status:'FAILED',error:error.message});}}
  const result=core.applyObservations(existing,history,rows);result.runtime={...priorRuntime,...result.runtime};save(result);
  fs.writeFileSync(path.join(root,'COMPETITOR_SOURCE_AUDIT.json'),JSON.stringify({observedAt:new Date().toISOString(),sources:sourceAudit},null,2)+'\n');console.log(JSON.stringify(result.report,null,2));
 }
