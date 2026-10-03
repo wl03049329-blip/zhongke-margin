@@ -75,7 +75,7 @@ const server=http.createServer((req,res)=>{const file=path.join(root,decodeURICo
  await page.locator('#cProduct').fill('65010209');await card.locator('.sales-copy').click();assert.match(await page.evaluate(()=>navigator.clipboard.readText()),/最新月：10,073 支（2026\/08）/);
  const network=await context.newCDPSession(page);await network.send('Network.enable');await network.send('Network.setCacheDisabled',{cacheDisabled:true});
  await page.reload({waitUntil:'networkidle'});await page.locator('#cProduct').fill('65010209');await card.locator('.sales-extrema').waitFor();
- const cache=await page.evaluate(async()=>{await navigator.serviceWorker.ready;return caches.keys()});assert.deepEqual(cache,['px-workbench-v4.1.2-sales-phase2']);assert.deepEqual(errors,[]);
+ const cache=await page.evaluate(async()=>{await navigator.serviceWorker.ready;return caches.keys()});assert.deepEqual(cache,['px-workbench-v4.1.7-new-px-reverse']);assert.deepEqual(errors,[]);
  const fixtureContext=await browser.newContext({viewport:{width:390,height:844}}),fixturePage=await fixtureContext.newPage(),fixtureErrors=[];
  fixturePage.on('pageerror',error=>fixtureErrors.push(error.message));
  await fixturePage.route('**/px-sales-data.js',async route=>{const response=await route.fetch();const original=await response.text();await route.fulfill({response,body:original+`\n{const source=window.PX_SALES_DATA,key='${foil}',sales=source[key].sales.map((value,index)=>index>=1&&index<=8?0:index===14?null:index===20?0:value);window.PX_SALES_DATA={...source,[key]:{...source[key],sales}}}`})});
