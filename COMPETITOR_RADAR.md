@@ -1,4 +1,6 @@
-# 競品價格雷達 — 保鮮膜 Pilot
+# 公開價格雷達
+
+目前正式支援 29 支公開商品（保鮮膜 14、鋁箔 8、料理紙 7）。商品別名與規格搜尋設定詳見 PRICE_CATALOG.md。以下首批驗證記錄保留作來源背景。
 
 ## Source feasibility
 
@@ -22,7 +24,7 @@
 
 執行 `node scripts/competitor-price-import.cjs <file.json|file.csv>`。JSON 是商品陣列；CSV 第一列為欄名，支援引號與 BOM。
 
-必要欄位：retailer、brand、productName、category（目前只接受 CLING_FILM）、specText、currentPrice（正數）、sourceUrl（公開 HTTPS）、observedAt（實際查核 ISO 時間）。選填 retailerProductId、originalPrice、promotionText、availability、material。人工匯入標為 MANUAL。價格必須實際查核，沒有來源／未提供價格不得匯入。不要把範例價格當正式資料。一般單卷來源可用 `30cm×60m／1入`，三入必須明示 `30cm×30m／3入`；未知寬度或長度保留原文、換算為 null。禁止猜包裝數或材質。
+必要欄位：retailer、brand、productName、category（CLING_FILM、FOIL、BAKING_PAPER）、specText、currentPrice（正數）、sourceUrl（公開 HTTPS）、observedAt（實際查核 ISO 時間）。選填 retailerProductId、originalPrice、promotionText、availability、material。人工匯入標為 MANUAL。價格必須實際查核，沒有來源／未提供價格不得匯入。不要把範例價格當正式資料。一般單卷來源可用 `30cm×60m／1入`，三入必須明示 `30cm×30m／3入`；未知寬度或長度保留原文、換算為 null。禁止猜包裝數或材質。
 
 `COMPETITOR_VALIDATION.json` 是本機驗證快照；每次自動工作的新 report 在 Actions artifact。單筆錯誤不讓整批崩潰，既有正常價格不清空。維護者應查閱失敗 artifact，若來源長期不支援則停用該 URL 的自動抓取，改人工查核。
 

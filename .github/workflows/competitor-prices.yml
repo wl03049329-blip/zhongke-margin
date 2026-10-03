@@ -30,7 +30,7 @@ jobs:
         run: node scripts/scrape_competitor_prices.cjs
       - name: Probe source feasibility before release
         if: github.ref != 'refs/heads/main'
-        run: node -e "const r=require('./COMPETITOR_VALIDATION.json');if(r.successful!==4||r.errors)process.exit(1)"
+        run: node -e "const r=require('./COMPETITOR_VALIDATION.json');if(r.successful!==require('./competitor-sources.json').reduce((n,s)=>n+s.productUrls.length,0)||r.errors)process.exit(1)"
       - name: Competitor unit checks
         run: node tests/competitor-prices.cjs --unit
       - name: Publish validation evidence
@@ -55,7 +55,7 @@ jobs:
           fi
       - name: Build static Pages with uncommitted runtime metadata
         if: github.ref == 'refs/heads/main'
-        run: node scripts/build_px_pages.cjs
+        run: node scripts/build_product_catalog.cjs && node scripts/build_px_pages.cjs
       - uses: actions/configure-pages@v5
         if: github.ref == 'refs/heads/main'
       - uses: actions/upload-pages-artifact@v3

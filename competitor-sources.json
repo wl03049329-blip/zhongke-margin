@@ -1,3 +1,67 @@
 [
- {"retailer":"萬家福","officialUrl":"https://www.uni-prosperity.com.tw/","baseUrl":"https://online.uni-prosperity.com.tw","robotsUrl":"https://online.uni-prosperity.com.tw/robots.txt","searchUrl":"https://online.uni-prosperity.com.tw/zh/search/?q=%E4%BF%9D%E9%AE%AE%E8%86%9C","sourceMethod":"PUBLIC_HTML","mode":"AUTO","category":"CLING_FILM","productUrls":["https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3142300100101.html","https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3142301900103.html","https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3142391100101.html","https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3142391500101.html"]}
+  {
+    "retailer": "萬家福",
+    "officialUrl": "https://www.uni-prosperity.com.tw/",
+    "baseUrl": "https://online.uni-prosperity.com.tw",
+    "robotsUrl": "https://online.uni-prosperity.com.tw/robots.txt",
+    "searchUrl": "https://online.uni-prosperity.com.tw/zh/search/?q=%E4%BF%9D%E9%AE%AE%E8%86%9C",
+    "sourceMethod": "PUBLIC_HTML",
+    "mode": "AUTO",
+    "category": "CLING_FILM",
+    "productUrls": [
+      "https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3142500900101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3142391100101.html",
+      "https://online.uni-prosperity.com.tw/zh/op/3142301000101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%90%B3%E7%BE%BD/3142500700101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3142301900103.html",
+      "https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3142391500101.html",
+      "https://online.uni-prosperity.com.tw/zh/op/3142390200101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3142301300101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%8D%97%E4%BA%9E/3142389700101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3142300400101.html",
+      "https://online.uni-prosperity.com.tw/zh/3142390100101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3142391000101.html",
+      "https://online.uni-prosperity.com.tw/zh/op/3142300800101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3142300100101.html"
+    ]
+  },
+  {
+    "retailer": "萬家福",
+    "officialUrl": "https://www.uni-prosperity.com.tw/",
+    "baseUrl": "https://online.uni-prosperity.com.tw",
+    "robotsUrl": "https://online.uni-prosperity.com.tw/robots.txt",
+    "searchUrl": "https://online.uni-prosperity.com.tw/zh/search/?q=%E9%8B%81%E7%AE%94",
+    "sourceMethod": "PUBLIC_HTML",
+    "mode": "AUTO",
+    "category": "FOIL",
+    "productUrls": [
+      "https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3142002500101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3142002200101.html",
+      "https://online.uni-prosperity.com.tw/zh/3142002400101.html",
+      "https://online.uni-prosperity.com.tw/zh/3142002300101.html",
+      "https://online.uni-prosperity.com.tw/zh/3142002900101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3142001700101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%90%B3%E7%BE%BD/3142002100101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3142002600101.html"
+    ]
+  },
+  {
+    "retailer": "萬家福",
+    "officialUrl": "https://www.uni-prosperity.com.tw/",
+    "baseUrl": "https://online.uni-prosperity.com.tw",
+    "robotsUrl": "https://online.uni-prosperity.com.tw/robots.txt",
+    "searchUrl": "https://online.uni-prosperity.com.tw/zh/search/?q=%E6%96%99%E7%90%86%E7%B4%99",
+    "sourceMethod": "PUBLIC_HTML",
+    "mode": "AUTO",
+    "category": "BAKING_PAPER",
+    "productUrls": [
+      "https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3145502700101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3145500200101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3145502300101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E5%A6%99%E6%BD%94/3145500300101.html",
+      "https://online.uni-prosperity.com.tw/zh/%E6%A5%93%E5%BA%B7/3145501400101.html",
+      "https://online.uni-prosperity.com.tw/zh/op/3146615600101.html",
+      "https://online.uni-prosperity.com.tw/zh/udilife-%E7%BE%8E%E5%91%B3%E9%97%9C%E4%BF%82/3145500800101.html"
+    ]
+  }
 ]

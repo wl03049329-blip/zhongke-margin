@@ -1,12 +1,132 @@
 {
   "added": 0,
   "changed": 0,
-  "successful": 4,
-  "warnings": 1,
+  "successful": 29,
+  "warnings": 25,
   "errors": 0,
   "issues": [
     {
       "id": "萬家福:3142391100101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142301000101",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "萬家福:3142301000101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142390200101",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "萬家福:3142390200101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142300400101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142391000101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142300800101",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "萬家福:3142300800101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142002500101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142002200101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142002400101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142002300101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142002900101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142002100101",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "萬家福:3142002100101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3142002600101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3145502700101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3145500200101",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "萬家福:3145500200101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3145502300101",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "萬家福:3145502300101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3145501400101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3146615600101",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "萬家福:3145500800101",
       "severity": "warning",
       "reason": "MISSING_WIDTH"
     }

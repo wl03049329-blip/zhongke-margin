@@ -37,7 +37,7 @@
   if(!safeUrl(row.sourceUrl))errors.push('INVALID_SOURCE_URL');
   if(typeof row.currentPrice!=='number'||!Number.isFinite(row.currentPrice)||row.currentPrice<=0)errors.push('INVALID_PRICE');
   if(row.originalPrice!==null&&row.originalPrice!==undefined&&(!Number.isFinite(row.originalPrice)||row.originalPrice<=0))errors.push('INVALID_ORIGINAL_PRICE');
-  if(row.category!=='CLING_FILM')errors.push('UNKNOWN_CATEGORY');
+  if(!['CLING_FILM','FOIL','BAKING_PAPER'].includes(row.category))errors.push('UNKNOWN_CATEGORY');
   if(!Number.isFinite(Date.parse(row.observedAt)))errors.push('INVALID_OBSERVED_AT');
   for(const field of ['widthCm','lengthM','packQuantity'])if(row[field]!=null&&(!Number.isFinite(row[field])||row[field]<=0||(field==='packQuantity'&&!Number.isInteger(row[field]))))errors.push('INVALID_'+field.toUpperCase());
   const spec=parseSpec(row.specText);if(spec.lengthM===null||spec.packQuantity===null)warnings.push('UNPARSEABLE_SPEC');if(spec.widthCm===null)warnings.push('MISSING_WIDTH');

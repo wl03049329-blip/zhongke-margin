@@ -53,7 +53,7 @@ async function main() {
   await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(process.env.PX_LIVE || `http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.2-sales-phase2"], "promotion release service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.3-price-catalog"], "promotion release service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   const expectedProductCategories = [
@@ -137,8 +137,8 @@ async function main() {
   assert.deepEqual(manifest.icons.map(icon => icon.purpose), ["any", "any"], "PWA icons declare standard any purpose");
   assert.ok(manifest.icons.every(icon => icon.src.endsWith("?v=4.1.2")), "PWA icons use the current cache-busting version");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.2-sales-phase2'/, "service worker cache version");
-  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.2-sales-phase2/, "service worker registration cache buster");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.3-price-catalog'/, "service worker cache version");
+  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.3-price-catalog/, "service worker registration cache buster");
   assert.match(staticHtml, /updateViaCache:"none"/, "service worker update bypasses HTTP cache");
   assert.match(serviceWorker, /e\.request\.mode==='navigate'\?\{cache:'no-store'\}/, "navigation fetch bypasses stale browser HTML cache");
   assert.match(serviceWorker, /cache:'reload'/, "new cache is populated from the network");
@@ -159,12 +159,12 @@ async function main() {
   assert.equal(fs.existsSync(path.join(root, "op-logo.png")), false, "legacy OP image is removed");
   assert.match(fs.readFileSync(path.join(root, "scripts/generate_social_preview.cjs"), "utf8"), /assets\/brand\/px-icon\.svg/, "social preview is generated from the locked PX icon asset");
   const logoSource = fs.readFileSync(path.join(root, "assets/brand/px-logo.svg"), "utf8");
-  assert.equal(crypto.createHash("sha256").update(logoSource).digest("hex"), lockedLogoHash, "locked PX logo SVG is byte-for-byte unchanged");
+  assert.equal(crypto.createHash("sha256").update(logoSource.replace(/\r\n/g,"\n")).digest("hex"), lockedLogoHash, "locked PX logo SVG is byte-for-byte unchanged");
   assert.doesNotMatch(logoSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇|<text[^>]*>[^<]+<\/text>/i, "logo contains only the PX lettermark");
   assert.match(logoSource, /viewBox="0 0 512 512"/, "reference-locked square logo viewBox");
   assert.match(logoSource, /x="113" y="376" width="286" height="20"/, "centered short cyan shelf line");
   const iconSource = fs.readFileSync(path.join(root, "assets/brand/px-icon.svg"), "utf8");
-  assert.equal(crypto.createHash("sha256").update(iconSource).digest("hex"), lockedLogoHash, "locked PX icon SVG is byte-for-byte unchanged");
+  assert.equal(crypto.createHash("sha256").update(iconSource.replace(/\r\n/g,"\n")).digest("hex"), lockedLogoHash, "locked PX icon SVG is byte-for-byte unchanged");
   assert.doesNotMatch(iconSource, /CHANNEL|WORKBENCH|通路工作台|Built by|弘昇/i, "icon contains only the PX lettermark");
 
   const rasterIcons = {

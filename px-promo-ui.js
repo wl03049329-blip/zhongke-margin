@@ -1,6 +1,7 @@
 /* Read-only campaign lookup linked to the existing product master. */
 const promoDataByName=new Map(PX_PROMO_PRICES.products.map(p=>[p.productName,p]));
 const PX_PRODUCT_MASTER=[...PX_Q3_PRODUCTS,...PX_PRODUCT_ADDITIONS];
+const catalogSearch=ProductSearch.create(PX_CATALOG_CONFIG);
 const promoEscape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const promoDateRange=p=>`${p.startDate.replaceAll('-','/')} ～ ${p.endDate.replaceAll('-','/')}`;
 function promoStatus(){const ctx=PXPromo.context(PX_PROMO_PRICES,PXPromo.today()),p=ctx.preferred;return p?`${ctx.current?'本檔':'下一檔'} ${p.label} · ${promoDateRange(p)}`:'目前無進行中或即將開始檔期';}
@@ -41,12 +42,12 @@ function promoCalcInfoMarkup(product){
 }
 function promoOptionMarkup(product){const data=promoDataByName.get(product.name),ctx=PXPromo.context(PX_PROMO_PRICES,PXPromo.today()),p=data?.periods[ctx.preferred?.id];return `<span class="campaign-option">${p?`${ctx.current?'本檔':'下一檔'} ${p.label} · ${p.campaignType}<br>`+p.promotions.map(p=>`${promoEscape(p.label)} ${p.promotionPrice===null?'—':'$'+PXPromo.money(p.promotionPrice)}｜${p.averageUnitPrice===null?'均價暫無法計算':'均價 $'+PXPromo.money(p.averageUnitPrice)}`).join('<br>'):'未提供檔期售價'}${p?promoComparisonMarkup(product,p.id,true):''}</span>`;}
 function renderCampaignSearch(){
- const query=document.getElementById('campaignSearch').value.trim().toLowerCase(),mode=document.getElementById('campaignFilter').value,results=document.getElementById('campaignResults');
+ const query=document.getElementById('campaignSearch').value.trim(),mode=document.getElementById('campaignFilter').value,results=document.getElementById('campaignResults');
  document.getElementById('campaignStatus').textContent=promoStatus();
  const current=PXPromo.context(PX_PROMO_PRICES,PXPromo.today()).current;document.querySelector('#campaignFilter option[value="current"]').textContent=current?'本檔':'下一檔（最近）';
- if(!query){results.innerHTML='<p class="campaign-empty">輸入名稱、關鍵字、品號或條碼，直接查看售價與均價。</p>';if(typeof renderCompetitorSearch==='function')renderCompetitorSearch('',[]);return;}
- const products=PX_PRODUCT_MASTER.filter(p=>productSearchText(p).includes(query));
- results.innerHTML=products.length?'<h2 class="campaign-own-heading">PX 自家商品</h2>'+products.map(p=>`<article class="card campaign-result" data-product-name="${promoEscape(p.name)}"><h2>${promoEscape(p.name)}</h2><div class="campaign-identifiers">品號：${p.code||'尚未建檔'}<br>條碼：${p.barcode||'尚未建檔'}</div>${promoProductMarkup(p,mode)}</article>`).join(''):'<p class="campaign-empty">沒有符合的 PX 商品</p>';
+ if(!query){results.innerHTML='<p class="campaign-empty">輸入品牌、關鍵字、規格、品號或條碼，直接查看售價與均價。支援夾鏈袋、烘焙紙、洗碗精等別名。</p>';if(typeof renderCompetitorSearch==='function')renderCompetitorSearch('',[]);return;}
+ const products=catalogSearch.searchOwn(PX_PRODUCT_MASTER,query);
+ results.innerHTML=products.length?'<h2 class="campaign-own-heading">PX 自家商品</h2>'+products.map(p=>`<article class="card campaign-result" data-product-name="${promoEscape(p.name)}"><h2>${promoEscape(p.name)}</h2><div class="campaign-identifiers">品號：${p.code||'尚未建檔'}<br>條碼：${p.barcode||'尚未建檔'}</div>${promoProductMarkup(p,mode)}<details class="campaign-history"><summary>查看商品來源與搜尋規格</summary><p>搜尋規格：${promoEscape(PX_CATALOG_CONFIG.products.find(e=>e.id===(p.code||p.barcode))?.specSearchText||p.name)}</p><p>促銷來源：${promoEscape(PX_PROMO_PRICES.sourceFile)}｜資料版本 ${promoEscape(PX_PROMO_PRICES.dataVersion)}</p><p>規格別名僅供搜尋，差額換算依已確認規格。</p></details></article>`).join(''):'<p class="campaign-empty">沒有符合的 PX 商品；可縮短關鍵字或分開輸入品牌與規格。</p>';
  if(typeof renderCompetitorSearch==='function')renderCompetitorSearch(query,products);
 }
 document.getElementById('campaignSearch').addEventListener('input',renderCampaignSearch);
