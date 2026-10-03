@@ -15,6 +15,7 @@ const server=http.createServer((req,res)=>{
 (async()=>{
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+ const baselineHeight=await require('./release-layout-baseline.cjs')(browser,`http://127.0.0.1:${server.address().port}/index.html`,'calc',page=>page.evaluate(()=>{PXPromo.today=()=> '2026-10-01';renderProductInsights(productBindings[0])}));
  const page=await browser.newPage({viewport:{width:390,height:844}}),errors=[];
  page.on('pageerror',error=>errors.push(error.message));
  page.on('console',message=>{if(message.type()==='error')errors.push(message.text())});
@@ -30,7 +31,7 @@ const server=http.createServer((req,res)=>{
  assert.ok(layout.hero.top<679,'hero moves above the prior 390px position');
  assert.equal(await page.locator('#thresholdSettings').evaluate(element=>element.previousElementSibling?.id),'cResult','threshold is immediately below hero');
  assert.ok(layout.hero.top<844,'margin result enters the first 390px viewport');
- assert.ok(layout.calcHeight<2862,'390px calculator height below measured pre-change baseline');
+ assert.ok(layout.calcHeight<=baselineHeight+1,`existing calculator height must not increase: ${layout.calcHeight} vs release baseline ${baselineHeight}`);
  const actions=await page.evaluate(()=>{const copy=document.querySelector('#copyResult'),clear=document.querySelector('#clearCalculation');return{copyWidth:copy.getBoundingClientRect().width,clearWidth:clear.getBoundingClientRect().width,copyHeight:copy.getBoundingClientRect().height,clearBackground:getComputedStyle(clear).backgroundColor,copyBackground:getComputedStyle(copy).backgroundColor}});
  assert.ok(actions.copyWidth>actions.clearWidth*2&&actions.clearWidth<120,'copy is primary and clear is compact');
  assert.ok(actions.copyHeight>=40&&actions.copyBackground!==actions.clearBackground,'copy remains a visible primary action');

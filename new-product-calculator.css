@@ -1,0 +1,6 @@
+#calc .new-product-picker-row{display:flex;align-items:center;gap:8px}#calc .new-product-picker-row .product-picker{flex:1;min-width:0}#calc .new-product-entry{margin:0;padding:7px 10px;min-height:44px;color:#075f68;background:#eef7f8;border:1px solid #bddcde;border-radius:9px;font-size:13px;font-weight:700;flex-shrink:0}
+#calc .new-product-mode{margin-bottom:12px;padding:10px 12px;border:1px solid #c9e3e5;border-radius:10px;background:#f0f8f8;display:flex;align-items:center;justify-content:space-between;gap:10px}
+#calc .new-product-mode b{display:block;font-size:13px;color:#153f52}#calc .new-product-mode small{display:block;margin-top:3px;color:#607482;font-size:11px}
+#calc .new-product-return{min-height:44px;padding:7px 9px;border:1px solid #d8e2e8;border-radius:8px;background:#fff;color:#405769;font-size:12px;flex-shrink:0}
+#calc .new-product-fields{display:contents}#calc .new-product-fields input{width:100%;min-width:0;font-size:16px}#calc .new-product-empty{padding:20px 14px;border:1px solid #d8e2e8;border-radius:14px;background:#f3f6f8;text-align:center;margin-bottom:10px;color:#405769}
+#calc .new-product-empty b{display:block;font-size:19px}#calc .new-product-empty p{margin:7px 0 0;font-size:13px}#calc [hidden]{display:none!important}

@@ -23,6 +23,7 @@ const server=http.createServer((req,res)=>{
 (async()=>{
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+ const baselineHeight=await require('./release-layout-baseline.cjs')(browser,`http://127.0.0.1:${server.address().port}/index.html`,'reverse');
  const page=await browser.newPage({viewport:{width:390,height:844}}),errors=[];
  page.on('pageerror',error=>errors.push(error.message));
  page.on('console',message=>{if(message.type()==='error')errors.push(message.text())});
@@ -35,7 +36,7 @@ const server=http.createServer((req,res)=>{
  });
  assert.ok(layout.input.bottom<=layout.hero.top&&layout.hero.bottom<=layout.detail.top&&layout.detail.bottom<=layout.product.top&&layout.product.bottom<=layout.campaign.top&&layout.campaign.bottom<=layout.sales.top,'reverse order');
  assert.ok(layout.hero.top<844&&layout.hero.top<1727,'hero moves into the first 390px viewport');
- assert.ok(layout.sectionHeight<2783,'page is shorter than the measured baseline');
+ assert.ok(layout.sectionHeight<=baselineHeight+1,`reverse page height must not increase: ${layout.sectionHeight} vs release baseline ${baselineHeight}`);
  assert.equal(await page.locator('#rDetail').evaluate(element=>element.open),false,'detail begins collapsed');
  assert.equal(await page.locator('#rPrice').innerText(),'66.37 元');
  assert.equal(await page.locator('#rSub').innerText(),'代回驗證：35.00%');
@@ -92,6 +93,6 @@ const server=http.createServer((req,res)=>{
  await page.setViewportSize({width:390,height:844});
  const preview=path.join(os.tmpdir(),'px-reverse-hierarchy-mobile.png');
  await page.locator('#reverse').screenshot({path:preview});
- console.log(JSON.stringify({status:'PASS',layout,baselineHeight:2783,formulaUnchanged:true,quickTargets:'PASS',fragranceCase:['82.57','78.63','58.83','6.44','20.59','35.00%'],badge:'input target',maximumOverflow,consoleErrors:errors,preview},null,2));
+ console.log(JSON.stringify({status:'PASS',layout,baselineHeight,formulaUnchanged:true,quickTargets:'PASS',fragranceCase:['82.57','78.63','58.83','6.44','20.59','35.00%'],badge:'input target',maximumOverflow,consoleErrors:errors,preview},null,2));
  await browser.close();server.close();
 })().catch(error=>{console.error(error);server.close();process.exit(1)});
