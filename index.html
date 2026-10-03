@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="px-promo.css">
 <link rel="stylesheet" href="competitor-price.css">
 <link rel="stylesheet" href="px-sales-explorer.css?v=4.1.2-sales-phase2">
-<link rel="stylesheet" href="new-product-calculator.css?v=4.1.5-new-product">
+<link rel="stylesheet" href="new-product-calculator.css?v=4.1.6-new-px">
 <style>
 :root{
  --op:#086b42;--op2:#16945b;--op3:#dff3e8;--earth:#8bc78f;
@@ -708,7 +708,7 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.5-new-product",{updateViaCache:"none"}));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.6-new-px",{updateViaCache:"none"}));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="scenario-summary.js?v=4.1.2-scenario-source"></script>
@@ -719,5 +719,5 @@ if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serv
 <script src="px-sales-explorer.js?v=4.1.2-sales-phase2"></script>
 <script src="new-product-organizer.js"></script>
 <script src="competitor-price-ui.js"></script>
-<script src="new-product-calculator.js?v=4.1.5-new-product"></script>
+<script src="new-product-calculator.js?v=4.1.6-new-px"></script>
 </body></html>
