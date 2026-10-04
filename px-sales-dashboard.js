@@ -2,7 +2,7 @@
 ((global)=>{
  'use strict';
  const core=global.PX_SALES_DASHBOARD_CORE,monthly=global.PX_SALES_ANALYSIS,periods=global.PX_SALES_PERIODS,data=global.PX_SALES_DATA;
- const products=PX_PRODUCT_MASTER,index=core.searchIndex(products),states=new Map(),storage='pxSalesRecentlyViewedV2';
+ const products=PX_PRODUCT_MASTER,index=core.searchIndex(products),states=new Map(),controllers=new Map(),pending=new Map(),storage='pxSalesRecentlyViewedV2';
  const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const nf=new Intl.NumberFormat('zh-TW',{maximumFractionDigits:0}),num=value=>core.valid(value)?nf.format(value):'資料不足',units=value=>core.valid(value)?num(value)+' 支':'資料不足';
  const signed=value=>core.valid(value)?(value>0?'+':'')+nf.format(value)+' 支':'資料不足';
@@ -40,21 +40,25 @@
   if(card.dataset.sales2)return;card.dataset.sales2='ready';card.classList.add('sales2');
   let state=states.get(binding.productId);const selected=binding.selected;if(selected)remember(selected);
   if(!state||state.name!==selected?.name){state={name:selected?.name||null,condition:{mode:'same'},view:null,analysisMode:state?.analysisMode||'single'};states.set(binding.productId,state)}
+  const handoff=pending.get(binding.productId);if(handoff){state.condition={mode:'custom',start:handoff.aStart,end:handoff.aEnd};state.analysisMode='single';state.handoffRanges=handoff;pending.delete(binding.productId)}
   const advanced=card.querySelector('.sales-explorer');
   card.querySelectorAll('.px-section-head,.sales-analysis-hero,.same-period-summary,.sales-averages,.sales-secondary,.trend-wrap,.monthly-details,.sales-extrema,.px-data-note,.px-empty').forEach(e=>e.remove());
   const ui=document.createElement('div');ui.className='sales2-flow';
-  ui.innerHTML=`<div class="sales2-heading"><h2>PX 銷售分析</h2><span>銷售分析 2.2</span></div><div class="sales22-modes" role="group" aria-label="銷售分析模式"><button type="button" data-sales-mode="single">單品分析</button><button type="button" data-sales-mode="multi">多品比較</button></div><div class="sales22-single-pane"><div class="sales2-controls"><div class="sales2-search"><label>商品搜尋<input class="sales2-search-input" type="search" autocomplete="off" role="combobox" aria-expanded="false" placeholder="搜尋商品名稱、條碼、PX 品號"></label><div class="sales2-search-results" role="listbox" hidden></div></div><label class="sales2-period-label">分析期間<select class="sales2-period"><option value="same">同期比較（今年累計）</option><option value="latest">最近一期</option><option value="all">全部資料</option><option value="custom">自訂期間</option></select></label></div><div class="sales2-custom" hidden><label>起始月份<input type="month" class="sales2-start"></label><label>結束月份<input type="month" class="sales2-end"></label></div><div class="sales2-body" aria-live="polite"></div></div><div class="sales22-multi-pane" hidden></div>`;
+  ui.innerHTML=`<div class="sales2-heading"><h2>PX 銷售分析</h2><span>銷售分析 2.3</span></div><div class="sales22-modes" role="group" aria-label="銷售分析模式"><button type="button" data-sales-mode="single">單品分析</button><button type="button" data-sales-mode="multi">多品比較</button><button type="button" data-sales-mode="radar">銷售雷達</button></div><div class="sales22-single-pane"><p class="sales23-handoff-note" hidden></p><div class="sales2-controls"><div class="sales2-search"><label>商品搜尋<input class="sales2-search-input" type="search" autocomplete="off" role="combobox" aria-expanded="false" placeholder="搜尋商品名稱、條碼、PX 品號"></label><div class="sales2-search-results" role="listbox" hidden></div></div><label class="sales2-period-label">分析期間<select class="sales2-period"><option value="same">同期比較（今年累計）</option><option value="latest">最近一期</option><option value="all">全部資料</option><option value="custom">自訂期間</option></select></label></div><div class="sales2-custom" hidden><label>起始月份<input type="month" class="sales2-start"></label><label>結束月份<input type="month" class="sales2-end"></label></div><div class="sales2-body" aria-live="polite"></div></div><div class="sales22-multi-pane" hidden></div><div class="sales23-radar-pane" hidden></div>`;
   card.prepend(ui);if(advanced){const details=document.createElement('details');details.className='sales2-advanced';details.innerHTML='<summary>進階工具：自訂期間比較</summary>';advanced.before(details);details.append(advanced)}
   global.PX_SALES_MULTI?.mount(ui.querySelector('.sales22-multi-pane'),binding);
   function syncMode(){
-   const multi=state.analysisMode==='multi';
-   ui.querySelector('.sales22-single-pane').hidden=multi;
-   ui.querySelector('.sales22-multi-pane').hidden=!multi;
-   card.querySelector('.sales2-advanced')?.toggleAttribute('hidden',multi);
+   const mode=state.analysisMode;
+   ui.querySelector('.sales22-single-pane').hidden=mode!=='single';
+   ui.querySelector('.sales22-multi-pane').hidden=mode!=='multi';
+   ui.querySelector('.sales23-radar-pane').hidden=mode!=='radar';
+   if(mode==='radar')global.PX_SALES_RADAR?.mount(ui.querySelector('.sales23-radar-pane'),binding);
+   card.querySelector('.sales2-advanced')?.toggleAttribute('hidden',mode!=='single');
    ui.querySelectorAll('[data-sales-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.salesMode===state.analysisMode)));
   }
   ui.querySelector('.sales22-modes').addEventListener('click',event=>{const button=event.target.closest('[data-sales-mode]');if(button){state.analysisMode=button.dataset.salesMode;syncMode()}});
-  ui.querySelector('.sales22-modes').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const buttons=[...ui.querySelectorAll('[data-sales-mode]')],target=buttons[event.key==='ArrowLeft'||event.key==='Home'?0:1];target.focus();target.click()});
+  ui.querySelector('.sales22-modes').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const buttons=[...ui.querySelectorAll('[data-sales-mode]')],current=buttons.indexOf(document.activeElement),target=buttons[event.key==='Home'?0:event.key==='End'?buttons.length-1:Math.max(0,Math.min(buttons.length-1,current+(event.key==='ArrowLeft'?-1:1)))];target.focus();target.click()});
+  controllers.set(binding.productId,mode=>{state.analysisMode=mode;syncMode()});
   syncMode();
   const latestView=selected?monthly.analyze(periods,data[selected.name]?.sales):null;
   const body=ui.querySelector('.sales2-body'),search=ui.querySelector('.sales2-search-input'),results=ui.querySelector('.sales2-search-results'),period=ui.querySelector('.sales2-period');
@@ -74,7 +78,7 @@
   const originalRender=render;
   function refreshReferences(){if(selected)body.querySelector('.sales2-details')?.insertAdjacentHTML('beforeend',references())}
   // Keep auxiliary monthly indicators available, without duplicating the primary KPI layer.
-  const renderWithReferences=()=>{originalRender();refreshReferences()};
+  const renderWithReferences=()=>{originalRender();refreshReferences();const note=ui.querySelector('.sales23-handoff-note'),r=state.handoffRanges;note.hidden=!r||(PX_SALES_EXPLORER.shift(r.aStart,-12)===r.bStart&&PX_SALES_EXPLORER.shift(r.aEnd,-12)===r.bEnd);if(!note.hidden)note.textContent=`沿用雷達本期 A。單品同期線固定比較去年同月；雷達對比期 B（${r.bStart}～${r.bEnd}）已帶入進階自訂期間比較。`};
   function options(){
    const query=search.value.trim(),matches=query?core.search(index,query):recent.map(name=>products.find(p=>p.name===name));
    results.hidden=false;search.setAttribute('aria-expanded','true');
@@ -86,8 +90,8 @@
   search.addEventListener('keydown',event=>{const buttons=[...results.querySelectorAll('button')],active=buttons.findIndex(b=>b.classList.contains('active'));if(event.key==='Escape'){close();search.value=selected?.name||''}else if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();const next=Math.max(0,Math.min(buttons.length-1,active+(event.key==='ArrowDown'?1:-1)));buttons.forEach(b=>b.classList.remove('active'));buttons[next]?.classList.add('active');buttons[next]?.scrollIntoView({block:'nearest'})}else if(event.key==='Enter'&&active>=0){event.preventDefault();buttons[active].click()}});
   results.addEventListener('mousedown',event=>event.preventDefault());
   results.addEventListener('click',event=>{const button=event.target.closest('[data-sales-product]');if(!button)return;const product=products[Number(button.dataset.salesIndex)];if(!product)return;remember(product);close();selectProduct(binding,product)});
-  period.addEventListener('change',()=>{state.condition.mode=period.value;const custom=period.value==='custom';ui.querySelector('.sales2-custom').hidden=!custom;if(custom&&!state.condition.start){const preset=PX_SALES_EXPLORER.preset(state.view.latest,'ytd');state.condition.start=preset.aStart;state.condition.end=preset.aEnd}ui.querySelector('.sales2-start').value=(state.condition.start||'').replace('/','-');ui.querySelector('.sales2-end').value=(state.condition.end||'').replace('/','-');renderWithReferences()});
-  for(const [selector,field] of [['.sales2-start','start'],['.sales2-end','end']])ui.querySelector(selector).addEventListener('input',event=>{state.condition[field]=PX_SALES_EXPLORER.normalize(event.target.value);renderWithReferences()});
+  period.addEventListener('change',()=>{state.handoffRanges=null;state.condition.mode=period.value;const custom=period.value==='custom';ui.querySelector('.sales2-custom').hidden=!custom;if(custom&&!state.condition.start){const preset=PX_SALES_EXPLORER.preset(state.view.latest,'ytd');state.condition.start=preset.aStart;state.condition.end=preset.aEnd}ui.querySelector('.sales2-start').value=(state.condition.start||'').replace('/','-');ui.querySelector('.sales2-end').value=(state.condition.end||'').replace('/','-');renderWithReferences()});
+  for(const [selector,field] of [['.sales2-start','start'],['.sales2-end','end']])ui.querySelector(selector).addEventListener('input',event=>{state.handoffRanges=null;state.condition[field]=PX_SALES_EXPLORER.normalize(event.target.value);renderWithReferences()});
   function tooltip(event){
    const target=event.target.closest('[data-point]');if(!target)return;const row=state.view.rows[Number(target.dataset.point)],tip=body.querySelector('.sales2-tooltip');
    const detail=(label,value)=>`<div><dt>${label}</dt><dd>${value}</dd></div>`;
@@ -109,7 +113,12 @@
   ui.querySelector('.sales2-custom').hidden=state.condition.mode!=='custom';ui.querySelector('.sales2-start').value=(state.condition.start||'').replace('/','-');ui.querySelector('.sales2-end').value=(state.condition.end||'').replace('/','-');renderWithReferences();
   let chartWidth=0;const resize=new ResizeObserver(()=>{if(!card.isConnected){resize.disconnect();return}const width=Math.max(260,Math.round(ui.clientWidth));if(width===chartWidth||!state.view||!ui.clientWidth)return;chartWidth=width;const trend=body.querySelector('.sales2-trend');if(trend){trend.innerHTML=trendMarkup(state.view,width)}});resize.observe(ui);
  }
- global.PX_SALES_DASHBOARD=Object.freeze({mount});
+ function openProduct(binding,name,ranges){
+  const product=products.find(p=>p.name===name);if(!product)return false;
+  pending.set(binding.productId,{...ranges});global.PX_SALES_CUSTOM?.prepareRanges(binding,ranges);selectProduct(binding,product);
+  requestAnimationFrame(()=>{controllers.get(binding.productId)?.('single');const panel=document.querySelector('#'+binding.salesId+' .sales22-single-pane');panel?.scrollIntoView({block:'start'});const title=panel?.querySelector('.sales2-product h3');if(title){title.tabIndex=-1;title.focus({preventScroll:true})}});return true;
+ }
+ global.PX_SALES_DASHBOARD=Object.freeze({mount,openProduct});
  // Empty entry still permits a search; existing selected cards mount after advanced tools.
  for(const binding of productBindings.filter(b=>b.salesId)){const container=document.getElementById(binding.salesId);const empty=()=>{if(binding.selected||container.querySelector('.px-sales-card')||(binding.productId==='cProduct'&&document.querySelector('#calc[data-calculator-mode="new"]')))return;const card=document.createElement('section');card.className='card px-sales-card';container.prepend(card);mount(card,binding)};new MutationObserver(empty).observe(container,{childList:true});empty()}
 })(window);

@@ -7,7 +7,7 @@
  const units=phase1.formatUnits,average=phase1.formatAverage,percent=value=>phase1.formatChange(value,'基準為 0，無法計算百分比');
  const signed=value=>core.valid(value)?`${value>0?'+':''}${number.format(value)} 支`:'資料不足';
  const span=view=>`${view.start} ～ ${view.end}`;
- const states=new Map();
+ const states=new Map(),pendingRanges=new Map();
  const coverage=view=>`有效月份 ${view.count} / ${view.length}`;
  async function copy(text,feedback){
   let copied=false;try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);copied=true}}catch(error){}
@@ -64,6 +64,7 @@
   card.classList.toggle('sales-empty-comparison',analysis.comparison?.status!=='comparable');
   let state=states.get(binding.productId);
   if(!state||state.product!==product){state={product,ranges:core.preset(analysis.latestMonth||periods.at(-1),'ytd'),names:[product],sort:'total',mode:'long'};states.set(binding.productId,state)}
+  if(pendingRanges.has(binding.productId)){state.ranges=pendingRanges.get(binding.productId);pendingRanges.delete(binding.productId)}
   if(!global.PX_SALES_DASHBOARD){setupExtrema(card,product);setupChart(card,product,state);setupMonths(card,product)}
   const root=document.createElement('div');root.className='sales-explorer';
   root.innerHTML=`<details class="sales-advanced sales-custom"><summary>自訂期間比較</summary>${controlsMarkup()}<div class="sales-period-results" aria-live="polite"></div><button type="button" class="sales-copy-action sales-period-copy">複製期間比較</button><span class="sales-feedback" role="status"></span></details>`;
@@ -84,6 +85,7 @@
   refresh();
   global.PX_SALES_DASHBOARD?.mount(card,binding);
  }
+ global.PX_SALES_CUSTOM=Object.freeze({prepareRanges:(binding,ranges)=>pendingRanges.set(binding.productId,{...ranges})});
  for(const binding of productBindings.filter(item=>item.salesId)){
   const container=document.getElementById(binding.salesId);if(!container)continue;
   new MutationObserver(()=>mount(container,binding)).observe(container,{childList:true});mount(container,binding);

@@ -1,7 +1,7 @@
 /* Sales 2.2 comparison center: only existing comparison results are presented. */
 ((global)=>{
  'use strict';
- const core=global.PX_SALES_EXPLORER,searchCore=global.PX_SALES_DASHBOARD_CORE,view=global.PX_SALES_MULTI_VIEW,periods=global.PX_SALES_PERIODS,data=global.PX_SALES_DATA,products=PX_PRODUCT_MASTER,index=searchCore.searchIndex(products),states=new Map();
+ const core=global.PX_SALES_EXPLORER,searchCore=global.PX_SALES_DASHBOARD_CORE,view=global.PX_SALES_MULTI_VIEW,periods=global.PX_SALES_PERIODS,data=global.PX_SALES_DATA,products=PX_PRODUCT_MASTER,index=searchCore.searchIndex(products),states=new Map(),renders=new Map();
  const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const sorts={total:'銷量最高',growth:'成長最快',difference:'增加支數最多'};
  const meta=product=>[product.code?'PX 品號：'+product.code:'',product.barcode?'條碼：'+product.barcode:''].filter(Boolean).join('｜');
@@ -72,8 +72,13 @@
    else if(button.classList.contains('sales-prior-year')){state.ranges.bStart=core.shift(state.ranges.aStart,-12)||'';state.ranges.bEnd=core.shift(state.ranges.aEnd,-12)||'';render()}
    else if(button.classList.contains('sales-multi-copy')&&state.presentation){const text=view.copyText(state.rows,state.presentation,sorts[state.sort]);let copied=false;try{await navigator.clipboard.writeText(text);copied=true}catch(error){try{copied=fallbackCopyText(text)}catch(error){}}pane.querySelector('.sales-feedback').textContent=copied?'已複製，可貼到 LINE 或 Email':'無法自動複製，請確認瀏覽器權限'}
   });
-  render();
+  renders.set(binding.productId,render);render();
  }
- global.PX_SALES_MULTI=Object.freeze({mount});
+ function add(binding,name){
+  const state=states.get(binding.productId);if(!state||!products.some(p=>p.name===name))return'missing';
+  if(state.names.includes(name))return'duplicate';if(state.names.length>=5)return'full';
+  state.touched=true;state.names.push(name);renders.get(binding.productId)?.();return'added';
+ }
+ global.PX_SALES_MULTI=Object.freeze({mount,add});
  for(const binding of productBindings.filter(b=>b.salesId))mount(document.querySelector('#'+binding.salesId+' .sales22-multi-pane'),binding);
 })(window);
