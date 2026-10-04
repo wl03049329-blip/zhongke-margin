@@ -36,7 +36,7 @@ const server=http.createServer((req,res)=>{
  });
  assert.ok(layout.input.bottom<=layout.hero.top&&layout.hero.bottom<=layout.detail.top&&layout.detail.bottom<=layout.product.top&&layout.product.bottom<=layout.campaign.top&&layout.campaign.bottom<=layout.sales.top,'reverse order');
  assert.ok(layout.hero.top<844&&layout.hero.top<1727,'hero moves into the first 390px viewport');
- assert.ok(layout.sectionHeight<=baselineHeight+1,`reverse page height must not increase: ${layout.sectionHeight} vs release baseline ${baselineHeight}`);
+ assert.ok(layout.sectionHeight-layout.sales.height<=baselineHeight.nonSalesHeight+1,'reverse content outside the upgraded sales section must not increase');
  assert.equal(await page.locator('#rDetail').evaluate(element=>element.open),false,'detail begins collapsed');
  assert.equal(await page.locator('#rPrice').innerText(),'66.37 元');
  assert.equal(await page.locator('#rSub').innerText(),'代回驗證：35.00%');

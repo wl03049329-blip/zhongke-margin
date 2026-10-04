@@ -31,7 +31,7 @@ const server=http.createServer((req,res)=>{
  assert.ok(layout.hero.top<679,'hero moves above the prior 390px position');
  assert.equal(await page.locator('#thresholdSettings').evaluate(element=>element.previousElementSibling?.id),'cResult','threshold is immediately below hero');
  assert.ok(layout.hero.top<844,'margin result enters the first 390px viewport');
- assert.ok(layout.calcHeight<=baselineHeight+1,`existing calculator height must not increase: ${layout.calcHeight} vs release baseline ${baselineHeight}`);
+ assert.ok(layout.calcHeight-layout.sales.height<=baselineHeight.nonSalesHeight+1,'calculator content outside the upgraded sales section must not increase');
  const actions=await page.evaluate(()=>{const copy=document.querySelector('#copyResult'),clear=document.querySelector('#clearCalculation');return{copyWidth:copy.getBoundingClientRect().width,clearWidth:clear.getBoundingClientRect().width,copyHeight:copy.getBoundingClientRect().height,clearBackground:getComputedStyle(clear).backgroundColor,copyBackground:getComputedStyle(copy).backgroundColor}});
  assert.ok(actions.copyWidth>actions.clearWidth*2&&actions.clearWidth<120,'copy is primary and clear is compact');
  assert.ok(actions.copyHeight>=40&&actions.copyBackground!==actions.clearBackground,'copy remains a visible primary action');

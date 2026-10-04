@@ -64,10 +64,10 @@
   card.classList.toggle('sales-empty-comparison',analysis.comparison?.status!=='comparable');
   let state=states.get(binding.productId);
   if(!state||state.product!==product){state={product,ranges:core.preset(analysis.latestMonth||periods.at(-1),'ytd'),names:[product],sort:'total',mode:'long'};states.set(binding.productId,state)}
-  setupExtrema(card,product);setupChart(card,product,state);setupMonths(card,product);
+  if(!global.PX_SALES_DASHBOARD){setupExtrema(card,product);setupChart(card,product,state);setupMonths(card,product)}
   const root=document.createElement('div');root.className='sales-explorer';
   root.innerHTML=`<details class="sales-advanced sales-custom"><summary>自訂期間比較</summary>${controlsMarkup()}<div class="sales-period-results" aria-live="polite"></div><button type="button" class="sales-copy-action sales-period-copy">複製期間比較</button><span class="sales-feedback" role="status"></span></details><details class="sales-advanced sales-multi"><summary>多商品比較（2～5 支）</summary><p class="sales-explorer-help">各商品使用相同 A／B 期間。請同時查看有效月份覆蓋，部分資料不能直接視為完整同期。</p>${controlsMarkup()}<label class="sales-multi-label">新增比較商品（名稱／PX 品號／條碼）<input class="sales-multi-search" type="search" autocomplete="off" placeholder="搜尋商品" aria-label="搜尋比較商品"></label><div class="sales-search-results" hidden></div><div class="sales-selected"></div><p class="sales-multi-note sales-selection-status" aria-live="polite"></p><label class="sales-sort-label">排序<select class="sales-sort"><option value="total">依本期銷量（高至低）</option><option value="difference">依差異支數（高至低）</option><option value="growth">依成長率（高至低）</option></select></label><div class="sales-multi-results" aria-live="polite"></div><button type="button" class="sales-copy-action sales-multi-copy">複製多商品比較</button><span class="sales-feedback" role="status"></span></details>`;
-  const anchor=card.querySelector('.monthly-details')||card.querySelector('.sales-extrema');anchor.after(root);
+  const anchor=card.querySelector('.monthly-details')||card.querySelector('.sales-extrema');if(anchor)anchor.after(root);else card.append(root);
   const custom=root.querySelector('.sales-custom'),multiple=root.querySelector('.sales-multi'),customOutput=custom.querySelector('.sales-period-results'),multiOutput=multiple.querySelector('.sales-multi-results');
   const selected=multiple.querySelector('.sales-selected'),search=multiple.querySelector('.sales-multi-search'),options=multiple.querySelector('.sales-search-results'),status=multiple.querySelector('.sales-selection-status');
   function renderMulti(){
@@ -107,6 +107,7 @@
    }
   });
   multiple.querySelector('.sales-sort').value=state.sort;refresh();
+  global.PX_SALES_DASHBOARD?.mount(card,binding);
  }
  for(const binding of productBindings.filter(item=>item.salesId)){
   const container=document.getElementById(binding.salesId);if(!container)continue;

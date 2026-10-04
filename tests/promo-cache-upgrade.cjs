@@ -46,7 +46,7 @@ const server=http.createServer((request,response)=>{
  const oldKeys=await page.evaluate(()=>caches.keys());
  upgraded=true;
  await page.evaluate(async()=>{const registration=await navigator.serviceWorker.ready;await registration.update()});
- await page.waitForFunction(async()=>{const keys=await caches.keys();return keys.length===1&&keys[0]==='px-workbench-v4.1.2-sales-phase2'},null,{timeout:20000});
+ await page.waitForFunction(async()=>{const keys=await caches.keys();return keys.length===1&&keys[0]==='px-workbench-v4.1.12-sales2'},null,{timeout:20000});
  await page.reload({waitUntil:'networkidle'});
  const current=await page.evaluate(async()=>({keys:await caches.keys(),controller:navigator.serviceWorker.controller?.scriptURL||null,active:(await navigator.serviceWorker.ready).active?.scriptURL||null,empty:!!document.querySelector('#pEmpty'),average:!!document.querySelector('#pAverage')}));
  console.log(JSON.stringify({oldKeys,current},null,2));

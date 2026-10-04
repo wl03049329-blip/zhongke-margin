@@ -53,7 +53,7 @@ async function main() {
   await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(process.env.PX_LIVE || `http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.11-poya"], "promotion release service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.12-sales2"], "promotion release service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   const expectedProductCategories = [
@@ -137,8 +137,8 @@ async function main() {
   assert.deepEqual(manifest.icons.map(icon => icon.purpose), ["any", "any"], "PWA icons declare standard any purpose");
   assert.ok(manifest.icons.every(icon => icon.src.endsWith("?v=4.1.2")), "PWA icons use the current cache-busting version");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.11-poya'/, "service worker cache version");
-  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.11-poya/, "service worker registration cache buster");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.12-sales2'/, "service worker cache version");
+  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.12-sales2/, "service worker registration cache buster");
   assert.match(staticHtml, /updateViaCache:"none"/, "service worker update bypasses HTTP cache");
   assert.match(serviceWorker, /e\.request\.mode==='navigate'\?\{cache:'no-store'\}/, "navigation fetch bypasses stale browser HTML cache");
   assert.match(serviceWorker, /cache:'reload'/, "new cache is populated from the network");
@@ -294,12 +294,16 @@ async function main() {
   assert.match(await page.locator("#cProductInfo").innerText(), /越庫/);
   assert.match(await page.locator("#cProductInfo").innerText(), /99%/);
   assert.match(await page.locator("#cProductInfo").innerText(), /1,271 店/);
+  await page.locator("#cSalesPerformance .sales2-period").selectOption("all");
+  await page.locator("#cSalesPerformance .sales2-details > summary").click();
   assert.match(await page.locator("#cSalesPerformance").innerText(), /2024\/12/);
   assert.match(await page.locator("#cSalesPerformance").innerText(), /10,073/);
   assert.match(await page.locator("#cSalesPerformance").innerText(), /\+34\.4%/);
-  assert.match(await page.locator("#cSalesPerformance .sales-analysis-hero").innerText(), /YoY・較去年同月/, "single-month YoY is clearly labeled");
-  assert.equal(await page.locator("#cSalesPerformance .month-row").count(), 21, "full month expansion data");
-  assert.ok(await page.locator("#cSalesPerformance .trend-line").getAttribute("d"), "trend path");
+  assert.match(await page.locator("#cSalesPerformance .sales2-kpis").innerText(), /同期成長率/, "sales 2.0 period YoY is clearly labeled");
+  assert.equal(await page.locator("#cSalesPerformance .sales2-details tbody tr").count(), 21, "full month expansion data");
+  assert.ok(await page.locator("#cSalesPerformance [data-series=current]").getAttribute("d"), "trend path");
+  await page.locator("#cSalesPerformance .sales2-details > summary").click();
+  await page.locator("#cSalesPerformance .sales2-period").selectOption("same");
 
   const fixedFrontMargin = await page.locator("#cPx").textContent();
   await page.locator("#cPrice").fill("129");
@@ -314,11 +318,11 @@ async function main() {
 
   await page.locator("#cProduct").fill("63020159");
   const newProductText = await page.locator("#cSalesPerformance").innerText();
-  assert.match(newProductText, /實銷資料起始\s*2026\/08/);
-  assert.match(newProductText, /近期月均銷/);
-  assert.match(newProductText, /尚無資料/);
+  assert.match(newProductText, /最新實銷資料：2026\/08/);
+  assert.match(newProductText, /現有 1 \/ 8 個月/);
+  assert.match(newProductText, /目前沒有足夠同期資料/);
   assert.doesNotMatch(newProductText, /上市月份|上市月齡|上市第/);
-  assert.ok(Number(await page.locator("#cSalesPerformance .prelaunch-zone").getAttribute("width")) > 0, "pre-data region");
+  assert.equal(await page.locator("#cSalesPerformance .sales2-point").count(), 1, "only the actual month is plotted, no pre-data zero points");
 
   const zeroCases = await page.evaluate(() => {
     const postLaunchZero = Array(21).fill(null);

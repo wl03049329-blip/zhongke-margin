@@ -33,56 +33,5 @@ assert.equal(core.multi(periods,synthetic,['a','b'],ytd)[0].name,'b');assert.equ
 assert.doesNotMatch(read('px-sales-explorer.js'),/熱銷|滯銷|推薦商品|最佳商品|最差商品|未來會|促銷成功/);
 global.window={};require('../px-sales-data.js');const source=window.PX_SALES_DATA,months=window.PX_SALES_PERIODS,foil='OP無雙酚A鋁箔800公分-12入';
 const real=core.compareRanges(months,source[foil].sales,ytd);assert.equal(real.a.total,74431);assert.equal(real.b.total,65240);assert.equal(real.difference,9191);
-const server=http.createServer((req,res)=>{const file=path.join(root,decodeURIComponent(new URL(req.url,'http://local').pathname).slice(1)||'index.html');if(!fs.existsSync(file)){res.writeHead(404).end();return}res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.json':'application/json'})[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file))});
-(async()=>{
- let browser;try{
- await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
- browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
- const context=await browser.newContext({viewport:{width:390,height:844},permissions:['clipboard-read','clipboard-write']}),page=await context.newPage(),errors=[];
- page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
- const url=process.env.PX_LIVE||`http://127.0.0.1:${server.address().port}/index.html`;
- await page.goto(url,{waitUntil:'networkidle'});await page.locator('#cProduct').fill('65010209');
- const card=page.locator('#cSalesPerformance .px-sales-card'),custom=card.locator('.sales-custom'),multi=card.locator('.sales-multi');
- await card.locator('.sales-extrema').waitFor();assert.equal(await card.locator('h2').innerText(),'PX 銷售分析');
- assert.equal(await card.locator('.sales-latest').innerText(),'10,073 支');assert.equal(await card.locator('.sales-mom').innerText(),'+18.0%');assert.equal(await card.locator('.sales-yoy').innerText(),'+34.4%');assert.equal(await card.locator('.sales-ytd').innerText(),'74,431 支');
- assert.match(await card.locator('.sales-extrema').innerText(),/近 12 月最高/);assert.equal(await custom.getAttribute('open'),null);assert.equal(await multi.getAttribute('open'),null);
- await card.locator('.monthly-details > summary').click();assert.equal(await card.locator('.month-row').count(),21);assert.match(await card.locator('.month-row').first().innerText(),/2026\/08[\s\S]*10,073[\s\S]*\+18.0%[\s\S]*\+34.4%/);
- await card.locator('[data-mode="year"]').click();assert.equal(await card.locator('.trend-svg').isVisible(),false);assert.equal(await card.locator('.sales-year-chart').isVisible(),true);assert.equal(await card.locator('.sales-year-line').count(),2);assert.match(await card.locator('.sales-year-note').innerText(),/資料不完整/);
- await card.locator('[data-mode="long"]').click();assert.equal(await card.locator('.trend-svg').isVisible(),true);await card.locator('.monthly-details > summary').click();
- const prefix=process.env.PX_LIVE?'px-sales-phase2-production':'px-sales-phase2-local',screenshots=[];
- const shot=async suffix=>{const file=path.join(os.tmpdir(),`${prefix}-${suffix}-390.png`);await card.screenshot({path:file});screenshots.push(file)};await shot('hero');
- const pageScreenshot=path.join(os.tmpdir(),`${prefix}-page-390.png`);await page.screenshot({path:pageScreenshot,fullPage:true});screenshots.push(pageScreenshot);
- await custom.locator('summary').click();assert.match(await custom.locator('.sales-period-results').innerText(),/74,431 支/);assert.match(await custom.locator('.sales-period-results').innerText(),/65,240 支/);assert.match(await custom.locator('.sales-period-results').innerText(),/\+9,191 支/);
- await custom.locator('.sales-period-copy').click();assert.equal((await page.evaluate(()=>navigator.clipboard.readText())).replace(/\r\n/g,'\n'),`【PX 銷售期間比較】\n商品：${foil}\n\n${await custom.locator('.sales-period-results').innerText()}`);
- await custom.locator('[data-range="bEnd"]').fill('2025-06');assert.match(await custom.locator('.sales-period-results').innerText(),/比較期間長度不同/);assert.match(await custom.locator('.sales-period-results').innerText(),/期間差異（非同期）/);
- await custom.locator('[data-range="aStart"]').fill('2026-09');assert.match(await custom.locator('.sales-period-results').innerText(),/起始月份不可晚於結束月份/);assert.equal(await custom.locator('.sales-period-copy').isDisabled(),true);
- await custom.locator('[data-preset="three"]').click();assert.equal(await custom.locator('[data-range="aStart"]').inputValue(),'2026-06');assert.equal(await custom.locator('[data-range="bStart"]').inputValue(),'2025-06');
- await custom.locator('[data-preset="six"]').click();assert.equal(await custom.locator('[data-range="aStart"]').inputValue(),'2026-03');
- await custom.locator('[data-range="bEnd"]').fill('2024-12');await custom.locator('.sales-prior-year').click();assert.equal(await custom.locator('[data-range="bStart"]').inputValue(),'2025-03');assert.equal(await custom.locator('[data-range="bEnd"]').inputValue(),'2025-08');await shot('period');
- await custom.locator('[data-preset="ytd"]').click();await custom.locator('summary').click();await multi.locator('summary').click();
- const add=async query=>{await multi.locator('.sales-multi-search').fill(query);await multi.locator('[data-add]').first().click()};
- await add('4710660886567');assert.equal(await multi.locator('tbody tr').count(),2);
- await add('63020159');await add('茶酚淨洗潔精-清雅茶香');await add('OP專科防臭袋S');assert.equal(await multi.locator('tbody tr').count(),5);assert.match(await multi.locator('.sales-multi-results').innerText(),/部分商品資料未完整/);
- await multi.locator('.sales-multi-search').fill('手套');assert.equal(await multi.locator('[data-add]').count(),0);assert.match(await multi.locator('.sales-search-results').innerText(),/已選滿/);
- await multi.locator('.sales-selected [data-remove="4"]').click();assert.equal(await multi.locator('tbody tr').count(),4);await add('OP專科防臭袋M');assert.equal(await multi.locator('tbody tr').count(),5);
- for(const sort of ['total','difference','growth']){await multi.locator('.sales-sort').selectOption(sort);const order=await multi.locator('tbody tr').evaluateAll(rows=>rows.map(row=>row.dataset.product));const expected=core.multi(months,source,order,ytd,sort).map(row=>row.name);assert.deepEqual(order,expected)}
- await multi.locator('[data-preset="three"]').click();assert.equal(await custom.locator('[data-range="aStart"]').inputValue(),'2026-06');assert.match(await multi.locator('.sales-multi-results').innerText(),/2026\/06/);
- await multi.locator('.sales-multi-copy').click();const multiCopy=await page.evaluate(()=>navigator.clipboard.readText());assert.match(multiCopy,/PX 多商品銷售比較/);assert.match(multiCopy,/OP指尖強化手套-薰衣紫M/);assert.match(multiCopy,/本期銷量：/);assert.match(multiCopy,/對比期銷量：/);assert.match(multiCopy,/非即時銷售資料/);
- for(const cell of await multi.locator('tbody td').allInnerTexts())assert.ok(multiCopy.includes(cell.replace(/\n/g,'；')));await shot('multi');
- let overflow=0;for(const width of [320,360,390,430,768,1280]){await page.setViewportSize({width,height:844});overflow=Math.max(overflow,await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)))}assert.equal(overflow,0);await page.setViewportSize({width:390,height:844});
- await page.locator('#cProduct').fill('OP指尖強化手套-薰衣紫M');assert.equal(await card.locator('.sales-ytd-label').innerText(),'2026 現有月份累計');assert.equal(await card.locator('.sales-ytd-note').innerText(),'計入：2026/08');assert.match(await card.locator('.sales-extrema').innerText(),/現有期間高點/);assert.equal(await card.locator('.sales-selected button').count(),1);
- await card.locator('.monthly-details > summary').click();assert.match(await card.locator('.month-row').nth(1).innerText(),/無資料/);await card.locator('[data-mode="year"]').click();assert.equal(await card.locator('.sales-year-dot').count(),1);await shot('partial');
- await page.locator('#cProduct').fill('65010209');await card.locator('.sales-copy').click();assert.match(await page.evaluate(()=>navigator.clipboard.readText()),/最新月：10,073 支（2026\/08）/);
- const network=await context.newCDPSession(page);await network.send('Network.enable');await network.send('Network.setCacheDisabled',{cacheDisabled:true});
- await page.reload({waitUntil:'networkidle'});await page.locator('#cProduct').fill('65010209');await card.locator('.sales-extrema').waitFor();
- const cache=await page.evaluate(async()=>{await navigator.serviceWorker.ready;return caches.keys()});assert.deepEqual(cache,['px-workbench-v4.1.11-poya']);assert.deepEqual(errors,[]);
- const fixtureContext=await browser.newContext({viewport:{width:390,height:844}}),fixturePage=await fixtureContext.newPage(),fixtureErrors=[];
- fixturePage.on('pageerror',error=>fixtureErrors.push(error.message));
- await fixturePage.route('**/px-sales-data.js',async route=>{const response=await route.fetch();const original=await response.text();await route.fulfill({response,body:original+`\n{const source=window.PX_SALES_DATA,key='${foil}',sales=source[key].sales.map((value,index)=>index>=1&&index<=8?0:index===14?null:index===20?0:value);window.PX_SALES_DATA={...source,[key]:{...source[key],sales}}}`})});
- await fixturePage.goto(url,{waitUntil:'networkidle'});await fixturePage.locator('#cProduct').fill('65010209');const fixtureCard=fixturePage.locator('#cSalesPerformance .px-sales-card');
- assert.equal(await fixtureCard.locator('.sales-latest').innerText(),'0 支');assert.equal(await fixtureCard.locator('.sales-mom').innerText(),'-100.0%');assert.equal(await fixtureCard.locator('.sales-yoy').innerText(),'去年同月為 0，無法計算百分比');assert.equal(await fixtureCard.locator('.sales-ytd-label').innerText(),'2026 現有月份累計');
- await fixtureCard.locator('[data-mode="year"]').click();assert.equal(((await fixtureCard.locator('.sales-year-line[data-year="2026"]').getAttribute('d')).match(/M/g)||[]).length,2,'null month splits current-year chart');
- await fixtureCard.locator('.sales-custom > summary').click();assert.match(await fixtureCard.locator('.sales-period-results').innerText(),/基準為 0，無法計算百分比/);assert.doesNotMatch(await fixtureCard.innerText(),/Infinity|NaN/);assert.deepEqual(fixtureErrors,[]);await fixtureContext.close();
- console.log(JSON.stringify({status:'PASS',mode:process.env.PX_LIVE?'PRODUCTION':'LOCAL',single:'PASS',months:'PASS',custom:'PASS',multi:'PASS',chart:'PASS',copy:'PASS',dataAndFormulas:'UNCHANGED',overflow,consoleErrors:errors,cache,screenshots},null,2));
- }finally{await browser?.close();server.close()}
-})().catch(error=>{console.error(error);process.exitCode=1});
+// Presentation checks moved to sales-dashboard.cjs; original calculation fixtures stay intact.
+console.log('PASS sales-phase2.cjs original data/formula/edge-case calculations');

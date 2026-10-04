@@ -68,12 +68,12 @@ async function enterCase(page,type,a,b){
  assert.match(await page.locator('#pSub').innerText(),/2 件總價 \$99\.00/);
  assert.equal(await page.locator('#pDetail').evaluate(element=>element.open),false,'details collapsed');
  const layout=await page.evaluate(()=>{
-  const rect=selector=>{const bounds=document.querySelector(selector).getBoundingClientRect();return{top:Math.round(bounds.top+scrollY),bottom:Math.round(bounds.bottom+scrollY)}};
+  const rect=selector=>{const bounds=document.querySelector(selector).getBoundingClientRect();return{top:Math.round(bounds.top+scrollY),bottom:Math.round(bounds.bottom+scrollY),height:Math.round(bounds.height)}};
   return{input:rect('#promo>.card:first-child'),hero:rect('#pResult'),detail:rect('#pDetail'),campaign:rect('#pCampaignInfo .campaign-info'),product:rect('#pProductInfo .px-info-card'),sales:rect('#pSalesPerformance .px-sales-card'),height:Math.round(document.querySelector('#promo').getBoundingClientRect().height)};
  });
  assert.ok(layout.input.bottom<=layout.hero.top&&layout.hero.bottom<=layout.detail.top&&layout.detail.bottom<=layout.campaign.top&&layout.campaign.bottom<=layout.product.top&&layout.product.bottom<=layout.sales.top,'promotion section order');
  assert.ok(layout.hero.top<oldHeroTop,'hero moves ahead of the former product and campaign sections');
- assert.ok(layout.height<=releaseHeight+1,`promotion page height must not increase: ${layout.height} vs release baseline ${releaseHeight}`);
+ assert.ok(layout.height-layout.sales.height<=releaseHeight.nonSalesHeight+1,'promotion content outside the upgraded sales section must not increase');
  const product=await page.locator('#pProductInfo .px-info-card').innerText();
  assert.doesNotMatch(product,/成本|全聯毛利率（前毛）/,'no duplicate product data');
  assert.match(product,/庫別[\s\S]*上架率[\s\S]*上架數/);
@@ -97,6 +97,6 @@ async function enterCase(page,type,a,b){
  await page.setViewportSize({width:390,height:844});
  const preview=path.join(os.tmpdir(),'px-promo-hierarchy-mobile.png');
  await page.locator('#promo').screenshot({path:preview});
- console.log(JSON.stringify({status:'PASS',layout,baselineHeight:releaseHeight,baselineHeroTop:oldHeroTop,heightChange:layout.height-releaseHeight,calculationParity:['bogo','half','special'],overflow,consoleErrors:errors,preview},null,2));
+ console.log(JSON.stringify({status:'PASS',layout,baselineHeight:releaseHeight,baselineHeroTop:oldHeroTop,heightChange:layout.height-releaseHeight.height,calculationParity:['bogo','half','special'],overflow,consoleErrors:errors,preview},null,2));
  await browser.close();server.close();
 })().catch(error=>{console.error(error);server.close();process.exit(1)});
