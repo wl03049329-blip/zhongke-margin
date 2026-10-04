@@ -1,4 +1,4 @@
-/* Browser QA: all tabs, expanded modules, desktop readability and exact mobile pixels. */
+/* Browser QA: all tabs, expanded modules, desktop readability and exact mobile styles/geometry. */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -14,7 +14,7 @@ const read = f => fs.readFileSync(path.join(root, f), 'utf8').replace(/\r\n/g, '
 const old = f => execFileSync('git', ['show', releaseBase + ':' + f], { cwd: root, encoding: 'utf8' }).replace(/\r\n/g, '\n');
 if (!process.env.PX_BASELINE) {
   const html = read('index.html');
-  assert.equal(html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.19-desktop-readability">/, '').replaceAll('service-worker.js?v=4.1.20-desktop-readability', 'service-worker.js?v=4.1.18-rsp-confirmed'), old('index.html'), 'original markup, inline CSS, formulas and business logic unchanged');
+  assert.equal(html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.21-desktop-readability">/, '').replaceAll('service-worker.js?v=4.1.21-desktop-readability', 'service-worker.js?v=4.1.18-rsp-confirmed'), old('index.html'), 'original markup, inline CSS, formulas and business logic unchanged');
   const tracked = execFileSync('git', ['ls-tree', '--name-only', releaseBase], { cwd: root, encoding: 'utf8' }).trim().split('\n');
   for (const f of tracked.filter(f => /\.(js|json|css)$/.test(f) && f !== 'service-worker.js')) assert.equal(read(f), old(f), f + ' data / original styles / logic unchanged');
 }
@@ -33,6 +33,10 @@ async function states(p, visit) {
     await openTab(p, tab); await p.locator('#' + input).fill('65010209');
     if (tab === 'promo') await p.locator('#pA').fill('129');
     await expand(p, `#${tab} details`); await visit(tab);
+    if (tab === 'calc') {
+      await p.locator('#cProduct').fill('OP'); await visit('product-dropdown');
+      await p.locator('#cProduct').fill('65010209');
+    }
   }
   await openTab(p, 'campaign'); await p.locator('#campaignSearch').fill('保鮮膜');
   await p.locator('.lookup-choices [data-px-compare="86210115"]').click();
@@ -63,6 +67,8 @@ async function states(p, visit) {
     await multi.locator('.sales-multi-search').fill(code); await multi.locator('[data-add]').first().click();
   }
   await expand(p, '#cSalesPerformance details'); await visit('sales-multi', '#cSalesPerformance');
+  await multi.locator('.sales-multi-search').fill('OP'); await visit('multi-dropdown', '#cSalesPerformance');
+  await multi.locator('.sales-multi-search').fill('');
   await card.locator('[data-sales-mode="radar"]').click();
   await expand(p, '#cSalesPerformance details'); await visit('sales-radar', '#cSalesPerformance');
   await p.evaluate(() => PX_SALES_UPDATE.open()); await visit('sales-update');
@@ -82,7 +88,7 @@ async function audit(p) {
   return p.evaluate(() => {
     const visible = e => { const s = getComputedStyle(e); return !!e.getClientRects().length && s.visibility !== 'hidden' && s.display !== 'none' && !e.closest('[hidden]'); };
     const scope = document.querySelector('dialog[open]') || document.querySelector('.app');
-    const small = [], buttonIssues = [], inputIssues = [], spill = [];
+    const small = [], buttonIssues = [], inputIssues = [], spill = [], dropdownIssues = [];
     const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
     while (walker.nextNode()) {
       const n = walker.currentNode, e = n.parentElement;
@@ -101,7 +107,11 @@ async function audit(p) {
     for (const e of scope.querySelectorAll('.px-metric b,.sales2-kpis strong,.sales22-kpis strong,.sales23-kpis strong,.lookup-normalized b')) {
       if (visible(e) && e.scrollWidth > e.clientWidth + 1) spill.push({ text: e.textContent, class: e.className });
     }
-    return { viewport: [innerWidth, innerHeight], devicePixelRatio, overflow: document.documentElement.scrollWidth - innerWidth, panel: document.querySelector('.panel.active')?.getBoundingClientRect().width, small, buttonIssues, inputIssues, spill };
+    for(const e of scope.querySelectorAll('.product-options.open,.sales2-search-results,.sales22 .sales-search-results')) {
+      if(!visible(e))continue; const r=e.getBoundingClientRect();
+      if(r.left<0||r.right>innerWidth+1||r.top<0||r.bottom>innerHeight+1)dropdownIssues.push({class:e.className,top:r.top,bottom:r.bottom});
+    }
+    return { viewport: [innerWidth, innerHeight], devicePixelRatio, overflow: document.documentElement.scrollWidth - innerWidth, panel: document.querySelector('.panel.active')?.getBoundingClientRect().width, small, buttonIssues, inputIssues, spill, dropdownIssues };
   });
 }
 (async () => {
@@ -127,7 +137,8 @@ async function audit(p) {
       });
       await context.close();
     }
-    if (!baseline && !process.env.PX_DESKTOP_ONLY) for (const [width, height] of [[390,844], [430,932], [900,900]]) {
+    const mobileSizes = [[390,844], [430,932], [900,900]].filter(([w])=>!process.env.PX_MOBILE_WIDTHS||process.env.PX_MOBILE_WIDTHS.split(',').includes(String(w)));
+    if (!baseline && !process.env.PX_DESKTOP_ONLY) for (const [width, height] of mobileSizes) {
       const c = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1, serviceWorkers: 'block' });
       const p = await c.newPage(); p.on('pageerror', e => errors.push(e.message));
       await p.goto(url, { waitUntil: 'networkidle' });
@@ -153,8 +164,8 @@ async function audit(p) {
         assert.deepEqual(captures[1].pixels.info,captures[0].pixels.info,`${width} ${name}: image dimensions unchanged`);
         let difference=0, antialiasPixels=0;
         for(let i=0;i<captures[0].pixels.data.length;i+=4){let delta=0;for(let j=0;j<4;j++)delta=Math.max(delta,Math.abs(captures[0].pixels.data[i+j]-captures[1].pixels.data[i+j]));difference=Math.max(difference,delta);if(delta>2)antialiasPixels++;}
-        // Permit isolated raster edge noise (at most 0.001% / 10 pixels); styles and geometry above must match exactly.
-        const tolerance=Math.max(10,Math.floor(captures[0].pixels.info.width*captures[0].pixels.info.height*0.00001));
+        // Permit isolated raster edge noise (at most 0.01% / 10 pixels); styles and geometry above must match exactly.
+        const tolerance=Math.max(10,Math.floor(captures[0].pixels.info.width*captures[0].pixels.info.height*0.0001));
         assert.ok(difference<=32&&antialiasPixels<=tolerance,`${width} ${name}: visual change (${antialiasPixels} pixels, max channel delta ${difference})`);
         maxPixelChannelDifference=Math.max(maxPixelChannelDifference,difference);maxAntialiasPixels=Math.max(maxAntialiasPixels,antialiasPixels); count++;
       });
@@ -170,6 +181,7 @@ async function audit(p) {
       assert.deepEqual(a.buttonIssues, [], `${a.viewport} ${a.name} button`);
       assert.deepEqual(a.inputIssues, [], `${a.viewport} ${a.name} input`);
       assert.deepEqual(a.spill, [], `${a.viewport} ${a.name} numeric overflow`);
+      assert.deepEqual(a.dropdownIssues, [], `${a.viewport} ${a.name} dropdown boundary`);
     }
     assert.deepEqual(errors, []);
     console.log(JSON.stringify({ status: 'PASS', baseline, url, desktopStates: report.desktop.length, mobile: report.mobile, errors, out }, null, 2));

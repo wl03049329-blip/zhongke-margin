@@ -41,7 +41,7 @@
   .app .product-search { padding-right: 56px; }
   .app .product-option { min-height: 50px; padding: 12px 14px; font-size: 15px; line-height: 1.5; }
   .app .product-section-title { font-size: 13px; padding: 12px 14px 8px; }
-  .app .product-options { max-height: min(420px, 56vh); }
+  .app .product-options { max-height: min(420px, 41dvh); }
   .app :is(button, .tab) { min-height: 48px; font-size: 15px; line-height: 1.45; }
   .app button { min-width: 0; overflow-wrap: anywhere; }
   .app .tab { min-height: 54px; }
@@ -177,6 +177,7 @@
   .app :is(.sales2, .sales22, .sales23, .sales-explorer) button { min-height: 48px; font-size: 15px; }
   .app :is(.sales2-search-results, .sales-search-results) b { font-size: 15px; }
   .app :is(.sales2-search-results, .sales-search-results) small { font-size: 13px; }
+  .app :is(.sales2-search-results, .sales22 .sales-search-results) { max-height: min(340px, 24dvh); overflow-y: auto; }
   .app :is(.sales2-badge, .sales2-trend-chip, .sales23-trend) { font-size: 12px; line-height: 1.5; white-space: normal; }
   .app :is(.sales2-kpis, .sales22-kpis, .sales23-kpis) { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
   .app :is(.sales2-kpis, .sales22-kpis, .sales23-kpis) article { padding: 20px; }
