@@ -1,0 +1,76 @@
+/* Scoped comparison center: no calculator or sales 2.1 chart styles changed. */
+.sales22-modes{display:flex;gap:4px;background:#f1f5f7;border-radius:10px;padding:4px;margin-bottom:18px}
+.sales22-modes button{min-height:44px;flex:1;border:0;border-radius:8px;background:transparent;color:#617785;font-size:13px;font-weight:600}
+.sales22-modes button[aria-pressed=true]{background:white;color:#18374b;box-shadow:0 2px 6px #18374b0a}
+.sales22{min-width:0;color:#18374b}
+.sales22 [hidden]{display:none!important}
+.sales22 h3{font-size:15px;margin:0 0 12px}
+.sales22 h4{font-size:12px;line-height:1.6;margin:0 0 7px;overflow-wrap:anywhere}
+.sales22 button{min-height:44px;border:1px solid #d8e3e9;border-radius:9px;background:#f7f9fa;color:#23485c;font-size:11px;padding:8px 12px}
+.sales22 button:disabled{opacity:.5;cursor:default}
+.sales22 :is(button,input,select,summary):focus-visible,.sales22-modes button:focus-visible{outline:2px solid #317887;outline-offset:2px}
+.sales22-selection,.sales22-period{margin:18px 0}
+.sales22-search{position:relative}
+.sales22 .sales-search-results{position:absolute;z-index:20;background:white;top:100%;left:0;right:0;max-height:310px;overflow:auto;box-shadow:0 8px 24px #18374b15}
+.sales22 .sales-search-results button{width:100%;border:0;border-bottom:1px solid #e8eef1;border-radius:0;text-align:left;background:white}
+.sales22 .sales-search-results button.active{background:#edf5f7}
+.sales22 .sales-search-results b{display:block;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.sales22 .sales-search-results small{display:block;font-size:10px;color:#677f8d;line-height:1.6}
+.sales22-chip{display:flex;align-items:center;gap:6px;max-width:100%;background:#f2f6f8;border:1px solid #dce7ec;border-radius:22px;padding:0 0 0 12px;font-size:11px;line-height:1.6}
+.sales22-chip>span{min-width:0;overflow-wrap:anywhere}
+.sales22-chip button{flex-shrink:0;background:transparent;border:0;border-radius:50%;font-size:18px;min-width:44px}
+.sales22 .sales-selection-status{font-size:11px;color:#637a89;margin:6px 0}
+.sales22-presets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.sales22-presets button[aria-pressed=true]{background:#eaf2f5;border-color:#a9c8d1;color:#195360}
+.sales22-custom{margin-top:12px}
+.sales22-note,.sales22-period-note{font-size:10px;color:#687f8d;line-height:1.7;margin:7px 0;overflow-wrap:anywhere}
+.sales22-period-note{font-weight:600;color:#476778}
+.sales22-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:22px 0 15px}
+.sales22-kpis article{min-width:0;border:1px solid #e3ebef;border-radius:12px;padding:16px 14px;background:white}
+.sales22-kpis article:first-child{background:#f6f9fa}
+.sales22-kpis span{font-size:11px;color:#617887}
+.sales22-kpis h4{font-size:11px;margin:10px 0;min-height:36px}
+.sales22-kpis strong{display:block;font-size:22px;font-variant-numeric:tabular-nums;line-height:1.4;overflow-wrap:anywhere}
+.sales22-kpis small{display:block;font-size:9px;color:#708591;line-height:1.6;margin-top:7px}
+.sales22-sort{display:flex!important;gap:10px;align-items:center;margin:15px 0}
+.sales22 .sales-sort{width:auto;max-width:100%;min-width:160px;margin:0}
+.sales22-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin-top:22px}
+.sales22-charts section{min-width:0}
+.sales22-charts article{padding:14px 0;border-bottom:1px solid #e9eff2}
+.sales22-volume-line{display:grid;grid-template-columns:40px minmax(0,1fr) 86px;gap:8px;align-items:center;margin:8px 0;font-size:10px;color:#637a89}
+.sales22-volume-line b{font-size:12px;text-align:right;color:#24485b;font-variant-numeric:tabular-nums}
+.sales22-volume-track{height:10px}
+.sales22-volume-track i{display:block;height:100%;border-radius:3px;background:#2f7d8a}
+.sales22-volume-track i.previous{background:#c4cfd8}
+.sales22-coverage summary{font-size:10px;line-height:1.6;color:#8a673c;cursor:pointer;padding:7px 0}
+.sales22-coverage p{font-size:10px;color:#637a89;line-height:1.7;margin:4px 0}
+.sales22-coverage-full{display:block;font-size:9px;color:#798d99;margin-top:8px}
+.sales22-growth-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sales22-growth-heading b{font-size:13px;font-variant-numeric:tabular-nums}
+.sales22 .positive{color:#326750}
+.sales22 .negative{color:#944c51}
+.sales22-growth-track{position:relative;height:12px;margin:16px 0 14px;background:#f7f9fa;border-radius:3px}
+.sales22-growth-track::before{content:'';position:absolute;left:50%;top:-5px;bottom:-5px;border-left:1px solid #9aaeba}
+.sales22-zero{position:absolute;left:50%;top:14px;transform:translateX(-50%);font-size:9px;color:#738896}
+.sales22-growth-track i{display:block;height:100%;position:absolute;border-radius:3px;background:#8fb7b1}
+.sales22-growth-track i.negative{background:#ccacaf}
+.sales22-summary{margin:24px 0;background:#f6f9fa;border-radius:10px;padding:16px}
+.sales22-summary p{font-size:11px;line-height:1.8;color:#4e6879;margin:5px 0;overflow-wrap:anywhere}
+.sales22-table{margin-top:22px;min-width:0}
+.sales22-table-scroll{width:100%;overflow:auto}
+.sales22 .sales-multi-table{display:table;width:100%;min-width:930px;table-layout:auto;border-collapse:collapse}
+.sales22 .sales-multi-table thead{display:table-header-group}
+.sales22 .sales-multi-table tbody{display:table-row-group}
+.sales22 .sales-multi-table tr{display:table-row;border:0;border-radius:0;margin:0;padding:0}
+.sales22 .sales-multi-table :is(th,td){display:table-cell;padding:12px 10px;border-bottom:1px solid #e5edf1;font-size:11px;white-space:nowrap;text-align:right;width:auto}
+.sales22 .sales-multi-table :is(th,td):first-child{width:38px;text-align:center}
+.sales22 .sales-multi-table :is(th,td):nth-child(2){width:210px;min-width:180px;max-width:240px;white-space:normal;text-align:left}
+.sales22 .sales-multi-table td::before{display:none}
+.sales22 .sales-multi-table td b{display:block}
+.sales22 .sales-multi-table .sales2-badge{display:inline-block;margin-top:5px}
+.sales22 .sales-multi-table small{font-size:9px;font-weight:400}
+.sales22-copy-row{margin-top:12px}
+.sales22 .sales-multi-copy{background:#176a73;color:white;border-color:#176a73}
+@media(max-width:900px){.sales22-charts{grid-template-columns:minmax(0,1fr);gap:24px}.sales22-presets{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.sales22-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sales22-kpis article{padding:14px 12px}.sales22-kpis strong{font-size:21px}}
+@media(max-width:360px){.sales22-volume-line{grid-template-columns:34px minmax(0,1fr) 80px;gap:5px}.sales22-kpis strong{font-size:19px}}

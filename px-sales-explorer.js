@@ -50,7 +50,7 @@
  }
  function controlsMarkup(){
   const inputs=(prefix,title)=>`<fieldset><legend>${title}</legend><label>起始月份<input type="month" data-range="${prefix}Start" aria-label="${title} 起始月份"></label><label>結束月份<input type="month" data-range="${prefix}End" aria-label="${title} 結束月份"></label></fieldset>`;
-  return `<p class="sales-explorer-help">A 為本期、B 為對比期。兩個比較區共用此月份設定；差異＝A − B。來源涵蓋 ${periods[0]} ～ ${periods.at(-1)}，範圍外不補值。</p><div class="sales-presets"><button type="button" data-preset="ytd">今年 YTD vs 去年同期</button><button type="button" data-preset="three">近 3 個月 vs 去年同期</button><button type="button" data-preset="six">近 6 個月 vs 去年同期</button></div><div class="sales-range-controls">${inputs('a','期間 A')}${inputs('b','期間 B')}</div><button type="button" class="sales-prior-year">快速帶入去年同期（依 A 設定 B）</button>`;
+  return `<p class="sales-explorer-help">A 為本期、B 為對比期。差異＝A − B。來源涵蓋 ${periods[0]} ～ ${periods.at(-1)}，範圍外不補值。</p><div class="sales-presets"><button type="button" data-preset="ytd">今年 YTD vs 去年同期</button><button type="button" data-preset="three">近 3 個月 vs 去年同期</button><button type="button" data-preset="six">近 6 個月 vs 去年同期</button></div><div class="sales-range-controls">${inputs('a','期間 A')}${inputs('b','期間 B')}</div><button type="button" class="sales-prior-year">快速帶入去年同期（依 A 設定 B）</button>`;
  }
  function periodMarkup(view){
   if(view.error)return `<p class="sales-error" role="alert">${escape(view.error)}</p>`;
@@ -66,47 +66,22 @@
   if(!state||state.product!==product){state={product,ranges:core.preset(analysis.latestMonth||periods.at(-1),'ytd'),names:[product],sort:'total',mode:'long'};states.set(binding.productId,state)}
   if(!global.PX_SALES_DASHBOARD){setupExtrema(card,product);setupChart(card,product,state);setupMonths(card,product)}
   const root=document.createElement('div');root.className='sales-explorer';
-  root.innerHTML=`<details class="sales-advanced sales-custom"><summary>自訂期間比較</summary>${controlsMarkup()}<div class="sales-period-results" aria-live="polite"></div><button type="button" class="sales-copy-action sales-period-copy">複製期間比較</button><span class="sales-feedback" role="status"></span></details><details class="sales-advanced sales-multi"><summary>多商品比較（2～5 支）</summary><p class="sales-explorer-help">各商品使用相同 A／B 期間。請同時查看有效月份覆蓋，部分資料不能直接視為完整同期。</p>${controlsMarkup()}<label class="sales-multi-label">新增比較商品（名稱／PX 品號／條碼）<input class="sales-multi-search" type="search" autocomplete="off" placeholder="搜尋商品" aria-label="搜尋比較商品"></label><div class="sales-search-results" hidden></div><div class="sales-selected"></div><p class="sales-multi-note sales-selection-status" aria-live="polite"></p><label class="sales-sort-label">排序<select class="sales-sort"><option value="total">依本期銷量（高至低）</option><option value="difference">依差異支數（高至低）</option><option value="growth">依成長率（高至低）</option></select></label><div class="sales-multi-results" aria-live="polite"></div><button type="button" class="sales-copy-action sales-multi-copy">複製多商品比較</button><span class="sales-feedback" role="status"></span></details>`;
+  root.innerHTML=`<details class="sales-advanced sales-custom"><summary>自訂期間比較</summary>${controlsMarkup()}<div class="sales-period-results" aria-live="polite"></div><button type="button" class="sales-copy-action sales-period-copy">複製期間比較</button><span class="sales-feedback" role="status"></span></details>`;
   const anchor=card.querySelector('.monthly-details')||card.querySelector('.sales-extrema');if(anchor)anchor.after(root);else card.append(root);
-  const custom=root.querySelector('.sales-custom'),multiple=root.querySelector('.sales-multi'),customOutput=custom.querySelector('.sales-period-results'),multiOutput=multiple.querySelector('.sales-multi-results');
-  const selected=multiple.querySelector('.sales-selected'),search=multiple.querySelector('.sales-multi-search'),options=multiple.querySelector('.sales-search-results'),status=multiple.querySelector('.sales-selection-status');
-  function renderMulti(){
-   selected.innerHTML=state.names.map((name,index)=>`<button type="button" data-remove="${index}" aria-label="移除 ${escape(name)}">${escape(name)} ×</button>`).join('');
-   status.textContent=`已選 ${state.names.length} / 5 支${state.names.length===5?'；已達上限，移除後可新增。':''}`;
-   multiple.querySelector('.sales-multi-copy').disabled=state.names.length<2;
-   if(state.names.length<2){multiOutput.innerHTML='<p class="sales-explorer-help">請選擇至少 2 支商品進行比較。</p>';return}
-   const rows=core.multi(periods,data,state.names,state.ranges,state.sort),first=rows[0].comparison;
-   if(first.error){multiOutput.innerHTML=`<p class="sales-error" role="alert">${escape(first.error)}</p>`;multiple.querySelector('.sales-multi-copy').disabled=true;return}
-   const cell=(label,content)=>`<td data-label="${label}">${content}</td>`;
-   multiOutput.innerHTML=`<p class="sales-multi-note">A：${span(first.a)}<br>B：${span(first.b)}</p>${first.unequal?'<p class="sales-warning">比較期間長度不同；百分比為期間差異（非同期）。</p>':''}${rows.some(row=>row.comparison.partial)?'<p class="sales-warning">部分商品資料未完整；各列差異僅依有效月份，不代表完整同期。</p>':''}<table class="sales-multi-table"><thead><tr><th>商品</th><th>本期銷量</th><th>對比期銷量</th><th>差異支數</th><th>成長／差異率</th><th>有效月份</th></tr></thead><tbody>${rows.map(row=>{const c=row.comparison;return `<tr data-product="${escape(row.name)}">${cell('商品',escape(row.name))}${cell('本期銷量',`${units(c.a.total)}<small>月平均 ${average(c.a.average)}</small>`)}${cell('對比期銷量',`${units(c.b.total)}<small>月平均 ${average(c.b.average)}</small>`)}${cell('差異支數',signed(c.difference))}${cell(c.rateLabel,`${percent(c.rate)}<small>${c.rateLabel}</small>`)}${cell('有效月份',`A ${c.a.count} / ${c.a.length}；B ${c.b.count} / ${c.b.length}<small>最新有效月 ${row.latest.latestMonth||'資料不足'}：${units(row.latest.latest)}</small>`)}</tr>`}).join('')}</tbody></table><p class="sales-multi-note">非即時銷售資料；最新有效月份依各商品顯示。</p>`;
-  }
+  const custom=root.querySelector('.sales-custom'),customOutput=custom.querySelector('.sales-period-results');
   function refresh(){
    root.querySelectorAll('[data-range]').forEach(input=>{input.value=(state.ranges[input.dataset.range]||'').replace('/','-')});
    const view=core.compareRanges(periods,data[product]?.sales,state.ranges);customOutput.innerHTML=periodMarkup(view)+`<p class="sales-multi-note">最新實銷資料：${analysis.latestMonth||'資料不足'}<br>※ 非即時銷售資料</p>`;
-   custom.querySelector('.sales-period-copy').disabled=!!view.error;renderMulti();root.querySelectorAll('.sales-feedback').forEach(node=>node.textContent='');
+   custom.querySelector('.sales-period-copy').disabled=!!view.error;root.querySelectorAll('.sales-feedback').forEach(node=>node.textContent='');
   }
-  function searchResults(){
-   const query=search.value.trim().toLocaleLowerCase('zh-TW');options.hidden=!query;if(!query){options.replaceChildren();return}
-   const matches=PX_Q3_PRODUCTS.filter(item=>!state.names.includes(item.name)&&productSearchText(item).includes(query));
-   options.innerHTML=state.names.length>=5?'<p>已選滿 5 支，請先移除商品。</p>':matches.length?matches.map(item=>`<button type="button" data-add="${escape(item.name)}">${escape(item.name)}</button>`).join(''):'<p>找不到符合的商品</p>';
-  }
-  search.addEventListener('input',searchResults);
   root.addEventListener('input',event=>{const input=event.target.closest('[data-range]');if(input){state.ranges[input.dataset.range]=core.normalize(input.value)||'';refresh()}});
-  root.addEventListener('change',event=>{if(event.target.matches('.sales-sort')){state.sort=event.target.value;renderMulti()}});
   root.addEventListener('click',event=>{
    const button=event.target.closest('button');if(!button)return;
    if(button.dataset.preset){state.ranges=core.preset(analysis.latestMonth||periods.at(-1),button.dataset.preset);refresh()}
    else if(button.classList.contains('sales-prior-year')){state.ranges.bStart=core.shift(state.ranges.aStart,-12)||'';state.ranges.bEnd=core.shift(state.ranges.aEnd,-12)||'';refresh()}
-   else if(button.dataset.add){if(state.names.length<5&&!state.names.includes(button.dataset.add)){state.names.push(button.dataset.add);search.value='';searchResults();refresh()}}
-   else if(button.dataset.remove!==undefined){state.names.splice(Number(button.dataset.remove),1);refresh();searchResults()}
    else if(button.classList.contains('sales-period-copy'))copy(`【PX 銷售期間比較】\n商品：${product}\n\n${customOutput.innerText}`,custom.querySelector('.sales-feedback'));
-   else if(button.classList.contains('sales-multi-copy')){
-    const rows=[...multiOutput.querySelectorAll('tbody tr')].map(row=>[...row.querySelectorAll('td')].map(cell=>`${cell.dataset.label}：${cell.innerText.replace(/\n/g,'；')}`).join('\n'));
-    const notes=[...multiOutput.querySelectorAll('.sales-multi-note,.sales-warning')].map(node=>node.innerText);
-    copy(`【PX 多商品銷售比較】\n\n${notes.join('\n')}\n\n${rows.join('\n\n')}`,multiple.querySelector('.sales-feedback'));
-   }
   });
-  multiple.querySelector('.sales-sort').value=state.sort;refresh();
+  refresh();
   global.PX_SALES_DASHBOARD?.mount(card,binding);
  }
  for(const binding of productBindings.filter(item=>item.salesId)){

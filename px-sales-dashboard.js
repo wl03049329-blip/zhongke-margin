@@ -39,12 +39,23 @@
  function mount(card,binding){
   if(card.dataset.sales2)return;card.dataset.sales2='ready';card.classList.add('sales2');
   let state=states.get(binding.productId);const selected=binding.selected;if(selected)remember(selected);
-  if(!state||state.name!==selected?.name){state={name:selected?.name||null,condition:{mode:'same'},view:null};states.set(binding.productId,state)}
+  if(!state||state.name!==selected?.name){state={name:selected?.name||null,condition:{mode:'same'},view:null,analysisMode:state?.analysisMode||'single'};states.set(binding.productId,state)}
   const advanced=card.querySelector('.sales-explorer');
   card.querySelectorAll('.px-section-head,.sales-analysis-hero,.same-period-summary,.sales-averages,.sales-secondary,.trend-wrap,.monthly-details,.sales-extrema,.px-data-note,.px-empty').forEach(e=>e.remove());
   const ui=document.createElement('div');ui.className='sales2-flow';
-  ui.innerHTML=`<div class="sales2-heading"><h2>PX 銷售分析</h2><span>銷售分析 2.1</span></div><div class="sales2-controls"><div class="sales2-search"><label>商品搜尋<input class="sales2-search-input" type="search" autocomplete="off" role="combobox" aria-expanded="false" placeholder="搜尋商品名稱、條碼、PX 品號"></label><div class="sales2-search-results" role="listbox" hidden></div></div><label class="sales2-period-label">分析期間<select class="sales2-period"><option value="same">同期比較（今年累計）</option><option value="latest">最近一期</option><option value="all">全部資料</option><option value="custom">自訂期間</option></select></label></div><div class="sales2-custom" hidden><label>起始月份<input type="month" class="sales2-start"></label><label>結束月份<input type="month" class="sales2-end"></label></div><div class="sales2-body" aria-live="polite"></div>`;
-  card.prepend(ui);if(advanced){const details=document.createElement('details');details.className='sales2-advanced';details.innerHTML='<summary>進階工具：自訂對比期／多商品比較</summary>';advanced.before(details);details.append(advanced)}
+  ui.innerHTML=`<div class="sales2-heading"><h2>PX 銷售分析</h2><span>銷售分析 2.2</span></div><div class="sales22-modes" role="group" aria-label="銷售分析模式"><button type="button" data-sales-mode="single">單品分析</button><button type="button" data-sales-mode="multi">多品比較</button></div><div class="sales22-single-pane"><div class="sales2-controls"><div class="sales2-search"><label>商品搜尋<input class="sales2-search-input" type="search" autocomplete="off" role="combobox" aria-expanded="false" placeholder="搜尋商品名稱、條碼、PX 品號"></label><div class="sales2-search-results" role="listbox" hidden></div></div><label class="sales2-period-label">分析期間<select class="sales2-period"><option value="same">同期比較（今年累計）</option><option value="latest">最近一期</option><option value="all">全部資料</option><option value="custom">自訂期間</option></select></label></div><div class="sales2-custom" hidden><label>起始月份<input type="month" class="sales2-start"></label><label>結束月份<input type="month" class="sales2-end"></label></div><div class="sales2-body" aria-live="polite"></div></div><div class="sales22-multi-pane" hidden></div>`;
+  card.prepend(ui);if(advanced){const details=document.createElement('details');details.className='sales2-advanced';details.innerHTML='<summary>進階工具：自訂期間比較</summary>';advanced.before(details);details.append(advanced)}
+  global.PX_SALES_MULTI?.mount(ui.querySelector('.sales22-multi-pane'),binding);
+  function syncMode(){
+   const multi=state.analysisMode==='multi';
+   ui.querySelector('.sales22-single-pane').hidden=multi;
+   ui.querySelector('.sales22-multi-pane').hidden=!multi;
+   card.querySelector('.sales2-advanced')?.toggleAttribute('hidden',multi);
+   ui.querySelectorAll('[data-sales-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.salesMode===state.analysisMode)));
+  }
+  ui.querySelector('.sales22-modes').addEventListener('click',event=>{const button=event.target.closest('[data-sales-mode]');if(button){state.analysisMode=button.dataset.salesMode;syncMode()}});
+  ui.querySelector('.sales22-modes').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const buttons=[...ui.querySelectorAll('[data-sales-mode]')],target=buttons[event.key==='ArrowLeft'||event.key==='Home'?0:1];target.focus();target.click()});
+  syncMode();
   const latestView=selected?monthly.analyze(periods,data[selected.name]?.sales):null;
   const body=ui.querySelector('.sales2-body'),search=ui.querySelector('.sales2-search-input'),results=ui.querySelector('.sales2-search-results'),period=ui.querySelector('.sales2-period');
   function references(){
