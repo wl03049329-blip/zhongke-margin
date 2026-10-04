@@ -1,3 +1,62 @@
 .sales2{max-width:1100px;min-width:0;color:#18374b}.sales2 [hidden]{display:none!important}.sales2-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.sales2-heading h2{font-size:17px;margin:0}.sales2-heading>span{font-size:10px;color:#667c89}.sales2-controls{display:grid;grid-template-columns:minmax(0,2fr) minmax(150px,1fr);gap:12px}.sales2 label{display:block;font-size:11px;font-weight:600;color:#526979}.sales2 input,.sales2 select{width:100%;min-width:0;min-height:44px;font-size:16px;margin-top:6px;background:#fff;color:#18374b;border:1px solid #cad8df;border-radius:10px;padding:10px}.sales2-search{position:relative;min-width:0}.sales2-search-results{position:absolute;z-index:30;top:100%;left:0;right:0;max-height:300px;overflow:auto;background:#fff;border:1px solid #d4e0e6;border-radius:12px;box-shadow:0 8px 24px #18374b15}.sales2-search-results p{font-size:12px;padding:12px;margin:0;color:#607687}.sales2-search-results button{display:block;width:100%;min-height:52px;padding:12px;text-align:left;background:#fff;border:0;border-bottom:1px solid #edf1f4;border-radius:0;color:#18374b}.sales2-search-results b{display:block;font-size:12px;line-height:1.6;overflow-wrap:anywhere}.sales2-search-results small{display:block;font-size:10px;line-height:1.5;color:#6b7e8c;overflow-wrap:anywhere}.sales2-search-results button:is(:hover,:focus,.active){background:#eef5f7;outline:2px solid #b8d6dc;outline-offset:-2px}.sales2-custom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:12px}.sales2-product{display:flex;align-items:start;justify-content:space-between;gap:12px;margin:20px 0 16px}.sales2-product>div{min-width:0}.sales2-product h3{font-size:16px;line-height:1.5;margin:0 0 7px;overflow-wrap:anywhere}.sales2-product p{font-size:10px;line-height:1.7;color:#637a89;margin:3px 0;overflow-wrap:anywhere}.sales2-badge{flex-shrink:0;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:700;background:#edf1f4;color:#526979;white-space:nowrap}.sales2-badge.positive{background:#edf5f1;color:#326750}.sales2-badge.negative{background:#f9efef;color:#944c51}.sales2-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.sales2-kpis article{min-width:0;border:1px solid #e0e8ed;border-radius:14px;background:#fff;box-shadow:0 2px 8px #15374b05;padding:16px 13px}.sales2-kpis span{font-size:11px;color:#5a7180;display:block}.sales2-kpis strong{display:block;font-size:24px;line-height:1.35;margin:8px 0 4px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.sales2-kpis small{display:block;font-size:10px;line-height:1.6;color:#6c818e}.sales2-kpis strong.positive{color:#326750}.sales2-kpis strong.negative{color:#944c51}.sales2-kpis .sales2-daily{font-size:18px}.sales2-trend,.sales2-comparison,.sales2-summary{margin-top:22px;min-width:0}.sales2 h3{font-size:14px;margin:0 0 7px}.sales2-subtitle,.sales2-pair-period,.sales2-chart-note{font-size:10px;line-height:1.6;color:#657d8b;margin:4px 0 10px;overflow-wrap:anywhere}.sales2-chart-stage{position:relative;min-width:0;background:#fff;border:1px solid #e5ecf0;border-radius:14px;padding:8px 0;touch-action:pan-y}.sales2-chart{display:block;width:100%;height:260px}.sales2-grid{stroke:#e8eef1;stroke-width:1}.sales2-axis{font-size:10px;fill:#6b7f8c}.sales2-line{fill:none;stroke:#277887;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.sales2-line.previous{stroke:#8192ab;stroke-dasharray:5 4}.sales2-point{fill:white;stroke:#277887;stroke-width:1.5;pointer-events:none}.sales2-point.previous{stroke:#8192ab}.sales2-point.highlight{r:5}.sales2-hit{fill:transparent;cursor:crosshair}.sales2-hit:focus{outline:none;fill:#27788708}.sales2-crosshair{stroke:#b8cbd2;stroke-width:1;pointer-events:none}.sales2-legend{display:flex;gap:18px;font-size:10px;color:#607687;margin:10px 0}.sales2-legend span{display:flex;gap:6px;align-items:center}.sales2-legend i{width:19px;border-top:2px solid #277887}.sales2-legend i.previous{border-top:2px dashed #8192ab}.sales2-tooltip{position:absolute;top:24px;z-index:2;padding:11px 13px;max-width:calc(100% - 8px);background:#fff;color:#18374b;border:1px solid #cfdee5;box-shadow:0 4px 14px #18374b12;border-radius:10px;font-size:11px;line-height:1.5;pointer-events:none}.sales2-tooltip p{margin:4px 0;font-variant-numeric:tabular-nums}.sales2-tooltip b{font-size:12px}.sales2-bar-row{display:grid;grid-template-columns:100px minmax(0,1fr);gap:7px 14px;font-size:11px;margin:13px 0;align-items:center}.sales2-bar-row b{text-align:right;font-size:15px}.sales2-bar-track{grid-column:1/-1;height:8px;border-radius:8px;background:#edf2f5;overflow:hidden}.sales2-bar-track i{display:block;height:100%;background:#277887;border-radius:8px}.sales2-bar-track i.previous{background:#b0bdd0}.sales2-comparison-result{font-size:14px;color:#18374b;display:flex;gap:16px;flex-wrap:wrap}.sales2-summary{padding:15px;border:1px solid #e0e8ed;border-radius:14px;background:#f8fafb}.sales2-summary p{font-size:11px;line-height:1.8;margin:5px 0;color:#4c6475}.sales2-copy{font-size:11px;min-height:44px;margin-top:10px}.sales2-copy-feedback{display:block;min-height:16px;font-size:10px;color:#277887;margin-top:4px}.sales2-details,.sales2-advanced{margin-top:14px;border-top:1px solid #e0e8ed}.sales2-details>summary,.sales2-advanced>summary{min-height:44px;padding:14px 0;font-size:11px;font-weight:650;color:#34566c;cursor:pointer}.sales2-table-scroll{max-width:100%;overflow:auto}.sales2-table-scroll table{width:100%;border-collapse:collapse;min-width:440px;font-size:11px;line-height:1.6;white-space:nowrap;font-variant-numeric:tabular-nums}.sales2-table-scroll th,.sales2-table-scroll td{padding:10px 12px;border-bottom:1px solid #e8eef1;text-align:right}.sales2-table-scroll :is(th,td):first-child{text-align:left}.sales2-table-scroll th{font-weight:600;color:#627987;background:#f8fafb}.sales2-empty{padding:22px 12px;text-align:center;font-size:12px;color:#657d8b;background:#f8fafb;border-radius:12px;line-height:1.7}.sales2-error,.sales2-scope-note{font-size:10px;line-height:1.7;color:#8a673c;padding:9px 12px;background:#fcf7ed;border-radius:9px}.sales2 .sales-extrema{margin-top:16px}
 @media(max-width:800px){.sales2-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.sales2-controls{grid-template-columns:minmax(0,1fr)}.sales2-kpis article{padding:13px 11px}.sales2-kpis strong{font-size:23px}.sales2-chart{height:260px}.sales2-product{gap:9px}.sales2-product h3{font-size:14px}.sales2-product .sales2-badge{font-size:9px;padding:5px 7px}}
 @media(max-width:360px){.sales2-kpis strong{font-size:21px}.sales2-heading h2{font-size:15px}.sales2-heading>span{font-size:9px}.sales2-product{display:block}.sales2-badge{display:inline-block;margin-top:8px}.sales2-custom{grid-template-columns:minmax(0,1fr)}}
+
+/* Sales 2.1: restrained hierarchy; status colors are limited to small signals. */
+.sales2-kpis{gap:12px}
+.sales2-kpis article{border-color:#e6edf0;box-shadow:none;padding:18px 14px}
+.sales2-kpis .sales2-primary{background:#f6f9fa;border-color:#dce7eb}
+.sales2-kpis strong{font-size:23px;letter-spacing:-.6px}
+.sales2-kpis .sales2-primary strong{font-size:32px;letter-spacing:-1px}
+.sales2-kpis .sales2-rate{font-size:22px}
+.sales2-trend{margin-top:28px}
+.sales2-trend-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sales2-trend-heading h3{margin:0;font-size:16px}
+.sales2-trend-chip{font-size:10px;font-weight:600;border:1px solid #e0e8ec;border-radius:20px;padding:4px 9px;color:#587080;background:#f7f9fa;white-space:nowrap}
+.sales2-trend-chip.strong{color:#326750}
+.sales2-trend-chip.weak{color:#944c51}
+.sales2-chart-stage{border:0;padding:0;border-radius:0}
+.sales2-chart{height:320px}
+.sales2-line{stroke-width:2.5}
+.sales2-line.previous{stroke:#9aa8b8;stroke-width:1.5;stroke-dasharray:5 4}
+.sales2-point.previous{stroke:#9aa8b8;stroke-width:1}
+.sales2-area{fill:#277887;fill-opacity:.045;pointer-events:none}
+.sales2-latest-halo{fill:#277887;fill-opacity:.12;pointer-events:none}
+.sales2-latest-label{pointer-events:none}
+.sales2-latest-label rect{fill:#fff;stroke:#dbe7eb}
+.sales2-latest-label text{font-size:11px;font-weight:650;fill:#225c69;font-variant-numeric:tabular-nums}
+.sales2-reference-line{stroke:#aac3c9;stroke-width:1;stroke-dasharray:3 5;opacity:.65;pointer-events:none}
+.sales2-average-note{font-size:10px;color:#718795;line-height:1.6;margin:6px 0}
+.sales2-legend{gap:14px;margin:12px 0}
+.sales2-tooltip{width:215px;max-width:calc(100% - 8px);padding:12px 14px;box-shadow:0 8px 24px #18374b14}
+.sales2-tooltip-date{display:block;font-size:16px;letter-spacing:.2px;margin-bottom:10px}
+.sales2-tooltip dl{margin:0}
+.sales2-tooltip dl>div{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:5px 0}
+.sales2-tooltip dt{font-size:10px;color:#637a89}
+.sales2-tooltip dd{margin:0;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.sales2-tooltip-difference{display:flex;align-items:center;flex-wrap:wrap;gap:5px 10px;border-top:1px solid #e8eef1;margin-top:9px;padding-top:9px}
+.sales2-tooltip-difference>span{font-size:10px;color:#637a89}
+.sales2-tooltip-difference b{font-size:12px;margin-left:auto}
+.sales2-tooltip-difference small{font-size:11px;margin-left:auto}
+.sales2-bar-row{margin:16px 0}
+.sales2-bar-track{height:10px;background:transparent;border-radius:3px}
+.sales2-bar-track i{border-radius:3px}
+.sales2-bar-track i.previous{background:#c5ced8}
+.sales2-comparison-result{border-top:1px solid #e7edf0;padding-top:12px;justify-content:space-between;font-variant-numeric:tabular-nums}
+.sales2-summary{border:0;border-radius:10px;background:#f6f9fa;padding:16px}
+.sales2-reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding-top:10px}
+.sales2-reference-grid span{display:block;font-size:10px;color:#637a89}
+.sales2-reference-grid b{display:block;font-size:13px;margin-top:5px}
+.sales2-search-more{border-top:1px solid #e8eef1;background:#f7f9fa}
+@media(max-width:800px){
+ .sales2-kpis article{padding:14px 12px}
+ .sales2-kpis strong{font-size:22px}
+ .sales2-kpis .sales2-primary strong{font-size:29px}
+ .sales2-chart{height:260px}
+ .sales2-trend-heading h3{font-size:15px}
+}
+@media(max-width:360px){
+ .sales2-kpis strong,.sales2-kpis .sales2-rate{font-size:20px}
+ .sales2-kpis .sales2-primary strong{font-size:26px}
+ .sales2-legend{gap:10px;font-size:9px}
+}

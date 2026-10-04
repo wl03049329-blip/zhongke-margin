@@ -1,4 +1,4 @@
-/* Sales analysis 2.0: read-only views over monthly unit sales, never money. */
+/* Sales analysis: read-only views over monthly unit sales, never money. */
 ((root)=>{
  'use strict';
  const monthly=typeof module==='object'&&module.exports?require('./px-sales-analysis.js'):root.PX_SALES_ANALYSIS;
@@ -46,12 +46,44 @@
   else if(last.length===3&&last.every(row=>valid(row.current))&&last[0].current>last[1].current&&last[1].current>last[2].current)summary.push('選取期間最後 3 個連續月份銷量逐月減少。');
   return{...empty,range,rows,total:range.total,pairedCurrent,previous,difference,rate,partial,pairs,currentMonths,previousMonths,hasPrevious:rows.some(row=>valid(row.previous)),status:status(rate.value),summary,period};
  }
+ // Presentation-only scale: readable 1/2/5 steps, no rounding of source values.
+ function niceTicks(maximum){
+  const peak=valid(maximum)&&maximum>0?maximum:1,power=Math.floor(Math.log10(peak));
+  const candidates=[];
+  for(let exponent=power-2;exponent<=power+1;exponent++)for(const factor of [1,2,5]){
+   const step=factor*10**exponent;if(step<1)continue;
+   const intervals=Math.max(3,Math.ceil(peak/step));if(intervals>5)continue;
+   const max=step*intervals,score=Math.abs(intervals+1-5)+(max-peak)/peak*.5;
+   candidates.push({step,max,score,ticks:Array.from({length:intervals+1},(_,i)=>i*step)});
+  }
+  candidates.sort((a,b)=>a.score-b.score||a.step-b.step);
+  const selected=candidates[0];
+  // Five grid labels suffice when a six-label scale is the best fit.
+  return{step:selected.step,max:selected.max,ticks:selected.ticks.length>5?selected.ticks.slice(0,-1):selected.ticks};
+ }
+ function recentTrend(rows){
+  const recent=rows.filter(row=>valid(row.current)).slice(-3);
+  if(recent.length<3)return null;
+  const baseline=(recent[0].current+recent[1].current)/2,latest=recent[2].current;
+  const direction=latest>baseline*1.1?'strong':latest<baseline*.9?'weak':'steady';
+  return{label:{strong:'近期走強',weak:'近期轉弱',steady:'近期持穩'}[direction],direction,average:recent.reduce((sum,row)=>sum+row.current,0)/3,months:recent.map(row=>row.period)};
+ }
+ function conciseSummary(view,trend){
+  if(!valid(view.total))return[view.summary[0]];
+  const n=new Intl.NumberFormat('zh-TW'),scope=view.range.complete?'本期':`本期現有 ${view.range.count} 個有效月份`;
+  let text=`${scope}銷量 ${n.format(view.total)} 支`;
+  if(view.rate.status==='comparable')text+=view.difference===0?'，與去年共同可比月份持平。':`，${view.partial?'共同可比月份':'較去年同期'}${view.difference>0?'增加':'減少'} ${n.format(Math.abs(view.difference))} 支（${Math.abs(view.rate.value).toFixed(1)}%）。`;
+  else text+=view.rate.status==='zero-baseline'?'；去年同期為 0，無法計算百分比。':'；目前沒有足夠同期資料。';
+  return[text,...(trend?[`${trend.label}（依最新有效月與前兩個有效月平均比較）。`]:[])];
+ }
  function paths(rows,width=620,height=260){
-  const left=55,right=18,top=22,bottom=38,max=Math.max(1,...rows.flatMap(row=>[row.current,row.previous]).filter(valid));
+  const left=60,right=32,top=38,bottom=38,scale=niceTicks(Math.max(0,...rows.flatMap(row=>[row.current,row.previous]).filter(valid))),max=scale.max;
   const x=i=>rows.length===1?(left+width-right)/2:left+i*(width-left-right)/Math.max(1,rows.length-1),y=value=>top+(height-top-bottom)*(1-value/max);
   const line=field=>{let path='',drawing=false;rows.forEach((row,i)=>{if(!valid(row[field])){drawing=false;return}path+=`${drawing?' L':' M'}${x(i).toFixed(2)} ${y(row[field]).toFixed(2)}`;drawing=true});return path.trim()};
-  return{left,right,top,bottom,width,height,max,x,y,current:line('current'),previous:line('previous')};
+  const segments=[];let segment=[];for(let i=0;i<rows.length;i++){if(valid(rows[i].current))segment.push(i);else{if(segment.length)segments.push(segment);segment=[]}}if(segment.length)segments.push(segment);
+  const area=segments.filter(indices=>indices.length>1).map(indices=>`M${x(indices[0])} ${y(rows[indices[0]].current)} `+indices.slice(1).map(i=>`L${x(i)} ${y(rows[i].current)}`).join(' ')+` L${x(indices.at(-1))} ${y(0)} L${x(indices[0])} ${y(0)} Z`).join(' ');
+  return{left,right,top,bottom,width,height,max,ticks:scale.ticks,x,y,area,current:line('current'),previous:line('previous')};
  }
- const api=Object.freeze({valid,normalize,searchIndex,search,status,monthSpans,analyze,paths});
+ const api=Object.freeze({valid,normalize,searchIndex,search,status,monthSpans,analyze,paths,niceTicks,recentTrend,conciseSummary});
  if(typeof module==='object'&&module.exports)module.exports=api;else root.PX_SALES_DASHBOARD_CORE=api;
 })(typeof window==='object'?window:globalThis);
