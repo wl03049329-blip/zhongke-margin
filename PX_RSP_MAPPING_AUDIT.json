@@ -2,8 +2,8 @@
   "sourceProducts": 57,
   "masterProducts": 55,
   "matched": 54,
-  "matchedWithRsp": 51,
-  "matchedWithoutRsp": 3,
+  "matchedWithRsp": 54,
+  "matchedWithoutRsp": 0,
   "masterMissingSource": 1,
   "sourceOnly": 3,
   "source": {
@@ -250,29 +250,62 @@
     {
       "sourceName": "OP生物分解抗菌\n平面密封袋 M",
       "productName": "OP生物抗菌密封袋M(PX)",
-      "rsp": null,
-      "status": "MATCHED_RSP_MISSING",
+      "rsp": 83,
+      "status": "MATCHED",
       "mappingMethod": "EXPLICIT_ALIAS",
       "nameCell": "BB1",
-      "rspCell": "BB2"
+      "rspCell": "BB2",
+      "history": [
+        {
+          "provenance": "RSP.xlsx",
+          "rsp": null,
+          "status": "MATCHED_RSP_MISSING",
+          "rspCell": "BB2"
+        }
+      ],
+      "sourceRsp": null,
+      "provenance": "MANUAL_CONFIRMED",
+      "confirmationSource": "Explicit user confirmation"
     },
     {
       "sourceName": "OP生物分解抗菌\n平面密封袋 L",
       "productName": "OP生物抗菌密封袋L(PX)",
-      "rsp": null,
-      "status": "MATCHED_RSP_MISSING",
+      "rsp": 83,
+      "status": "MATCHED",
       "mappingMethod": "EXPLICIT_ALIAS",
       "nameCell": "BD1",
-      "rspCell": "BD2"
+      "rspCell": "BD2",
+      "history": [
+        {
+          "provenance": "RSP.xlsx",
+          "rsp": null,
+          "status": "MATCHED_RSP_MISSING",
+          "rspCell": "BD2"
+        }
+      ],
+      "sourceRsp": null,
+      "provenance": "MANUAL_CONFIRMED",
+      "confirmationSource": "Explicit user confirmation"
     },
     {
       "sourceName": "OP生物分解抗菌\n立體密封袋 S",
       "productName": "OP生物分解抗菌立體密封袋S",
-      "rsp": null,
-      "status": "MATCHED_RSP_MISSING",
+      "rsp": 179,
+      "status": "MATCHED",
       "mappingMethod": "NORMALIZED_NAME",
       "nameCell": "BF1",
-      "rspCell": "BF2"
+      "rspCell": "BF2",
+      "history": [
+        {
+          "provenance": "RSP.xlsx",
+          "rsp": null,
+          "status": "MATCHED_RSP_MISSING",
+          "rspCell": "BF2"
+        }
+      ],
+      "sourceRsp": null,
+      "provenance": "MANUAL_CONFIRMED",
+      "confirmationSource": "Explicit user confirmation"
     },
     {
       "sourceName": "OP生物分解抗菌\n立體密封袋 M+L",
@@ -533,5 +566,10 @@
       "status": "MASTER_NO_SOURCE",
       "mappingMethod": "NONE"
     }
+  ],
+  "manualConfirmed": 3,
+  "effectiveRspProducts": 54,
+  "missingRspProducts": [
+    "香氛豆-粉紅甜蜜果香淡香水"
   ]
 }

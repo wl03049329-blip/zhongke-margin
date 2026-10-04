@@ -44,7 +44,40 @@ const aliases = Object.freeze({
  '德適淨十抗病毒濕拖巾-薰衣草':'德適淨濕拖巾-薰衣草'
 });
 const normalize = name => String(name).normalize('NFKC').toLowerCase().replace(/[\s\p{P}]/gu,'');
-const expected = Object.freeze({sourceProducts:57,masterProducts:55,matched:54,matchedWithRsp:51,matchedWithoutRsp:3,masterMissingSource:1,sourceOnly:3});
+const sourceExpected = Object.freeze({sourceProducts:57,masterProducts:55,matched:54,matchedWithRsp:51,matchedWithoutRsp:3,masterMissingSource:1,sourceOnly:3});
+const expected = Object.freeze({...sourceExpected,matchedWithRsp:54,matchedWithoutRsp:0});
+// Explicit user-confirmed metadata, not values inferred from blank Excel cells.
+const manualConfirmed = Object.freeze({
+ 'OP生物抗菌密封袋M(PX)':83,
+ 'OP生物抗菌密封袋L(PX)':83,
+ 'OP生物分解抗菌立體密封袋S':179
+});
+function applyManualConfirmations(result){
+ const {audit,values}=JSON.parse(JSON.stringify(result));
+ for(const [name,rsp]of Object.entries(manualConfirmed)){
+  const matches=audit.records.filter(r=>r.productName===name);
+  if(matches.length!==1)throw Error('Manual RSP requires a unique existing mapping: '+name);
+  const record=matches[0];
+  if(record.provenance==='MANUAL_CONFIRMED'){
+   if(record.rsp!==rsp||record.sourceRsp!==null)throw Error('Manual RSP provenance mismatch: '+name);
+  }else{
+   if(record.status!=='MATCHED_RSP_MISSING'||record.rsp!==null)throw Error('Manual RSP source changed; review required: '+name);
+   record.history=[{provenance:'RSP.xlsx',rsp:null,status:record.status,rspCell:record.rspCell}];
+   record.sourceRsp=null;
+   record.provenance='MANUAL_CONFIRMED';
+   record.confirmationSource='Explicit user confirmation';
+   record.status='MATCHED';record.rsp=rsp;
+  }
+  values[name]=rsp;
+ }
+ audit.matchedWithRsp=audit.records.filter(r=>r.status==='MATCHED').length;
+ audit.matchedWithoutRsp=audit.records.filter(r=>r.status==='MATCHED_RSP_MISSING').length;
+ audit.manualConfirmed=Object.keys(manualConfirmed).length;
+ audit.effectiveRspProducts=Object.values(values).filter(v=>v!==null).length;
+ audit.missingRspProducts=Object.entries(values).filter(([,v])=>v===null).map(([name])=>name);
+ for(const [key,value]of Object.entries(expected))if(audit[key]!==value)throw Error('Effective mapping gate failed: '+key);
+ return {audit,values};
+}
 function auditWorkbook(filename, master){
  const fs=require('node:fs'),crypto=require('node:crypto'),X=require('../assets/vendor/xlsx-0.20.3.full.min.js');
  const bytes=fs.readFileSync(filename),book=X.read(bytes,{type:'buffer'});
@@ -66,7 +99,7 @@ function auditWorkbook(filename, master){
  });
  for(const p of master)if(!used.has(p.name))records.push({sourceName:null,productName:p.name,rsp:null,status:'MASTER_NO_SOURCE',mappingMethod:'NONE'});
  const count=s=>records.filter(r=>r.status===s).length,counts={sourceProducts:records.filter(r=>r.sourceName!==null).length,masterProducts:master.length,matched:used.size,matchedWithRsp:count('MATCHED'),matchedWithoutRsp:count('MATCHED_RSP_MISSING'),masterMissingSource:count('MASTER_NO_SOURCE'),sourceOnly:count('SOURCE_ONLY')};
- for(const [key,value]of Object.entries(expected))if(counts[key]!==value)throw Error(`Mapping gate failed: ${key} ${counts[key]} != ${value}`);
- return {audit:{...counts,source:{filename:'RSP.xlsx',sha256:crypto.createHash('sha256').update(bytes).digest('hex'),sheet:book.SheetNames[0],policy:'Only the RSP cell directly below each original name; blank values are never inferred.'},records},values};
+ for(const [key,value]of Object.entries(sourceExpected))if(counts[key]!==value)throw Error(`Mapping gate failed: ${key} ${counts[key]} != ${value}`);
+ return applyManualConfirmations({audit:{...counts,source:{filename:'RSP.xlsx',sha256:crypto.createHash('sha256').update(bytes).digest('hex'),sheet:book.SheetNames[0],policy:'Only the RSP cell directly below each original name; blank values are never inferred.'},records},values});
 }
-module.exports={aliases,normalize,expected,auditWorkbook};
+module.exports={aliases,normalize,expected,sourceExpected,manualConfirmed,applyManualConfirmations,auditWorkbook};

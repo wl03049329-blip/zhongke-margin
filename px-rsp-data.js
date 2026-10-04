@@ -1,18 +1,20 @@
 // PX RSP reference
 // Source: RSP.xlsx (工作表1)
 // Source SHA-256: de095c38800c2b74f94b5b3e5024015e775d13c5a9092f4b0e46ba5ac8140343
-// Missing source values remain null; never inferred. Display only, not calculation inputs.
+// RSP is display-only metadata. Never use it in calculations, decisions or input autofill.
+// Three original blank cells have MANUAL_CONFIRMED values; see PX_RSP_MAPPING_AUDIT.json.
+// Other missing values remain null; never inferred.
 window.PX_RSP_DATA = Object.freeze({
   "OP專科防臭袋S": 269,
   "OP專科防臭袋M": 269,
   "OP安全無毒耐熱袋(小)PX(二)": 99,
   "OP安全無毒耐熱袋(中)PX(二)": 99,
-  "OP生物抗菌密封袋M(PX)": null,
-  "OP生物抗菌密封袋L(PX)": null,
+  "OP生物抗菌密封袋M(PX)": 83,
+  "OP生物抗菌密封袋L(PX)": 83,
   "OP生物分解抗菌密封袋XL": 199,
   "OP抗菌立體密封袋M+L": 110,
   "OP長效抗菌立體密封袋M": 110,
-  "OP生物分解抗菌立體密封袋S": null,
+  "OP生物分解抗菌立體密封袋S": 179,
   "OP生物分解保鮮膜360尺(20入)": 128,
   "OP植材抗菌保鮮膜300尺": 289,
   "OP無雙酚A鋁箔800公分-12入": 110,
