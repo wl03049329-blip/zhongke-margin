@@ -27,9 +27,10 @@
 <link rel="stylesheet" href="competitor-price.css">
 <link rel="stylesheet" href="campaign-lookup-ui.css?v=4.1.11-poya">
 <link rel="stylesheet" href="px-sales-explorer.css?v=4.1.2-sales-phase2">
-<link rel="stylesheet" href="px-sales-dashboard.css?v=4.1.15-sales23">
-<link rel="stylesheet" href="px-sales-multi.css?v=4.1.15-sales23">
-<link rel="stylesheet" href="px-sales-radar.css?v=4.1.15-sales23">
+<link rel="stylesheet" href="px-sales-dashboard.css?v=4.1.16-sales24">
+<link rel="stylesheet" href="px-sales-multi.css?v=4.1.16-sales24">
+<link rel="stylesheet" href="px-sales-radar.css?v=4.1.16-sales24">
+<link rel="stylesheet" href="px-sales-update.css?v=4.1.16-sales24">
 <link rel="stylesheet" href="new-product-calculator.css?v=4.1.11-poya">
 <style>
 :root{
@@ -712,7 +713,7 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.15-sales23",{updateViaCache:"none"}));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.16-sales24",{updateViaCache:"none"}));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="scenario-summary.js?v=4.1.2-scenario-source"></script>
@@ -720,13 +721,15 @@ if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serv
 <script src="same-period-sales.js?v=4.1.2-sales-phase2"></script>
 <script src="px-sales-analysis.js?v=4.1.2-sales-phase2"></script>
 <script src="px-sales-explorer-core.js?v=4.1.2-sales-phase2"></script>
-<script src="px-sales-dashboard-core.js?v=4.1.15-sales23"></script>
-<script src="px-sales-dashboard.js?v=4.1.15-sales23"></script>
-<script src="px-sales-multi-view.js?v=4.1.15-sales23"></script>
-<script src="px-sales-multi.js?v=4.1.15-sales23"></script>
-<script src="px-sales-radar-core.js?v=4.1.15-sales23"></script>
-<script src="px-sales-radar.js?v=4.1.15-sales23"></script>
-<script src="px-sales-explorer.js?v=4.1.15-sales23"></script>
+<script src="px-sales-dashboard-core.js?v=4.1.16-sales24"></script>
+<script src="px-sales-dashboard.js?v=4.1.16-sales24"></script>
+<script src="px-sales-multi-view.js?v=4.1.16-sales24"></script>
+<script src="px-sales-multi.js?v=4.1.16-sales24"></script>
+<script src="px-sales-radar-core.js?v=4.1.16-sales24"></script>
+<script src="px-sales-radar.js?v=4.1.16-sales24"></script>
+<script src="px-sales-import-core.js?v=4.1.16-sales24"></script>
+<script src="px-sales-update.js?v=4.1.16-sales24"></script>
+<script src="px-sales-explorer.js?v=4.1.16-sales24"></script>
 <script src="new-product-organizer.js"></script>
 <script src="competitor-price-ui.js"></script>
 <script src="competitor-candidate-core.js?v=4.1.11-poya"></script>

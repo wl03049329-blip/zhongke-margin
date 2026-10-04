@@ -31,6 +31,10 @@ jobs:
       - name: Probe source feasibility before release
         if: github.ref != 'refs/heads/main'
         run: node -e "const r=require('./COMPETITOR_VALIDATION.json');const count=require('./competitor-sources.json').reduce((n,s)=>n+s.productUrls.length,0)+require('./competitor-poya-sources.json').products.length;if(r.successful!==count||r.errors)process.exit(1)"
+      - name: Validate monthly sales contract and import safety
+        run: |
+          node scripts/validate-px-sales.cjs
+          node tests/sales-import.cjs
       - name: Competitor unit checks
         run: |
           node tests/competitor-prices.cjs --unit
