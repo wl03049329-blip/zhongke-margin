@@ -6,7 +6,7 @@ const root=path.resolve(__dirname,'..'),base='371bc2ff768381fd4137084d9b5a283471
 const read=file=>fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n');
 const baseline=file=>execFileSync('git',['show',`${base}:${file}`],{encoding:'utf8'}).replace(/\r\n/g,'\n');
 for(const file of ['px-sales-data.js','px-product-additions.js','px-replacement-data.js','px-promo-core.js','px-promo-prices.js','px-sales-analysis.js','same-period-sales.js'])assert.equal(read(file),baseline(file),`${file} unchanged`);
-const inline=html=>[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(match=>match[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?RELEASE');
+const inline=html=>[...require('./rsp-inline-integrity.cjs').withoutRsp(html).matchAll(/<script>([\s\S]*?)<\/script>/g)].map(match=>match[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?RELEASE');
 assert.equal(inline(read('index.html')),inline(baseline('index.html')),'existing inline formulas, product master, and logic unchanged');
 const periods=Array.from({length:24},(_,i)=>core.shift('2025/01',i));
 const sales=Array.from({length:24},(_,i)=>i<12?10:20);

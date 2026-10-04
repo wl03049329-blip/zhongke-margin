@@ -31,7 +31,7 @@ const server=http.createServer((req,res)=>{
  assert.ok(layout.hero.top<679,'hero moves above the prior 390px position');
  assert.equal(await page.locator('#thresholdSettings').evaluate(element=>element.previousElementSibling?.id),'cResult','threshold is immediately below hero');
  assert.ok(layout.hero.top<844,'margin result enters the first 390px viewport');
- assert.ok(layout.calcHeight-layout.sales.height<=baselineHeight.nonSalesHeight+1,'calculator content outside the upgraded sales section must not increase');
+ assert.ok(layout.calcHeight-layout.sales.height-layout.product.height<=baselineHeight.nonSalesHeight+1,'calculator content outside the upgraded sales/basic-info sections must not increase');
  const actions=await page.evaluate(()=>{const copy=document.querySelector('#copyResult'),clear=document.querySelector('#clearCalculation');return{copyWidth:copy.getBoundingClientRect().width,clearWidth:clear.getBoundingClientRect().width,copyHeight:copy.getBoundingClientRect().height,clearBackground:getComputedStyle(clear).backgroundColor,copyBackground:getComputedStyle(copy).backgroundColor}});
  assert.ok(actions.copyWidth>actions.clearWidth*2&&actions.clearWidth<120,'copy is primary and clear is compact');
  assert.ok(actions.copyHeight>=40&&actions.copyBackground!==actions.clearBackground,'copy remains a visible primary action');
@@ -44,7 +44,8 @@ const server=http.createServer((req,res)=>{
  assert.equal(await page.locator('#cProfit').innerText(),await page.locator('#cRows .row:last-child .value').innerText(),'hero profit follows price and cost edits');
  assert.equal(await page.locator('#cPx').innerText(),'26.18%','front margin remains visible in the input area');
  assert.match(await page.evaluate(()=>buildCalcResultText()),/成本：\$24\.50[\s\S]*中科毛利率（費用後）：/,'existing copy content remains linked to current inputs');
- assert.equal(await page.locator('#cProductInfo .px-info-card .px-metric').count(),3);
+ assert.equal(await page.locator('#cProductInfo .px-info-card .px-metric').count(),4,'three existing reference fields plus display-only RSP');
+ assert.equal(await page.locator('#cProductInfo .px-rsp b').innerText(),'$110');
  assert.doesNotMatch(await page.locator('#cProductInfo .px-info-card').innerText(),/成本|全聯毛利率（前毛）/);
  assert.match(await page.locator('#cProductInfo .px-info-card').innerText(),/庫別|上架率|上架數/);
  assert.match(await page.locator('#cProductInfo .campaign-preview').innerText(),/下一檔\s*10-1[\s\S]*2026\/10\/02 ～ 2026\/10\/15[\s\S]*促銷型態\s*IP・單特／二特[\s\S]*最低均價\s*\$69\.5／件/);

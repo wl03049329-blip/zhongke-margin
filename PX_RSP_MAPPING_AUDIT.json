@@ -1,0 +1,537 @@
+{
+  "sourceProducts": 57,
+  "masterProducts": 55,
+  "matched": 54,
+  "matchedWithRsp": 51,
+  "matchedWithoutRsp": 3,
+  "masterMissingSource": 1,
+  "sourceOnly": 3,
+  "source": {
+    "filename": "RSP.xlsx",
+    "sha256": "de095c38800c2b74f94b5b3e5024015e775d13c5a9092f4b0e46ba5ac8140343",
+    "sheet": "工作表1",
+    "policy": "Only the RSP cell directly below each original name; blank values are never inferred."
+  },
+  "records": [
+    {
+      "sourceName": "AMAZE 大地擴香\n甜橘玫瑰果",
+      "productName": "Amaze大地擴香-甜橘玫瑰果",
+      "rsp": 338,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "B1",
+      "rspCell": "B2"
+    },
+    {
+      "sourceName": "Amaze 經典擴香\n雪松中性淡香水",
+      "productName": "AMAZE經典擴香-雪松中性淡香水",
+      "rsp": 359,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "D1",
+      "rspCell": "D2"
+    },
+    {
+      "sourceName": "Amaze 經典擴香\n白麝香琥珀淡香水",
+      "productName": "AMAZE經典擴香-白麝香琥珀淡香水",
+      "rsp": 359,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "F1",
+      "rspCell": "F2"
+    },
+    {
+      "sourceName": "AMAZE 礦石香氛包\n玫瑰淡香水",
+      "productName": "Amaze礦石香氛-玫瑰淡香水",
+      "rsp": 159,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "H1",
+      "rspCell": "H2"
+    },
+    {
+      "sourceName": "Amaze 礦石香氛\n沁藍海洋淡香水",
+      "productName": "礦石香氛-沁藍海洋淡香水",
+      "rsp": 159,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "J1",
+      "rspCell": "J2"
+    },
+    {
+      "sourceName": "Amaze 礦石香氛\n月光舒眠薰衣草",
+      "productName": "礦石香氛-月光舒眠薰衣草",
+      "rsp": 159,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "L1",
+      "rspCell": "L2"
+    },
+    {
+      "sourceName": "AMAZE 礦石香氛包\n雪松中性淡香水",
+      "productName": "AMAZE 礦石香氛包-雪松中性淡香水",
+      "rsp": 159,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "N1",
+      "rspCell": "N2"
+    },
+    {
+      "sourceName": "AMAZE 礦石香氛包\n白麝香琥珀淡香水",
+      "productName": "AMAZE 礦石香氛包-白麝香琥珀淡香水",
+      "rsp": 159,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "P1",
+      "rspCell": "P2"
+    },
+    {
+      "sourceName": "Amaze 法國植萃精油香氛豆-\n鳶尾粉邂逅淡香水",
+      "productName": "香氛豆-鳶尾粉邂逅淡香水",
+      "rsp": 359,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "R1",
+      "rspCell": "R2"
+    },
+    {
+      "sourceName": "Amaze 法國淡香水香氛豆-挪威雪松森林",
+      "productName": "Amaze 法國淡香水香氛豆-挪威雪松森林-(補充包)",
+      "rsp": 359,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "T1",
+      "rspCell": "T2"
+    },
+    {
+      "sourceName": "AMAZE 法國植萃衣物香氛豆\n超值補充包-玫瑰淡香水",
+      "productName": "香氛豆補充包-玫瑰淡香水(二)",
+      "rsp": 238,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "V1",
+      "rspCell": "V2"
+    },
+    {
+      "sourceName": "AMAZE 法國植萃衣物香氛豆\n超值補充包-海洋中性白麝香",
+      "productName": "香氛豆補充包-海洋中性白麝香(二)",
+      "rsp": 238,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "X1",
+      "rspCell": "X2"
+    },
+    {
+      "sourceName": "OP茶酚淨洗潔精-\n清雅茶香",
+      "productName": "茶酚淨洗潔精-清雅茶香(黃)",
+      "rsp": 349,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "Z1",
+      "rspCell": "Z2"
+    },
+    {
+      "sourceName": "OP茶酚淨洗潔精-\n檸檬茶萃",
+      "productName": "茶酚淨洗潔精-檸檬茶萃(黃)",
+      "rsp": 279,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AB1",
+      "rspCell": "AB2"
+    },
+    {
+      "sourceName": "OP茶酚淨洗潔精補充包-\n清雅茶香",
+      "productName": "茶酚淨洗潔精補充包-茶香(黃)",
+      "rsp": 282,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AD1",
+      "rspCell": "AD2"
+    },
+    {
+      "sourceName": "OP日本愛宕柿小蘇打",
+      "productName": "OP日本愛宕柿小蘇打(二)",
+      "rsp": 138,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AF1",
+      "rspCell": "AF2"
+    },
+    {
+      "sourceName": "OP愛岩柿除菌消臭噴霧-\n抗病毒EX",
+      "productName": "OP愛岩柿消臭噴霧-抗病毒EX(黃)",
+      "rsp": 298,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AH1",
+      "rspCell": "AH2"
+    },
+    {
+      "sourceName": "OP抗菌消臭防螨噴霧-\n清新海洋",
+      "productName": "OP抗菌消臭噴霧-清新海洋",
+      "rsp": 298,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AJ1",
+      "rspCell": "AJ2"
+    },
+    {
+      "sourceName": "OP EcoDry凝膠型吊掛除濕袋-\n雪松清香",
+      "productName": "凝膠型除濕袋-雪松清香",
+      "rsp": 159,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AL1",
+      "rspCell": "AL2"
+    },
+    {
+      "sourceName": "OP 專科防臭袋 S",
+      "productName": "OP專科防臭袋S",
+      "rsp": 269,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "AN1",
+      "rspCell": "AN2"
+    },
+    {
+      "sourceName": "OP 專科防臭袋 M",
+      "productName": "OP專科防臭袋M",
+      "rsp": 269,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "AP1",
+      "rspCell": "AP2"
+    },
+    {
+      "sourceName": "OP生物分解保鮮膜360尺",
+      "productName": "OP生物分解保鮮膜360尺(20入)",
+      "rsp": 128,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AR1",
+      "rspCell": "AR2"
+    },
+    {
+      "sourceName": "OP植材來源無氯抗菌保鮮膜300尺",
+      "productName": "OP植材抗菌保鮮膜300尺",
+      "rsp": 289,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AT1",
+      "rspCell": "AT2"
+    },
+    {
+      "sourceName": "OP專科抗菌保鮮膜420尺",
+      "productName": null,
+      "rsp": 220,
+      "status": "SOURCE_ONLY",
+      "mappingMethod": "NONE",
+      "nameCell": "AV1",
+      "rspCell": "AV2"
+    },
+    {
+      "sourceName": "OP無雙酚A鋁箔800cm",
+      "productName": "OP無雙酚A鋁箔800公分-12入",
+      "rsp": 110,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AX1",
+      "rspCell": "AX2"
+    },
+    {
+      "sourceName": "OP無雙酚A鋁箔1500cm",
+      "productName": "OP無雙酚A鋁箔1500公分-12入",
+      "rsp": 221,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "AZ1",
+      "rspCell": "AZ2"
+    },
+    {
+      "sourceName": "OP生物分解抗菌\n平面密封袋 M",
+      "productName": "OP生物抗菌密封袋M(PX)",
+      "rsp": null,
+      "status": "MATCHED_RSP_MISSING",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BB1",
+      "rspCell": "BB2"
+    },
+    {
+      "sourceName": "OP生物分解抗菌\n平面密封袋 L",
+      "productName": "OP生物抗菌密封袋L(PX)",
+      "rsp": null,
+      "status": "MATCHED_RSP_MISSING",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BD1",
+      "rspCell": "BD2"
+    },
+    {
+      "sourceName": "OP生物分解抗菌\n立體密封袋 S",
+      "productName": "OP生物分解抗菌立體密封袋S",
+      "rsp": null,
+      "status": "MATCHED_RSP_MISSING",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "BF1",
+      "rspCell": "BF2"
+    },
+    {
+      "sourceName": "OP生物分解抗菌\n立體密封袋 M+L",
+      "productName": "OP抗菌立體密封袋M+L",
+      "rsp": 110,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BH1",
+      "rspCell": "BH2"
+    },
+    {
+      "sourceName": "OP抗菌立體密封袋M",
+      "productName": "OP長效抗菌立體密封袋M",
+      "rsp": 110,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BJ1",
+      "rspCell": "BJ2"
+    },
+    {
+      "sourceName": "OP無雙酚A料理紙32M",
+      "productName": "OP無雙酚A料理紙32M(12入)",
+      "rsp": 399,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BL1",
+      "rspCell": "BL2"
+    },
+    {
+      "sourceName": "OP安全無毒耐熱袋-小",
+      "productName": "OP安全無毒耐熱袋(小)PX(二)",
+      "rsp": 99,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BN1",
+      "rspCell": "BN2"
+    },
+    {
+      "sourceName": "OP安全無毒耐熱袋-中",
+      "productName": "OP安全無毒耐熱袋(中)PX(二)",
+      "rsp": 99,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BP1",
+      "rspCell": "BP2"
+    },
+    {
+      "sourceName": "OP生物分解濾水網80入",
+      "productName": "OP生物分解濾水網80入",
+      "rsp": 119,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "BR1",
+      "rspCell": "BR2"
+    },
+    {
+      "sourceName": "OP咖啡渣淨味濾水網80入",
+      "productName": "OP咖啡渣淨味濾水網80入(PX)",
+      "rsp": 79,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BT1",
+      "rspCell": "BT2"
+    },
+    {
+      "sourceName": "OP生物分解抗菌密封袋XL",
+      "productName": "OP生物分解抗菌密封袋XL",
+      "rsp": 199,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "BV1",
+      "rspCell": "BV2"
+    },
+    {
+      "sourceName": "OP無漂白原色料理紙7+5M",
+      "productName": "OP無漂白料理紙7M(加量)",
+      "rsp": 179,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BX1",
+      "rspCell": "BX2"
+    },
+    {
+      "sourceName": "OP柑橘抗菌海棉菜瓜布",
+      "productName": "OP柑橘抗菌EX菜瓜布(三)",
+      "rsp": 99,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "BZ1",
+      "rspCell": "BZ2"
+    },
+    {
+      "sourceName": "OP細柔無砂海綿菜瓜布",
+      "productName": "OP細柔無砂海綿菜瓜布",
+      "rsp": 139,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "CB1",
+      "rspCell": "CB2"
+    },
+    {
+      "sourceName": "OP檸檬馬鞭草菜瓜布4入",
+      "productName": "檸檬馬鞭草菜瓜布-萬用速淨4入",
+      "rsp": 139,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "CD1",
+      "rspCell": "CD2"
+    },
+    {
+      "sourceName": "OP抗菌木漿棉",
+      "productName": "OP抗菌木漿棉",
+      "rsp": 139,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "CF1",
+      "rspCell": "CF2"
+    },
+    {
+      "sourceName": "OP環保舒適手套\n綠茶香氛M",
+      "productName": "OP環保舒適手套-綠茶香氛M(橘)",
+      "rsp": 139,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "CH1",
+      "rspCell": "CH2"
+    },
+    {
+      "sourceName": "OP環保舒適手套\n綠茶香氛L",
+      "productName": "OP環保舒適手套-綠茶香氛L(橘)",
+      "rsp": 139,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "CJ1",
+      "rspCell": "CJ2"
+    },
+    {
+      "sourceName": "OP環保舒適手套\n綠茶香氛S",
+      "productName": "OP環保舒適手套-綠茶香氛S",
+      "rsp": 139,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "CL1",
+      "rspCell": "CL2"
+    },
+    {
+      "sourceName": "OP加長耐用強化手套M",
+      "productName": "OP加長保護手套耐用強化 M",
+      "rsp": 106,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "CN1",
+      "rspCell": "CN2"
+    },
+    {
+      "sourceName": "OP檸檬香氛細絨手套M",
+      "productName": null,
+      "rsp": 139,
+      "status": "SOURCE_ONLY",
+      "mappingMethod": "NONE",
+      "nameCell": "CP1",
+      "rspCell": "CP2"
+    },
+    {
+      "sourceName": "OP檸檬香氛細絨手套L",
+      "productName": null,
+      "rsp": 67,
+      "status": "SOURCE_ONLY",
+      "mappingMethod": "NONE",
+      "nameCell": "CR1",
+      "rspCell": "CR2"
+    },
+    {
+      "sourceName": "OP清新檸檬抗菌瞬吸布",
+      "productName": "OP檸檬清新抗菌瞬吸布",
+      "rsp": 199,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "CT1",
+      "rspCell": "CT2"
+    },
+    {
+      "sourceName": "德適淨十抗菌酒精擦90抽",
+      "productName": "德適淨十抗菌酒精擦(PX)",
+      "rsp": 179,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "CV1",
+      "rspCell": "CV2"
+    },
+    {
+      "sourceName": "OP超音波馬卡龍瞬吸布",
+      "productName": "OP超音波馬卡龍瞬吸布PX",
+      "rsp": 117,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "CX1",
+      "rspCell": "CX2"
+    },
+    {
+      "sourceName": "OP天然棉紗布3入",
+      "productName": "OP天然棉紗布(3片入)",
+      "rsp": 99,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "CZ1",
+      "rspCell": "CZ2"
+    },
+    {
+      "sourceName": "德適淨十抗病毒濕拖巾-雪松",
+      "productName": "德適淨濕拖巾-雪松清香",
+      "rsp": 129,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "DB1",
+      "rspCell": "DB2"
+    },
+    {
+      "sourceName": "德適淨十抗病毒濕拖巾-海洋",
+      "productName": "德適淨濕拖巾-海洋清新",
+      "rsp": 129,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "DD1",
+      "rspCell": "DD2"
+    },
+    {
+      "sourceName": "德適淨十抗病毒濕拖巾-薰衣草",
+      "productName": "德適淨濕拖巾-薰衣草",
+      "rsp": 129,
+      "status": "MATCHED",
+      "mappingMethod": "EXPLICIT_ALIAS",
+      "nameCell": "DF1",
+      "rspCell": "DF2"
+    },
+    {
+      "sourceName": "OP指尖強化手套-薰衣紫M",
+      "productName": "OP指尖強化手套-薰衣紫M",
+      "rsp": 129,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "DH1",
+      "rspCell": "DH2"
+    },
+    {
+      "sourceName": "OP指尖強化手套-薰衣紫L",
+      "productName": "OP指尖強化手套-薰衣紫L",
+      "rsp": 129,
+      "status": "MATCHED",
+      "mappingMethod": "NORMALIZED_NAME",
+      "nameCell": "DJ1",
+      "rspCell": "DJ2"
+    },
+    {
+      "sourceName": null,
+      "productName": "香氛豆-粉紅甜蜜果香淡香水",
+      "rsp": null,
+      "status": "MASTER_NO_SOURCE",
+      "mappingMethod": "NONE"
+    }
+  ]
+}

@@ -27,10 +27,10 @@
 <link rel="stylesheet" href="competitor-price.css">
 <link rel="stylesheet" href="campaign-lookup-ui.css?v=4.1.11-poya">
 <link rel="stylesheet" href="px-sales-explorer.css?v=4.1.2-sales-phase2">
-<link rel="stylesheet" href="px-sales-dashboard.css?v=4.1.16-sales24">
-<link rel="stylesheet" href="px-sales-multi.css?v=4.1.16-sales24">
-<link rel="stylesheet" href="px-sales-radar.css?v=4.1.16-sales24">
-<link rel="stylesheet" href="px-sales-update.css?v=4.1.16-sales24">
+<link rel="stylesheet" href="px-sales-dashboard.css?v=4.1.17-rsp">
+<link rel="stylesheet" href="px-sales-multi.css?v=4.1.17-rsp">
+<link rel="stylesheet" href="px-sales-radar.css?v=4.1.17-rsp">
+<link rel="stylesheet" href="px-sales-update.css?v=4.1.17-rsp">
 <link rel="stylesheet" href="new-product-calculator.css?v=4.1.11-poya">
 <style>
 :root{
@@ -232,6 +232,11 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 #scenario .scenario-detail-card .head{margin-bottom:0}
 #scenario .scenario-detail-card .scenario-results{margin-top:10px}
 @media(max-width:620px){#scenario .grid{grid-template-columns:repeat(2,minmax(0,1fr))}#scenario .grid>.full{grid-column:1/-1}#scenario .scenario-inputs{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}#scenario .scenario-plan{padding:8px}#scenario .scenario-plan h3{font-size:12px;margin-bottom:7px}#scenario .scenario-plan label{font-size:10px}#scenario .scenario-plan input{font-size:16px;padding:10px 25px 10px 8px}#scenario .scenario-plan .unit{right:7px}}
+/* Display-only RSP: basic info layout, independent of sales KPI grids. */
+.px-info-card .px-info-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#calc .calc-product-data .px-info-grid,#reverse .reverse-product-data .px-info-grid,#promo .promo-product-data .px-info-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:620px){.px-info-card .px-info-grid,#calc .calc-product-data .px-info-grid,#reverse .reverse-product-data .px-info-grid,#promo .promo-product-data .px-info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:320px){.px-info-card .px-metric{padding:7px}.px-info-card .px-metric b{font-size:13px}}
 </style>
 </head>
 <body>
@@ -355,6 +360,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 <script src="px-product-additions.js"></script>
 <script src="px-sales-data.js"></script>
 <script src="px-replacement-data.js"></script>
+<script src="px-rsp-data.js?v=4.1.17-rsp"></script>
 <script src="competitor-price-core.js"></script>
 <script src="competitor-prices.js"></script>
 <script src="competitor-comparison-core.js"></script>
@@ -516,7 +522,7 @@ function trendChart(data,analysis){
 function productInfoMarkup(binding,product,data){
  const calcView=binding.productId==="cProduct",reverseView=binding.productId==="rProduct",promoView=binding.productId==="pProduct",cost=Number($(binding.costId).value),warehouse=data?.warehouse==="寄"?"寄庫":data?.warehouse==="越"?"越庫":"—";
  const repeated=calcView||reverseView||promoView?"":`<div class="px-metric"><span>成本</span><b>$${m2(cost)}</b></div><div class="px-metric px-front-margin"><span>全聯毛利率（前毛）</span><b>${rateText(data?.pxMargin)}</b></div>`;
- return `<section class="card px-info-card${calcView?" calc-product-data":reverseView?" reverse-product-data":promoView?" promo-product-data":""}"><div class="px-section-head"><h2>${product.name}</h2><span class="px-source">${data?"PX 商品資料":"尚無 PX 補充資料"}</span></div><div class="px-info-grid">${repeated}<div class="px-metric"><span>庫別</span><b>${warehouse}</b></div><div class="px-metric"><span>上架率</span><b>${rateText(data?.listingRate,0)}</b></div><div class="px-metric"><span>上架數</span><b>${Number.isFinite(data?.stores)?countText(data.stores)+" 店":"—"}</b></div></div></section>`;
+ return `<section class="card px-info-card${calcView?" calc-product-data":reverseView?" reverse-product-data":promoView?" promo-product-data":""}"><div class="px-section-head"><h2>${product.name}</h2><span class="px-source">${data?"PX 商品資料":"尚無 PX 補充資料"}</span></div><div class="px-info-grid">${repeated}<div class="px-metric"><span>庫別</span><b>${warehouse}</b></div><div class="px-metric"><span>上架率</span><b>${rateText(data?.listingRate,0)}</b></div><div class="px-metric"><span>上架數</span><b>${Number.isFinite(data?.stores)?countText(data.stores)+" 店":"—"}</b></div><div class="px-metric px-rsp"><span>RSP</span><b>${window.PX_RSP_REFERENCE.format(window.PX_RSP_REFERENCE.resolve(product))}</b></div></div></section>`;
 }
 function salesMarkup(data,analysis){
  if(!data||!analysis)return `<section class="card px-sales-card"><div class="px-section-head"><h2>PX 銷售表現</h2></div><div class="px-empty">此商品目前沒有可確認的 PX 實銷與前毛資料。成本主檔保留，前毛與相關試算不推算假資料。</div></section>`;
@@ -713,7 +719,7 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.16-sales24",{updateViaCache:"none"}));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.17-rsp",{updateViaCache:"none"}));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="scenario-summary.js?v=4.1.2-scenario-source"></script>
@@ -721,15 +727,15 @@ if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serv
 <script src="same-period-sales.js?v=4.1.2-sales-phase2"></script>
 <script src="px-sales-analysis.js?v=4.1.2-sales-phase2"></script>
 <script src="px-sales-explorer-core.js?v=4.1.2-sales-phase2"></script>
-<script src="px-sales-dashboard-core.js?v=4.1.16-sales24"></script>
-<script src="px-sales-dashboard.js?v=4.1.16-sales24"></script>
-<script src="px-sales-multi-view.js?v=4.1.16-sales24"></script>
-<script src="px-sales-multi.js?v=4.1.16-sales24"></script>
-<script src="px-sales-radar-core.js?v=4.1.16-sales24"></script>
-<script src="px-sales-radar.js?v=4.1.16-sales24"></script>
-<script src="px-sales-import-core.js?v=4.1.16-sales24"></script>
-<script src="px-sales-update.js?v=4.1.16-sales24"></script>
-<script src="px-sales-explorer.js?v=4.1.16-sales24"></script>
+<script src="px-sales-dashboard-core.js?v=4.1.17-rsp"></script>
+<script src="px-sales-dashboard.js?v=4.1.17-rsp"></script>
+<script src="px-sales-multi-view.js?v=4.1.17-rsp"></script>
+<script src="px-sales-multi.js?v=4.1.17-rsp"></script>
+<script src="px-sales-radar-core.js?v=4.1.17-rsp"></script>
+<script src="px-sales-radar.js?v=4.1.17-rsp"></script>
+<script src="px-sales-import-core.js?v=4.1.17-rsp"></script>
+<script src="px-sales-update.js?v=4.1.17-rsp"></script>
+<script src="px-sales-explorer.js?v=4.1.17-rsp"></script>
 <script src="new-product-organizer.js"></script>
 <script src="competitor-price-ui.js"></script>
 <script src="competitor-candidate-core.js?v=4.1.11-poya"></script>

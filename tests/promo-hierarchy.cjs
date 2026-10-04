@@ -73,7 +73,7 @@ async function enterCase(page,type,a,b){
  });
  assert.ok(layout.input.bottom<=layout.hero.top&&layout.hero.bottom<=layout.detail.top&&layout.detail.bottom<=layout.campaign.top&&layout.campaign.bottom<=layout.product.top&&layout.product.bottom<=layout.sales.top,'promotion section order');
  assert.ok(layout.hero.top<oldHeroTop,'hero moves ahead of the former product and campaign sections');
- assert.ok(layout.height-layout.sales.height<=releaseHeight.nonSalesHeight+1,'promotion content outside the upgraded sales section must not increase');
+ assert.ok(layout.height-layout.sales.height-layout.product.height<=releaseHeight.nonSalesHeight+1,'promotion content outside the upgraded sales/basic-info sections must not increase');
  const product=await page.locator('#pProductInfo .px-info-card').innerText();
  assert.doesNotMatch(product,/成本|全聯毛利率（前毛）/,'no duplicate product data');
  assert.match(product,/庫別[\s\S]*上架率[\s\S]*上架數/);

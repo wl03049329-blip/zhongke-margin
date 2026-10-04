@@ -35,6 +35,7 @@ jobs:
         run: |
           node scripts/validate-px-sales.cjs
           node tests/sales-import.cjs
+          node tests/rsp-data.cjs --unit
       - name: Competitor unit checks
         run: |
           node tests/competitor-prices.cjs --unit

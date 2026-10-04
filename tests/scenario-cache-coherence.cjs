@@ -16,7 +16,7 @@ for(const file of ['scenario-summary.js','decision-summary.js']){
  assert.match(html,new RegExp(`${file.replace('.','\\.')}\\?v=4\\.1\\.2-scenario-source`));
  assert.ok(worker.includes(`./${file}?v=4.1.2-scenario-source`));
 }
-assert.match(worker,/const CACHE='px-workbench-v4\.1\.16-sales24'/);
+assert.match(worker,/const CACHE='px-workbench-v4\.1\.17-rsp'/);
 
 const requests=[];
 const server=http.createServer((req,res)=>{

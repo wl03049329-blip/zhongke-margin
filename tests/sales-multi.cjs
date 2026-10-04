@@ -3,7 +3,7 @@ const root=path.resolve(__dirname,'..'),core=require('../px-sales-explorer-core'
 for(const f of ['px-sales-data.js','px-sales-analysis.js','same-period-sales.js','px-sales-explorer-core.js','px-sales-dashboard-core.js','px-promo-core.js','px-promo-ui.js','px-promo-prices.js','px-replacement-data.js','new-product-calculator.js','new-product-organizer.js','scenario-summary.js','decision-summary.js','product-catalog.js','assets/brand/px-logo.svg']){
  assert.equal(fs.readFileSync(path.join(root,f),'utf8').replace(/\r\n/g,'\n'),execFileSync('git',['show',base+':'+f],{encoding:'utf8'}).replace(/\r\n/g,'\n'),f+' unchanged');
 }
-const inline=s=>[...s.replace(/\r\n/g,'\n').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?VERSION');
+const inline=s=>[...require('./rsp-inline-integrity.cjs').withoutRsp(s).replace(/\r\n/g,'\n').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?VERSION');
 assert.equal(inline(fs.readFileSync(path.join(root,'index.html'),'utf8')),inline(execFileSync('git',['show',base+':index.html'],{encoding:'utf8'})),'inline core formulas unchanged');
 const months=Array.from({length:24},(_,i)=>core.shift('2025/01',i)),series=(prior,current)=>months.map((_,i)=>i<12?prior:current),data={A:{sales:series(10,20)},B:{sales:series(20,10)},C:{sales:series(0,0)},D:{sales:series(10,30)},E:{sales:series(10,20)}},ranges=core.preset('2026/12','ytd');
 data.D.sales[15]=null;
@@ -62,7 +62,7 @@ const server=http.createServer((req,res)=>{const f=path.join(root,decodeURICompo
  }
  await card.locator('[data-sales-mode="single"]').click();assert.equal(await card.locator('.sales2-total').innerText(),'74,431');assert.equal(await card.locator('.sales2-latest-label text').textContent(),'10,073');await card.locator('[data-sales-mode="multi"]').click();assert.equal(await pane.locator('tbody tr').count(),5);
  await page.locator('[data-tab="reverse"]').click();await page.locator('#rProduct').fill('65010209');const other=page.locator('#rSalesPerformance .sales2');assert.equal(await other.locator('[data-sales-mode="single"]').getAttribute('aria-pressed'),'true');await page.locator('[data-tab="calc"]').click();assert.equal(await pane.locator('tbody tr').count(),5);
- await page.reload({waitUntil:'networkidle'});await page.locator('#cProduct').fill('65010209');assert.equal(await card.locator('[data-sales-mode="single"]').getAttribute('aria-pressed'),'true');await page.evaluate(()=>navigator.serviceWorker.ready);assert.deepEqual(await page.evaluate(()=>caches.keys()),['px-workbench-v4.1.16-sales24']);
+ await page.reload({waitUntil:'networkidle'});await page.locator('#cProduct').fill('65010209');assert.equal(await card.locator('[data-sales-mode="single"]').getAttribute('aria-pressed'),'true');await page.evaluate(()=>navigator.serviceWorker.ready);assert.deepEqual(await page.evaluate(()=>caches.keys()),['px-workbench-v4.1.17-rsp']);
  // Controlled fixture only: production raw data remains unchanged.
  const fixture=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'}),fp=await fixture.newPage();fp.on('pageerror',e=>errors.push(e.message));
  const fixtureNames=names.slice(0,4).concat('AMAZE經典擴香-雪松中性淡香水'),fixtureSales=[series(10,20),series(20,10),series(0,0),series(10,30),series(10,20)];fixtureSales[3][15]=null;fixtureSales[4][23]=null;

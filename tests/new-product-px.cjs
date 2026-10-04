@@ -1,9 +1,9 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os'),{execFileSync}=require('node:child_process');
 const {chromium}=require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const root=path.resolve(__dirname,'..'),base='593a3412cbba3f0a53880e2d2834f24c13ce7417',cache='px-workbench-v4.1.16-sales24';
+const root=path.resolve(__dirname,'..'),base='593a3412cbba3f0a53880e2d2834f24c13ce7417',cache='px-workbench-v4.1.17-rsp';
 const old=file=>execFileSync('git',['show',`${base}:${file}`],{encoding:'utf8'}).replace(/\r\n/g,'\n'),read=file=>fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n');
 for(const file of ['px-sales-data.js','px-product-additions.js','px-product-additions.json','px-promo-prices.js','px-promo-prices.json','px-promo-core.js','px-replacement-data.js','product-catalog.js','px-sales-analysis.js','same-period-sales.js','decision-summary.js','scenario-summary.js'])assert.equal(read(file),old(file),file+' unchanged');
-const inline=html=>[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?VERSION');
+const inline=html=>[...require('./rsp-inline-integrity.cjs').withoutRsp(html).matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?VERSION');
 assert.equal(inline(read('index.html')),inline(old('index.html')),'official model, all core formulas, product master and thresholds unchanged');
 assert.equal(read('new-product-calculator.js').replace('[25.68,26.18,26.68]','[33,35,37,38,40,45,50]').replace('pxTarget.after(quick)','pxTarget.append(quick)'),old('new-product-calculator.js'),'only PX shortcuts and their placement changed; all formulas and general mode intact');
 const general=source=>source.slice(source.indexOf("  const price=read('cPrice'),cost=read('cCost'),purchase=read('cNewPurchase'),fee=read('cFee');"),source.indexOf(' function enter(){'));
