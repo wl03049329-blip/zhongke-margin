@@ -1,0 +1,271 @@
+/* Desktop presentation only. Keep every rule inside the >900px boundary. */
+@media (min-width: 901px) {
+  :root {
+    --desktop-title: 26px;
+    --desktop-h2: 20px;
+    --desktop-h3: 17px;
+    --desktop-body: 15px;
+    --desktop-label: 15px;
+    --desktop-helper: 13px;
+    --desktop-meta: 12px;
+    --desktop-table: 14px;
+    --desktop-kpi: 22px;
+    --desktop-gap: 18px;
+  }
+
+  body { font-size: var(--desktop-body); line-height: 1.5; }
+  .app { max-width: 1440px; padding-top: 24px; }
+  .app .panel.active { max-width: 1280px; margin-inline: auto; }
+  .app .hero, .app .tabs-shell { max-width: 1280px; margin-inline: auto; }
+  .app .hero { padding: 24px 28px; gap: 24px; }
+  .app .brand h1 { font-size: var(--desktop-title); line-height: 1.3; }
+  .app .brand p, .app .developer-secondary { font-size: 14px; line-height: 1.5; }
+  .app .meta { gap: 8px; }
+  .app .pill { font-size: var(--desktop-meta); padding: 7px 11px; line-height: 1.5; }
+  .app .tabs { gap: 10px; margin-block: 18px; }
+  .app .tab { flex: 1 0 140px; min-height: 54px; padding: 12px 16px; font-size: 15px; font-weight: 750; }
+
+  .app .card { padding: 26px; margin-bottom: var(--desktop-gap); }
+  .app :is(.head, .px-section-head) { gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+  .app :is(.head h2, .px-section-head h2, .competitor-heading h2, .public-catalog-heading h2, .lookup-heading h2) { font-size: var(--desktop-h2); line-height: 1.45; }
+  .app :is(.grid, .scenario-inputs, .scenario-results, .organizer-fields, .organizer-replacement) { gap: var(--desktop-gap); }
+  .app :is(label, .sales2 label, .organizer-fields label, .competitor-heading label) { font-size: var(--desktop-label); line-height: 1.5; margin-bottom: 8px; }
+  .app :is(input, select, textarea, .fixed-attribute), .campaign-product-drawer input {
+    min-width: 0; min-height: 52px; font-size: 18px; line-height: 1.45; padding: 12px 40px 12px 14px;
+  }
+  .app .organizer-fields :is(input, select, textarea) { font-size: 18px; min-height: 52px; padding: 12px 14px; }
+  .app .organizer-fields textarea { min-height: 100px; }
+  .app .scenario-plan input { font-size: 18px; min-height: 52px; }
+  .app .threshold-item input { width: 88px; min-height: 52px; font-size: 18px; padding: 10px; }
+  .app .product-toggle { width: 48px; min-width: 48px; min-height: 48px; top: 2px; right: 2px; padding: 0; }
+  .app .product-search { padding-right: 56px; }
+  .app .product-option { min-height: 50px; padding: 12px 14px; font-size: 15px; line-height: 1.5; }
+  .app .product-section-title { font-size: 13px; padding: 12px 14px 8px; }
+  .app .product-options { max-height: min(420px, 56vh); }
+  .app :is(button, .tab) { min-height: 48px; font-size: 15px; line-height: 1.45; }
+  .app button { min-width: 0; overflow-wrap: anywhere; }
+  .app .tab { min-height: 54px; }
+  .app :is(.quick, .copy-actions, .threshold-actions, .scenario-summary-actions, .decision-actions, .organizer-toolbar, .organizer-copy-actions, .organizer-views) { gap: 10px; }
+
+  /* Shared secondary information: visible data never falls below 12px. */
+  .app :is(.tag, .margin-status, .best-badge, .scenario-state, .new-badge, .replacement-status) { font-size: 12px; line-height: 1.5; padding: 5px 9px; white-space: normal; }
+  .app :is(.unit, .px-source, .px-data-note, .copy-feedback, .threshold-error, .scenario-summary-feedback, .decision-feedback, .sales-copy-feedback, .same-period-feedback, .organizer-feedback, .hs-copy .built-by) { font-size: var(--desktop-meta); line-height: 1.5; }
+  .app :is(.note, .fixed-note, .cost-override-note, .product-cost-note, .product-empty, .px-empty, .threshold-item, .scenario-summary-context, .scenario-summary-highest, .decision-head span, .decision-product, .decision-next, .decision-context, .same-period-period, .same-period-scope-note, .same-period-description, .same-period-foot, .sales-mom-description, .sales-secondary, .organizer-summary-status, .organizer-warning, .replacement-note) { font-size: var(--desktop-helper); line-height: 1.6; }
+  .app .note { padding: 14px 16px; }
+  .app :is(.formula b, .formula code) { font-size: 14px; line-height: 1.6; }
+  .app .formula { padding: 16px 18px; margin-bottom: 16px; }
+  .app :is(.hs-copy strong, .hs-copy .hs-purpose, .hs-copy b) { font-size: 14px; }
+
+  /* Calculation heroes retain their strong emphasis without miniature labels. */
+  .app .result { padding: 26px; margin-bottom: var(--desktop-gap); }
+  .app .result small { font-size: 14px; }
+  .app .result strong { font-size: 48px; line-height: 1.15; }
+  .app .result em { font-size: 13px; line-height: 1.6; }
+  #calc #cResult, #promo .promo-result { padding: 26px; margin-bottom: 18px; }
+  #calc .calc-hero-profit { font-size: 14px; }
+  #calc .calc-hero-profit b { font-size: 22px; }
+  #calc :is(#copyResult, #clearCalculation) { min-height: 48px; font-size: 15px; padding: 12px 16px; }
+  #promo .promo-average { font-size: 14px; }
+  #promo .promo-average-value { font-size: 44px; }
+  #promo .promo-average-value small { font-size: 16px; }
+  #promo .promo-margin-line span { font-size: 14px; }
+  #promo .promo-margin-line strong { font-size: 28px; }
+  #promo .promo-empty { font-size: 15px; padding: 26px; }
+  #calc .calc-detail, #reverse .reverse-detail, #promo .promo-detail { padding: 0 26px; }
+  #calc .calc-detail>summary, #reverse .reverse-detail>summary, #promo .promo-detail>summary { min-height: 54px; font-size: 15px; }
+  .app .row, #calc .calc-detail .row, #reverse .reverse-detail .row, #promo .promo-detail .row { min-height: 48px; padding: 12px 2px; }
+  .app .row span:first-child { font-size: 14px; }
+  .app .row .value { font-size: 16px; }
+  .app .threshold-settings summary { min-height: 50px; padding: 14px 16px; font-size: 14px; }
+  .app .threshold-body { padding: 18px; }
+  .app .threshold-grid { gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  #calc .calc-product-data, #reverse .reverse-product-data, #promo .promo-product-data, #calc .campaign-info-compact { padding: 26px; }
+
+  /* Minimum track widths let extra KPIs wrap instead of squeezing seven columns. */
+  .app :is(.px-info-grid, .px-kpi-grid, .sales-hero-grid, .replacement-channel-grid, .replacement-kpis),
+  #calc .calc-product-data .px-info-grid, #reverse .reverse-product-data .px-info-grid, #promo .promo-product-data .px-info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px;
+  }
+  .app :is(.px-metric, .sales-hero-grid>div, .sales-average-grid>div, .replacement-channel-card, .replacement-kpi) { padding: 18px; }
+  #calc .calc-product-data .px-metric, #reverse .reverse-product-data .px-metric, #promo .promo-product-data .px-metric { padding: 18px; }
+  .app :is(.px-metric span, .sales-hero-grid span, .sales-average-grid span, .same-period-stats span, .replacement-kpi>span, .replacement-channel-card span, .decision-metric span) { font-size: 13px; line-height: 1.5; }
+  .app :is(.px-metric b, .sales-hero-grid strong, .sales-average-grid b, .same-period-stats b, .replacement-kpi>strong, .replacement-channel-card b) { font-size: 20px; line-height: 1.4; }
+  .app :is(.px-metric small, .sales-hero-grid small, .replacement-kpi>small, .trend-title small, .same-period-head small) { font-size: 12px; line-height: 1.6; }
+  .app :is(.sales-analysis-hero h3, .same-period-head h3, .replacement-layer h3, .replacement-size h3, .replacement-size-title, .trend-title b, .replacement-timeline-head b) { font-size: 17px; }
+  .app :is(.same-period-summary, .decision-card, .scenario-summary, .replacement-layer, .replacement-size, .replacement-timeline) { padding: 20px; }
+  .app :is(.same-period-stats, .decision-core, .sales-average-grid, .replacement-dates, .replacement-sizes) { gap: 16px; }
+  .app :is(.replacement-route, .replacement-date, .replacement-change, .replacement-size-row, .replacement-size-row b) { font-size: 14px; line-height: 1.6; }
+  .app .replacement-date b { font-size: 16px; }
+  .app .replacement-legend { font-size: 12px; flex-wrap: wrap; }
+  .app :is(.trend-axis, .prelaunch-label, .replacement-axis, .replacement-marker-text) { font-size: 11px; }
+  .app .monthly-details summary { font-size: 14px; min-height: 48px; }
+  .app .month-row { font-size: 13px; min-height: 46px; padding: 12px; }
+
+  /* A/B/C plans and decision summaries remain readable in three columns. */
+  .app :is(.scenario-plan, .scenario-card) { padding: 20px; }
+  .app :is(.scenario-plan h3, .scenario-card h3, .scenario-summary h3, .decision-head h3) { font-size: 17px; line-height: 1.5; }
+  .app .scenario-title { flex-wrap: wrap; gap: 10px; }
+  .app .scenario-badges { justify-content: flex-start; }
+  .app .scenario-metric { font-size: 14px; line-height: 1.5; gap: 12px; }
+  .app .scenario-metric b { font-size: 16px; }
+  .app .scenario-summary-row, .app .decision-notices, .app .decision-deltas { font-size: 14px; line-height: 1.6; }
+  .app .scenario-summary-row strong { font-size: 17px; }
+  #scenario .scenario-summary-more>summary { min-height: 48px; font-size: 14px; }
+  .app .decision-card h4 { font-size: 14px; }
+  .app .decision-metric strong { font-size: 24px; }
+
+  /* Price lookup: OP benchmark, original price, normalization, then metadata. */
+  .app :is(.campaign-controls, .campaign-prices, .lookup-comparison-list, .competitor-grid) { gap: 18px; }
+  .app .campaign-controls { grid-template-columns: minmax(0, 1fr) 190px; }
+  .app :is(.campaign-status, .campaign-identifiers, .campaign-period-head span, .campaign-option, .campaign-comparison, .campaign-history summary) { font-size: 14px; line-height: 1.6; }
+  .app .campaign-result h2 { font-size: 20px; }
+  .app .campaign-price { padding: 18px; }
+  .app .campaign-price span { font-size: 13px; }
+  .app .campaign-price strong { font-size: 28px; }
+  .app .campaign-price b { font-size: 16px; }
+  #calc .campaign-preview { grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px; }
+  #calc .campaign-preview>div { padding: 18px; }
+  #calc .campaign-preview span, #calc .campaign-preview small { font-size: 13px; line-height: 1.6; }
+  #calc .campaign-preview b { font-size: 18px; }
+  .app :is(.lookup-comparison-card, .lookup-results .competitor-benchmark, .competitor-section .competitor-card, .competitor-section .competitor-benchmark) { padding: 24px; }
+  .app :is(.lookup-card-head h3, .lookup-results .competitor-benchmark h3, .competitor-card h3, .competitor-benchmark h3) { font-size: 17px; line-height: 1.5; }
+  .app :is(.lookup-card-head>span, .lookup-card-head p, .lookup-original, .lookup-basis, .lookup-normalized>span, .lookup-normalized small, .competitor-brand, .competitor-retailer, .competitor-spec, .competitor-price>span, .competitor-benchmark-price>span, .competitor-primary-metric>span) { font-size: 13px; line-height: 1.6; }
+  .app .lookup-original { padding: 14px; }
+  .app .lookup-original b { font-size: 24px; color: #173c50; }
+  .app .lookup-normalized { padding: 18px; }
+  .app .lookup-normalized b { font-size: 20px; }
+  .app .lookup-conclusion { padding: 16px; }
+  .app .lookup-conclusion>b { font-size: 16px; }
+  .app .lookup-conclusion strong { font-size: 24px; }
+  .app :is(.lookup-conclusion small, .lookup-updated, .lookup-own-label, .lookup-candidate-label, .competitor-badges span, .competitor-meta, .competitor-benchmark-head span, .competitor-benchmark-head small) { font-size: 12px; line-height: 1.6; }
+  .app :is(.lookup-caution, .lookup-select-notice, .lookup-choices button small, .lookup-no-candidates small, .competitor-secondary-metrics, .metric-unavailable, .competitor-comparison-strip.unavailable small, .competitor-benchmark-price>small) { font-size: 13px; line-height: 1.6; }
+  .app :is(.lookup-summary, .lookup-choices p, .lookup-no-candidates strong, .competitor-disclaimer, .competitor-selection-hint, .competitor-sort-note, .competitor-benchmark-notice, .competitor-list-heading, .competitor-comparison-strip>span, .competitor-comparison-strip strong) { font-size: 14px; line-height: 1.6; }
+  .app :is(.competitor-details, .competitor-detail-content p, .competitor-source-link, .lookup-campaign-details>summary) { font-size: 13px; line-height: 1.6; }
+  .app .competitor-details summary, .app .lookup-campaign-details>summary { min-height: 48px; }
+  .app :is(.competitor-price strong, .competitor-benchmark-price strong) { font-size: 28px; }
+  .app .competitor-primary-metric b { font-size: 20px; }
+  .app .competitor-comparison-strip b { font-size: 24px; }
+  .app .competitor-comparison-strip { padding: 16px; }
+  .app .competitor-benchmark-head { font-size: 14px; padding: 12px; }
+  .app .competitor-heading>div>span { font-size: 13px; }
+  .app .public-catalog-name b { font-size: 17px; }
+  .app :is(.public-catalog-name small, .public-catalog-expand) { font-size: 13px; }
+  .app .public-catalog-list>li>details>summary { padding: 20px; }
+  .campaign-product-drawer { width: min(820px, calc(100% - 48px)); padding: 26px; max-height: 85dvh; }
+  .campaign-product-drawer :is(button, .lookup-product-option) { min-height: 48px; font-size: 15px; line-height: 1.5; }
+  .campaign-product-drawer .lookup-drawer-head h2 { font-size: 20px; }
+  .campaign-product-drawer .lookup-drawer-head p { font-size: 14px; line-height: 1.6; }
+  .campaign-product-drawer .lookup-product-list h3 { font-size: 17px; margin-block: 22px 12px; }
+  .campaign-product-drawer .lookup-product-option { padding: 14px; margin-bottom: 8px; }
+  .campaign-product-drawer .lookup-product-option b { font-size: 15px; }
+  .campaign-product-drawer .lookup-product-option small { font-size: 13px; line-height: 1.6; }
+  .campaign-product-drawer :is(.lookup-own-label, .lookup-candidate-label) { font-size: 12px; line-height: 1.6; }
+  .app .campaign-browse-actions #campaignBrowseAll, .app .campaign-browse-actions #campaignSearchableProducts { font-size: 15px; min-height: 48px; }
+
+  /* Sales: one shared scale for single, multi, radar and legacy advanced views. */
+  .app .sales2 { max-width: none; }
+  .app :is(.sales2, .sales22, .sales23, .sales-explorer) :is(p, small, dt, summary) { font-size: 13px; line-height: 1.6; }
+  .app :is(.sales2, .sales22, .sales23) span { font-size: 13px; }
+  .app :is(.sales2, .sales22, .sales23) b { font-size: 14px; }
+  .app :is(.sales2, .sales22, .sales23) h2 { font-size: 20px; }
+  .app :is(.sales2, .sales22, .sales23) h3 { font-size: 17px; line-height: 1.5; }
+  .app :is(.sales2, .sales22, .sales23) h4 { font-size: 15px; line-height: 1.5; }
+  .app .sales2-product h3 { font-size: 18px; }
+  .app :is(.sales2-controls, .sales2-custom, .sales-range-controls) { gap: 18px; }
+  .app :is(.sales2, .sales22, .sales23, .sales-explorer) :is(input, select) { min-height: 52px; font-size: 18px; padding: 12px; }
+  .app :is(.sales2, .sales22, .sales23, .sales-explorer) label { font-size: 15px; }
+  .app :is(.sales2, .sales22, .sales23, .sales-explorer) button { min-height: 48px; font-size: 15px; }
+  .app :is(.sales2-search-results, .sales-search-results) b { font-size: 15px; }
+  .app :is(.sales2-search-results, .sales-search-results) small { font-size: 13px; }
+  .app :is(.sales2-badge, .sales2-trend-chip, .sales23-trend) { font-size: 12px; line-height: 1.5; white-space: normal; }
+  .app :is(.sales2-kpis, .sales22-kpis, .sales23-kpis) { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+  .app :is(.sales2-kpis, .sales22-kpis, .sales23-kpis) article { padding: 20px; }
+  .app :is(.sales2-kpis, .sales22-kpis, .sales23-kpis) strong { font-size: 22px; line-height: 1.4; overflow-wrap: anywhere; }
+  .app .sales2-kpis .sales2-primary strong { font-size: 32px; }
+  .app .sales2-kpis .sales2-daily { font-size: 22px; }
+  .app .sales22-kpis h4 { font-size: 14px; min-height: 42px; }
+  .app :is(.sales2-summary, .sales22-summary, .sales23-overview, .sales23-attention) { padding: 22px; }
+  .app :is(.sales2-summary, .sales22-summary, .sales23-overview) p { font-size: 14px; line-height: 1.7; }
+  .app :is(.sales2-bar-row, .sales22-volume-line, .sales22-chip, .sales23-result-count, .sales2-legend, .sales-year-legend, .sales-range-controls legend, .sales-period-results) { font-size: 13px; line-height: 1.6; }
+  .app .sales2-bar-row b { font-size: 18px; }
+  .app .sales22-volume-line { grid-template-columns: 60px minmax(0,1fr) 110px; gap: 12px; }
+  .app .sales22-volume-line b { font-size: 16px; }
+  .app .sales22-growth-heading { flex-wrap: wrap; }
+  .app .sales22-growth-heading b { font-size: 17px; }
+  .app .sales22-zero { font-size: 12px; }
+  .app .sales22-growth-track { margin-bottom: 24px; }
+  .app .sales23 .sales23-name { font-size: 15px; line-height: 1.6; }
+  .app .sales23-attention-values strong { font-size: 22px; }
+  .app .sales23-rank-value b { font-size: 18px; }
+  .app .sales23-bar { margin-top: 24px; }
+  .app .sales23-bar small { font-size: 12px; top: -21px; line-height: 1.5; }
+  .app :is(.sales2-details, .sales2-advanced, .sales-advanced, .sales22-coverage, .sales23-coverage, .sales23-unavailable)>summary { font-size: 14px; min-height: 48px; }
+  .app .sales2-reference-grid b { font-size: 20px; }
+  .app .sales2-tooltip { width: 270px; font-size: 14px; padding: 16px; }
+  .app .sales2-tooltip .sales2-tooltip-date { font-size: 17px; }
+  .app .sales2-tooltip dd, .app .sales2-tooltip b { font-size: 16px; }
+  .app .sales2-tooltip dt, .app .sales2-tooltip-difference>span, .app .sales2-tooltip-difference small { font-size: 13px; }
+  .app .sales2-axis { font-size: 11px; }
+  .app .sales2-latest-label text { font-size: 12px; }
+  .app .sales-extrema b { font-size: 20px; }
+  .app .sales-extrema span, .app .sales-extrema small, .app .sales-extrema-note { font-size: 13px; }
+  .app .sales-month-details .month-row, .app .sales-month-heading, .app .sales-month-details .month-row b { font-size: 14px; }
+  .app .sales-month-heading { min-height: 46px; align-items: center; }
+
+  /* Scroll belongs to table wrappers; column-heavy tables keep readable cells. */
+  .app :is(.table-wrap, .sales2-table-scroll, .sales22-table-scroll, .sales23-table-scroll) { min-width: 0; max-width: 100%; overflow-x: auto; }
+  .app :is(table, .sales-multi-table), .app .sales22 .sales-multi-table :is(th,td) { font-size: var(--desktop-table); line-height: 1.6; }
+  .app :is(table, .sales-multi-table) :is(th,td) { padding: 13px 14px; height: 48px; vertical-align: top; }
+  .app .sales22 .sales-multi-table :is(th,td) { padding: 13px 14px; }
+  .app table :is(small, .sales2-badge) { font-size: 12px; line-height: 1.6; }
+  .app .sales22 .sales-multi-table { min-width: 1150px; }
+  .app .sales23 table { min-width: 1320px; }
+  .app .sales2-table-scroll table { font-size: 14px; min-width: 560px; }
+  .app .sales22 .sales-multi-table :is(th,td):nth-child(2), .app .sales23 :is(th,td):first-child { min-width: 250px; width: 280px; max-width: 320px; }
+  .app table .sales23-actions { gap: 8px; }
+
+  /* The update dialog lives outside .app, so it has its own desktop scope. */
+  .app :is(.sales24-entry, .sales24-freshness) { font-size: 13px; line-height: 1.6; }
+  .sales24-dialog { width: min(1000px, calc(100% - 48px)); }
+  .sales24-dialog .sales24-top, .sales24-dialog .sales24-body { padding: 24px 28px; }
+  .sales24-dialog .sales24-top h2 { font-size: 20px; }
+  .sales24-dialog .sales24-body { font-size: 14px; line-height: 1.65; }
+  .sales24-dialog label { font-size: 15px; line-height: 1.5; }
+  .sales24-dialog button { font-size: 15px; min-height: 48px; }
+  .sales24-dialog :is(input:not([type=checkbox]), select) { font-size: 18px; min-height: 52px; padding: 12px; }
+  .sales24-dialog .sales24-grid { grid-template-columns: repeat(auto-fit, minmax(170px,1fr)); gap: 16px; }
+  .sales24-dialog .sales24-grid div { padding: 16px; }
+  .sales24-dialog .sales24-grid strong { font-size: 22px; }
+  .sales24-dialog .sales24-note { font-size: 13px; line-height: 1.6; }
+  .sales24-dialog summary { min-height: 48px; font-size: 14px; }
+
+  /* New-product calculation and text organizer share the same form scale. */
+  #calc :is(.new-product-entry, .new-product-return, .new-channel-switch button, .new-px-quick button, .new-px-result .copy-result) { font-size: 15px; min-height: 48px; }
+  #calc .new-product-fields input { font-size: 18px; min-height: 52px; }
+  #calc .new-product-mode { padding: 18px; gap: 18px; }
+  #calc .new-product-mode b { font-size: 16px; }
+  #calc .new-product-mode small, #calc .new-px-help, #calc .new-px-fee-note { font-size: 13px; line-height: 1.6; }
+  #calc .new-product-empty { padding: 26px; }
+  #calc .new-product-empty p { font-size: 15px; }
+  #calc .new-px-result { padding: 26px; }
+  #calc .new-px-result-head h3 { font-size: 17px; }
+  #calc .new-px-result span { font-size: 13px; }
+  #calc .new-px-result b { font-size: 22px; }
+  #calc .new-px-result .margin-status { font-size: 12px; }
+  #calc .new-px-offer span { font-size: 14px; }
+  #calc .new-px-offer strong { font-size: 44px; }
+  .app :is(.organizer-intro, .organizer-empty, .organizer-preview) { font-size: 14px; line-height: 1.65; }
+  .app .organizer-preview { padding: 20px; max-height: 460px; }
+  .app .organizer-items { gap: 18px; }
+  .app .organizer-item summary { font-size: 16px; min-height: 64px; padding: 16px 92px 16px 20px; }
+  .app .organizer-fields { padding: 0 20px 20px; }
+  .app .organizer-delete { top: 8px; right: 8px; padding: 10px 14px; font-size: 14px; }
+  #organizerClear { font-size: 14px; }
+}
+
+@media (min-width: 901px) and (max-width: 1279px) {
+  /* Two columns at small desktop widths avoid narrow form fields and charts. */
+  .app .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .app .sales22-charts, .app .sales23-rankings { grid-template-columns: minmax(0,1fr); }
+  .app .lookup-comparison-list { grid-template-columns: minmax(0,1fr); }
+}

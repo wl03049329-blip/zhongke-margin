@@ -53,7 +53,7 @@ async function main() {
   await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(process.env.PX_LIVE || `http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
-  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.18-rsp-confirmed"], "promotion release service worker cache is active");
+  assert.deepEqual(cacheKeys, ["px-workbench-v4.1.19-desktop-readability"], "promotion release service worker cache is active");
 
   assert.equal(await page.evaluate(() => eval("PX_Q3_PRODUCTS.length")), 54, "product master count");
   const expectedProductCategories = [
@@ -137,8 +137,8 @@ async function main() {
   assert.deepEqual(manifest.icons.map(icon => icon.purpose), ["any", "any"], "PWA icons declare standard any purpose");
   assert.ok(manifest.icons.every(icon => icon.src.endsWith("?v=4.1.2")), "PWA icons use the current cache-busting version");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.18-rsp-confirmed'/, "service worker cache version");
-  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.18-rsp-confirmed/, "service worker registration cache buster");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.1\.19-desktop-readability'/, "service worker cache version");
+  assert.match(staticHtml, /service-worker\.js\?v=4\.1\.19-desktop-readability/, "service worker registration cache buster");
   assert.match(staticHtml, /updateViaCache:"none"/, "service worker update bypasses HTTP cache");
   assert.match(serviceWorker, /e\.request\.mode==='navigate'\?\{cache:'no-store'\}/, "navigation fetch bypasses stale browser HTML cache");
   assert.match(serviceWorker, /cache:'reload'/, "new cache is populated from the network");

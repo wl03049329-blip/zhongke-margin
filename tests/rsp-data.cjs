@@ -43,14 +43,15 @@ assert.deepEqual(applyManualConfirmations({audit,values:JSON.parse(JSON.stringif
 if(process.env.PX_RSP_SOURCE){const actual=auditWorkbook(process.env.PX_RSP_SOURCE,master);assert.deepEqual(actual.audit,audit);assert.deepEqual(actual.values,JSON.parse(JSON.stringify(data)));}
 if(!process.argv.includes('--unit')){
  const releaseBase='43d2a523f180c362c16bd100b79af88d90c2310c',releaseOld=f=>execFileSync('git',['show',releaseBase+':'+f],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n');
- assert.equal(html.replaceAll('18-rsp-confirmed','17-rsp'),releaseOld('index.html'),'UI and all inline code unchanged; only cache URLs updated');
+ const withoutDesktop=html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.19-desktop-readability">/,'').replaceAll('19-desktop-readability','17-rsp');
+ assert.equal(withoutDesktop.replaceAll('18-rsp-confirmed','17-rsp'),releaseOld('index.html'),'existing UI and all inline code unchanged; only desktop stylesheet and cache URLs added');
  const previousAudit=JSON.parse(releaseOld('PX_RSP_MAPPING_AUDIT.json'));
  const previousValues=Object.fromEntries(previousAudit.records.filter(r=>r.productName).map(r=>[r.productName,r.rsp]));
  assert.deepEqual(applyManualConfirmations({audit:previousAudit,values:previousValues}).audit,audit,'only three confirmed values overlay original source audit');
  const beforeResolver=releaseOld('px-rsp-data.js').split('window.PX_RSP_REFERENCE =')[1];
  assert.equal(read('px-rsp-data.js').split('window.PX_RSP_REFERENCE =')[1],beforeResolver,'pure display resolver unchanged');
  const tracked=execFileSync('git',['ls-files','-z'],{cwd:root,encoding:'utf8'}).split('\0');
- for(const file of tracked.filter(f=>!f.includes('/')&&/\.(js|json|css)$/.test(f)&&!['px-rsp-data.js','PX_RSP_MAPPING_AUDIT.json','service-worker.js'].includes(f)))assert.equal(read(file),releaseOld(file),file+' untouched by RSP patch');
+ for(const file of tracked.filter(f=>!f.includes('/')&&/\.(js|json|css)$/.test(f)&&!['px-rsp-data.js','PX_RSP_MAPPING_AUDIT.json','service-worker.js','desktop-readability.css'].includes(f)))assert.equal(read(file),releaseOld(file),file+' untouched by RSP patch');
  const base='6748d0935fc04ca62a905072588266f158197b6d',old=f=>execFileSync('git',['show',base+':'+f],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n');
  const inline=s=>[...require('./rsp-inline-integrity.cjs').withoutRsp(s).matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?VERSION');
  assert.equal(inline(read('index.html')),inline(old('index.html')),'all inline code unchanged except exact RSP display cell');

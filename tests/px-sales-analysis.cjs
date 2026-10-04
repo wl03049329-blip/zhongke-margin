@@ -6,7 +6,7 @@ const {execFileSync}=require('node:child_process');
 const {chromium}=require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const {analyze,change}=require('../px-sales-analysis.js');
 const root=path.resolve(__dirname,'..'),base='59b8f49a209d6e99331345bf7d64071850402ec0';
-for(const file of ['px-sales-data.js','px-replacement-data.js','same-period-sales.js'])assert.deepEqual(fs.readFileSync(path.join(root,file)),execFileSync('git',['show',`${base}:${file}`]),`${file} unchanged`);
+for(const file of ['px-sales-data.js','px-replacement-data.js','same-period-sales.js'])assert.equal(fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n'),execFileSync('git',['show',`${base}:${file}`],{encoding:'utf8'}).replace(/\r\n/g,'\n'),`${file} unchanged`);
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/\r\n/g,'\n'),before=execFileSync('git',['show',`${base}:index.html`],{encoding:'utf8'}).replace(/\r\n/g,'\n');
 for(const [start,end] of [['function model(','function rows('],['function calcC(','function calcR('],['function analyzePxSales(','function trendChart('],['function trendChart(','function productInfoMarkup(']])assert.equal(html.slice(html.indexOf(start),html.indexOf(end)),before.slice(before.indexOf(start),before.indexOf(end)),`${start} unchanged`);
 const months=Array.from({length:8},(_,index)=>String(index+1).padStart(2,'0'));

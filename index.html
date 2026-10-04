@@ -238,6 +238,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 @media(max-width:620px){.px-info-card .px-info-grid,#calc .calc-product-data .px-info-grid,#reverse .reverse-product-data .px-info-grid,#promo .promo-product-data .px-info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:320px){.px-info-card .px-metric{padding:7px}.px-info-card .px-metric b{font-size:13px}}
 </style>
+<link rel="stylesheet" href="desktop-readability.css?v=4.1.19-desktop-readability">
 </head>
 <body>
 <main class="app">
@@ -719,7 +720,7 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.18-rsp-confirmed",{updateViaCache:"none"}));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.19-desktop-readability",{updateViaCache:"none"}));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="scenario-summary.js?v=4.1.2-scenario-source"></script>
