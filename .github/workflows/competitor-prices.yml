@@ -27,6 +27,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: node scripts/restore_competitor_runtime.cjs
       - name: Observe public product pages (no authentication)
+        if: github.event_name != 'push' || github.ref != 'refs/heads/main'
         run: node scripts/scrape_competitor_prices.cjs
       - name: Probe source feasibility before release
         if: github.ref != 'refs/heads/main'

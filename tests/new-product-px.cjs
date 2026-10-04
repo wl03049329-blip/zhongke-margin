@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os'),{execFileSync}=require('node:child_process');
 const {chromium}=require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const root=path.resolve(__dirname,'..'),base='593a3412cbba3f0a53880e2d2834f24c13ce7417',cache='px-workbench-v4.1.19-desktop-readability';
+const root=path.resolve(__dirname,'..'),base='593a3412cbba3f0a53880e2d2834f24c13ce7417',cache='px-workbench-v4.1.20-desktop-readability';
 const old=file=>execFileSync('git',['show',`${base}:${file}`],{encoding:'utf8'}).replace(/\r\n/g,'\n'),read=file=>fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n');
 for(const file of ['px-sales-data.js','px-product-additions.js','px-product-additions.json','px-promo-prices.js','px-promo-prices.json','px-promo-core.js','px-replacement-data.js','product-catalog.js','px-sales-analysis.js','same-period-sales.js','decision-summary.js','scenario-summary.js'])assert.equal(read(file),old(file),file+' unchanged');
 const inline=html=>[...require('./rsp-inline-integrity.cjs').withoutRsp(html).matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?VERSION');

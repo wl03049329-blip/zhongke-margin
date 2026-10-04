@@ -1,4 +1,4 @@
-const CACHE='px-workbench-v4.1.19-desktop-readability';
+const CACHE='px-workbench-v4.1.20-desktop-readability';
 const IMPORT_ASSETS=['./px-sales-import-core.js?v=4.1.18-rsp-confirmed','./px-sales-update.js?v=4.1.18-rsp-confirmed','./px-sales-update.css?v=4.1.18-rsp-confirmed','./assets/vendor/xlsx-0.20.3.full.min.js'];
 const RADAR_ASSETS=['./px-sales-radar-core.js?v=4.1.18-rsp-confirmed','./px-sales-radar.js?v=4.1.18-rsp-confirmed','./px-sales-radar.css?v=4.1.18-rsp-confirmed'];
 const MULTI_ASSETS=['./px-sales-multi-view.js?v=4.1.18-rsp-confirmed','./px-sales-multi.js?v=4.1.18-rsp-confirmed','./px-sales-multi.css?v=4.1.18-rsp-confirmed'];

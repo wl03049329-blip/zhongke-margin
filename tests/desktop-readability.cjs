@@ -14,7 +14,7 @@ const read = f => fs.readFileSync(path.join(root, f), 'utf8').replace(/\r\n/g, '
 const old = f => execFileSync('git', ['show', releaseBase + ':' + f], { cwd: root, encoding: 'utf8' }).replace(/\r\n/g, '\n');
 if (!process.env.PX_BASELINE) {
   const html = read('index.html');
-  assert.equal(html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.19-desktop-readability">/, '').replaceAll('service-worker.js?v=4.1.19-desktop-readability', 'service-worker.js?v=4.1.18-rsp-confirmed'), old('index.html'), 'original markup, inline CSS, formulas and business logic unchanged');
+  assert.equal(html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.19-desktop-readability">/, '').replaceAll('service-worker.js?v=4.1.20-desktop-readability', 'service-worker.js?v=4.1.18-rsp-confirmed'), old('index.html'), 'original markup, inline CSS, formulas and business logic unchanged');
   const tracked = execFileSync('git', ['ls-tree', '--name-only', releaseBase], { cwd: root, encoding: 'utf8' }).trim().split('\n');
   for (const f of tracked.filter(f => /\.(js|json|css)$/.test(f) && f !== 'service-worker.js')) assert.equal(read(f), old(f), f + ' data / original styles / logic unchanged');
 }

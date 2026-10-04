@@ -43,7 +43,7 @@ assert.deepEqual(applyManualConfirmations({audit,values:JSON.parse(JSON.stringif
 if(process.env.PX_RSP_SOURCE){const actual=auditWorkbook(process.env.PX_RSP_SOURCE,master);assert.deepEqual(actual.audit,audit);assert.deepEqual(actual.values,JSON.parse(JSON.stringify(data)));}
 if(!process.argv.includes('--unit')){
  const releaseBase='43d2a523f180c362c16bd100b79af88d90c2310c',releaseOld=f=>execFileSync('git',['show',releaseBase+':'+f],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n');
- const withoutDesktop=html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.19-desktop-readability">/,'').replaceAll('19-desktop-readability','17-rsp');
+ const withoutDesktop=html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.19-desktop-readability">/,'').replaceAll('20-desktop-readability','17-rsp');
  assert.equal(withoutDesktop.replaceAll('18-rsp-confirmed','17-rsp'),releaseOld('index.html'),'existing UI and all inline code unchanged; only desktop stylesheet and cache URLs added');
  const previousAudit=JSON.parse(releaseOld('PX_RSP_MAPPING_AUDIT.json'));
  const previousValues=Object.fromEntries(previousAudit.records.filter(r=>r.productName).map(r=>[r.productName,r.rsp]));
