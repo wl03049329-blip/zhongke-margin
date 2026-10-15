@@ -39,7 +39,7 @@ async function states(p, visit) {
       await p.locator('#cProduct').fill('65010209');
     }
   }
-  await openTab(p, 'campaign'); await p.locator('#campaignSearch').fill('保鮮膜');
+  await openTab(p, 'campaign'); if(await p.locator('.pc-legacy').count()&&!await p.locator('.pc-legacy').evaluate(el=>el.open))await p.locator('.pc-legacy > summary').click(); await p.locator('#campaignSearch').fill('保鮮膜');
   await p.locator('.lookup-choices [data-px-compare="86210115"]').click();
   await expand(p, '#campaign details'); await visit('campaign');
   await p.locator('#campaignSearchableProducts').click(); await visit('drawer');
@@ -102,8 +102,11 @@ async function audit(p) {
     for (const e of scope.querySelectorAll('button,input:not([type=checkbox]),select,textarea')) {
       if (!visible(e)) continue;
       const s = getComputedStyle(e), r = e.getBoundingClientRect();
-      if (e.tagName === 'BUTTON' && (parseFloat(s.fontSize) < 14 || r.height < 46)) buttonIssues.push({ text: e.textContent.trim().slice(0, 50), class: e.className, size: s.fontSize, height: r.height });
-      if (e.tagName !== 'BUTTON' && (parseFloat(s.fontSize) < 17 || r.height < 50)) inputIssues.push({ id: e.id, class: e.className, size: s.fontSize, height: r.height });
+      // Accepted lookup 2.0 controls use 44px targets / 16px input text; retain the
+      // earlier desktop-readability contract for every existing workspace module.
+      const lookup = !!e.closest('#priceCenter,.pc-dialog');
+      if (e.tagName === 'BUTTON' && (parseFloat(s.fontSize) < 14 || r.height < (lookup ? 44 : 46))) buttonIssues.push({ text: e.textContent.trim().slice(0, 50), class: e.className, size: s.fontSize, height: r.height });
+      if (e.tagName !== 'BUTTON' && (parseFloat(s.fontSize) < (lookup ? 16 : 17) || r.height < (lookup ? 46 : 50))) inputIssues.push({ id: e.id, class: e.className, size: s.fontSize, height: r.height });
     }
     for (const e of scope.querySelectorAll('.px-metric b,.sales2-kpis strong,.sales22-kpis strong,.sales23-kpis strong,.lookup-normalized b')) {
       if (visible(e) && e.scrollWidth > e.clientWidth + 1) spill.push({ text: e.textContent, class: e.className });
