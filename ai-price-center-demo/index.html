@@ -13,14 +13,15 @@
   <script defer src="app.js"></script>
 </head>
 <body>
-<div class="demo-ribbon">AI 應用展示版 <span>全站商品與價格均為虛構示範資料・非官方系統</span></div>
+<div class="demo-ribbon">AI 應用成果展示 <span>所有商品與價格均為虛構示範資料・非官方報價系統</span></div>
 <main class="shell">
   <header class="header">
     <div class="identity"><span class="brand-mark" aria-hidden="true">PX</span><div><p class="eyebrow">PRICE INTELLIGENCE · DEMO 2.0</p><h1>PX 智慧價格中心</h1><p class="subtitle">搜尋一次，完成查價、比較與分析。</p></div></div>
     <div class="header-actions"><button class="primary" id="startDemo">一鍵展示 <span aria-hidden="true">↗</span></button><button class="quiet" id="resetDemo">重設展示</button></div>
   </header>
   <nav id="demoGuide" class="demo-guide" aria-label="展示步驟" hidden>
-    <span>展示流程</span><button data-step="search">1 搜尋商品</button><button data-step="history">2 歷史價格</button><button data-step="promotion">3 促銷換算</button><button data-step="pk">4 商品 PK</button><button data-step="summary">5 重點摘要</button>
+    <div class="guide-steps"><button data-step="search">1 搜尋商品</button><button data-step="history">2 歷史價格</button><button data-step="promotion">3 促銷換算</button><button data-step="pk">4 商品 PK</button><button data-step="summary">5 重點摘要</button></div>
+    <div class="guide-controls"><span id="guideProgress" role="status">1 / 5</span><button id="previousStep">← 上一步</button><button id="nextStep" class="primary">下一步 →</button><button id="exitGuide" class="quiet">自由操作</button></div>
   </nav>
   <section class="search-section" aria-labelledby="searchHeading">
     <div class="section-line"><h2 id="searchHeading">找到商品，開始比較</h2><span class="muted">獨立示範資料集 · 8 支商品</span></div>
@@ -54,7 +55,7 @@
     </section>
     <section id="panel-channels" class="panel" role="tabpanel" aria-labelledby="tab-channels" hidden><div class="section-line"><div><p class="eyebrow">CHANNEL PRICES</p><h2>跨通路價格比較</h2></div></div><p class="muted">目前選取的是虛構商品，未配對真實通路商品。公開價格需逐筆驗證後才能加入。</p><div id="channelCards" class="channel-grid"></div></section>
     <details id="pkSection" class="panel pk-section"><summary><span><span class="eyebrow">PRODUCT MATCHUP</span><strong>A/B/C 商品 PK</strong><span class="muted">先換算單位，再比較價格</span></span><span class="open-label">展開比較 ＋</span></summary><div class="pk-body"><div class="section-line"><p class="muted">以本檔平均單件實付價換算；不同用途／單位不排名。</p><label class="pk-unit">保鮮膜基準<select id="pkUnit"><option value="length">每公尺</option><option value="area">每平方公尺</option></select></label></div><div class="pk-selectors"><label>A 商品<select id="pkA"></select></label><label>B 商品<select id="pkB"></select></label><label>C 商品<select id="pkC"></select></label></div><p id="pkStatus" role="status"></p><div id="pkCards" class="pk-grid"></div></div></details>
-    <section id="summarySection" class="panel summary-panel"><div class="section-line"><div><p class="eyebrow">PRICE BRIEF</p><h2>自動價格重點摘要</h2></div><span class="rule-badge">可追溯規則</span></div><p class="muted">依目前商品的示範檔期資料整理，隨商品切換同步更新。</p><div id="summaryItems"></div></section>
+    <details id="summarySection" class="panel summary-panel pk-section"><summary><span><span class="eyebrow">PRICE BRIEF</span><strong>自動價格重點摘要</strong><span class="muted">可追溯規則・隨目前商品同步更新</span></span><span class="open-label">展開摘要 ＋</span></summary><div class="summary-body"><div id="summaryItems"></div></div></details>
   </div>
   <footer><strong>PX 智慧價格中心</strong><span>AI 應用展示版 · 2026/10/16</span><p>個人工作輔助展示・非官方系統。全站資料皆為虛構，請勿作為實際交易依據。</p></footer>
 </main>

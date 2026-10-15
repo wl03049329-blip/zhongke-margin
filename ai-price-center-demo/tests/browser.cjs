@@ -14,6 +14,8 @@ const artifacts=path.join(root,'artifacts');fs.mkdirSync(artifacts,{recursive:tr
  await page.evaluate(()=>{localStorage.setItem('unrelated-workspace','KEEP');sessionStorage.setItem('unrelated-session','KEEP');});
  await page.locator('#productSearch').fill('保鮮膜');assert.equal(await page.locator('.search-option').count(),3);
  await page.locator('#productSearch').fill('DEMO-10002');assert.equal(await page.locator('.search-option').count(),1);await page.keyboard.press('Enter');assert.match(await page.locator('#productCard').innerText(),/輕巧保鮮膜/);
+ assert.equal(await page.locator('#pkSection').getAttribute('open'),null);assert.equal(await page.locator('#summarySection').getAttribute('open'),null,'normal lookup starts compact');
+ await page.locator('#summarySection>summary').click();assert.equal(await page.locator('#summaryItems').isVisible(),true);await page.locator('#summarySection>summary').click();
  await page.locator('#productSearch').fill('查無商品ABC');assert.match(await page.locator('#searchResults').innerText(),/找不到/);await page.keyboard.press('Escape');assert.equal(await page.locator('#searchResults').isVisible(),false);
  await page.locator('#productSearch').fill('<img src=x onerror=alert(1)>');assert.equal(await page.locator('#searchResults img').count(),0);await page.keyboard.press('Escape');
  await page.locator('#startDemo').click();assert.match(await page.locator('#productCard').innerText(),/日常保鮮膜/);assert.match(await page.locator('.primary-metric').innerText(),/99\.50/);
@@ -28,7 +30,7 @@ const artifacts=path.join(root,'artifacts');fs.mkdirSync(artifacts,{recursive:tr
  await page.locator('#startDemo').click();await page.locator('[data-tab="promotion"]').click();
  for(const [type,value,quantity,total,average]of [['SINGLE','99',1,'99.00','99.00'],['BOGO','99',2,'99.00','49.50'],['HALF','99',2,'148.50','74.25'],['BUNDLE','199',3,'199.00','66.33']]){
   await page.locator('#promotionType').selectOption(type);await page.locator('#promotionPrice').fill(value);if(type==='BUNDLE')await page.locator('#bundleQuantity').fill(String(quantity));
-  assert.match(await page.locator('.promo-hero>strong').innerText(),new RegExp(average.replace('.','\\.')));assert.ok((await page.locator('.promo-totals').innerText()).includes(total));assert.ok((await page.locator('.promo-totals').innerText()).includes(quantity+' 件'));assert.equal(await page.locator('.calculation-steps li').count(),2);
+  assert.match(await page.locator('.promo-hero>strong').innerText(),new RegExp(average.replace('.','\\.')));assert.ok((await page.locator('.promo-totals').innerText()).includes(total));assert.ok((await page.locator('.promo-totals').innerText()).includes(quantity+' 件'));assert.equal(await page.locator('#promotionResult .calculation-steps li').count(),2);
  }
  await page.locator('#promotionPrice').fill('');assert.match(await page.locator('#promotionResult').innerText(),/尚未計算/);assert.equal(await page.locator('.promo-hero').count(),0);
  await page.locator('#promotionPrice').fill('-5');assert.match(await page.locator('#promotionResult').innerText(),/有效金額/);
@@ -43,10 +45,39 @@ const artifacts=path.join(root,'artifacts');fs.mkdirSync(artifacts,{recursive:tr
  assert.deepEqual(await page.evaluate(()=>({local:localStorage.getItem('unrelated-workspace'),session:sessionStorage.getItem('unrelated-session')})),{local:'KEEP',session:'KEEP'});
  await page.locator('#startDemo').click();await page.locator('#productSearch').fill('DEMO-10003');await page.keyboard.press('Enter');await page.reload({waitUntil:'networkidle'});assert.equal(await page.locator('#welcome').isVisible(),true,'no persisted product');
  const screens=[];for(const [width,height]of [[1920,1080],[1366,768],[390,844],[320,568]]){
-  await page.setViewportSize({width,height});await page.locator('#startDemo').click();await page.locator('[data-range="12"]').click();
+  await page.setViewportSize({width,height});await page.locator('#startDemo').click();
+  assert.equal(await page.locator('#previousStep').isDisabled(),true);
+  if(width>=1366){
+   for(const selector of ['.subtitle','.product-meta','.metric>span','.metric small','.demo-guide button','.chart-axis'])assert.ok(await page.locator(selector).first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize))>=16,selector+' projection font');
+   assert.ok(await page.locator('.product-title h2').evaluate(e=>parseFloat(getComputedStyle(e).fontSize))>=22);
+  }
+  assert.equal(await page.locator('#pkSection').getAttribute('open'),null);assert.equal(await page.locator('#summarySection').getAttribute('open'),null);
+  const productBefore=await page.locator('#productCard').innerText();
+  assert.match(productBefore,/取得 2 件，共付 \$199\.00/);assert.match(productBefore,/2026\/10 vs 2026\/09/);
+  for(const [index,step]of ['search','history','promotion','pk','summary'].entries()){
+   if(index)await page.locator('#nextStep').click();
+   assert.equal(await page.locator('[aria-current="step"]').getAttribute('data-step'),step);
+   assert.equal(await page.locator('#guideProgress').innerText(),(index+1)+' / 5');
+   if(step==='history'||step==='promotion')assert.equal(await page.locator('#panel-'+step).isVisible(),true);
+   assert.equal(await page.locator('#pkSection').evaluate(e=>e.open),step==='pk');assert.equal(await page.locator('#summarySection').evaluate(e=>e.open),step==='summary');
+   const target=step==='search'?'.search-section':step==='pk'?'#pkSection':step==='summary'?'#summarySection':'#panel-'+step;
+   const rect=await page.locator(target).boundingBox(),nav=await page.locator('#demoGuide').boundingBox();
+   assert.ok(rect.y>=nav.y+nav.height-1&&rect.y<height-60,`${width} ${step} heading visible below sticky navigation: ${JSON.stringify({rect,nav})}`);
+   assert.equal(await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),0,width+' '+step+' overflow');
+   assert.equal(await page.locator('#productCard').innerText(),productBefore,'step navigation retains selected product');
+   if(width!==320)await page.screenshot({path:path.join(artifacts,`talk-${width}-${index+1}-${step}.png`)});
+  }
+  assert.equal(await page.locator('#nextStep').isDisabled(),true);
+  for(const step of ['pk','promotion','history','search']){await page.locator('#previousStep').click();assert.equal(await page.locator('[aria-current="step"]').getAttribute('data-step'),step);}
+  await page.locator('[data-step="promotion"]').click();await page.locator('#promotionPrice').fill('123');
+  await page.locator('[data-step="pk"]').click();await page.locator('#previousStep').click();assert.equal(await page.locator('#promotionPrice').inputValue(),'123','return retains edited promotion');
+  await page.locator('#exitGuide').click();assert.equal(await page.locator('#demoGuide').isVisible(),false);assert.equal(await page.locator('#productCard').innerText(),productBefore);
+  await page.locator('[data-tab="periods"]').click();assert.equal(await page.locator('#panel-periods').isVisible(),true);
+  await page.locator('#resetDemo').click();assert.equal(await page.locator('#workspace').isVisible(),false);
+  await page.locator('#startDemo').click();await page.locator('[data-range="12"]').click();
   for(const tab of ['history','periods','promotion','channels']){await page.locator('[data-tab="'+tab+'"]').click();assert.equal(await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),0,width+' '+tab+' overflow');}
   await page.locator('[data-step="pk"]').click();assert.equal(await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),0,width+' PK overflow');
-  await page.locator('[data-tab="history"]').click();await page.evaluate(()=>window.scrollTo(0,0));const shot=path.join(artifacts,'demo-'+width+'.png');await page.screenshot({path:shot,fullPage:true});screens.push(shot);await page.screenshot({path:path.join(artifacts,'demo-viewport-'+width+'.png')});
+  await page.locator('[data-tab="history"]').click();await page.locator('[data-step="search"]').click();await page.locator('#productSearch').blur();await page.evaluate(()=>window.scrollTo(0,0));const shot=path.join(artifacts,'demo-'+width+'.png');await page.screenshot({path:shot,fullPage:true});screens.push(shot);await page.screenshot({path:path.join(artifacts,'demo-viewport-'+width+'.png')});
  }
  // Touch devices can inspect a plot value without hover.
  const touch=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'}),tp=await touch.newPage();await tp.goto(url);await tp.locator('#startDemo').tap();await tp.locator('[data-range="3"]').tap();await tp.locator('[data-history-index="2"]').tap();assert.match(await tp.locator('#historyReadout').innerText(),/2026\/10/);await touch.close();
@@ -56,5 +87,5 @@ const artifacts=path.join(root,'artifacts');fs.mkdirSync(artifacts,{recursive:tr
  // The exhibition package must work directly from disk, with no server or network.
  const offline=await browser.newContext({viewport:{width:1366,height:768},offline:true,serviceWorkers:'block'}),op=await offline.newPage(),offlineErrors=[];op.on('pageerror',e=>offlineErrors.push(e.message));op.on('console',m=>{if(m.type()==='error')offlineErrors.push(m.text());});
  await op.goto(pathToFileURL(path.join(root,'dist/index.html')).href);await op.locator('#startDemo').click();assert.match(await op.locator('.primary-metric').innerText(),/99\.50/);await op.locator('[data-tab="promotion"]').click();assert.match(await op.locator('.promo-hero').innerText(),/99\.50/);assert.deepEqual(offlineErrors,[]);await offline.close();
- console.log(JSON.stringify({status:'PASS',search:'PASS',formulas:'PASS',periodComparison:'PASS',history:'3/6/12 PASS, null gaps retained',pk:'PASS',reset:'PASS',mobileTap:'PASS',offlineFile:'PASS',viewports:'1920/1366/390/320',overflow:0,consoleErrors:0,requests:'allowlist only',screens},null,2));
+ console.log(JSON.stringify({status:'PASS',presentation:'all five steps, previous/next, viewport positioning, state retention, free mode, reset PASS',search:'PASS',formulas:'PASS',periodComparison:'PASS',history:'3/6/12 PASS, null gaps retained',pk:'PASS',reset:'PASS',mobileTap:'PASS',offlineFile:'PASS',viewports:'1920/1366/390/320',overflow:0,consoleErrors:0,requests:'allowlist only',screens},null,2));
 }finally{await browser?.close();server.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

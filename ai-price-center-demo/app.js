@@ -2,7 +2,8 @@
   'use strict';
   const D=window.PRICE_DEMO_DATA,C=window.PriceDemoCore,$=id=>document.getElementById(id),last=D.periods.at(-1);
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const fresh=()=>({productId:null,tab:'history',range:6,from:D.periods.at(-2),to:last,basis:'average',pk:[null,null,null],unit:'length',results:[],highlight:-1,guide:false});
+  const steps=['search','history','promotion','pk','summary'];
+  const fresh=()=>({productId:null,tab:'history',range:6,from:D.periods.at(-2),to:last,basis:'average',pk:[null,null,null],unit:'length',results:[],highlight:-1,guide:false,step:'search'});
   let state=fresh();
   const selected=()=>D.products.find(p=>p.id===state.productId);
   const tone=change=>({UP:'up',DOWN:'down',SAME:'same'}[change.status]||'same');
@@ -16,17 +17,19 @@
   }
   function renderProduct(){
     const p=selected(),record=C.at(p,last),avg=C.price(record),previous=C.price(C.at(p,D.periods.at(-2))),delta=C.change(previous,avg),priced=record?.listedCents!==null;
-    $('productCard').innerHTML=`<div class="product-title"><span class="fictional-tag">虛構商品 · ${esc(last)} 示範檔</span><h2>${esc(p.name)}</h2><p class="product-meta">示範條碼 ${esc(p.barcode)}<br>${esc(p.spec.label)}</p><p class="product-promo">${avg?esc(C.labels[record.promotion.type]):'本檔未收錄有效示範價格'}</p></div><div class="product-metrics"><div class="metric"><span>標示售價</span><strong${!priced?' class="no-price"':''}>${priced?C.money(C.rational(record.listedCents)):'尚無價格'}</strong><small>每件商品</small></div><div class="metric primary-metric"><span>平均單件實付價</span><strong${!avg?' class="no-price"':''}>${avg?C.money(avg):'尚無價格'}</strong><small>依本檔促銷換算／件</small></div><div class="metric delta-metric"><span>較前檔平均實付</span><strong class="${tone(delta)}${!delta.delta?' no-price':''}">${delta.delta?(delta.status==='SAME'?'持平':C.signedMoney(delta.delta)):'無比較基準'}</strong><small>${delta.delta&&delta.status!=='SAME'?esc(C.percent(delta.percent)):'相鄰兩檔・同一基準'}</small></div></div>`;
+    const promo=record?.promotion,result=promo?C.promotion(promo.type,promo.priceCents,promo.quantity):null;
+    $('productCard').innerHTML=`<div class="product-title"><span class="fictional-tag">虛構商品 · ${esc(last)} 示範檔</span><h2>${esc(p.name)}</h2><p class="product-meta">示範條碼 ${esc(p.barcode)}<br>${esc(p.spec.label)}</p><p class="product-promo">${avg?esc(C.labels[record.promotion.type]):'本檔未收錄有效示範價格'}</p></div><div class="product-metrics"><div class="metric"><span>標示售價</span><strong${!priced?' class="no-price"':''}>${priced?C.money(C.rational(record.listedCents)):'尚無價格'}</strong><small>單件標價，非促銷均價</small></div><div class="metric primary-metric"><span>平均單件實付</span><strong${!avg?' class="no-price"':''}>${avg?C.money(avg):'尚無價格'}</strong><small>${result?`取得 ${result.units} 件，共付 ${C.money(result.total)}`:'本檔無有效促銷價格'}</small></div><div class="metric delta-metric"><span>較前檔平均實付</span><strong class="${tone(delta)}${!delta.delta?' no-price':''}">${delta.delta?(delta.status==='SAME'?'持平':C.signedMoney(delta.delta)):'無比較基準'}</strong><small>${delta.delta&&delta.status!=='SAME'?esc(C.percent(delta.percent)):'相鄰兩檔・同一基準'}</small></div></div><details class="details product-basis"><summary>比較基準：${esc(last)} vs ${esc(D.periods.at(-2))}・每件平均實付｜查看計算依據</summary><p>前檔 ${C.money(previous)}／件 → 本檔 ${C.money(avg)}／件。差額與百分比均依每件平均實付比較，非標價差異。</p>${result?`<ol class="calculation-steps">${result.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`:'<p>本檔資料不足，不推算價格。</p>'}</details>`;
   }
   function renderHistory(){
     if(!selected()||state.tab!=='history')return;
-    const records=selected().history.slice(-state.range),container=$('historyChart'),w=Math.max(270,Math.round(container.clientWidth)),h=Math.round(container.clientHeight),left=w<500?49:63,right=20,top=20,bottom=37,plotW=w-left-right,plotH=h-top-bottom;
+    const records=selected().history.slice(-state.range),container=$('historyChart'),w=Math.max(270,Math.round(container.clientWidth)),h=Math.round(container.clientHeight),left=w<500?49:70,right=20,top=20,bottom=40,plotW=w-left-right,plotH=h-top-bottom;
     const values=records.flatMap(r=>[C.decimal(C.price(r,'listed')),C.decimal(C.price(r))]).filter(v=>v!==null).map(v=>v/100),ticks=C.ticks(Math.max(0,...values)),max=ticks.at(-1),x=i=>left+i*plotW/Math.max(1,records.length-1),y=v=>top+plotH-v/max*plotH;
     function line(basis){let pen=false;return records.map((r,i)=>{const v=C.decimal(C.price(r,basis));if(v===null){pen=false;return '';}const s=`${pen?'L':'M'}${x(i).toFixed(2)},${y(v/100).toFixed(2)}`;pen=true;return s;}).join(' ');}
     const maxTicks=w<500?3:7,step=Math.max(1,Math.ceil((records.length-1)/(maxTicks-1))),tickIndices=records.map((_,i)=>i).filter(i=>i===0||i===records.length-1||i%step===0);
     container.innerHTML=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(selected().name)}，最近 ${state.range} 個月的虛構價格走勢；缺值處斷線"><title>標示售價與平均單件實付價；虛構示範資料</title>${ticks.map(t=>`<line class="chart-grid" x1="${left}" x2="${w-right}" y1="${y(t)}" y2="${y(t)}"/><text class="chart-axis" text-anchor="end" x="${left-9}" y="${y(t)+4}">${t}</text>`).join('')}<path class="listed-line" d="${line('listed')}"/><path class="average-line" d="${line('average')}"/>${records.map((r,i)=>['listed','average'].map(b=>{const v=C.decimal(C.price(r,b));return v===null?'':`<circle class="${b}-dot" cx="${x(i)}" cy="${y(v/100)}" r="${i===records.length-1?5:3.5}"/>`;}).join('')).join('')}${tickIndices.map(i=>`<text class="chart-axis" text-anchor="${i===0?'start':i===records.length-1?'end':'middle'}" x="${x(i)}" y="${h-10}">${esc(records[i].period)}</text>`).join('')}${records.map((r,i)=>`<rect class="chart-hit" data-history-index="${i}" tabindex="0" role="button" aria-label="查看 ${esc(r.period)} 價格" x="${Math.max(left-12,x(i)-Math.min(22,plotW/records.length/2))}" y="${top}" width="${Math.min(44,plotW/records.length)}" height="${plotH}"/>`).join('')}</svg>`;
     $('historyTable').innerHTML=records.map(r=>`<div class="history-row"><strong>${esc(r.period)}</strong><span>標示 ${C.money(C.price(r,'listed'))}／件</span><span>平均實付 ${C.money(C.price(r))}／件</span><span>${r.promotion?esc(C.labels[r.promotion.type]):'尚無示範價格・未補值'}</span></div>`).join('');
-    $('historyReadout').textContent='點選資料點或用鍵盤 Tab 查看各檔價格；缺值月份保留斷線。';
+    const gaps=records.filter(r=>C.price(r)===null).map(r=>r.period);
+    $('historyReadout').textContent=gaps.length?`缺值月份：${gaps.join('、')}，折線保留斷線、未補值。點選資料點查看價格。`:'點選資料點或用鍵盤 Tab 查看各檔價格；缺值月份保留斷線。';
     container.querySelectorAll('[data-history-index]').forEach(el=>{const show=()=>{const r=records[Number(el.dataset.historyIndex)];$('historyReadout').textContent=`${r.period}｜標示售價 ${C.money(C.price(r,'listed'))}｜平均單件實付 ${C.money(C.price(r))}${r.promotion?'｜'+C.labels[r.promotion.type]:'｜尚無示範價格'}`;};el.addEventListener('pointerenter',show);el.addEventListener('focus',show);el.addEventListener('click',show);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show();}});});
   }
   function renderPeriods(){
@@ -47,7 +50,12 @@
     $('pkCards').innerHTML=state.pk.map((id,i)=>{const e=result.entries.find(e=>e.product.id===id);if(!e)return `<div class="pk-card"><span class="pk-tag">方案 ${'ABC'[i]}</span><p class="muted">尚未選擇商品</p></div>`;const p=e.product,record=C.at(p,last),win=result.winners.includes(id);return `<article class="pk-card${win?' winner':''}" data-pk-product="${esc(id)}"><div class="pk-tag"><b>商品 ${'ABC'[i]}</b>${win?'<span class="winner-tag">最低單位價格</span>':''}</div><h3>${esc(p.name)}</h3><p class="muted">${esc(p.spec.label)}</p><strong class="unit-value">${e.unit?C.money(e.unit.value):'—'}</strong><span class="unit-label">${e.unit?esc(e.unit.label):'規格或價格不足，無法公平換算'}</span><div class="pk-price">標示售價 <b>${C.money(C.price(record,'listed'))}</b><br>平均實付 <b>${C.money(e.average)}／件</b><br>${record?.promotion?esc(C.labels[record.promotion.type]):'本檔未提供價格'}</div></article>`;}).join('');
   }
   function renderSummary(){$('summaryItems').innerHTML=C.summaries(selected(),D.periods).map(row=>`<div class="summary-item"><p>${esc(row.text)}</p><details><summary>查看計算來源</summary><p>${esc(row.source)}</p></details></div>`).join('');}
-  function setTab(tab, focus=false){state.tab=tab;document.querySelectorAll('[data-tab]').forEach(el=>{const active=el.dataset.tab===tab;el.setAttribute('aria-selected',String(active));el.tabIndex=active?0:-1;$('panel-'+el.dataset.tab).hidden=!active;if(active&&focus)el.focus();});if(state.guide)document.querySelectorAll('[data-step]').forEach(el=>{if(el.dataset.step===tab)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');});renderHistory();}
+  function syncGuide(){
+    const i=steps.indexOf(state.step);
+    document.querySelectorAll('[data-step]').forEach(el=>{if(state.guide&&el.dataset.step===state.step)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');});
+    $('guideProgress').textContent=`${i+1} / ${steps.length}`;$('previousStep').disabled=i===0;$('nextStep').disabled=i===steps.length-1;
+  }
+  function setTab(tab, focus=false){state.tab=tab;document.querySelectorAll('[data-tab]').forEach(el=>{const active=el.dataset.tab===tab;el.setAttribute('aria-selected',String(active));el.tabIndex=active?0:-1;$('panel-'+el.dataset.tab).hidden=!active;if(active&&focus)el.focus();});if(state.guide&&steps.includes(tab)){state.step=tab;syncGuide();}renderHistory();}
   function selectProduct(id){
     const p=D.products.find(p=>p.id===id);if(!p)return;
     state.productId=id;state.pk[0]=id;for(let i=1;i<3;i++)if(state.pk[i]===id)state.pk[i]=null;
@@ -55,17 +63,24 @@
     renderProduct();renderPeriods();resetPromotion();renderPk();renderSummary();renderHistory();$('announcement').textContent='已選擇 '+p.name+'。所有價格均為虛構示範。';
   }
   function guide(step){
-    document.querySelectorAll('[data-step]').forEach(el=>{if(el.dataset.step===step)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');});
-    if(step==='search'){$('productSearch').focus();$('productSearch').select();$('searchHeading').scrollIntoView({block:'start'});}
-    if(step==='history'||step==='promotion'){closeSearch();setTab(step);$('panel-'+step).scrollIntoView({block:'start'});}
-    if(step==='pk'){closeSearch();$('pkSection').open=true;$('pkSection').scrollIntoView({block:'start'});}
-    if(step==='summary'){closeSearch();$('summarySection').scrollIntoView({block:'start'});}
+    if(!selected()||!steps.includes(step))return;
+    closeSearch();state.step=step;
+    $('pkSection').open=step==='pk';$('summarySection').open=step==='summary';
+    if(step==='history'||step==='promotion')setTab(step);
+    syncGuide();
+    const target=step==='search'?document.querySelector('.search-section'):step==='pk'?$('pkSection'):step==='summary'?$('summarySection'):$('panel-'+step);
+    // Offset by the actual sticky navigation height, including its mobile wrapping.
+    target.setAttribute('tabindex','-1');
+    if(step==='search'){$('productSearch').focus({preventScroll:true});$('productSearch').select();closeSearch();}
+    else target.focus({preventScroll:true});
+    window.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+window.scrollY-$('demoGuide').getBoundingClientRect().height-24),behavior:'instant'});
+    $('announcement').textContent=`展示步驟 ${steps.indexOf(step)+1} / 5，${document.querySelector('[data-step="'+step+'"]').textContent}`;
   }
   function reset(){
     state=fresh();$('productSearch').value='';closeSearch();$('workspace').hidden=true;$('welcome').hidden=false;$('demoGuide').hidden=true;$('pkSection').open=false;
     for(const id of ['productCard','historyChart','historyTable','historyReadout','periodResult','periodCoverage','summaryItems','pkCards','pkStatus','promotionResult','searchResults'])$(id).replaceChildren();
     $('promotionPrice').value='';$('promotionType').value='SINGLE';$('bundleQuantity').value='2';$('pkUnit').value='length';$('compareBasis').value='average';$('compareFrom').value=state.from;$('compareTo').value=state.to;
-    document.querySelectorAll('details').forEach(el=>el.open=false);document.querySelectorAll('[data-range]').forEach(el=>el.setAttribute('aria-pressed',String(Number(el.dataset.range)===6)));setTab('history');$('announcement').textContent='展示已重設，請重新選擇商品。';window.scrollTo(0,0);
+    document.querySelectorAll('details').forEach(el=>el.open=false);document.querySelectorAll('[data-range]').forEach(el=>el.setAttribute('aria-pressed',String(Number(el.dataset.range)===6)));setTab('history');syncGuide();$('announcement').textContent='展示已重設，請重新選擇商品。';window.scrollTo(0,0);
   }
   $('compareFrom').innerHTML=options(D.periods.map(p=>({value:p,label:p+' 示範檔'})),state.from);
   $('compareTo').innerHTML=options(D.periods.map(p=>({value:p,label:p+' 示範檔'})),state.to);
@@ -89,5 +104,8 @@
   $('pkUnit').addEventListener('change',()=>{state.unit=$('pkUnit').value;renderPk();});
   $('startDemo').addEventListener('click',()=>{reset();state.guide=true;$('demoGuide').hidden=false;selectProduct('demo-film-a');state.pk=['demo-film-a','demo-film-b','demo-film-c'];renderPk();guide('search');closeSearch();$('announcement').textContent='一鍵展示已就緒。示範保鮮膜與商品 PK 已載入。';});
   $('resetDemo').addEventListener('click',reset);document.querySelectorAll('[data-step]').forEach(el=>el.addEventListener('click',()=>guide(el.dataset.step)));
+  $('previousStep').addEventListener('click',()=>guide(steps[steps.indexOf(state.step)-1]));
+  $('nextStep').addEventListener('click',()=>guide(steps[steps.indexOf(state.step)+1]));
+  $('exitGuide').addEventListener('click',()=>{state.guide=false;$('demoGuide').hidden=true;syncGuide();$('announcement').textContent='已返回自由操作，商品與試算內容保留。';});
   new ResizeObserver(()=>{if(state.productId&&state.tab==='history')renderHistory();}).observe($('historyChart'));
 })();
