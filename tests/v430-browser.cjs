@@ -1,0 +1,52 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
+const {chromium}=require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const root=path.join(__dirname,'..'),out=process.env.PX_V430_EVIDENCE||path.join(root,'../v430-browser-evidence');
+fs.mkdirSync(out,{recursive:true});
+const privatePath=process.env.PX_PIN_DELIVERY||'C:/Users/林弘昇/Desktop/PX工作台_登入PIN_請自行保存.txt';
+const pin=fs.readFileSync(privatePath,'utf8').match(/PIN：([0-9]{4})/)[1];
+const errors=[],requests=[],checks=[];
+const server=http.createServer((req,res)=>{const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);const file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return}fs.readFile(file,(err,b)=>{if(err){res.writeHead(404).end();return}res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.css')?'text/css':file.endsWith('.html')?'text/html':'application/octet-stream');res.end(b)})});
+(async()=>{
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));const url=process.env.PX_V430_URL||'http://127.0.0.1:'+server.address().port+'/index.html';
+ const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
+ const context=await browser.newContext({viewport:{width:390,height:844}}),page=await context.newPage();
+ page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('request',r=>{if(new URL(r.url()).origin!==new URL(url).origin&&!r.url().startsWith('data:'))requests.push(r.url())});
+ async function login(){await page.locator('#pxPinGate input').first().evaluate((el,value)=>{const e=new Event('paste',{bubbles:true,cancelable:true});Object.defineProperty(e,'clipboardData',{value:{getData:()=>value}});el.dispatchEvent(e)},pin);await page.locator('#pxPinGate button').click();await page.locator('#pxPinGate').waitFor({state:'hidden'})}
+ await page.goto(url);await page.locator('#pxPinGate').waitFor();assert(await page.locator('.app').isHidden());
+ for(const width of [320,375,390,430,768,1280,1366,1920]){await page.setViewportSize({width,height:900});assert.equal(await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),0);assert.equal(await page.locator('#pxPinGate input').first().getAttribute('inputmode'),'numeric')}
+ await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(out,'pin-390.png')});checks.push('locked first paint / 8 viewports');
+ await page.locator('#pxPinGate input').first().fill('x');assert.equal(await page.locator('#pxPinGate input').first().inputValue(),'');
+ await page.locator('#pxPinGate input').first().evaluate(el=>{const e=new Event('paste',{bubbles:true,cancelable:true});Object.defineProperty(e,'clipboardData',{value:{getData:()=>'12345'}});el.dispatchEvent(e)});assert.match(await page.locator('.pin-message').textContent(),/4 位/);
+ for(let i=0;i<4;i++)await page.locator('#pxPinGate input').nth(i).fill('0');
+ await page.locator('#pxPinGate button').click();await page.waitForFunction(()=>document.querySelector('.pin-message').textContent.includes('不正確'));checks.push('wrong / non-digit / overlength');
+ await page.evaluate(()=>localStorage.setItem('px-price-center-personal-v1',JSON.stringify({version:1,favorites:[{id:'px:65010209',note:'保留測試'}],sets:[],lastBase:'px:65010209',recent:[]})));
+ await login();checks.push('real PIN / paste');
+ let sentinel=await page.evaluate(()=>localStorage.getItem('px-price-center-personal-v1'));
+ await page.reload();await page.locator('#pxPinGate').waitFor({state:'hidden'});assert.equal(await page.evaluate(()=>localStorage.getItem('px-price-center-personal-v1')),sentinel);checks.push('refresh / business storage untouched');
+ await page.locator('[data-tab=campaign]').click();await page.locator('#pcSearch').fill('86210115');await page.locator('#pcSearchResults [data-pc-base]').click();await page.locator('#pcTab-all').click();await page.locator('#pcSearch').fill('保鮮膜');
+ for(let i=0;i<3;i++)await page.locator('#pcSearchResults [data-pc-add]:not([disabled])').first().click();
+ await page.locator('[data-pc-start]').click();assert(await page.locator('.pc-duel-scroll').isVisible());assert.equal(await page.locator('[data-pc-compare-row]').count(),3);checks.push('authenticated OP + 3 / start duel');
+ await page.locator('[data-tab=calc]').click();await page.evaluate(()=>selectProduct(productBindings.find(b=>b.productId==='cProduct'),PX_Q3_PRODUCTS.find(p=>p.name.includes('800公分'))));
+ const ref=page.locator('.panel.active .px-provisional').first();await ref.locator('summary').first().click();
+ assert.match(await ref.textContent(),/234,653/);assert.match(await ref.textContent(),/月份完整性待確認/);assert.match(await ref.textContent(),/銷額：無資料/);
+ assert.equal(await page.evaluate(()=>PX_SALES_PERIODS.at(-1)),'2026/08');
+ assert.equal(await page.evaluate(()=>PX_SALES_DATA['OP無雙酚A鋁箔800公分-12入'].sales.at(-1)),10073);
+ assert.match(await ref.locator('.px-provisional-grid').textContent(),/27,554/);
+ const names=await ref.locator('option').evaluateAll(os=>os.slice(0,3).map(o=>o.value));await ref.locator('select').selectOption(names);assert.equal(await ref.locator('article').count(),3);
+ await ref.scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'provisional-390.png')});checks.push('provisional single / multi / trend / amount absent / formal latest unchanged');
+ for(const width of [320,375,390,430,768,1280,1366,1920]){await page.setViewportSize({width,height:900});assert.equal(await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),0)}
+ await page.setViewportSize({width:1366,height:900});await ref.scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'provisional-1366.png')});
+ sentinel=await page.evaluate(()=>localStorage.getItem('px-price-center-personal-v1'));assert.match(sentinel,/保留測試/);await page.locator('#pxPinLogout').click();await page.locator('#pxPinGate').waitFor({state:'visible'});assert.equal(await page.evaluate(()=>localStorage.getItem('px-price-center-personal-v1')),sentinel);checks.push('logout preserves business storage');
+ await login();await page.evaluate(()=>{const key='px-screen-session-v1',s=JSON.parse(localStorage.getItem(key));s.started=Date.now()-6*3600000-1;localStorage.setItem(key,JSON.stringify(s))});await page.locator('#pxPinGate').waitFor({state:'visible'});checks.push('six-hour expiry');
+ await login();await page.evaluate(()=>{const s=JSON.parse(localStorage.getItem('px-screen-session-v1'));s.seen=Date.now()+3600000;localStorage.setItem('px-screen-session-v1',JSON.stringify(s))});await page.locator('#pxPinGate').waitFor({state:'visible'});checks.push('clock anomaly');
+ await page.evaluate(()=>localStorage.setItem('px-screen-session-v1','corrupt'));await page.reload();await page.locator('#pxPinGate').waitFor({state:'visible'});checks.push('corrupt session');
+ const incognito=await browser.newContext(),p=await incognito.newPage();await p.goto(url);await p.locator('#pxPinGate').waitFor({state:'visible'});checks.push('isolated context locked');await incognito.close();
+ await login();await page.reload({waitUntil:'networkidle'});await page.locator('#pxPinGate').waitFor({state:'hidden'});assert.match(await page.locator('.meta').textContent(),/4.3.0/);
+ await page.evaluate(async()=>{const registration=await navigator.serviceWorker.ready;await registration.update()});
+ const cdp=await context.newCDPSession(page);await cdp.send('Page.reload',{ignoreCache:true});await page.waitForLoadState('networkidle');await page.locator('#pxPinGate').waitFor({state:'hidden'});
+ assert.match(await page.locator('.meta').textContent(),/4.3.0/);assert.deepEqual(await page.evaluate(async()=>caches.keys()),['px-workbench-v4.3.0-provisional-pin']);checks.push('hard refresh / current service worker only');
+ assert.equal(errors.length,0,JSON.stringify(errors));assert.equal(requests.length,0,JSON.stringify(requests));
+ fs.writeFileSync(path.join(out,'acceptance.json'),JSON.stringify({status:'PASS',url,checks,consoleErrors:errors,unexpectedRequests:requests,overflow:0},null,2));
+ await browser.close();server.close();console.log('PASS: '+checks.join('; '));
+})().catch(e=>{console.error(e.stack);server.close();process.exit(1)});

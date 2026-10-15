@@ -50,7 +50,8 @@ async function main() {
   const errors = [];
   page.on("pageerror", error => errors.push(error.message));
   page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
-  await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { localStorage.clear(); sessionStorage.setItem("px-regression-started", "1"); } });
+  // Reset business fixtures, retaining only the test harness's unlocked screen session.
+  await page.addInitScript(() => { if (!sessionStorage.getItem("px-regression-started")) { const screen=localStorage.getItem("px-screen-session-v1"); localStorage.clear(); if(screen)localStorage.setItem("px-screen-session-v1",screen); sessionStorage.setItem("px-regression-started", "1"); } });
   await page.goto(process.env.PX_LIVE || `http://127.0.0.1:${server.address().port}/index.html`, { waitUntil: "networkidle" });
   const cacheKeys = await page.evaluate(async () => { await navigator.serviceWorker.ready; return caches.keys(); });
   assert.deepEqual(cacheKeys, [require('./price-center-contract.cjs').cache], "current service worker cache is active");
@@ -93,7 +94,7 @@ async function main() {
   assert.doesNotMatch(staticHtml, />全聯毛利率</, "legacy PX margin label removed");
   assert.match(staticHtml, /<title>PX 通路工作台<\/title>/, "site title");
   assert.doesNotMatch(staticHtml, /OP 中科毛利率試算器|OP 毛利試算|op-logo\.png/i, "legacy OP share metadata and image references are removed");
-  assert.match(staticHtml, /VERSION 4\.2\.1/, "site version");
+  assert.match(staticHtml, /VERSION 4\.3\.0/, "site version");
   assert.match(staticHtml, /開發者：弘昇/, "Chinese-first developer credit");
   assert.match(staticHtml, /Built by HS/, "secondary English developer credit");
   assert.match(staticHtml, /非官方系統/, "non-official disclaimer");
@@ -137,8 +138,8 @@ async function main() {
   assert.deepEqual(manifest.icons.map(icon => icon.purpose), ["any", "any"], "PWA icons declare standard any purpose");
   assert.ok(manifest.icons.every(icon => icon.src.endsWith("?v=4.1.2")), "PWA icons use the current cache-busting version");
   const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.2\.1-price-center-duel'/, "service worker cache version");
-  assert.match(staticHtml, /service-worker\.js\?v=4\.2\.1/, "service worker registration cache buster");
+  assert.match(serviceWorker, /const CACHE='px-workbench-v4\.3\.0-provisional-pin'/, "service worker cache version");
+  assert.match(staticHtml, /service-worker\.js\?v=4\.3\.0/, "service worker registration cache buster");
   assert.match(staticHtml, /updateViaCache:"none"/, "service worker update bypasses HTTP cache");
   assert.match(serviceWorker, /e\.request\.mode==='navigate'\?\{cache:'no-store'\}/, "navigation fetch bypasses stale browser HTML cache");
   assert.match(serviceWorker, /cache:'reload'/, "new cache is populated from the network");

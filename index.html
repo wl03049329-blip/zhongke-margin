@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" class="px-locked">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -23,6 +23,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=4.1.2">
 <link rel="icon" type="image/svg+xml" href="assets/brand/px-icon.svg?v=4.1.2">
 <title>PX 通路工作台</title>
+<style id="px-lock-first-paint">html.px-locked body>:not(#pxPinGate):not(script):not(style){display:none!important}html.px-locked body{background:#102a43}</style>
+<link rel="stylesheet" href="px-release.css?v=4.3.0">
 <link rel="stylesheet" href="px-promo.css">
 <link rel="stylesheet" href="competitor-price.css">
 <link rel="stylesheet" href="campaign-lookup-ui.css?v=4.1.11-poya">
@@ -245,7 +247,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 <main class="app">
 <header class="hero">
  <div class="brand"><img class="brand-logo" src="assets/brand/px-logo.svg" alt="PX"><div class="brand-copy"><h1>PX 通路工作台</h1><p><span class="developer-primary">開發者：弘昇</span><span class="developer-secondary">｜Built by HS</span></p></div></div>
- <div class="meta"><span class="pill">VERSION 4.2.1</span><span class="pill">檔期查價 2.1</span><span class="pill">個人工作輔助工具</span><span class="pill">固定稅率 5%</span></div>
+ <div class="meta"><span class="pill">VERSION 4.3.0</span><span class="pill">整合升級</span><span class="pill">個人工作輔助工具</span><span class="pill">固定稅率 5%</span></div>
 </header>
 
 <div class="tabs-shell"><nav class="tabs">
@@ -721,7 +723,7 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.2.1",{updateViaCache:"none"}));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.3.0",{updateViaCache:"none"}));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="scenario-summary.js?v=4.1.2-scenario-source"></script>
@@ -745,4 +747,8 @@ if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serv
 <script src="price-center-core.js?v=4.2.1"></script>
 <script src="price-center-ui.js?v=4.2.1"></script>
 <script src="new-product-calculator.js?v=4.1.3-new-product-v2"></script>
+<script src="px-pin-config.js?v=4.3.0"></script>
+<script src="px-screen-lock.js?v=4.3.0"></script>
+<script src="px-provisional-data.js?v=4.3.0"></script>
+<script src="px-provisional-sales.js?v=4.3.0"></script>
 </body></html>

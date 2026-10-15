@@ -1,5 +1,5 @@
 // Only the approved 2.1 version/cache identifiers normalize; no business code is removed.
-function duelRelease(s){return s.replaceAll('4.2.1','4.2.0').replaceAll('檔期查價 2.1','檔期查價 2.0').replaceAll('price-center-duel','price-center');}
+function duelRelease(s){const c=require('./v430-release-contract.cjs');s=c.worker(c.html(s));return s.replaceAll('4.2.1','4.2.0').replaceAll('檔期查價 2.1','檔期查價 2.0').replaceAll('price-center-duel','price-center');}
 // Strip only this release's integration tags for historical whole-file contracts.
 const fs=require('node:fs'),path=require('node:path');
 const cache=fs.readFileSync(path.join(__dirname,'../service-worker.js'),'utf8').match(/const CACHE='([^']+)'/)[1];

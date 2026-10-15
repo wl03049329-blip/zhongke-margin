@@ -1,0 +1,15 @@
+html.px-locked body> :not(#pxPinGate):not(script):not(style){display:none!important}
+html.px-locked body{background:#102a43}
+#pxPinGate{min-height:100dvh;display:grid;place-items:center;padding:20px;background:#102a43;color:#102a43}
+#pxPinGate[hidden]{display:none}
+.pin-card{width:min(100%,400px);background:#fff;border-radius:20px;padding:32px 24px;text-align:center}
+.pin-card h1{font-size:26px;margin:0 0 18px}.pin-card p{font-size:17px}.pin-boxes{display:flex;gap:12px;justify-content:center;margin:24px 0}
+.pin-boxes input{width:54px;min-width:0;height:62px;text-align:center;font-size:28px;border:1px solid #9aaebe;border-radius:10px}
+.pin-card button{width:100%;min-height:48px;background:#126b73;color:white;font-size:17px;border:0;border-radius:10px}
+.pin-message{min-height:24px;color:#a33030}#pxPinLogout{flex:0 0 auto;display:block;margin:0 0 0 auto;min-height:46px;padding:8px;border:1px solid #5d778a;border-radius:9px;background:#183c50;color:#fff;font-size:18px}.brand{width:100%}
+.px-provisional{margin:16px 0;padding:14px;background:#fffaf0;border:1px solid #e1d2ad;border-radius:12px;min-width:0}
+.px-provisional summary{font-weight:700;cursor:pointer;min-height:44px;line-height:1.6}
+.px-provisional p{line-height:1.6;font-size:14px}.px-provisional select{width:100%;font-size:16px;min-height:44px}
+.px-provisional-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+.px-provisional article{background:white;border-radius:9px;padding:12px;min-width:0;overflow-wrap:anywhere}
+.px-provisional svg{width:100%;height:140px;display:block}.px-provisional strong{font-size:22px;color:#694b19}
