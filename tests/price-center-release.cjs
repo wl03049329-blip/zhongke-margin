@@ -22,6 +22,7 @@ const personal={version:1,favorites:[{id:'px:65010209',note:'發布前保留驗�
  await page.locator('[data-pc-rename-set]').click();await page.locator('#pcTextValue').fill('已更名組合');await page.locator('#pcTextForm button[type=submit]').click();assert.match(await page.locator('#pcFavorites').innerText(),/已更名組合/);
  const stable=await page.evaluate(()=>PXPriceCenter.getPersonal());
  await page.locator('[data-pc-import]').click();await page.locator('#pcImportFile').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"version":999,"favorites":[],"sets":[]}')});
+ await page.waitForFunction(()=>document.getElementById('pcImportStatus').textContent.includes('匯入失敗'));
  assert.match(await page.locator('#pcImportStatus').innerText(),/匯入失敗/);assert.deepEqual(await page.evaluate(()=>PXPriceCenter.getPersonal()),stable);await page.locator('[data-pc-close]').click();
  await page.locator('#pcTab-op').click();await page.locator('#pcSearch').fill('86210115');await page.locator('#pcSearchResults [data-pc-base]').click();
  await page.locator('.pc-tier').nth(1).locator(':scope > summary').click();
