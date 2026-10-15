@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="PX 智慧價格中心 AI 應用展示版。所有商品、條碼與價格皆為虛構示範資料。">
+  <title>PX 智慧價格中心｜AI 應用展示版</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="demo-data.js"></script>
+  <script defer src="price-core.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<div class="demo-ribbon">AI 應用展示版 <span>全站商品與價格均為虛構示範資料・非官方系統</span></div>
+<main class="shell">
+  <header class="header">
+    <div class="identity"><span class="brand-mark" aria-hidden="true">PX</span><div><p class="eyebrow">PRICE INTELLIGENCE · DEMO 2.0</p><h1>PX 智慧價格中心</h1><p class="subtitle">搜尋一次，完成查價、比較與分析。</p></div></div>
+    <div class="header-actions"><button class="primary" id="startDemo">一鍵展示 <span aria-hidden="true">↗</span></button><button class="quiet" id="resetDemo">重設展示</button></div>
+  </header>
+  <nav id="demoGuide" class="demo-guide" aria-label="展示步驟" hidden>
+    <span>展示流程</span><button data-step="search">1 搜尋商品</button><button data-step="history">2 歷史價格</button><button data-step="promotion">3 促銷換算</button><button data-step="pk">4 商品 PK</button><button data-step="summary">5 重點摘要</button>
+  </nav>
+  <section class="search-section" aria-labelledby="searchHeading">
+    <div class="section-line"><h2 id="searchHeading">找到商品，開始比較</h2><span class="muted">獨立示範資料集 · 8 支商品</span></div>
+    <label class="sr-only" for="productSearch">搜尋商品名稱、品牌、示範條碼或規格</label>
+    <div class="search-wrap"><span class="search-icon" aria-hidden="true"></span><input id="productSearch" type="search" placeholder="試試「保鮮膜」、30m 或 DEMO-10001" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list"><button id="clearSearch" class="search-clear" aria-label="清除搜尋">×</button><div id="searchResults" class="search-results" role="listbox" hidden></div></div>
+    <div class="quick-tries"><span>快速試用</span><button data-quick="demo-film-a">日常保鮮膜 30m</button><button data-quick="demo-bag">垃圾袋・買一送一</button><button data-quick="demo-scent">新收錄香氛包</button></div>
+  </section>
+  <div id="welcome" class="welcome"><div class="welcome-icon" aria-hidden="true">↗</div><h2>從一個商品，看清價格全貌</h2><p>選擇快速試用商品，或按「一鍵展示」開始。</p><div class="welcome-features"><span>12 個示範月份</span><span>4 種促銷換算</span><span>3 支商品 PK</span><span>離線可用</span></div></div>
+  <div id="workspace" hidden>
+    <section id="productCard" class="product-card" aria-label="目前商品"></section>
+    <nav class="feature-tabs" role="tablist" aria-label="價格分析功能">
+      <button id="tab-history" role="tab" aria-selected="true" aria-controls="panel-history" data-tab="history">歷史價格走勢</button>
+      <button id="tab-periods" role="tab" aria-selected="false" aria-controls="panel-periods" data-tab="periods" tabindex="-1">檔期價格比較</button>
+      <button id="tab-promotion" role="tab" aria-selected="false" aria-controls="panel-promotion" data-tab="promotion" tabindex="-1">促銷智慧換算</button>
+      <button id="tab-channels" role="tab" aria-selected="false" aria-controls="panel-channels" data-tab="channels" tabindex="-1">跨通路價格比較</button>
+    </nav>
+    <section id="panel-history" class="panel" role="tabpanel" aria-labelledby="tab-history">
+      <div class="section-line"><div><p class="eyebrow">PRICE TIMELINE</p><h2>歷史價格走勢</h2></div><div class="range-buttons" aria-label="歷史區間"><button data-range="3" aria-pressed="false">3 個月</button><button data-range="6" aria-pressed="true">6 個月</button><button data-range="12" aria-pressed="false">12 個月</button></div></div>
+      <div class="chart-meta"><div class="legend"><span><i class="solid"></i>標示售價</span><span><i class="dashed"></i>平均單件實付價</span></div><span class="muted">虛構歷史・金額／件</span></div>
+      <div id="historyChart" class="history-chart"></div><p id="historyReadout" class="chart-readout" aria-live="polite"></p>
+      <details class="details"><summary>查看各檔價格與計算資料</summary><div id="historyTable" class="history-table"></div></details>
+    </section>
+    <section id="panel-periods" class="panel" role="tabpanel" aria-labelledby="tab-periods" hidden>
+      <div class="section-line"><div><p class="eyebrow">PERIOD COMPARISON</p><h2>兩檔價格，同一基準</h2></div><span class="fictional-tag">虛構示範</span></div>
+      <div class="controls-grid"><label>原檔<select id="compareFrom"></select></label><label>比較檔<select id="compareTo"></select></label><label>共同計價基準<select id="compareBasis"><option value="average">平均單件實付價</option><option value="listed">標示售價</option></select></label></div>
+      <div id="periodResult"></div><details class="details"><summary>查看全部示範商品的收錄差異</summary><div id="periodCoverage" class="coverage-list"></div></details>
+    </section>
+    <section id="panel-promotion" class="panel" role="tabpanel" aria-labelledby="tab-promotion" hidden>
+      <div class="section-line"><div><p class="eyebrow">PROMOTION CALCULATOR</p><h2>促銷換算，算清每一件</h2></div><span class="fictional-tag">可自行試算</span></div>
+      <div class="promo-layout"><div class="promo-inputs"><label>促銷方式<select id="promotionType"><option value="SINGLE">一般售價</option><option value="BOGO">買一送一</option><option value="HALF">第二件五折</option><option value="BUNDLE">多件組合價</option></select></label><label><span id="promotionPriceLabel">單件標示售價</span><div class="input-unit"><span>$</span><input id="promotionPrice" inputmode="decimal" type="text" placeholder="輸入金額" maxlength="10"></div></label><label id="bundleQuantityLabel" hidden>組合件數<input id="bundleQuantity" type="number" min="2" max="99" step="1" value="2"></label><p class="muted">此處為暫時試算；不改動任何示範歷史價格。</p></div><div id="promotionResult" aria-live="polite"></div></div>
+    </section>
+    <section id="panel-channels" class="panel" role="tabpanel" aria-labelledby="tab-channels" hidden><div class="section-line"><div><p class="eyebrow">CHANNEL PRICES</p><h2>跨通路價格比較</h2></div></div><p class="muted">目前選取的是虛構商品，未配對真實通路商品。公開價格需逐筆驗證後才能加入。</p><div id="channelCards" class="channel-grid"></div></section>
+    <details id="pkSection" class="panel pk-section"><summary><span><span class="eyebrow">PRODUCT MATCHUP</span><strong>A/B/C 商品 PK</strong><span class="muted">先換算單位，再比較價格</span></span><span class="open-label">展開比較 ＋</span></summary><div class="pk-body"><div class="section-line"><p class="muted">以本檔平均單件實付價換算；不同用途／單位不排名。</p><label class="pk-unit">保鮮膜基準<select id="pkUnit"><option value="length">每公尺</option><option value="area">每平方公尺</option></select></label></div><div class="pk-selectors"><label>A 商品<select id="pkA"></select></label><label>B 商品<select id="pkB"></select></label><label>C 商品<select id="pkC"></select></label></div><p id="pkStatus" role="status"></p><div id="pkCards" class="pk-grid"></div></div></details>
+    <section id="summarySection" class="panel summary-panel"><div class="section-line"><div><p class="eyebrow">PRICE BRIEF</p><h2>自動價格重點摘要</h2></div><span class="rule-badge">可追溯規則</span></div><p class="muted">依目前商品的示範檔期資料整理，隨商品切換同步更新。</p><div id="summaryItems"></div></section>
+  </div>
+  <footer><strong>PX 智慧價格中心</strong><span>AI 應用展示版 · 2026/10/16</span><p>個人工作輔助展示・非官方系統。全站資料皆為虛構，請勿作為實際交易依據。</p></footer>
+</main>
+<div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>
