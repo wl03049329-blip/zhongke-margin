@@ -8,16 +8,16 @@
  let personal={version:1,favorites:[],sets:[],lastBase:null,recent:[]},images={},storageError='';
  try{const saved=localStorage.getItem(KEY);if(saved)personal=C.validatePersonal(JSON.parse(saved),entries());}catch{storageError='個人清單無法讀取，請匯入備份或重新建立。';}
  try{const raw=JSON.parse(localStorage.getItem(IMAGE_KEY)||'{}');if(raw&&typeof raw==='object')for(const [id,img] of Object.entries(raw)){if(entries().some(p=>p.id===id)&&typeof img==='string'&&img.length<250000&&/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(img))images[id]=img;}}catch{/* No price data depends on local images. */}
- let state={tab:'op',baseId:personal.lastBase,selected:[],query:'',brand:'',category:'',spec:'',source:'',sort:'relevance',mode:'minimum',date:PXPromo.today(),quantity:1,group:'GENERAL',favoriteQuery:'',editingSet:null};
+ let state={tab:'op',baseId:personal.lastBase,selected:[],query:'',brand:'',category:'',spec:'',source:'',sort:'relevance',mode:'minimum',date:PXPromo.today(),quantity:1,group:'GENERAL',favoriteQuery:'',editingSet:null,detail:'summary',competitorIndex:0};
  const legacy=document.createElement('details');legacy.className='pc-legacy';legacy.innerHTML='<summary>既有自由查價／完整檔期與歷史資料</summary>';
  while(panel.firstChild)legacy.append(panel.firstChild);
  const host=document.createElement('div');host.id='priceCenter';panel.append(host,legacy);
- host.innerHTML=`<header class="pc-heading"><div><span class="pc-eyebrow">檔期查價 2.0</span><h2>智慧商品比價中心</h2><p>先選 OP 基準，再看規格、優惠門檻與價差。</p></div><span class="pc-local">收藏與組合僅儲存於此瀏覽器</span></header>
+ host.innerHTML=`<header class="pc-heading"><div><span class="pc-eyebrow">檔期查價 2.1 · 競品對決版</span><h2>智慧商品比價中心</h2><p>OP 對多支競品，並排看價格與優惠門檻。</p></div><span class="pc-local">收藏與組合僅儲存於此瀏覽器</span></header>
  <div class="pc-tabs" role="tablist" aria-label="查價方式">${[['op','OP 找競品'],['all','全部商品搜尋'],['favorites','我的最愛']].map(([v,t])=>`<button role="tab" type="button" id="pcTab-${v}" data-pc-tab="${v}" aria-controls="pcWorkspace">${t}</button>`).join('')}</div>
  <div id="pcNotice" role="status" aria-live="polite"></div><section id="pcWorkspace" role="tabpanel">
  <div id="pcSearchArea" class="pc-search-area"><label for="pcSearch">搜尋 OP 商品</label><div class="pc-search-line"><input id="pcSearch" type="search" autocomplete="off" placeholder="名稱、品號、條碼、品牌或規格"><button type="button" id="pcBrowse">查看可搜尋商品</button></div><div id="pcRecent" class="pc-recent"></div>
  <details id="pcFilters"><summary>品牌、分類、規格與來源篩選</summary><div class="pc-filter-grid"><label>品牌<select id="pcBrand"></select></label><label>分類<select id="pcCategory"></select></label><label>規格關鍵字<input id="pcSpec" type="search" placeholder="如 30cm、300尺"></label><label>價格來源<select id="pcSource"></select></label><label>排序<select id="pcSort"><option value="relevance">OP 優先／相關性</option><option value="asc">參考均價由低到高</option><option value="desc">參考均價由高到低</option></select></label><button type="button" id="pcClearFilters">清除篩選</button></div></details><div id="pcSearchResults" class="pc-search-results"></div></div>
- <div id="pcFavorites" hidden></div><div id="pcComparison"></div><div id="pcRecommendations"></div></section>`;
+ <div id="pcFavorites" hidden></div><div id="pcComparison" tabindex="-1"></div><div id="pcRecommendations"></div></section><div class="pc-start-bar" id="pcStartBar" hidden><button type="button" class="pc-primary" data-pc-start aria-controls="pcComparison"></button></div>`;
  const dialog=document.createElement('dialog');dialog.className='pc-dialog';dialog.id='pcDialog';document.body.append(dialog);let returnFocus=null;
  const get=id=>entries().find(p=>p.id===id),money=v=>C.positive(v)?'$'+PXPromo.money(v):'目前無有效價格';
  function notice(text){$id('pcNotice').textContent=text;}
@@ -58,21 +58,74 @@
  function renderSearch(){
   if(state.tab==='favorites')return;
   const rows=searchResults(),show=state.query||state.tab==='all'||!state.baseId;
-  $id('pcSearchResults').innerHTML=!show?'':`<p class="pc-count">符合 ${rows.length} 項 · 來源即時讀取既有主檔</p><div class="${state.tab==='op'?'pc-options':'pc-product-grid'}">${rows.slice(0,searchLimit).map(p=>state.tab==='op'?`<button type="button" data-pc-base="${E(p.id)}"><b>${E(p.name)}</b><span>OP／我司 · ${E(catalogSearch.label(p.category))}</span><small>${E(p.code||p.barcode||'尚未建檔')}</small></button>`:card(p)).join('')}</div>${rows.length>searchLimit?`<button type="button" data-pc-more>顯示更多（另有 ${rows.length-searchLimit} 項）</button>`:''}${!rows.length?'<p class="pc-empty">沒有符合的已收錄商品，請縮短關鍵字或清除篩選。</p>':''}`;
+  const publicRows=rows.filter(p=>p.kind==='market'),base=get(state.baseId),formalCount=base?comparisonRows(base,publicRows,true).filter(p=>p.level!==3&&p.comparison).length:0;
+  $id('pcSearchResults').innerHTML=!show?'':`<p class="pc-count">資料庫：OP ${entries().filter(p=>p.kind==='own').length} 支／公開商品 ${entries().filter(p=>p.kind==='market').length} 筆<br>搜尋符合 ${rows.length} 項（公開商品 ${publicRows.length} 筆） · ${base?'正式可比 '+formalCount+' 筆／僅供參考 '+(publicRows.length-formalCount)+' 筆':'選 OP 後可判斷正式可比數'}<small>正式可比依目前 OP、日期、${state.quantity} 件、${state.group==='FREE_MEMBER'?'免費會員':'一般資格'}判定。</small></p><div class="${state.tab==='op'?'pc-options':'pc-product-grid'}">${rows.slice(0,searchLimit).map(p=>state.tab==='op'?`<button type="button" data-pc-base="${E(p.id)}"><b>${E(p.name)}</b><span>OP／我司 · ${E(catalogSearch.label(p.category))}</span><small>${E(p.code||p.barcode||'尚未建檔')}</small></button>`:card(p)).join('')}</div>${rows.length>searchLimit?`<button type="button" data-pc-more>顯示更多（另有 ${rows.length-searchLimit} 項）</button>`:''}${!rows.length?'<p class="pc-empty">沒有符合的已收錄商品，請縮短關鍵字或清除篩選。</p>':''}`;
  }
  function candidateRows(){const base=get(state.baseId);if(!base)return [];const d=data(base),found=new Set(PXLookupUI.candidates(base.record).records.map(r=>r.competitorProductId));return entries().filter(p=>p.kind==='market'&&p.category===base.category&&!p.own).map(p=>({...p,...C.grade(d.benchmark,p.record,found.has(p.record.competitorProductId))}));}
  function renderRecommendations(){
   const el=$id('pcRecommendations');if(state.tab!=='op'||!state.baseId){el.innerHTML='';return;}
-  const rows=candidateRows();el.innerHTML='<h3>相關競品</h3><p>依既有品類、用途與確認規格分級；相關不代表可以排名。</p>'+[1,2,3].map(level=>{const list=rows.filter(p=>p.level===level),title={1:'高度相關',2:'不同規格但可換算',3:'其他相關商品 · 僅供參考'}[level];return `<details class="pc-tier" ${level===1?'open':''}><summary>${title}（${list.length}）</summary>${!list.length?'<p>目前尚未建立此級可比較競品</p>':`<div class="pc-product-grid">${list.slice(0,6).map(p=>card(p,{reason:p.reason})).join('')}</div>${list.length>6?`<details><summary>查看其餘 ${list.length-6} 項</summary><div class="pc-product-grid">${list.slice(6).map(p=>card(p,{reason:p.reason})).join('')}</div></details>`:''}`}</details>`;}).join('');
+  const rows=candidateRows(),formalCount=comparisonRows(get(state.baseId),rows,true).filter(p=>p.comparison).length;el.innerHTML='<h3>相關競品</h3><p class="pc-count">公開資料庫 '+entries().filter(p=>p.kind==='market').length+' 筆 · 同分類 '+rows.length+' 筆 · 目前條件正式可比 '+formalCount+' 筆 · 僅供參考 '+(rows.length-formalCount)+' 筆</p><p>依既有品類、用途與確認規格分級；相關不代表可以排名。</p>'+[1,2,3].map(level=>{const list=rows.filter(p=>p.level===level),title={1:'高度相關',2:'不同規格但可換算',3:'其他相關商品 · 僅供參考'}[level];return `<details class="pc-tier" ${level===1?'open':''}><summary>${title}（${list.length}）</summary>${!list.length?'<p>目前尚未建立此級可比較競品</p>':`<div class="pc-product-grid">${list.slice(0,6).map(p=>card(p,{reason:p.reason})).join('')}</div>${list.length>6?`<details><summary>查看其餘 ${list.length-6} 項</summary><div class="pc-product-grid">${list.slice(6).map(p=>card(p,{reason:p.reason})).join('')}</div></details>`:''}`}</details>`;}).join('');
  }
- function delta(c){if(!c?.metric)return '';const unit=c.metric==='AREA'?'㎡':'10m',same=c.direction==='SAME',cheap=c.direction==='HIGHER';return `<div class="pc-delta ${same?'same':cheap?'lower':'higher'}"><b>${same?'換算價格相同':cheap?'OP 較便宜':'OP 較高'}</b><span>OP ${money(c.pxValue)}／${unit} · 競品 ${money(c.competitorValue)}／${unit}</span>${same?'':`<strong>${cheap?'−':'+'}${money(Math.abs(c.difference))}／${unit} · ${Math.abs(c.percentage).toFixed(2)}%</strong>`}<small>價差百分比以 OP 換算價為分母；比較基準：每${unit}</small></div>`;}
+ // Presentation-only definition approved for the duel. The existing comparison engine is unchanged.
+ function duelDifference(c){
+  if(!c?.metric||!Number.isFinite(c.pxValue)||!C.positive(c.competitorValue))return null;
+  const amount=c.pxValue-c.competitorValue;
+  return {amount,percentage:amount/c.competitorValue*100,unit:c.metric==='AREA'?'㎡':'10m'};
+ }
+ function delta(c){
+  const v=duelDifference(c);if(!v)return '';
+  const same=Math.abs(v.amount)<1e-10,cheap=v.amount<0;
+  return '<div class="pc-delta '+(same?'same':cheap?'lower':'higher')+'"><b>'+(same?'換算價格相同':cheap?'OP 較便宜':'OP 較高')+'</b><span>OP '+money(c.pxValue)+'／'+v.unit+'<br>競品 '+money(c.competitorValue)+'／'+v.unit+'</span>'+(same?'':'<strong>'+(cheap?'−':'+')+money(Math.abs(v.amount))+'<br>'+(cheap?'−':'+')+Math.abs(v.percentage).toFixed(2)+'%</strong>')+'<small>每'+v.unit+'價差<br>（OP－競品）÷ 競品</small></div>';
+ }
+ function comparisonRows(base,selected,formalOnly=false){
+  const d=data(base),candidates=candidateRows();
+  const rows=selected.map(p=>({...p,offers:data(p).offers,level:candidates.find(c=>c.id===p.id)?.level||3}));
+  return C.rank(d,rows,{date:state.date,quantity:state.quantity,group:state.group}).map(row=>{
+   let comparison=row.comparison,reason=row.reason,basisLabel='',member=null;
+   if(state.mode==='minimum'&&!formalOnly){
+    const pairs=C.minimumPairs(d.offers,row.offers,state.date);basisLabel=pairs.primaryLabel;
+    comparison=row.level!==3&&pairs.primary?C.compare(d.benchmark,row.record,...pairs.primary):null;
+    reason=comparison?.metric?null:row.level===3?'僅供參考；用途或規格尚未滿足比較條件':'缺少同資格有效價或可靠規格，無法公平換算';
+    if(row.level!==3&&pairs.member)member=C.compare(d.benchmark,row.record,...pairs.member);
+   }
+   return {...row,comparison,reason,basisLabel,member};
+  });
+ }
+ function duelColumn(entry,row,index){
+  const d=data(entry),own=index<0,general=C.best(d.offers,'GENERAL',state.date),member=C.best(d.offers,'FREE_MEMBER',state.date),ref=C.best(d.offers,'UNKNOWN');
+  const min=general||ref,selectedOffer=state.mode==='formal'?C.selectFormal(d.offers,state.date,state.quantity,state.group):min;
+  const price=o=>o?money(o.average)+'／件':'未查得',source='<b>'+E(d.source)+'</b><small>查價：'+(d.observed?E(competitorTime(d.observed)):'來源未提供')+'</small><small>'+(min?.startDate&&min?.endDate?E(min.startDate+' ～ '+min.endDate):'有效期間未確認')+'</small><small>非即時報價</small>';
+  const identity=image(entry)+'<div class="pc-tags"><span>'+(own?'OP 基準商品':E(entry.brand||'公開商品'))+'</span></div><h4>'+E(entry.name)+'</h4>';
+  const minimum='<strong class="pc-duel-price">'+(min?money(min.average):'無有效價格')+'</strong><small>／件 · '+(general?'一般消費者':'資格待確認，僅供參考')+'</small><small>免費會員：'+(member?price(member):'未查得會員價')+'</small>';
+  const quantity=min?.quantity?'<b>'+min.quantity+' 件</b><small>最低優惠總支出 '+money(min.total)+'</small>':'購買門檻未確認';
+  const comparison=row?(row.reason?'<p class="pc-missing">'+E(row.reason)+'</p>':delta(row.comparison)):'<b>OP 比較基準</b><small>右側價差以競品為分母。<br>不同單位不混合排名。</small>';
+  const rank=state.mode==='formal'&&row?.comparison?'<p class="pc-rank">'+(row.lowest?'競品為此單位組最低（含 OP）':row.opLowest?'OP 為此單位組最低':'此競品非本組最低')+' · '+row.selectedOffer.quantity+' 件 · 總支出 '+money(row.selectedOffer.total)+'</p>':'';
+  const units=['CLING_FILM','FOIL','BAKING_PAPER'].includes(entry.category)?unit(d.metrics,selectedOffer?.average):'規格不足，無法公平換算';
+  const promotion='<b>'+E(min?.label||'未提供')+'</b><small>'+(entry.kind==='market'?'原始標價：':'方案總價：')+(entry.kind==='market'?money(entry.record.currentPrice):min?money(min.total):'未提供')+'</small><small>原價：'+(entry.kind==='market'&&C.positive(entry.record.originalPrice)?money(entry.record.originalPrice):'未提供；不以 RSP 替代')+'</small><small>'+E(min?.restrictions||'優惠限制未完整確認')+'</small>';
+  const full=state.detail==='full';
+  const cells=full?[
+   ['商品圖片',image(entry)],['品牌及完整品名','<div class="pc-tags"><span>'+(own?'OP 基準商品':E(entry.brand))+'</span></div><h4>'+E(entry.name)+'</h4>'],
+   ['商品規格',E(d.spec)],['一般售價',general?price(general):'資格待確認'],['免費會員售價',member?price(member):'未查得會員價'],
+   ['最低促銷平均單件價',minimum],['最低優惠購買件數',quantity],['標準化單位價格','<b>'+E(units)+'</b>'],
+   ['OP 與競品價差',comparison+rank],['促銷方式',promotion],['價格來源與有效日期',source]
+  ]:[['商品',identity],['最低促銷平均單件價',minimum],['最低優惠門檻',quantity],['標準化單位價格','<b>'+E(units)+'</b>'],['OP 與競品價差',comparison+rank],['促銷重點',promotion+source]];
+  if(row?.member?.metric)cells[full?8:4][1]+='<details><summary>免費會員價差</summary><small>假設具有各平台適用免費會員資格；購買門檻不同不排名。</small>'+delta(row.member)+'</details>';
+  cells.push(['操作','<div class="pc-actions">'+(own?'<button type="button" data-pc-change>更換商品</button>':'<button type="button" data-pc-remove="'+E(entry.id)+'">移除競品</button>')+'<button type="button" data-pc-favorite="'+E(entry.id)+'" aria-pressed="'+personal.favorites.some(f=>f.id===entry.id)+'">☆ 收藏</button></div><details><summary>圖片與完整來源</summary><p>'+E(entry.code||entry.barcode||'品號／條碼未提供')+'</p><p>'+E(d.raw||'促銷原文未提供')+'</p>'+(d.url&&CompetitorPrice.safeUrl(d.url)?'<a href="'+E(d.url)+'" target="_blank" rel="noopener noreferrer">查看公開來源 ↗</a>':'')+'<button type="button" data-pc-edit-image="'+E(entry.id)+'">設定／移除個人圖片</button></details>']);
+  return '<section class="pc-duel-column '+(own?'pc-base':'pc-competitor')+'" '+(own?'':'data-pc-compare-row="'+E(entry.id)+'" data-competitor-index="'+index+'" data-current="'+(index===state.competitorIndex)+'"')+' aria-label="'+E(own?'OP 基準':entry.name)+'">'+cells.map(([label,html])=>'<div class="pc-duel-cell"><span class="pc-field-label">'+label+'</span>'+html+'</div>').join('')+'</section>';
+ }
  function renderComparison(){
+  $id('pcStartBar').hidden=!state.baseId||!state.selected.length;
+  host.querySelector('[data-pc-start]').textContent='開始對決（已選 '+state.selected.length+' 支）';
   const el=$id('pcComparison'),base=get(state.baseId);if(!base){el.innerHTML='<div class="pc-empty">先選擇一支 OP 基準商品，即可查看相關競品與建立比較組合。</div>';return;}
-  const d=data(base),candidates=candidateRows(),selected=state.selected.map(get).filter(Boolean).map(p=>({...p,offers:data(p).offers,level:candidates.find(c=>c.id===p.id)?.level||3}));
-  const formal=C.rank(d,selected,{date:state.date,quantity:state.quantity,group:state.group});
-  el.innerHTML=`<div class="pc-section-title"><h3>OP 基準商品</h3><span>1 支 OP ＋ ${selected.length}／5 支競品</span></div>${card(base)}<div class="pc-compare-controls"><label>比較方式<select id="pcMode"><option value="minimum">最低優惠價展示（預設）</option><option value="formal">同購買數量正式比較</option></select></label><label>比較日期<input id="pcDate" type="date" value="${E(state.date)}"></label>${state.mode==='formal'?`<label>購買件數<input id="pcQuantity" type="number" min="1" max="9999" step="1" value="${state.quantity}"></label><label>優惠資格<select id="pcGroup"><option value="GENERAL">一般消費者</option><option value="FREE_MEMBER">免費會員</option></select></label>`:''}</div><p class="pc-context">${state.mode==='minimum'?'最低均價各有購買門檻；以下價差僅供參考，不是同條件排名。':'必須同日期、同件數、同資格及可靠單位才排名；無法確認者不列名次。'}${state.group==='FREE_MEMBER'&&state.mode==='formal'?' 假設具有各平台適用免費會員資格。':''}</p>
-  <div class="pc-actions"><button type="button" data-pc-save-set ${!selected.length?'disabled':''}>${state.editingSet?'更新目前比較組合':'儲存比較組合'}</button>${state.editingSet?'<button type="button" data-pc-save-as>另存新組合</button>':''}<button type="button" data-pc-clear-comparison ${!selected.length?'disabled':''}>清空比較</button></div>
-  <div class="pc-compare-list">${formal.map(row=>{let c=row.comparison,reason=row.reason,memberMarkup='',basisLabel='';if(state.mode==='minimum'){const pairs=C.minimumPairs(d.offers,row.offers,state.date);basisLabel=pairs.primaryLabel;c=row.level!==3&&pairs.primary?C.compare(d.benchmark,row.record,...pairs.primary):null;reason=c?.metric?null:row.level===3?'僅供參考；用途或規格尚未滿足比較條件':'缺少同資格有效價或可靠規格，無法公平換算';if(row.level!==3&&pairs.member){const memberComparison=C.compare(d.benchmark,row.record,...pairs.member);if(memberComparison?.metric)memberMarkup='<p>免費會員價格參考 · 假設具有各平台適用免費會員資格，門檻不同不排名。</p>'+delta(memberComparison);}}return `<section class="pc-compare-row" data-pc-compare-row="${E(row.id)}"><div class="pc-section-title"><h4>${E(row.name)}</h4><button type="button" data-pc-remove="${E(row.id)}">移除</button></div>${state.mode==='formal'&&row.comparison?`<p class="pc-rank">${row.lowest?'競品為此單位組最低（含 OP）':row.opLowest?'OP 為此單位組最低':'此競品非本組最低'} · ${row.selectedOffer.quantity} 件 · 總支出 ${money(row.selectedOffer.total)}</p>`:''}${state.mode==='minimum'?`<small>${E(basisLabel)}</small>`:''}${reason?`<p class="pc-missing">${E(reason)}</p>`:delta(c)}${memberMarkup}${card(row)}</section>`;}).join('')||'<p class="pc-empty">從相關競品、全部商品或收藏按「＋ 加入比較」。</p>'}</div>`;
+  const selected=state.selected.map(get).filter(Boolean),rows=comparisonRows(base,selected);
+  state.competitorIndex=Math.max(0,Math.min(state.competitorIndex,selected.length-1));
+  el.innerHTML='<div class="pc-section-title"><h3>OP vs 競品</h3><span>1 支 OP ＋ '+selected.length+'／5 支競品</span></div>'+
+   '<div class="pc-compare-controls"><label>比較方式<select id="pcMode"><option value="minimum">最低優惠價展示（預設）</option><option value="formal">同購買數量正式比較</option></select></label><label>比較日期<input id="pcDate" type="date" value="'+E(state.date)+'"></label>'+
+   (state.mode==='formal'?'<label>購買件數<input id="pcQuantity" type="number" min="1" max="9999" step="1" value="'+state.quantity+'"><span class="pc-quantity-shortcuts">'+[1,2,3].map(q=>'<button type="button" data-pc-quantity="'+q+'" aria-pressed="'+(state.quantity===q)+'">'+q+' 件</button>').join('')+'</span></label><label>優惠資格<select id="pcGroup"><option value="GENERAL">一般消費者</option><option value="FREE_MEMBER">免費會員</option></select></label>':'')+'</div>'+
+   '<p class="pc-context">'+(state.mode==='minimum'?'最低均價各有購買門檻；價差僅供參考，不是同條件排名。':'同日期、同件數、同資格及可靠單位才排名；缺資料不排名。')+(state.group==='FREE_MEMBER'&&state.mode==='formal'?' 假設具有各平台適用免費會員資格。':'')+'</p>'+
+   '<div class="pc-duel-toolbar"><div class="pc-view-switch" role="group" aria-label="比較資訊量">'+[['summary','摘要對決'],['full','完整比較']].map(([v,t])=>'<button type="button" data-pc-detail="'+v+'" aria-pressed="'+(state.detail===v)+'">'+t+'</button>').join('')+'</div><div class="pc-actions"><button type="button" data-pc-save-set '+(!selected.length?'disabled':'')+'>'+(state.editingSet?'更新目前比較組合':'儲存比較組合')+'</button>'+(state.editingSet?'<button type="button" data-pc-save-as>另存新組合</button>':'')+'<button type="button" data-pc-clear-comparison '+(!selected.length?'disabled':'')+'>清空比較</button></div></div>'+
+   (selected.length?'<div class="pc-mobile-navigation"><button type="button" data-pc-previous '+(!state.competitorIndex?'disabled':'')+' aria-label="上一支競品">← 上一支</button><span aria-live="polite">競品 '+(state.competitorIndex+1)+'／'+selected.length+'</span><button type="button" data-pc-next '+(state.competitorIndex===selected.length-1?'disabled':'')+' aria-label="下一支競品">下一支 →</button></div>':'<p class="pc-empty">從相關競品、全部商品或收藏按「＋ 加入比較」。</p>')+
+   '<div class="pc-duel-scroll" tabindex="0" role="region" aria-label="商品對決；桌機可水平捲動，手機可左右滑動切換競品"><div class="pc-duel-grid" style="--duel-columns:'+Math.max(2,selected.length+1)+';--duel-rows:'+(state.detail==='full'?12:7)+'">'+duelColumn(base,null,-1)+rows.map((row,i)=>duelColumn(row,row,i)).join('')+'</div></div>';
   $id('pcMode').value=state.mode;if($id('pcGroup'))$id('pcGroup').value=state.group;
  }
  function renderFavorites(){
@@ -97,7 +150,11 @@
  }
  host.addEventListener('click',event=>{
   const b=event.target.closest('button');if(!b)return;const ds=b.dataset;
-  if(ds.pcTab){state.tab=ds.pcTab;searchLimit=12;notice('');render();}
+  if('pcStart'in ds){state.tab='op';render();$id('pcComparison').focus({preventScroll:true});host.querySelector('.pc-duel-toolbar').scrollIntoView({block:'start'});}
+  else if(ds.pcDetail){state.detail=ds.pcDetail;renderComparison();}
+  else if('pcPrevious'in ds||'pcNext'in ds){state.competitorIndex+=('pcNext'in ds?1:-1);renderComparison();}
+  else if(ds.pcQuantity){state.quantity=Number(ds.pcQuantity);renderComparison();}
+  else if(ds.pcTab){state.tab=ds.pcTab;searchLimit=12;notice('');render();}
   else if(ds.pcBase)setBase(ds.pcBase);
   else if('pcChange'in ds){state.tab='op';state.query='';$id('pcSearch').value='';render();searchLimit=entries().length;renderSearch();$id('pcSearch').focus();$id('pcSearchArea').scrollIntoView();}
   else if(ds.pcFavorite){const exists=personal.favorites.some(f=>f.id===ds.pcFavorite);if(!exists&&personal.favorites.length>=300){notice('收藏最多 300 項');return;}personal.favorites=exists?personal.favorites.filter(f=>f.id!==ds.pcFavorite):[...personal.favorites,{id:ds.pcFavorite,note:''}];save();render();}
@@ -126,6 +183,10 @@
  dialog.addEventListener('click',e=>{if(e.target.closest('[data-pc-close]'))dialog.close();});dialog.addEventListener('close',()=>{if(returnFocus?.isConnected)returnFocus.focus();else host.querySelector('[aria-selected="true"]').focus();});
  host.addEventListener('error',e=>{if(e.target.tagName==='IMG'){const wrapper=e.target.closest('.pc-image');if(wrapper){wrapper.replaceWith(Object.assign(document.createElement('span'),{className:'pc-image pc-placeholder',textContent:'圖片無法載入'}));}}},true);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){renderComparison();renderRecommendations();renderSearch();}});
- window.PXPriceCenter=Object.freeze({entries,data,searchResults,candidateRows,getState:()=>structuredClone(state),getPersonal:()=>structuredClone(personal),refresh:render});
+ let swipeStart=null;
+ host.addEventListener('touchstart',e=>{if(e.target.closest('.pc-duel-scroll')&&matchMedia('(max-width:650px)').matches&&e.touches.length===1)swipeStart={x:e.touches[0].clientX,y:e.touches[0].clientY};},{passive:true});
+ host.addEventListener('touchend',e=>{if(!swipeStart)return;const t=e.changedTouches[0],dx=t.clientX-swipeStart.x,dy=t.clientY-swipeStart.y;swipeStart=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5){state.competitorIndex+=dx<0?1:-1;renderComparison();}},{passive:true});
+ host.addEventListener('touchcancel',()=>{swipeStart=null;},{passive:true});
+ window.PXPriceCenter=Object.freeze({entries,data,searchResults,candidateRows,duelDifference,getState:()=>structuredClone(state),getPersonal:()=>structuredClone(personal),refresh:render});
  filters();render();if(storageError)notice(storageError);
 })();

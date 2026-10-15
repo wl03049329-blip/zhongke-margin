@@ -1,0 +1,17 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),cp=require('node:child_process');
+const C=require('../price-center-core'),M=require('../competitor-comparison-core');
+const rows=require('../competitor-prices.json'),audit=require('../COMPETITOR_V21_SOURCE_AUDIT.json');
+const before=JSON.parse(cp.execFileSync('git',['show','6709c407d0c1953f51d78f721a09b7b0324914de:competitor-prices.json'],{encoding:'utf8'}));
+for(const r of before)assert.deepEqual(rows.find(p=>p.competitorProductId===r.competitorProductId),r);
+assert.equal(new Set(rows.map(r=>r.competitorProductId)).size,rows.length);assert.equal(new Set(rows.map(r=>r.sourceUrl)).size,rows.length);
+const added=rows.filter(r=>!before.some(p=>p.competitorProductId===r.competitorProductId));assert.equal(added.length,7);
+for(const r of added){assert.equal(r.retailer,'寶雅');assert.match(r.sourceUrl,/^https:\/\/www\.poyabuy\.com\.tw\/SalePage\/Index\/\d+$/);assert(r.currentPrice>0);assert.equal(r.unitConversionVerified,false);assert.equal(r.widthCm,null);assert.equal(r.validFrom,null);assert.equal(r.validTo,null);assert.equal(r.barcode,null);assert.equal(r.imageVerification,'NOT_AUTHORIZED_NOT_LOADED');assert.equal(C.selectFormal(C.publicOffers(r),'2026-10-16',1,'GENERAL'),null);assert.equal(C.best(C.publicOffers(r),'FREE_MEMBER'),null);assert.equal(audit.sourceChecks.find(s=>s.url===r.sourceUrl).evidenceSHA256,r.evidenceSHA256);}
+// Unit engine, all original PX data and business logic remain byte-identical.
+for(const file of ['price-center-core.js','competitor-price-core.js','competitor-comparison-core.js','competitor-candidate-core.js','px-sales-data.js','px-promo-prices.js','px-promo-prices.json','px-promo-core.js','px-rsp-data.js','px-replacement-data.js','product-catalog.js','new-product-calculator.js','new-product-calculator.css'])assert.equal(fs.readFileSync(file,'utf8').replace(/\r\n/g,'\n'),cp.execFileSync('git',['show','6709c407d0c1953f51d78f721a09b7b0324914de:'+file],{encoding:'utf8'}).replace(/\r\n/g,'\n'),file);
+// Release changes in the shell are limited to version labels and asset query keys.
+for(const file of ['index.html','service-worker.js']){
+ const normalize=s=>s.replace(/\r\n/g,'\n').replaceAll('4.2.1','4.2.0').replaceAll('檔期查價 2.1','檔期查價 2.0').replaceAll('price-center-duel','price-center');
+ assert.equal(normalize(fs.readFileSync(file,'utf8')),normalize(cp.execFileSync('git',['show','6709c407d0c1953f51d78f721a09b7b0324914de:'+file],{encoding:'utf8'})),file+' release-only edits');
+}
+const summary=data=>({count:data.length,sources:Object.fromEntries([...new Set(data.map(p=>p.retailer))].map(s=>[s,data.filter(p=>p.retailer===s).length])),withObservedPrice:data.filter(r=>r.currentPrice>0).length,withLength:data.filter(r=>M.getCompetitorMetrics(r).pricePer10M!==null).length,withArea:data.filter(r=>M.getCompetitorMetrics(r).pricePerSquareMeter!==null).length,withVerifiedGeneralOffer:data.filter(r=>C.selectFormal(C.publicOffers(r),'2026-10-16',1,'GENERAL')).length});
+console.log(JSON.stringify({status:'PASS',before:summary(before),after:summary(rows),added:added.map(r=>({name:r.productName,price:r.currentPrice,url:r.sourceUrl})),formalRanking:'0: no verified validity/eligibility; observed prices are references, not current guaranteed prices',protectedFiles:'PASS',original48:'unchanged'},null,2));

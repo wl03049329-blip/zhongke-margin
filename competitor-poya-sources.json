@@ -4,6 +4,13 @@
   "robotsUrl": "https://www.poyabuy.com.tw/robots.txt",
   "policy": "Public product HTML only; no login, search-snippet prices, conditional offers or cross-retailer redirects. Eligible codes limit candidates, not price equivalence.",
   "products": [
+    {"id":"9954920","name":"妙潔PE保鮮膜60M","brand":"妙潔","category":"CLING_FILM","reason":"食品保鮮膜；每件卷數及寬度未完整確認，不產生換算價差。"},
+    {"id":"10106242","name":"楓康食品用PE保鮮膜30cmx60M","brand":"楓康","category":"CLING_FILM","reason":"食品保鮮膜；長寬見公開品名，但每件卷數未獨立確認，不產生換算價差。"},
+    {"id":"11719515","name":"楓康骨鏈式夾鏈密封袋50入-小","brand":"楓康","category":"ZIP_BAG","eligibleProductCodes":[],"reason":"平面小型食品密封袋；OP 現有小袋為立體袋，僅供相關參考，不視為同規格。"},
+    {"id":"10259138","name":"妙潔輕鬆掛細緻海綿菜瓜布","brand":"妙潔","category":"SPONGE","eligibleProductCodes":["65020089","65020125","65020135"],"reason":"餐具用細緻海綿菜瓜布；不配木漿棉，不假設每件片數。"},
+    {"id":"11719531","name":"楓康超細緻海綿菜瓜布4片裝","brand":"楓康","category":"SPONGE","eligibleProductCodes":["65020089","65020125","65020135"],"reason":"餐具用細緻海綿菜瓜布；原始包裝價格參考，不重寫每片比較引擎。"},
+    {"id":"10258951","name":"妙潔輕鬆掛海綿菜瓜布補充包","brand":"妙潔","category":"SPONGE","eligibleProductCodes":["65020089","65020125","65020135"],"reason":"居家海綿菜瓜布補充包；每件片數未確認，不視為同規格。"},
+    {"id":"11100777","name":"妙潔職人巾3片-30*30cm","brand":"妙潔","category":"DISH_CLOTH","eligibleProductCodes":["65020228","63020126","4710660888820"],"reason":"居家清潔擦拭布；不同材質與入數僅供原始價格參考。"},
     {"id":"11100796","name":"妙潔三層細緻海綿菜瓜布2入(款式隨機出貨)","brand":"妙潔","category":"SPONGE","eligibleProductCodes":["65020089","65020125","65020135"],"reason":"餐具清潔海綿菜瓜布；不配木漿棉。"},
     {"id":"9931992","name":"3M百利餐具專用海綿菜瓜布3片","brand":"3M","category":"SPONGE","eligibleProductCodes":["65020089","65020125","65020135"],"reason":"餐具清潔海綿菜瓜布；不配木漿棉。"},
     {"id":"9932003","name":"3M百利超吸水抹布單片包","brand":"3M","category":"DISH_CLOTH","eligibleProductCodes":["65020228","63020126","4710660888820"],"reason":"居家擦拭抹布；材質與包裝數不同，不產生換算價差。"},

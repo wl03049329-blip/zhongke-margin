@@ -1,0 +1,132 @@
+{
+  "checkedAt": "2026-10-15T19:16:16.858Z",
+  "sourcePolicy": "POYA public product HTML only; Carrefour redirects to a different retailer and is not relabelled",
+  "baselineProducts": 48,
+  "added": 7,
+  "changed": 0,
+  "successful": 7,
+  "warnings": 10,
+  "errors": 0,
+  "issues": [
+    {
+      "id": "寶雅:9954920",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:11719515",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:11719515",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:10259138",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:10259138",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:11719531",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:11719531",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:10258951",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    },
+    {
+      "id": "寶雅:10258951",
+      "severity": "warning",
+      "reason": "MISSING_WIDTH"
+    },
+    {
+      "id": "寶雅:11100777",
+      "severity": "warning",
+      "reason": "UNPARSEABLE_SPEC"
+    }
+  ],
+  "sourceChecks": [
+    {
+      "url": "https://www.poyabuy.com.tw/SalePage/Index/9954920",
+      "status": "SUCCESS",
+      "price": 85,
+      "productName": "妙潔PE保鮮膜60M",
+      "evidenceSHA256": "afa5c40002b6843b35cd1ca897fc01188d2f5261b8556a8fa77c93f355a4d9dd",
+      "priceEvidence": "VISIBLE_META_OG_VARIANTS_JSON_LD",
+      "noLogin": true
+    },
+    {
+      "url": "https://www.poyabuy.com.tw/SalePage/Index/10106242",
+      "status": "SUCCESS",
+      "price": 55,
+      "productName": "楓康食品用PE保鮮膜30cmx60M",
+      "evidenceSHA256": "467fff5610be4bf97da8ac61e062f02703c6335c0b1b7d35f71d3e5f9daf2f1d",
+      "priceEvidence": "VISIBLE_META_OG_VARIANTS_JSON_LD",
+      "noLogin": true
+    },
+    {
+      "url": "https://www.poyabuy.com.tw/SalePage/Index/11719515",
+      "status": "SUCCESS",
+      "price": 35,
+      "productName": "楓康骨鏈式夾鏈密封袋50入-小",
+      "evidenceSHA256": "293727bf4481172c1286e95cc8c6717cbc2b77b92674d728f41749b54ebbcfbe",
+      "priceEvidence": "VISIBLE_META_OG_VARIANTS_JSON_LD",
+      "noLogin": true
+    },
+    {
+      "url": "https://www.poyabuy.com.tw/SalePage/Index/10259138",
+      "status": "SUCCESS",
+      "price": 59,
+      "productName": "妙潔輕鬆掛細緻海綿菜瓜布",
+      "evidenceSHA256": "aeeee686f0ee0cd2f459ebb8869f43e63960411f55e50df1af32b6bb54fd6c06",
+      "priceEvidence": "VISIBLE_META_OG_VARIANTS_JSON_LD",
+      "noLogin": true
+    },
+    {
+      "url": "https://www.poyabuy.com.tw/SalePage/Index/11719531",
+      "status": "SUCCESS",
+      "price": 49,
+      "productName": "楓康超細緻海綿菜瓜布4片裝",
+      "evidenceSHA256": "3b70a1bb6139dae01c4b5703ea1aa95340c05c3cbeda967718d4e53b81f057f3",
+      "priceEvidence": "VISIBLE_META_OG_VARIANTS_JSON_LD",
+      "noLogin": true
+    },
+    {
+      "url": "https://www.poyabuy.com.tw/SalePage/Index/10258951",
+      "status": "SUCCESS",
+      "price": 59,
+      "productName": "妙潔輕鬆掛海綿菜瓜布補充包",
+      "evidenceSHA256": "c8b6bdc8ccaa1fdd0e0fb7be876b3c08b39ea351c38498df1dc6206f51abf468",
+      "priceEvidence": "VISIBLE_META_OG_VARIANTS_JSON_LD",
+      "noLogin": true
+    },
+    {
+      "url": "https://www.poyabuy.com.tw/SalePage/Index/11100777",
+      "status": "SUCCESS",
+      "price": 99,
+      "productName": "妙潔職人巾3片-30*30cm",
+      "evidenceSHA256": "50bff1d310f52709a158e69961ecdcbd162ab3e2e3bcfc1133c72fb47a4eb3f3",
+      "priceEvidence": "VISIBLE_META_OG_VARIANTS_JSON_LD",
+      "noLogin": true
+    }
+  ],
+  "limitations": [
+    "No inferred barcode, pack quantity, promotion validity or member eligibility",
+    "No remote images loaded without rights confirmation",
+    "Observed price does not imply eligibility for formal ranking"
+  ]
+}

@@ -19,7 +19,7 @@ const digest=value=>crypto.createHash('sha256').update(value.replace(/\r\n/g,'\n
   normal=await chromium.launchPersistentContext(path.join(os.tmpdir(),'px-v2-browser-'+Date.now()),{...options,viewport:{width:390,height:844},permissions:['clipboard-read','clipboard-write']});
   const observe=page=>{page.on('pageerror',e=>report.errors.push(e.message));page.on('console',m=>{if(m.type()==='error')report.errors.push(m.text())});page.on('request',r=>{if(new URL(r.url()).origin!==new URL(url).origin)report.unexpectedRequests.push(r.url())})};
   const page=normal.pages()[0]||await normal.newPage();page.setDefaultTimeout(30000);observe(page);console.log('Acceptance: open '+url);await page.goto(url,{waitUntil:'networkidle'});
-  assert.match(await page.locator('.meta').innerText(),/VERSION 4\.2\.0[\s\S]*檔期查價 2\.0/);
+  assert.match(await page.locator('.meta').innerText(),/VERSION 4\.2\.1[\s\S]*檔期查價 2\.1/);
   await page.locator('#cProduct').fill('65010209');await page.locator('#cPrice').fill('129');await page.locator('#cCost').fill('24.50');
   const existing=await page.evaluate(()=>({copy:buildCalcResultText(),margin:$('cMargin').textContent,rows:$('cRows').innerHTML,master:JSON.stringify(PX_Q3_PRODUCTS)}));
   await page.locator('#developNewProduct').click();assert.equal(await page.locator('[data-new-mode="A"]').getAttribute('aria-pressed'),'true');
@@ -50,9 +50,9 @@ const digest=value=>crypto.createHash('sha256').update(value.replace(/\r\n/g,'\n
   for(const tab of ['reverse','scenario','promo','campaign','organizer','basis','calc']){await page.locator(`[data-tab="${tab}"]`).click();assert.equal(await page.locator('#'+tab).isVisible(),true)}
   console.log('Acceptance: responsive and existing product restore PASS');
   await page.evaluate(()=>Promise.race([navigator.serviceWorker.ready,new Promise((_,reject)=>setTimeout(()=>reject(Error('Service worker not ready within 30s')),30000))])).catch(async error=>{console.log('SW diagnostics',JSON.stringify({errors:report.errors,registrations:await page.evaluate(async()=>(await navigator.serviceWorker.getRegistrations()).map(r=>({scope:r.scope,active:r.active?.scriptURL,installing:r.installing?.state}))),unexpectedRequests:report.unexpectedRequests}));throw error});
-  await page.waitForFunction(expected=>navigator.serviceWorker.controller?.scriptURL.includes(expected),'4.2.0',{timeout:30000});
+  await page.waitForFunction(expected=>navigator.serviceWorker.controller?.scriptURL.includes(expected),'4.2.1',{timeout:30000});
   await page.waitForFunction(async expected=>(await caches.keys()).length===1&&(await caches.keys())[0]===expected,cache,{timeout:30000});
-  for(const file of ['index.html',`new-product-calculator.js?v=${version}`,`new-product-calculator.css?v=${version}`,'service-worker.js?v=4.2.0']){
+  for(const file of ['index.html',`new-product-calculator.js?v=${version}`,`new-product-calculator.css?v=${version}`,'service-worker.js?v=4.2.1']){
    const response=await normal.request.get(new URL(file,url).href,{headers:{'Cache-Control':'no-cache'}});assert.equal(response.status(),200);
    const content=await response.text(),expected=fs.readFileSync(path.join(root,file.split('?')[0]),'utf8');assert.equal(digest(content),digest(expected),file+' production/build matches release');report.assets.push({file,sha256:digest(content)});
   }
@@ -66,7 +66,7 @@ const digest=value=>crypto.createHash('sha256').update(value.replace(/\r\n/g,'\n
   for(const [id,value] of [['cCost','30'],['cFee','10'],['cNewPXMargin','40'],['cPrice','105']])await page.locator('#'+id).fill(value);
   assert.equal(await page.locator('#cNewPXOffer').innerText(),'40.00%');report.forceReload='PASS';
   browser=await chromium.launch(options);const incognito=await browser.newContext({viewport:{width:390,height:844}}),fresh=await incognito.newPage();observe(fresh);await fresh.goto(url,{waitUntil:'networkidle'});
-  assert.match(await fresh.locator('.meta').innerText(),/VERSION 4\.2\.0/);await fresh.locator('#developNewProduct').click();assert.equal(await fresh.locator('[data-new-mode]').count(),2);assert.equal(await fresh.locator('#cPrice').inputValue(),'');report.incognito='PASS';
+  assert.match(await fresh.locator('.meta').innerText(),/VERSION 4\.2\.1/);await fresh.locator('#developNewProduct').click();assert.equal(await fresh.locator('[data-new-mode]').count(),2);assert.equal(await fresh.locator('#cPrice').inputValue(),'');report.incognito='PASS';
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.unexpectedRequests,[]);report.horizontalOverflow=0;report.cacheCoherence='PASS';report.status='PASS';
   fs.writeFileSync(path.join(out,`acceptance-${report.environment.toLowerCase()}.json`),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));
  }finally{await normal?.close();await browser?.close();server.close()}

@@ -1110,5 +1110,75 @@
       "availability": "InStock",
       "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/9955034"
     }
+  ],
+  "寶雅:9954920": [
+    {
+      "effectiveObservedAt": "2026-10-15T19:16:06.821Z",
+      "price": 85,
+      "originalPrice": 85,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/9954920"
+    }
+  ],
+  "寶雅:10106242": [
+    {
+      "effectiveObservedAt": "2026-10-15T19:16:08.316Z",
+      "price": 55,
+      "originalPrice": 79,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/10106242"
+    }
+  ],
+  "寶雅:11719515": [
+    {
+      "effectiveObservedAt": "2026-10-15T19:16:09.841Z",
+      "price": 35,
+      "originalPrice": 65,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/11719515"
+    }
+  ],
+  "寶雅:10259138": [
+    {
+      "effectiveObservedAt": "2026-10-15T19:16:11.300Z",
+      "price": 59,
+      "originalPrice": 59,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/10259138"
+    }
+  ],
+  "寶雅:11719531": [
+    {
+      "effectiveObservedAt": "2026-10-15T19:16:12.819Z",
+      "price": 49,
+      "originalPrice": 68,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/11719531"
+    }
+  ],
+  "寶雅:10258951": [
+    {
+      "effectiveObservedAt": "2026-10-15T19:16:14.374Z",
+      "price": 59,
+      "originalPrice": 59,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/10258951"
+    }
+  ],
+  "寶雅:11100777": [
+    {
+      "effectiveObservedAt": "2026-10-15T19:16:15.849Z",
+      "price": 99,
+      "originalPrice": 99,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/11100777"
+    }
   ]
 }

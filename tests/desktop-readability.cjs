@@ -7,6 +7,7 @@ const sharp = require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-ru
 const { execFileSync } = require('node:child_process');
 const { chromium } = require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const root = path.resolve(__dirname, '..');
+require('./price-center-v21.cjs');
 const out = process.env.PX_QA_OUT || path.join(require('node:os').tmpdir(), 'px-desktop-readability');
 fs.mkdirSync(out, { recursive: true });
 const releaseBase = '0ffebfa4cb9ead0dd3b872c799155df3346fda81';
@@ -17,7 +18,7 @@ if (!process.env.PX_BASELINE) {
   assert.equal(html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.21-desktop-readability">/, '').replaceAll('service-worker.js?v=4.1.21-desktop-readability', 'service-worker.js?v=4.1.18-rsp-confirmed'), old('index.html'), 'original markup, inline CSS, formulas and business logic unchanged');
   const tracked = execFileSync('git', ['ls-tree', '--name-only', releaseBase], { cwd: root, encoding: 'utf8' }).trim().split('\n');
   // Only the PX draft calculator is intentionally upgraded; all other modules remain protected.
-  for (const f of tracked.filter(f => /\.(js|json|css)$/.test(f) && !['service-worker.js','new-product-calculator.js','new-product-calculator.css'].includes(f))) assert.equal(read(f), ['competitor-prices.json','competitor-prices.js','competitor-price-history.json'].includes(f) ? execFileSync('git',['show','7c317d0965177e6dd3735fa5e7b1ee9a0f291df0:'+f],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n') : old(f), f + ' data / original styles / logic unchanged');
+  for (const f of tracked.filter(f => /\.(js|json|css)$/.test(f) && !['service-worker.js','new-product-calculator.js','new-product-calculator.css','competitor-prices.json','competitor-prices.js','competitor-price-history.json','competitor-products.json','competitor-poya-sources.json'].includes(f))) assert.equal(read(f), ['competitor-prices.json','competitor-prices.js','competitor-price-history.json'].includes(f) ? execFileSync('git',['show','7c317d0965177e6dd3735fa5e7b1ee9a0f291df0:'+f],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n') : old(f), f + ' data / original styles / logic unchanged');
 }
 const server = http.createServer((req, res) => {
   const file = path.join(root, decodeURIComponent(new URL(req.url, 'http://local').pathname).slice(1) || 'index.html');
