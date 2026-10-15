@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="px-sales-multi.css?v=4.1.18-rsp-confirmed">
 <link rel="stylesheet" href="px-sales-radar.css?v=4.1.18-rsp-confirmed">
 <link rel="stylesheet" href="px-sales-update.css?v=4.1.18-rsp-confirmed">
-<link rel="stylesheet" href="new-product-calculator.css?v=4.1.11-poya">
+<link rel="stylesheet" href="new-product-calculator.css?v=4.1.3-new-product-v2">
 <style>
 :root{
  --op:#086b42;--op2:#16945b;--op3:#dff3e8;--earth:#8bc78f;
@@ -244,7 +244,7 @@ input,select{border-color:#b9cad5;background:#fff}.cost-override-note{display:bl
 <main class="app">
 <header class="hero">
  <div class="brand"><img class="brand-logo" src="assets/brand/px-logo.svg" alt="PX"><div class="brand-copy"><h1>PX 通路工作台</h1><p><span class="developer-primary">開發者：弘昇</span><span class="developer-secondary">｜Built by HS</span></p></div></div>
- <div class="meta"><span class="pill">VERSION 4.1.2</span><span class="pill">個人工作輔助工具</span><span class="pill">固定稅率 5%</span></div>
+ <div class="meta"><span class="pill">VERSION 4.1.3</span><span class="pill">開發新品 2.0</span><span class="pill">個人工作輔助工具</span><span class="pill">固定稅率 5%</span></div>
 </header>
 
 <div class="tabs-shell"><nav class="tabs">
@@ -720,7 +720,7 @@ setupProductSelectors();
 setupThresholdSettings();
 syncReverseQuickTarget();
 calcC();calcR();calcS();updatePromoUI();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.21-desktop-readability",{updateViaCache:"none"}));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js?v=4.1.3-new-product-v2",{updateViaCache:"none"}));
 </script>
 <script src="px-promo-ui.js"></script>
 <script src="scenario-summary.js?v=4.1.2-scenario-source"></script>
@@ -741,5 +741,5 @@ if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serv
 <script src="competitor-price-ui.js"></script>
 <script src="competitor-candidate-core.js?v=4.1.11-poya"></script>
 <script src="campaign-lookup-ui.js?v=4.1.11-poya"></script>
-<script src="new-product-calculator.js?v=4.1.11-poya"></script>
+<script src="new-product-calculator.js?v=4.1.3-new-product-v2"></script>
 </body></html>

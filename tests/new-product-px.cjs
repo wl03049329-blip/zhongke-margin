@@ -1,8 +1,10 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os'),vm=require('node:vm'),{execFileSync}=require('node:child_process');
 const {chromium}=require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const root=path.resolve(__dirname,'..'),base='2a33c44c7f9b7375ee7b3b9cdc234792e4a5bce1';
+const root=path.resolve(__dirname,'..'),base='7c317d0965177e6dd3735fa5e7b1ee9a0f291df0';
 const old=file=>execFileSync('git',['show',`${base}:${file}`],{encoding:'utf8'}).replace(/\r\n/g,'\n'),read=file=>fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n');
-for(const file of ['index.html','service-worker.js','px-sales-data.js','px-rsp-data.js','px-product-additions.js','px-product-additions.json','px-promo-prices.js','px-promo-prices.json','px-promo-core.js','px-replacement-data.js','product-catalog.js','px-sales-analysis.js','same-period-sales.js','decision-summary.js','scenario-summary.js','competitor-comparison.js']){
+assert.equal(require('./new-product-v2-release-contract.cjs').normalizeReleaseMetadata(read('index.html')),old('index.html'),'only approved release metadata changes in HTML');
+assert.equal(read('service-worker.js').replaceAll('px-workbench-v4.1.3-new-product-v2','px-workbench-v4.1.21-desktop-readability').replaceAll('new-product-calculator.js?v=4.1.3-new-product-v2','new-product-calculator.js?v=4.1.11-poya').replaceAll('new-product-calculator.css?v=4.1.3-new-product-v2','new-product-calculator.css?v=4.1.11-poya'),old('service-worker.js'),'only cache name and calculator asset versions changed');
+for(const file of ['px-sales-data.js','px-rsp-data.js','px-product-additions.js','px-product-additions.json','px-promo-prices.js','px-promo-prices.json','px-promo-core.js','px-replacement-data.js','product-catalog.js','px-sales-analysis.js','same-period-sales.js','decision-summary.js','scenario-summary.js','competitor-comparison.js']){
  if(fs.existsSync(path.join(root,file)))assert.equal(read(file),old(file),file+' unchanged');
 }
 const source=read('new-product-calculator.js');assert.ok(!/PX_RSP_DATA|PX_RSP_REFERENCE|cNewPurchase|data-new-channel/.test(source),'no metadata RSP dependency or retired general-channel controls');

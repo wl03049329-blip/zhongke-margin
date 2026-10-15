@@ -2,6 +2,8 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),{execFileSync}=require('node:child_process');
 const root=path.resolve(__dirname,'..'),master=require('../scripts/sales-data-io.cjs').readMaster(),audit=require('../PX_RSP_MAPPING_AUDIT.json'),{expected,auditWorkbook,manualConfirmed,applyManualConfirmations}=require('../scripts/rsp-mapping.cjs');
 const read=f=>fs.readFileSync(path.join(root,f),'utf8').replace(/\r\n/g,'\n');
+const snapshotFiles=['competitor-prices.json','competitor-prices.js','competitor-price-history.json'];
+const productionSnapshot=f=>execFileSync('git',['show','7c317d0965177e6dd3735fa5e7b1ee9a0f291df0:'+f],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n');
 const context={window:{},Intl};vm.runInNewContext(read('px-rsp-data.js'),context);
 const {PX_RSP_DATA:data,PX_RSP_REFERENCE:ref}=context.window;
 for(const [key,value]of Object.entries(expected))assert.equal(audit[key],value,key);
@@ -43,7 +45,7 @@ assert.deepEqual(applyManualConfirmations({audit,values:JSON.parse(JSON.stringif
 if(process.env.PX_RSP_SOURCE){const actual=auditWorkbook(process.env.PX_RSP_SOURCE,master);assert.deepEqual(actual.audit,audit);assert.deepEqual(actual.values,JSON.parse(JSON.stringify(data)));}
 if(!process.argv.includes('--unit')){
  const releaseBase='43d2a523f180c362c16bd100b79af88d90c2310c',releaseOld=f=>execFileSync('git',['show',releaseBase+':'+f],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n');
- const withoutDesktop=html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.21-desktop-readability">/,'').replaceAll('21-desktop-readability','17-rsp');
+ const withoutDesktop=require('./new-product-v2-release-contract.cjs').normalizeReleaseMetadata(html).replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.21-desktop-readability">/,'').replaceAll('21-desktop-readability','17-rsp');
  assert.equal(withoutDesktop.replaceAll('18-rsp-confirmed','17-rsp'),releaseOld('index.html'),'existing UI and all inline code unchanged; only desktop stylesheet and cache URLs added');
  const previousAudit=JSON.parse(releaseOld('PX_RSP_MAPPING_AUDIT.json'));
  const previousValues=Object.fromEntries(previousAudit.records.filter(r=>r.productName).map(r=>[r.productName,r.rsp]));
@@ -52,11 +54,11 @@ if(!process.argv.includes('--unit')){
  assert.equal(read('px-rsp-data.js').split('window.PX_RSP_REFERENCE =')[1],beforeResolver,'pure display resolver unchanged');
  const tracked=execFileSync('git',['ls-files','-z'],{cwd:root,encoding:'utf8'}).split('\0');
  // New-product 2.0 is now intentionally changed; RSP master and display-only contracts remain locked.
- for(const file of tracked.filter(f=>!f.includes('/')&&/\.(js|json|css)$/.test(f)&&!['px-rsp-data.js','PX_RSP_MAPPING_AUDIT.json','service-worker.js','desktop-readability.css','new-product-calculator.js','new-product-calculator.css'].includes(f)))assert.equal(read(file),releaseOld(file),file+' untouched by RSP patch');
+ for(const file of tracked.filter(f=>!f.includes('/')&&/\.(js|json|css)$/.test(f)&&!['px-rsp-data.js','PX_RSP_MAPPING_AUDIT.json','service-worker.js','desktop-readability.css','new-product-calculator.js','new-product-calculator.css'].includes(f)))assert.equal(read(file),snapshotFiles.includes(file)?productionSnapshot(file):releaseOld(file),file+' untouched by release');
  const base='6748d0935fc04ca62a905072588266f158197b6d',old=f=>execFileSync('git',['show',base+':'+f],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n');
  const inline=s=>[...require('./rsp-inline-integrity.cjs').withoutRsp(s).matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?VERSION');
  assert.equal(inline(read('index.html')),inline(old('index.html')),'all inline code unchanged except exact RSP display cell');
 // PX draft UI is intentionally upgraded; official-core parity is covered in new-product-px.cjs.
- for(const file of ['px-sales-data.js','px-product-additions.js','px-product-additions.json','px-promo-prices.js','px-promo-prices.json','px-promo-core.js','px-promo-ui.js','px-replacement-data.js','product-catalog.js','new-product-organizer.js','scenario-summary.js','decision-summary.js','same-period-sales.js','px-sales-analysis.js','px-sales-dashboard-core.js','px-sales-dashboard.js','px-sales-multi.js','px-sales-radar.js','px-sales-import-core.js','competitor-comparison-core.js','competitor-price-ui.js','competitor-prices.json'])assert.equal(read(file),old(file),file+' unchanged');
+ for(const file of ['px-sales-data.js','px-product-additions.js','px-product-additions.json','px-promo-prices.js','px-promo-prices.json','px-promo-core.js','px-promo-ui.js','px-replacement-data.js','product-catalog.js','new-product-organizer.js','scenario-summary.js','decision-summary.js','same-period-sales.js','px-sales-analysis.js','px-sales-dashboard-core.js','px-sales-dashboard.js','px-sales-multi.js','px-sales-radar.js','px-sales-import-core.js','competitor-comparison-core.js','competitor-price-ui.js','competitor-prices.json'])assert.equal(read(file),snapshotFiles.includes(file)?productionSnapshot(file):old(file),file+' unchanged');
 }
 console.log(JSON.stringify({status:'PASS',sourceProducts:57,masterProducts:55,matched:54,withRsp:54,missingRsp:1,manualConfirmed:3,sourceOnly:3,displayOnlyContract:'PASS',resolverNullSafety:'PASS',sourceVerified:!!process.env.PX_RSP_SOURCE,formulaAndDataIntegrity:process.argv.includes('--unit')?'not history-dependent':'PASS'}));
