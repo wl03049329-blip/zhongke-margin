@@ -16,7 +16,8 @@ if (!process.env.PX_BASELINE) {
   const html = read('index.html');
   assert.equal(html.replace(/\n<link rel="stylesheet" href="desktop-readability\.css\?v=4\.1\.21-desktop-readability">/, '').replaceAll('service-worker.js?v=4.1.21-desktop-readability', 'service-worker.js?v=4.1.18-rsp-confirmed'), old('index.html'), 'original markup, inline CSS, formulas and business logic unchanged');
   const tracked = execFileSync('git', ['ls-tree', '--name-only', releaseBase], { cwd: root, encoding: 'utf8' }).trim().split('\n');
-  for (const f of tracked.filter(f => /\.(js|json|css)$/.test(f) && f !== 'service-worker.js')) assert.equal(read(f), old(f), f + ' data / original styles / logic unchanged');
+  // Only the PX draft calculator is intentionally upgraded; all other modules remain protected.
+  for (const f of tracked.filter(f => /\.(js|json|css)$/.test(f) && !['service-worker.js','new-product-calculator.js','new-product-calculator.css'].includes(f))) assert.equal(read(f), old(f), f + ' data / original styles / logic unchanged');
 }
 const server = http.createServer((req, res) => {
   const file = path.join(root, decodeURIComponent(new URL(req.url, 'http://local').pathname).slice(1) || 'index.html');
@@ -78,9 +79,9 @@ async function states(p, visit) {
   await p.waitForFunction(() => document.querySelector('.sales24-loading').textContent.startsWith('解析完成'));
   await expand(p, '.sales24-dialog details'); await visit('sales-update-preview'); await p.keyboard.press('Escape');
   await p.locator('#developNewProduct').click();
-  for (const [id, value] of [['cNewName', '新品長名稱／OP食品用鋁箔800公分12入'], ['cNewBarcode', '47112345678901234567890'], ['cPrice', '105'], ['cCost', '30'], ['cNewPurchase', '60'], ['cFee', '10']]) await p.locator('#' + id).fill(value);
+  for (const [id, value] of [['cNewName', '新品長名稱／OP食品用鋁箔800公分12入'], ['cNewBarcode', '47112345678901234567890'], ['cPrice', '105'], ['cCost', '30'], ['cNewPXMargin', '40'], ['cFee', '10']]) await p.locator('#' + id).fill(value);
   await expand(p, '#calc details'); await visit('new-product');
-  await p.locator('[data-new-channel="px"]').click(); await visit('new-px-empty');
+  await p.locator('[data-new-mode="B"]').click(); await visit('new-px-empty');
   for (const [id, value] of [['cCost','99999999'],['cNewPXMargin','26.18'],['cNewCompanyMargin','38'],['cFee','10.95']]) await p.locator('#'+id).fill(value);
   await expand(p, '#calc details'); await visit('new-px-result');
 }

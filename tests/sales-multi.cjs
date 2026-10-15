@@ -1,6 +1,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os'),{execFileSync}=require('node:child_process');
 const root=path.resolve(__dirname,'..'),core=require('../px-sales-explorer-core'),view=require('../px-sales-multi-view'),dashboard=require('../px-sales-dashboard-core'),base='0732f07e25e15f40ada10023c11b4ee11dd68c95';
-for(const f of ['px-sales-data.js','px-sales-analysis.js','same-period-sales.js','px-sales-explorer-core.js','px-sales-dashboard-core.js','px-promo-core.js','px-promo-ui.js','px-promo-prices.js','px-replacement-data.js','new-product-calculator.js','new-product-organizer.js','scenario-summary.js','decision-summary.js','product-catalog.js','assets/brand/px-logo.svg']){
+// PX draft UI is intentionally upgraded; official-core parity is covered in new-product-px.cjs.
+for(const f of ['px-sales-data.js','px-sales-analysis.js','same-period-sales.js','px-sales-explorer-core.js','px-sales-dashboard-core.js','px-promo-core.js','px-promo-ui.js','px-promo-prices.js','px-replacement-data.js','new-product-organizer.js','scenario-summary.js','decision-summary.js','product-catalog.js','assets/brand/px-logo.svg']){
  assert.equal(fs.readFileSync(path.join(root,f),'utf8').replace(/\r\n/g,'\n'),execFileSync('git',['show',base+':'+f],{encoding:'utf8'}).replace(/\r\n/g,'\n'),f+' unchanged');
 }
 const inline=s=>[...require('./rsp-inline-integrity.cjs').withoutRsp(s).replace(/\r\n/g,'\n').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n').replace(/service-worker\.js\?v=[^"']+/g,'service-worker.js?VERSION');

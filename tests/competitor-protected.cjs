@@ -2,7 +2,8 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const root=path.resolve(__dirname,'..'),base='61952fed48a4b86723323865821590066ac14093';
 const old=file=>execFileSync('git',['show',base+':'+file],{encoding:'utf8'}).replace(/\r\n/g,'\n');
 const current=file=>fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n/g,'\n');
-for(const file of ['competitor-comparison-core.js','competitor-price-ui.js','product-search-core.js','px-promo-ui.js','px-promo-core.js','px-promo-prices.js','px-promo-prices.json','px-sales-data.js','px-replacement-data.js','new-product-calculator.js','product-catalog.js','competitor-category-map.json','assets/brand/px-logo.svg'])assert.equal(current(file),old(file),file+' protected');
+// PX draft UI is intentionally upgraded; its official-core parity is covered in new-product-px.cjs.
+for(const file of ['competitor-comparison-core.js','competitor-price-ui.js','product-search-core.js','px-promo-ui.js','px-promo-core.js','px-promo-prices.js','px-promo-prices.json','px-sales-data.js','px-replacement-data.js','product-catalog.js','competitor-category-map.json','assets/brand/px-logo.svg'])assert.equal(current(file),old(file),file+' protected');
 const previous={module:{exports:{}}};vm.runInNewContext(old('competitor-price-core.js'),previous);const core=require('../competitor-price-core');
 for(const name of ['parseSpec','units','effectiveAverage','money','freshness','material','productId'])assert.equal(core[name].toString().replace(/\r\n/g,'\n'),previous.module.exports[name].toString().replace(/\r\n/g,'\n'),name+' formula unchanged');
 const before=JSON.parse(old('competitor-prices.json')),records=require('../competitor-prices.json');for(const row of before)assert.deepEqual(records.find(p=>p.competitorProductId===row.competitorProductId),row,'existing public record preserved');
