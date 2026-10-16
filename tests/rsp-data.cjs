@@ -55,7 +55,8 @@ if(!process.argv.includes('--unit')){
  assert.deepEqual(applyManualConfirmations({audit:previousAudit,values:previousValues}).audit,audit,'only three confirmed values overlay original source audit');
  const beforeResolver=releaseOld('px-rsp-data.js').split('window.PX_RSP_REFERENCE =')[1];
  assert.equal(read('px-rsp-data.js').split('window.PX_RSP_REFERENCE =')[1],beforeResolver,'pure display resolver unchanged');
- const tracked=execFileSync('git',['ls-files','-z'],{cwd:root,encoding:'utf8'}).split('\0');
+ // Compare files that actually existed at the RSP release. Later modules have their own release contracts.
+ const tracked=execFileSync('git',['ls-tree','--name-only','-z',releaseBase],{cwd:root,encoding:'utf8'}).split('\0');
  // New-product 2.0 is now intentionally changed; RSP master and display-only contracts remain locked.
  for(const file of tracked.filter(f=>!f.includes('/')&&/\.(js|json|css)$/.test(f)&&!['px-rsp-data.js','PX_RSP_MAPPING_AUDIT.json','COMPETITOR_V21_SOURCE_AUDIT.json','service-worker.js','desktop-readability.css','new-product-calculator.js','new-product-calculator.css','competitor-prices.json','competitor-prices.js','competitor-price-history.json','competitor-products.json','competitor-poya-sources.json','price-center-core.js','price-center-ui.js','price-center.css'].includes(f)))assert.equal(read(file),snapshotFiles.includes(file)?productionSnapshot(file):releaseOld(file),file+' untouched by release');
  const base='6748d0935fc04ca62a905072588266f158197b6d',old=f=>execFileSync('git',['show',base+':'+f],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n');

@@ -7,6 +7,11 @@ const num=v=>typeof v==='number'&&Number.isFinite(v)?v.toLocaleString('zh-TW')+'
 function mount(flow){
  if(flow.querySelector('.px-provisional'))return;
  const panel=document.createElement('details');panel.className='px-provisional';
+ if(d.status==='CONFIRMED'&&window.PX_SALES_PERIODS.includes(d.period)){
+  panel.classList.add('px-sales-confirmed');
+  panel.innerHTML='<summary>2026/09 正式月銷量｜234,653 支</summary><p>資料期間：2026/09/01～2026/09/30。使用者已確認完整月份及全品項總銷量，53 筆有效銷量已納入正式分析。</p><p>銷量資料截止：2026/09。銷額：無資料（沒有可驗證的銷額截止月份，未以售價推估）。</p><details><summary>來源與認列紀錄</summary><p>'+esc(d.sourceFile)+'｜工作表：'+esc(d.sourceSheet)+'。2026/10/16 使用者確認；原始檔未記載年份，月份依此次確認認列。</p><p>5 筆下架商品保留 null，不列入現售商品排行：</p><ul>'+d.rows.filter(r=>r.quantity===null).map(r=>'<li>'+esc(r.sourceName)+'：下架／不適用</li>').join('')+'</ul></details>';
+  flow.querySelector('.sales24-freshness')?.after(panel);return;
+ }
  panel.innerHTML='<summary>2026/09 待確認銷量｜月份完整性待確認</summary><p>獨立參考檢視，不納入正式 YTD、近 3／6 月、同期成長、雷達或排名。銷額：無資料。</p>';
  if(window.PX_SALES_PERIODS.includes(d.period)){panel.insertAdjacentHTML('beforeend','<p>本月已有正式資料；暫定參考已停用，避免重複計算。</p>');flow.append(panel);return}
  panel.insertAdjacentHTML('beforeend','<p>來源有效銷量加總：'+num(d.totalQuantity)+'；53 筆有值、5 筆空白。月份由使用者暫定，非已核實完整月。</p><label>參考商品（可多選，最多 5 支）<select multiple size="4" aria-label="待確認銷量參考商品">'+d.rows.filter(r=>r.productName).map(r=>'<option value="'+esc(r.productName)+'">'+esc(r.productName)+'</option>').join('')+'</select></label><div class="px-provisional-grid"></div><details><summary>來源與空白紀錄</summary><p>'+esc(d.sourceFile)+'｜'+esc(d.period)+'（暫定）</p><p>以下原始空白未補 0：'+d.rows.filter(r=>r.quantity===null).map(r=>esc(r.sourceName)).join('、')+'</p></details>');

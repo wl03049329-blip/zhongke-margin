@@ -1,16 +1,16 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
 const {chromium}=require('C:/Users/林弘昇/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const root=path.join(__dirname,'..'),out=process.env.PX_V430_EVIDENCE||path.join(root,'../v430-browser-evidence');
+const root=path.join(__dirname,'..'),out=process.env.PX_V431_EVIDENCE||path.join(root,'../v431-browser-evidence');
 fs.mkdirSync(out,{recursive:true});
 const privatePath=process.env.PX_PIN_DELIVERY||'C:/Users/林弘昇/Desktop/PX工作台_登入PIN_請自行保存.txt';
 const pin=fs.readFileSync(privatePath,'utf8').match(/PIN：([0-9]{4})/)[1];
 const errors=[],requests=[],checks=[];
 const server=http.createServer((req,res)=>{const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);const file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return}fs.readFile(file,(err,b)=>{if(err){res.writeHead(404).end();return}res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.css')?'text/css':file.endsWith('.html')?'text/html':'application/octet-stream');res.end(b)})});
 (async()=>{
- await new Promise(r=>server.listen(0,'127.0.0.1',r));const url=process.env.PX_V430_URL||'http://127.0.0.1:'+server.address().port+'/index.html';
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));const url=process.env.PX_V431_URL||'http://127.0.0.1:'+server.address().port+'/index.html';
  const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
- const context=await browser.newContext({viewport:{width:390,height:844}}),page=await context.newPage();
+ const context=await browser.newContext({viewport:{width:390,height:844},permissions:['clipboard-read','clipboard-write']}),page=await context.newPage();
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('request',r=>{if(new URL(r.url()).origin!==new URL(url).origin&&!r.url().startsWith('data:'))requests.push(r.url())});
  async function login(){await page.locator('#pxPinGate input').first().evaluate((el,value)=>{const e=new Event('paste',{bubbles:true,cancelable:true});Object.defineProperty(e,'clipboardData',{value:{getData:()=>value}});el.dispatchEvent(e)},pin);await page.locator('#pxPinGate button').click();await page.locator('#pxPinGate').waitFor({state:'hidden'})}
  await page.goto(url);await page.locator('#pxPinGate').waitFor();assert(await page.locator('.app').isHidden());
@@ -29,23 +29,33 @@ const server=http.createServer((req,res)=>{const pathname=decodeURIComponent(new
  await page.locator('[data-pc-start]').click();assert(await page.locator('.pc-duel-scroll').isVisible());assert.equal(await page.locator('[data-pc-compare-row]').count(),3);checks.push('authenticated OP + 3 / start duel');
  await page.locator('[data-tab=calc]').click();await page.evaluate(()=>selectProduct(productBindings.find(b=>b.productId==='cProduct'),PX_Q3_PRODUCTS.find(p=>p.name.includes('800公分'))));
  const ref=page.locator('.panel.active .px-provisional').first();await ref.locator('summary').first().click();
- assert.match(await ref.textContent(),/234,653/);assert.match(await ref.textContent(),/月份完整性待確認/);assert.match(await ref.textContent(),/銷額：無資料/);
- assert.equal(await page.evaluate(()=>PX_SALES_PERIODS.at(-1)),'2026/08');
- assert.equal(await page.evaluate(()=>PX_SALES_DATA['OP無雙酚A鋁箔800公分-12入'].sales.at(-1)),10073);
- assert.match(await ref.locator('.px-provisional-grid').textContent(),/27,554/);
- const names=await ref.locator('option').evaluateAll(os=>os.slice(0,3).map(o=>o.value));await ref.locator('select').selectOption(names);assert.equal(await ref.locator('article').count(),3);
- await ref.scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'provisional-390.png')});checks.push('provisional single / multi / trend / amount absent / formal latest unchanged');
+ assert.match(await ref.textContent(),/234,653/);assert.doesNotMatch(await ref.textContent(),/待確認/);assert.match(await ref.textContent(),/銷額：無資料/);assert.equal(await ref.locator('li').count(),5);assert.match(await ref.locator('li').first().textContent(),/下架／不適用/);
+ assert.equal(await page.evaluate(()=>PX_SALES_PERIODS.at(-1)),'2026/09');
+ assert.equal(await page.evaluate(()=>Object.values(PX_SALES_DATA).reduce((n,r)=>n+r.sales.at(-1),0)),234653);
+ const card=page.locator('#cSalesPerformance .sales2');
+ assert.equal(await card.locator('.sales2-latest-value').innerText(),'27,554');assert.equal(await card.locator('.sales2-total').innerText(),'101,985');assert.match(await card.locator('.sales2-comparison').innerText(),/2025\/01～09 vs 2026\/01～09/);
+ assert.equal(await card.locator('.sales2-hit').count(),9);await card.locator('.sales2-hit').last().focus();assert.match(await card.locator('.sales2-tooltip').innerText(),/2026\/09/);await page.keyboard.press('Escape');
+ await card.locator('.sales2-copy').click();const copied=await page.evaluate(()=>navigator.clipboard.readText());assert.match(copied,/101,985/);assert.match(copied,/27,554/);assert.match(copied,/2026\/09/);
+ await card.locator('.sales2-period').selectOption('custom');await card.locator('.sales2-start').fill('2026-07');await card.locator('.sales2-end').fill('2026-09');assert.equal(await card.locator('.sales2-total').innerText(),'46,161');
+ await card.locator('.sales2-start').fill('2026-04');assert.equal(await card.locator('.sales2-total').innerText(),'70,505');
+ await card.locator('.sales2-period').selectOption('same');
+ await card.scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'sales-390.png')});
+ await card.locator('[data-sales-mode="multi"]').click();await card.locator('.sales-multi-search').fill('65010647');await card.locator('[data-add]').first().click();assert.equal(await card.locator('.sales-multi-results tbody tr').count(),2);assert.match(await card.locator('.sales-multi-results').innerText(),/101,985/);
+ await card.locator('[data-sales-mode="radar"]').click();const radar=card.locator('.sales23-radar-pane');
+ for(const preset of ['three','six','ytd']){await radar.locator('[data-radar-preset="'+preset+'"]').click();assert.equal(await radar.locator('[data-radar-range="aEnd"]').inputValue(),'2026-09');assert.equal(await radar.locator('[data-radar-range="aStart"]').inputValue(),preset==='three'?'2026-07':preset==='six'?'2026-04':'2026-01');}
+ await radar.locator('.sales23-search').fill('65010209');assert.match(await radar.locator('tbody tr').innerText(),/101,985/);await card.locator('[data-sales-mode="single"]').click();
+ checks.push('formal September / 234653 / 5 delisted null / amount absent / single YTD / 3 and 6 months / multi / radar / YoY');
  for(const width of [320,375,390,430,768,1280,1366,1920]){await page.setViewportSize({width,height:900});assert.equal(await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),0)}
- await page.setViewportSize({width:1366,height:900});await ref.scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'provisional-1366.png')});
+ await page.setViewportSize({width:1366,height:900});await card.scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'sales-1366.png')});
  sentinel=await page.evaluate(()=>localStorage.getItem('px-price-center-personal-v1'));assert.match(sentinel,/保留測試/);await page.locator('#pxPinLogout').click();await page.locator('#pxPinGate').waitFor({state:'visible'});assert.equal(await page.evaluate(()=>localStorage.getItem('px-price-center-personal-v1')),sentinel);checks.push('logout preserves business storage');
  await login();await page.evaluate(()=>{const key='px-screen-session-v1',s=JSON.parse(localStorage.getItem(key));s.started=Date.now()-6*3600000-1;localStorage.setItem(key,JSON.stringify(s))});await page.locator('#pxPinGate').waitFor({state:'visible'});checks.push('six-hour expiry');
  await login();await page.evaluate(()=>{const s=JSON.parse(localStorage.getItem('px-screen-session-v1'));s.seen=Date.now()+3600000;localStorage.setItem('px-screen-session-v1',JSON.stringify(s))});await page.locator('#pxPinGate').waitFor({state:'visible'});checks.push('clock anomaly');
  await page.evaluate(()=>localStorage.setItem('px-screen-session-v1','corrupt'));await page.reload();await page.locator('#pxPinGate').waitFor({state:'visible'});checks.push('corrupt session');
  const incognito=await browser.newContext(),p=await incognito.newPage();await p.goto(url);await p.locator('#pxPinGate').waitFor({state:'visible'});checks.push('isolated context locked');await incognito.close();
- await login();await page.reload({waitUntil:'networkidle'});await page.locator('#pxPinGate').waitFor({state:'hidden'});assert.match(await page.locator('.meta').textContent(),/4.3.0/);
+ await login();await page.reload({waitUntil:'networkidle'});await page.locator('#pxPinGate').waitFor({state:'hidden'});assert.match(await page.locator('.meta').textContent(),/4.3.1/);
  await page.evaluate(async()=>{const registration=await navigator.serviceWorker.ready;await registration.update()});
  const cdp=await context.newCDPSession(page);await cdp.send('Page.reload',{ignoreCache:true});await page.waitForLoadState('networkidle');await page.locator('#pxPinGate').waitFor({state:'hidden'});
- assert.match(await page.locator('.meta').textContent(),/4.3.0/);assert.deepEqual(await page.evaluate(async()=>caches.keys()),['px-workbench-v4.3.0-provisional-pin']);checks.push('hard refresh / current service worker only');
+ assert.match(await page.locator('.meta').textContent(),/4.3.1/);assert.deepEqual(await page.evaluate(async()=>caches.keys()),['px-workbench-v4.3.1-september-confirmed']);checks.push('hard refresh / current service worker only');
  assert.equal(errors.length,0,JSON.stringify(errors));assert.equal(requests.length,0,JSON.stringify(requests));
  fs.writeFileSync(path.join(out,'acceptance.json'),JSON.stringify({status:'PASS',url,checks,consoleErrors:errors,unexpectedRequests:requests,overflow:0},null,2));
  await browser.close();server.close();console.log('PASS: '+checks.join('; '));

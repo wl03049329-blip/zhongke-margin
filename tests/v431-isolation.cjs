@@ -1,0 +1,28 @@
+'use strict';
+const fs=require('node:fs'),cp=require('node:child_process'),vm=require('node:vm'),assert=require('node:assert/strict');
+const base='ddc2ed2c307d234b812f9ba7ebc7d2547ab2f961',read=f=>fs.readFileSync(f,'utf8').replace(/\r\n/g,'\n'),old=f=>cp.execFileSync('git',['show',base+':'+f],{encoding:'utf8'}).replace(/\r\n/g,'\n');
+const before={window:{}},after={window:{}};vm.runInNewContext(old('px-sales-data.js'),before);vm.runInNewContext(read('px-sales-data.js'),after);vm.runInNewContext(read('px-provisional-data.js'),after);
+const p=Array.from(after.window.PX_SALES_PERIODS),data=JSON.parse(JSON.stringify(after.window.PX_SALES_DATA)),b=JSON.parse(JSON.stringify(before.window.PX_SALES_DATA)),audit=after.window.PX_PROVISIONAL_SALES;
+assert.deepEqual(p,[...before.window.PX_SALES_PERIODS,'2026/09']);assert.deepEqual(Object.keys(data),Object.keys(b));
+for(const [name,row]of Object.entries(data)){assert.deepEqual({...row,sales:row.sales.slice(0,-1)},b[name],name+' history and attributes unchanged');assert.equal(row.sales.at(-1),audit.rows.find(r=>r.productName===name).quantity)}
+assert.equal(Object.keys(data).length,53);assert.equal(Object.values(data).reduce((s,r)=>s+r.sales.at(-1),0),234653);
+assert.equal(audit.status,'CONFIRMED');assert.equal(audit.completeness,'USER_CONFIRMED_FULL_MONTH');assert.equal(audit.confirmation.startDate,'2026-09-01');assert.equal(audit.confirmation.endDate,'2026-09-30');assert.equal(audit.confirmation.totalQuantity,234653);assert.equal(audit.confirmation.sourceVerifiedPeriod,false);
+assert.equal(audit.rows.length,58);assert.equal(audit.rows.filter(r=>r.quantity===null).length,5);assert(audit.rows.filter(r=>r.quantity===null).every(r=>r.quantityStatus==='DELISTED_NOT_APPLICABLE'&&r.productName===null));assert(audit.rows.every(r=>r.amount===null));assert.equal(audit.totalAmount,null);
+const oldAudit={window:{}};vm.runInNewContext(old('px-provisional-data.js'),oldAudit);assert.equal(audit.sourceSHA256,oldAudit.window.PX_PROVISIONAL_SALES.sourceSHA256);assert.deepEqual(JSON.parse(JSON.stringify(audit.rows.map(({quantityStatus,...row})=>row))),JSON.parse(JSON.stringify(oldAudit.window.PX_PROVISIONAL_SALES.rows)));
+const monthly=require('../px-sales-analysis'),same=require('../same-period-sales'),dashboard=require('../px-sales-dashboard-core'),explorer=require('../px-sales-explorer-core'),radar=require('../px-sales-radar-core'),io=require('../scripts/sales-data-io.cjs');
+const sum=a=>a.reduce((s,v)=>s+(v??0),0),ranges=explorer.preset('2026/09','ytd');
+for(const [name,row] of Object.entries(data)){
+ const m=monthly.analyze(p,row.sales),s=same.compare(p,row.sales),d=dashboard.analyze(p,row.sales),valid=i=>typeof row.sales[i]==='number';
+ assert.equal(m.latestMonth,'2026/09');assert.equal(m.latest,row.sales.at(-1));assert.equal(m.ytd.value,sum(row.sales.slice(13)));
+ for(const [n,key]of [[3,'three'],[6,'six']]){const a=row.sales.slice(-n).filter(v=>v!==null);assert.equal(m.averages[key].count,a.length);assert.equal(m.averages[key].value,sum(a)/a.length)}
+ const pairs=Array.from({length:9},(_,i)=>[i+13,i+1]).filter(([a,b])=>valid(a)&&valid(b));assert.equal(s.current,pairs.length?sum(pairs.map(([a])=>row.sales[a])):null);assert.equal(s.previous,pairs.length?sum(pairs.map(([,b])=>row.sales[b])):null);assert.equal(d.latest,'2026/09');
+}
+assert.deepEqual(explorer.preset('2026/09','three'),{aStart:'2026/07',aEnd:'2026/09',bStart:'2025/07',bEnd:'2025/09'});assert.equal(explorer.preset('2026/09','six').aStart,'2026/04');
+const all=radar.create(p,data,io.readMaster()).analyze(ranges);assert.equal(all.counts.total,53);assert.equal(sum(all.rows.map(r=>r.comparison.a.total)),sum(Object.values(data).map(r=>sum(r.sales.slice(13)))));assert.equal(all.volume[0].comparison.a.total,Math.max(...all.rows.map(r=>r.comparison.a.total)));
+const foil=monthly.analyze(p,data['OP無雙酚A鋁箔800公分-12入'].sales);assert.equal(foil.latest,27554);assert.equal(foil.ytd.value,101985);assert.equal(foil.comparison.previous,75796);assert.equal(foil.averages.three.value,46161/3);assert.equal(foil.averages.six.value,70505/6);
+const importer=require('../px-sales-import-core'),formal=io.readData('px-sales-data.js'),repeat=importer.plan(importer.parseRows([['商品名稱','2026/09'],...audit.rows.filter(r=>r.productName).map(r=>[r.productName,r.quantity])]),formal.periods,formal.rows,io.readMaster());assert.equal(repeat.canGenerate,true);assert.deepEqual(repeat.changes,[]);assert.equal(repeat.periods.length,22);
+const delisted={sample:{sales:[...b['OP無雙酚A鋁箔800公分-12入'].sales,null]}};
+const noZero=radar.create(p,delisted,[{name:'sample'}]).analyze({aStart:'2026/09',aEnd:'2026/09',bStart:'2025/09',bEnd:'2025/09'}).rows[0];assert.equal(noZero.comparison.a.total,null);assert.equal(noZero.comparison.rate.value,null);assert.equal(noZero.status.label,'資料不足');assert.equal(noZero.complete,false);
+for(const f of cp.execFileSync('git',['ls-tree','--name-only',base],{encoding:'utf8'}).trim().split('\n').filter(f=>/^(?:px-sales|same-period|new-product|scenario|decision|px-promo|price-center|competitor|px-rsp|px-replacement|product-catalog|px-product|px-pin|px-screen)/.test(f)&&/\.(js|json|css)$/.test(f)&&f!=='px-sales-data.js'))assert.equal(read(f),old(f),f+' unchanged');
+const normalized=s=>s.replaceAll('4.3.1','4.3.0');assert.equal(normalized(read('index.html')),old('index.html'));assert.equal(normalized(read('service-worker.js')).replace('v4.3.0-september-confirmed','v4.3.0-provisional-pin'),old('service-worker.js'));
+console.log('PASS current September: 53 quantities / 234653; 5 delisted null; amounts null; all history unchanged; single/multi/radar/YTD/YoY/3+6 periods/ranks; PIN, masters, formulas unchanged.');

@@ -7,6 +7,7 @@ const bytes=fs.readFileSync(file),hash=crypto.createHash('sha256').update(bytes)
 assert.equal(hash,'a8230869ca688afac0bdadb4eb0401d94cb06d554adc99edd9a39562104b494a');
 const parsed=core.parseWorkbook(X,bytes),w=X.read(bytes,{type:'buffer',bookVBA:false}),formal=io.readData(path.join(io.root,'px-sales-data.js')),master=io.readMaster();
 assert.equal(w.SheetNames.length,1);assert.equal(parsed.sheetName,'銷售量');
+assert(!formal.periods.includes('2026/09'),'September is formally recognized; do not recreate a provisional import');
 assert(parsed.errors.every(e=>e.code==='YEAR_CONFIRMATION'));
 const rows=parsed.rows.map(r=>{const match=core.matchRow(r,master,formal.rows);const quantity=w.Sheets[parsed.sheetName]['D'+r.row]?.v??null;assert(quantity===null||(Number.isInteger(quantity)&&quantity>=0));if(quantity!==null)assert.equal(match.status,'MATCHED');return {sourceRow:r.row,sourceName:r.name,productName:match.status==='MATCHED'?match.name:null,quantity,amount:null};});
 assert.equal(rows.length,58);assert.equal(rows.filter(r=>r.quantity===null).length,5);assert.equal(new Set(rows.map(r=>r.sourceName)).size,58);

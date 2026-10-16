@@ -1,4 +1,7 @@
 'use strict';
+// Fixed August baseline exercises September-as-new-month import, even after release advancement.
+require('./historical-sales-fixture.cjs');
+if(!process.env.NODE_OPTIONS?.includes('historical-sales-fixture.cjs'))process.env.NODE_OPTIONS=(process.env.NODE_OPTIONS||'')+' --require "'+require('node:path').join(__dirname,'historical-sales-fixture.cjs').replace(/\\/g,'/')+'"';
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),{execFileSync}=require('node:child_process'),core=require('../px-sales-import-core'),X=require('../assets/vendor/xlsx-0.20.3.full.min'),io=require('../scripts/sales-data-io.cjs');
 const master=io.readMaster(),base=io.readData(path.join(io.root,'px-sales-data.js')),sourceBytes=fs.readFileSync(path.join(io.root,'px-sales-data.js'),'utf8'),name=master[0].name,other=master[1].name,options={sourceFile:'fixture.xlsx',importedAt:'2026-10-04T00:00:00Z'},snapshot=JSON.stringify(base),cases=[];
 function test(label,fn){fn();cases.push(label);}
