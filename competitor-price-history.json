@@ -1283,6 +1283,14 @@
       "promotionText": "",
       "availability": "InStock",
       "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/9931992"
+    },
+    {
+      "effectiveObservedAt": "2026-11-04T04:54:48.286Z",
+      "price": 80,
+      "originalPrice": 95,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/9931992"
     }
   ],
   "寶雅:9932003": [
@@ -1363,6 +1371,14 @@
       "promotionText": "",
       "availability": "UNKNOWN",
       "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/9951414"
+    },
+    {
+      "effectiveObservedAt": "2026-11-04T04:55:12.900Z",
+      "price": 45,
+      "originalPrice": 49,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/9951414"
     }
   ],
   "寶雅:11981229": [
@@ -1433,6 +1449,14 @@
     {
       "effectiveObservedAt": "2026-10-07T04:25:11.442Z",
       "price": 89,
+      "originalPrice": 89,
+      "promotionText": "",
+      "availability": "InStock",
+      "sourceUrl": "https://www.poyabuy.com.tw/SalePage/Index/9929445"
+    },
+    {
+      "effectiveObservedAt": "2026-11-04T04:55:27.797Z",
+      "price": 79,
       "originalPrice": 89,
       "promotionText": "",
       "availability": "InStock",
